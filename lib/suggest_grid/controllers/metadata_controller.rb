@@ -1,4 +1,4 @@
-# This file was automatically generated for SuggestGrid by APIMATIC BETA v2.0 on 12/24/2015
+# This file was automatically generated for SuggestGrid by APIMATIC BETA v2.0 on 12/25/2015
 
 module SuggestGrid
   class MetadataController
@@ -24,7 +24,9 @@ module SuggestGrid
 
       # prepare headers
       headers = {
-        "user-agent" => "SUGGESTGRID"
+        "user-agent" => "SUGGESTGRID",
+        "accept" => "application/json",
+        "content-type" => "application/json; charset=utf-8"
       }
 
       # invoke the API call request to fetch the response
@@ -66,7 +68,8 @@ module SuggestGrid
 
       # prepare headers
       headers = {
-        "user-agent" => "SUGGESTGRID"
+        "user-agent" => "SUGGESTGRID",
+        "accept" => "application/json"
       }
 
       # invoke the API call request to fetch the response
@@ -104,7 +107,8 @@ module SuggestGrid
 
       # prepare headers
       headers = {
-        "user-agent" => "SUGGESTGRID"
+        "user-agent" => "SUGGESTGRID",
+        "accept" => "application/json"
       }
 
       # invoke the API call request to fetch the response
@@ -143,7 +147,9 @@ module SuggestGrid
 
       # prepare headers
       headers = {
-        "user-agent" => "SUGGESTGRID"
+        "user-agent" => "SUGGESTGRID",
+        "accept" => "application/json",
+        "content-type" => "application/json; charset=utf-8"
       }
 
       # invoke the API call request to fetch the response
@@ -185,7 +191,8 @@ module SuggestGrid
 
       # prepare headers
       headers = {
-        "user-agent" => "SUGGESTGRID"
+        "user-agent" => "SUGGESTGRID",
+        "accept" => "application/json"
       }
 
       # invoke the API call request to fetch the response
@@ -223,7 +230,8 @@ module SuggestGrid
 
       # prepare headers
       headers = {
-        "user-agent" => "SUGGESTGRID"
+        "user-agent" => "SUGGESTGRID",
+        "accept" => "application/json"
       }
 
       # invoke the API call request to fetch the response
