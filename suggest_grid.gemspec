@@ -5,7 +5,7 @@ Gem::Specification.new do |s|
   s.description = 'Hosted Recommendation and Personalization API for developers'
   s.authors     = ['SuggestGrid']
   s.email       = 'support@suggestgrid.com'
-  s.homepage    = 'suggestgrid.com'
+  s.homepage    = 'http://www.suggestgrid.com'
   s.license     = 'MIT'
   
   s.add_dependency('unirest', '~> 1.1.2')
