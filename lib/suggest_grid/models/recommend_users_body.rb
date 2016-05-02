@@ -1,15 +1,14 @@
-# This file was automatically generated for SuggestGrid by APIMATIC BETA v2.0 on 12/25/2015
+# This file was automatically generated for SuggestGrid by APIMATIC v2.0 on 05/02/2016
 
 module SuggestGrid
   class RecommendUsersBody
-
     # TODO: Write general description for this method
     # @return [String]
-    attr_accessor :itemid
+    attr_accessor :item_id
 
     # TODO: Write general description for this method
     # @return [Array<String>]
-    attr_accessor :itemids
+    attr_accessor :item_ids
 
     # TODO: Write general description for this method
     # @return [mixed]
@@ -21,34 +20,32 @@ module SuggestGrid
 
     # TODO: Write general description for this method
     # @return [String]
-    attr_accessor :similar_userid
+    attr_accessor :similar_user_id
 
     # These ids will not be included in the response.
     # @return [Array<String>]
     attr_accessor :except
 
-    
-    def method_missing (method_name)
+    def method_missing(method_name)
       puts "there's no method called '#{method_name}'"
     end
 
-    # Creates JSON of the curent object  
+    # Creates JSON of the curent object
     def to_json
-      hash = self.key_map()
+      hash = key_map
       hash.to_json
     end
 
-    # Defines the key map for json serialization  
+    # Defines the key map for json serialization
     def key_map
       hash = {}
-      hash['itemid'] = self.itemid
-      hash['itemids'] = self.itemids
-      hash['filter'] = self.filter
-      hash['size'] = self.size
-      hash['similar_userid'] = self.similar_userid
-      hash['except'] = self.except
+      hash['item_id'] = item_id
+      hash['item_ids'] = item_ids
+      hash['filter'] = filter
+      hash['size'] = size
+      hash['similar_user_id'] = similar_user_id
+      hash['except'] = except
       hash
     end
-
   end
 end

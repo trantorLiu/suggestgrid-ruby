@@ -1,4 +1,4 @@
-# This file was automatically generated for SuggestGrid by APIMATIC BETA v2.0 on 12/25/2015
+# This file was automatically generated for SuggestGrid by APIMATIC v2.0 on 05/02/2016
 require 'openssl'
 require 'json'
 require 'unirest'
@@ -7,6 +7,7 @@ require 'unirest'
 require 'suggest_grid/api_helper.rb'
 require 'suggest_grid/api_exception.rb'
 require 'suggest_grid/configuration.rb'
+require 'suggest_grid/suggest_grid_client.rb'
 
 # Controllers
 require 'suggest_grid/controllers/action_controller.rb'
