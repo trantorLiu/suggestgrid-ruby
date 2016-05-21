@@ -1,20 +1,14 @@
 # This file was automatically generated for SuggestGrid by APIMATIC v2.0 ( https://apimatic.io ) on 05/21/2016
 
 module SuggestGrid
-  class SimilarItemsBody
+  class ItemSimilarityResponse
 
     # TODO: Write general description for this method
-    # @return [Integer]
-    attr_accessor :size
+    # @return [Float]
+    attr_accessor :similarity
 
-    # These ids will not be included in the response.
-    # @return [List of String]
-    attr_accessor :except
-
-    def initialize(size = nil,
-                   except = nil)
-      @size = size
-      @except = except
+    def initialize(similarity = nil)
+      @similarity = similarity
 
     end
 
@@ -34,19 +28,16 @@ module SuggestGrid
         nil
       else
         # Extract variables from the hash
-        size = hash["size"]
-        except = hash["except"]
+        similarity = hash["similarity"]
         # Create object from extracted values
-        SimilarItemsBody.new(size,
-                             except)
+        ItemSimilarityResponse.new(similarity)
       end
     end
 
     # Defines the key map for json serialization
     def key_map
       hash = {}
-      hash['size'] = size
-      hash['except'] = except
+      hash['similarity'] = similarity
       hash
     end
   end

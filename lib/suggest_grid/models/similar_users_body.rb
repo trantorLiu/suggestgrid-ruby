@@ -1,23 +1,45 @@
-# This file was automatically generated for SuggestGrid by APIMATIC v2.0 on 05/02/2016
+# This file was automatically generated for SuggestGrid by APIMATIC v2.0 ( https://apimatic.io ) on 05/21/2016
 
 module SuggestGrid
   class SimilarUsersBody
+
     # TODO: Write general description for this method
-    # @return [Numeric]
+    # @return [Integer]
     attr_accessor :size
 
     # These ids will not be included in the response.
-    # @return [Array<String>]
+    # @return [List of String]
     attr_accessor :except
 
+    def initialize(size = nil,
+                   except = nil)
+      @size = size
+      @except = except
+
+    end
+
     def method_missing(method_name)
-      puts "there's no method called '#{method_name}'"
+      puts "There is no method called '#{method_name}'."
     end
 
     # Creates JSON of the curent object
-    def to_json
+    def to_json(options = {})
       hash = key_map
-      hash.to_json
+      hash.to_json(options)
+    end
+
+    # Creates an instance of the object from a hash
+    def self.from_hash(hash)
+      if hash == nil
+        nil
+      else
+        # Extract variables from the hash
+        size = hash["size"]
+        except = hash["except"]
+        # Create object from extracted values
+        SimilarUsersBody.new(size,
+                             except)
+      end
     end
 
     # Defines the key map for json serialization

@@ -1,4 +1,4 @@
-# This file was automatically generated for SuggestGrid by APIMATIC v2.0 on 05/02/2016
+# This file was automatically generated for SuggestGrid by APIMATIC v2.0 ( https://apimatic.io ) on 05/21/2016
 
 module SuggestGrid
   class Configuration
@@ -6,19 +6,18 @@ module SuggestGrid
     @base_uri = 'http://localhost:9090'
 
     # The username to use with basic authentication
-    @basic_auth_user_name = 'TODO: Replace'
+    @basic_auth_user_name = TODO: Replace
 
     # The password to use with basic authentication
-    @basic_auth_password = 'TODO: Replace'
+    @basic_auth_password = TODO: Replace
 
     # create the getters and setters
     class << self
-      attr_accessor :BASE_URI
-
+      attr_accessor :base_uri
       attr_accessor :basic_auth_user_name
-
       attr_accessor :basic_auth_password
-
+      attr_accessor :basic_auth_user_name
+      attr_accessor :basic_auth_password
     end
   end
 end

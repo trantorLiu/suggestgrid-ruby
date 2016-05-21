@@ -1,15 +1,26 @@
 # This file was automatically generated for SuggestGrid by APIMATIC v2.0 ( https://apimatic.io ) on 05/21/2016
 
 module SuggestGrid
-  class TypeRequestBody
+  class SchemaErrorResponse
 
-    # Could be "explicit" or "implicit"
-    # The default is "implicit".
+    # Message of the response.
     # @return [String]
-    attr_accessor :rating
+    attr_accessor :message
 
-    def initialize(rating = nil)
-      @rating = rating
+    # The cause of the error.
+    # @return [Object]
+    attr_accessor :value
+
+    # Programatic description of the error.
+    # @return [Object]
+    attr_accessor :error
+
+    def initialize(message = nil,
+                   value = nil,
+                   error = nil)
+      @message = message
+      @value = value
+      @error = error
 
     end
 
@@ -29,16 +40,22 @@ module SuggestGrid
         nil
       else
         # Extract variables from the hash
-        rating = hash["rating"]
+        message = hash["message"]
+        value = hash["value"]
+        error = hash["error"]
         # Create object from extracted values
-        TypeRequestBody.new(rating)
+        SchemaErrorResponse.new(message,
+                                value,
+                                error)
       end
     end
 
     # Defines the key map for json serialization
     def key_map
       hash = {}
-      hash['rating'] = rating
+      hash['message'] = message
+      hash['value'] = value
+      hash['error'] = error
       hash
     end
   end

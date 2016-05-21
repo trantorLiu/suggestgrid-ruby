@@ -1,142 +1,150 @@
-# This file was automatically generated for SuggestGrid by APIMATIC v2.0 on 05/02/2016
+# This file was automatically generated for SuggestGrid by APIMATIC v2.0 ( https://apimatic.io ) on 05/21/2016
 
 module SuggestGrid
-  class BulkController
+  class BulkController < BaseController
     @@instance = BulkController.new
     # Singleton instance of the controller class
     def self.instance
       @@instance
     end
 
-    # Post bulk JSON actions.
-    # @param [ActionsModel] body Required parameter: TODO: type description here
-    # @param [String] space Required parameter: TODO: type description here
-    # @param [String] type Required parameter: TODO: type description here
+    # Post bulk actions.
+    # @param [String] body Required parameter: Example: 
+    # @param [String] type Required parameter: Example: 
     # @return MessageResponse response from the API call
-    def post_bulk_json_action(body, space, type)
+    def post_bulk_actions(body, 
+                          type)
       # the base uri for api requests
-      query_builder = Configuration.base_uri.dup
+      _query_builder = Configuration.base_uri.dup
 
       # prepare query string for API call
-      query_builder << '/v1/{space}/{type}/_action/_bulk'
+      _query_builder << '/v1/actions/{type}/_bulk'
 
       # process optional query parameters
-      query_builder = APIHelper.append_url_with_template_parameters query_builder, {
-        'space' => space,
+      _query_builder = APIHelper.append_url_with_template_parameters _query_builder, {
         'type' => type
       }
 
       # validate and preprocess url
-      query_url = APIHelper.clean_url query_builder
+      _query_url = APIHelper.clean_url _query_builder
 
       # prepare headers
-      headers = {
+      _headers = {
         'user-agent' => 'SUGGESTGRID',
-        'accept' => 'application/json',
-        'content-type' => 'application/json; charset=utf-8'
+        'accept' => 'application/json'
       }
 
       # invoke the API call request to fetch the response
-      response = Unirest.post query_url, headers: headers, parameters: body.to_json, auth: { :user => Configuration.basic_auth_user_name, :password => Configuration.basic_auth_password }
+      _response = Unirest.post _query_url, headers: _headers, parameters: body, auth: { :user => Configuration.basic_auth_user_name, :password => Configuration.basic_auth_password }
 
-      # Error handling using HTTP status codes
-      if response.code == 402
-        raise APIException.new 'Action limit exceeded.', 402, response.raw_body
-      elsif response.code == 429
-        raise APIException.new 'Too many requests.', 429, response.raw_body
-      elsif response.code == 500
-        raise APIException.new 'Unexpected internal error.', 500, response.raw_body
-      elsif !response.code.between?(200, 206) # [200,206] = HTTP OK
-        raise APIException.new 'HTTP Response Not OK', response.code, response.raw_body
+      # Endpoint error handling using HTTP status codes.
+      if _response.code == 402
+        raise APIException.new 'Action limit exceeded.', 402, _response.body
+      elsif _response.code == 429
+        raise APIException.new 'Too many requests.', 429, _response.body
+      elsif _response.code == 500
+        raise APIException.new 'Unexpected internal error.', 500, _response.body
       end
 
-      response.body
+      # Global error handling using HTTP status codes.
+      validate_response(_response)
+
+      # Try to cast response to desired type
+      if _response.body.instance_of? Hash
+        begin
+          MessageResponse.from_hash(_response.body)
+        rescue Exception
+          raise APIException.new "Invalid JSON returned.", _response.code, _response.body
+        end
+      end
     end
 
-    # Post bulk JSON user metadata.
-    # @param [UsersModel] body Required parameter: TODO: type description here
-    # @param [String] space Required parameter: TODO: type description here
+    # Post bulk user metadata.
+    # @param [String] body Required parameter: Example: 
     # @return MessageResponse response from the API call
-    def post_bulk_json_user_metadata(body, space)
+    def post_bulk_user_metadata(body)
       # the base uri for api requests
-      query_builder = Configuration.base_uri.dup
+      _query_builder = Configuration.base_uri.dup
 
       # prepare query string for API call
-      query_builder << '/v1/{space}/_user/_bulk'
-
-      # process optional query parameters
-      query_builder = APIHelper.append_url_with_template_parameters query_builder, {
-        'space' => space
-      }
+      _query_builder << '/v1/users/_bulk'
 
       # validate and preprocess url
-      query_url = APIHelper.clean_url query_builder
+      _query_url = APIHelper.clean_url _query_builder
 
       # prepare headers
-      headers = {
+      _headers = {
         'user-agent' => 'SUGGESTGRID',
-        'accept' => 'application/json',
-        'content-type' => 'application/json; charset=utf-8'
+        'accept' => 'application/json'
       }
 
       # invoke the API call request to fetch the response
-      response = Unirest.post query_url, headers: headers, parameters: body.to_json, auth: { :user => Configuration.basic_auth_user_name, :password => Configuration.basic_auth_password }
+      _response = Unirest.post _query_url, headers: _headers, parameters: body, auth: { :user => Configuration.basic_auth_user_name, :password => Configuration.basic_auth_password }
 
-      # Error handling using HTTP status codes
-      if response.code == 207
-        raise APIException.new 'Some metadata is not uploaded successfully.', 207, response.raw_body
-      elsif response.code == 429
-        raise APIException.new 'Too many requests.', 429, response.raw_body
-      elsif response.code == 500
-        raise APIException.new 'Unexpected internal error.', 500, response.raw_body
-      elsif !response.code.between?(200, 206) # [200,206] = HTTP OK
-        raise APIException.new 'HTTP Response Not OK', response.code, response.raw_body
+      # Endpoint error handling using HTTP status codes.
+      if _response.code == 207
+        raise APIException.new 'Some metadata is not uploaded successfully.', 207, _response.body
+      elsif _response.code == 429
+        raise APIException.new 'Too many requests.', 429, _response.body
+      elsif _response.code == 500
+        raise APIException.new 'Unexpected internal error.', 500, _response.body
       end
 
-      response.body
+      # Global error handling using HTTP status codes.
+      validate_response(_response)
+
+      # Try to cast response to desired type
+      if _response.body.instance_of? Hash
+        begin
+          MessageResponse.from_hash(_response.body)
+        rescue Exception
+          raise APIException.new "Invalid JSON returned.", _response.code, _response.body
+        end
+      end
     end
 
-    # Post bulk JSON item metadata.
-    # @param [ItemsModel] body Required parameter: TODO: type description here
-    # @param [String] space Required parameter: TODO: type description here
+    # Post bulk item metadata.
+    # @param [String] body Required parameter: Example: 
     # @return MessageResponse response from the API call
-    def post_bulk_json_item_metadata(body, space)
+    def post_bulk_item_metadata(body)
       # the base uri for api requests
-      query_builder = Configuration.base_uri.dup
+      _query_builder = Configuration.base_uri.dup
 
       # prepare query string for API call
-      query_builder << '/v1/{space}/_item/_bulk'
-
-      # process optional query parameters
-      query_builder = APIHelper.append_url_with_template_parameters query_builder, {
-        'space' => space
-      }
+      _query_builder << '/v1/items/_bulk'
 
       # validate and preprocess url
-      query_url = APIHelper.clean_url query_builder
+      _query_url = APIHelper.clean_url _query_builder
 
       # prepare headers
-      headers = {
+      _headers = {
         'user-agent' => 'SUGGESTGRID',
-        'accept' => 'application/json',
-        'content-type' => 'application/json; charset=utf-8'
+        'accept' => 'application/json'
       }
 
       # invoke the API call request to fetch the response
-      response = Unirest.post query_url, headers: headers, parameters: body.to_json, auth: { :user => Configuration.basic_auth_user_name, :password => Configuration.basic_auth_password }
+      _response = Unirest.post _query_url, headers: _headers, parameters: body, auth: { :user => Configuration.basic_auth_user_name, :password => Configuration.basic_auth_password }
 
-      # Error handling using HTTP status codes
-      if response.code == 207
-        raise APIException.new 'Some metadata is not uploaded successfully.', 207, response.raw_body
-      elsif response.code == 429
-        raise APIException.new 'Too many requests.', 429, response.raw_body
-      elsif response.code == 500
-        raise APIException.new 'Unexpected internal error.', 500, response.raw_body
-      elsif !response.code.between?(200, 206) # [200,206] = HTTP OK
-        raise APIException.new 'HTTP Response Not OK', response.code, response.raw_body
+      # Endpoint error handling using HTTP status codes.
+      if _response.code == 207
+        raise APIException.new 'Some metadata is not uploaded successfully.', 207, _response.body
+      elsif _response.code == 429
+        raise APIException.new 'Too many requests.', 429, _response.body
+      elsif _response.code == 500
+        raise APIException.new 'Unexpected internal error.', 500, _response.body
       end
 
-      response.body
+      # Global error handling using HTTP status codes.
+      validate_response(_response)
+
+      # Try to cast response to desired type
+      if _response.body.instance_of? Hash
+        begin
+          MessageResponse.from_hash(_response.body)
+        rescue Exception
+          raise APIException.new "Invalid JSON returned.", _response.code, _response.body
+        end
+      end
     end
   end
 end

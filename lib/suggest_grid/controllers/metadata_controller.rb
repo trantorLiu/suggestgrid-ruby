@@ -1,257 +1,291 @@
-# This file was automatically generated for SuggestGrid by APIMATIC v2.0 on 05/02/2016
+# This file was automatically generated for SuggestGrid by APIMATIC v2.0 ( https://apimatic.io ) on 05/21/2016
 
 module SuggestGrid
-  class MetadataController
+  class MetadataController < BaseController
     @@instance = MetadataController.new
     # Singleton instance of the controller class
     def self.instance
       @@instance
     end
 
-    # Create an user metadata.
-    # @param [Metadata] body Required parameter: TODO: type description here
-    # @param [String] space Required parameter: TODO: type description here
-    # @return MessageResponse response from the API call
-    def create_user_metadata(body, space)
-      # the base uri for api requests
-      query_builder = Configuration.base_uri.dup
-
-      # prepare query string for API call
-      query_builder << '/v1/{space}/_user'
-
-      # process optional query parameters
-      query_builder = APIHelper.append_url_with_template_parameters query_builder, {
-        'space' => space
-      }
-
-      # validate and preprocess url
-      query_url = APIHelper.clean_url query_builder
-
-      # prepare headers
-      headers = {
-        'user-agent' => 'SUGGESTGRID',
-        'accept' => 'application/json',
-        'content-type' => 'application/json; charset=utf-8'
-      }
-
-      # invoke the API call request to fetch the response
-      response = Unirest.post query_url, headers: headers, parameters: body.to_json, auth: { :user => Configuration.basic_auth_user_name, :password => Configuration.basic_auth_password }
-
-      # Error handling using HTTP status codes
-      if response.code == 400
-        raise APIException.new 'Metadata is invalid.', 400, response.raw_body
-      elsif response.code == 429
-        raise APIException.new 'Too many requests.', 429, response.raw_body
-      elsif response.code == 500
-        raise APIException.new 'Unexpected internal error.', 500, response.raw_body
-      elsif !response.code.between?(200, 206) # [200,206] = HTTP OK
-        raise APIException.new 'HTTP Response Not OK', response.code, response.raw_body
-      end
-
-      response.body
-    end
-
-    # Delete an user metadata.
-    # @param [String] space Required parameter: TODO: type description here
+    # Create a user metadata.
+    # @param [Object] metadata Required parameter: Example: 
     # @param [String] user_id Required parameter: The user_id to delete its metadata.
     # @return MessageResponse response from the API call
-    def delete_an_user_metadata(space, user_id)
+    def create_a_user_metadata(metadata, 
+                               user_id)
       # the base uri for api requests
-      query_builder = Configuration.base_uri.dup
+      _query_builder = Configuration.base_uri.dup
 
       # prepare query string for API call
-      query_builder << '/v1/{space}/_user/{user_id}'
+      _query_builder << '/v1/_user/{user_id}'
 
       # process optional query parameters
-      query_builder = APIHelper.append_url_with_template_parameters query_builder, {
-        'space' => space,
+      _query_builder = APIHelper.append_url_with_template_parameters _query_builder, {
         'user_id' => user_id
       }
 
       # validate and preprocess url
-      query_url = APIHelper.clean_url query_builder
+      _query_url = APIHelper.clean_url _query_builder
 
       # prepare headers
-      headers = {
-        'user-agent' => 'SUGGESTGRID',
-        'accept' => 'application/json'
-      }
-
-      # invoke the API call request to fetch the response
-      response = Unirest.delete query_url, headers: headers, auth: { :user => Configuration.basic_auth_user_name, :password => Configuration.basic_auth_password }
-
-      # Error handling using HTTP status codes
-      if response.code == 429
-        raise APIException.new 'Too many requests.', 429, response.raw_body
-      elsif response.code == 500
-        raise APIException.new 'Unexpected internal error.', 500, response.raw_body
-      elsif !response.code.between?(200, 206) # [200,206] = HTTP OK
-        raise APIException.new 'HTTP Response Not OK', response.code, response.raw_body
-      end
-
-      response.body
-    end
-
-    # Delete all user metadatas.
-    # @param [String] space Required parameter: TODO: type description here
-    # @return MessageResponse response from the API call
-    def delete_all_user_metadata(space)
-      # the base uri for api requests
-      query_builder = Configuration.base_uri.dup
-
-      # prepare query string for API call
-      query_builder << '/v1/{space}/_user/_all'
-
-      # process optional query parameters
-      query_builder = APIHelper.append_url_with_template_parameters query_builder, {
-        'space' => space
-      }
-
-      # validate and preprocess url
-      query_url = APIHelper.clean_url query_builder
-
-      # prepare headers
-      headers = {
-        'user-agent' => 'SUGGESTGRID',
-        'accept' => 'application/json'
-      }
-
-      # invoke the API call request to fetch the response
-      response = Unirest.delete query_url, headers: headers, auth: { :user => Configuration.basic_auth_user_name, :password => Configuration.basic_auth_password }
-
-      # Error handling using HTTP status codes
-      if response.code == 429
-        raise APIException.new 'Too many requests.', 429, response.raw_body
-      elsif response.code == 500
-        raise APIException.new 'Unexpected internal error.', 500, response.raw_body
-      elsif !response.code.between?(200, 206) # [200,206] = HTTP OK
-        raise APIException.new 'HTTP Response Not OK', response.code, response.raw_body
-      end
-
-      response.body
-    end
-
-    # Create an item metadata.
-    # @param [Metadata] body Required parameter: TODO: type description here
-    # @param [String] space Required parameter: TODO: type description here
-    # @return MessageResponse response from the API call
-    def create_item_metadata(body, space)
-      # the base uri for api requests
-      query_builder = Configuration.base_uri.dup
-
-      # prepare query string for API call
-      query_builder << '/v1/{space}/_item'
-
-      # process optional query parameters
-      query_builder = APIHelper.append_url_with_template_parameters query_builder, {
-        'space' => space
-      }
-
-      # validate and preprocess url
-      query_url = APIHelper.clean_url query_builder
-
-      # prepare headers
-      headers = {
+      _headers = {
         'user-agent' => 'SUGGESTGRID',
         'accept' => 'application/json',
         'content-type' => 'application/json; charset=utf-8'
       }
 
       # invoke the API call request to fetch the response
-      response = Unirest.post query_url, headers: headers, parameters: body.to_json, auth: { :user => Configuration.basic_auth_user_name, :password => Configuration.basic_auth_password }
+      _response = Unirest.put _query_url, headers: _headers, parameters: metadata.to_json, auth: { :user => Configuration.basic_auth_user_name, :password => Configuration.basic_auth_password }
 
-      # Error handling using HTTP status codes
-      if response.code == 400
-        raise APIException.new 'Metadata is invalid.', 400, response.raw_body
-      elsif response.code == 429
-        raise APIException.new 'Too many requests.', 429, response.raw_body
-      elsif response.code == 500
-        raise APIException.new 'Unexpected internal error.', 500, response.raw_body
-      elsif !response.code.between?(200, 206) # [200,206] = HTTP OK
-        raise APIException.new 'HTTP Response Not OK', response.code, response.raw_body
+      # Endpoint error handling using HTTP status codes.
+      if _response.code == 400
+        raise APIException.new 'Metadata is invalid.', 400, _response.body
+      elsif _response.code == 429
+        raise APIException.new 'Too many requests.', 429, _response.body
+      elsif _response.code == 500
+        raise APIException.new 'Unexpected internal error.', 500, _response.body
       end
 
-      response.body
+      # Global error handling using HTTP status codes.
+      validate_response(_response)
+
+      # Try to cast response to desired type
+      if _response.body.instance_of? Hash
+        begin
+          MessageResponse.from_hash(_response.body)
+        rescue Exception
+          raise APIException.new "Invalid JSON returned.", _response.code, _response.body
+        end
+      end
+    end
+
+    # Delete a user metadata.
+    # @param [String] user_id Required parameter: The user_id to delete its metadata.
+    # @return MessageResponse response from the API call
+    def delete_a_user_metadata(user_id)
+      # the base uri for api requests
+      _query_builder = Configuration.base_uri.dup
+
+      # prepare query string for API call
+      _query_builder << '/v1/_user/{user_id}'
+
+      # process optional query parameters
+      _query_builder = APIHelper.append_url_with_template_parameters _query_builder, {
+        'user_id' => user_id
+      }
+
+      # validate and preprocess url
+      _query_url = APIHelper.clean_url _query_builder
+
+      # prepare headers
+      _headers = {
+        'user-agent' => 'SUGGESTGRID',
+        'accept' => 'application/json'
+      }
+
+      # invoke the API call request to fetch the response
+      _response = Unirest.delete _query_url, headers: _headers, auth: { :user => Configuration.basic_auth_user_name, :password => Configuration.basic_auth_password }
+
+      # Endpoint error handling using HTTP status codes.
+      if _response.code == 429
+        raise APIException.new 'Too many requests.', 429, _response.body
+      elsif _response.code == 500
+        raise APIException.new 'Unexpected internal error.', 500, _response.body
+      end
+
+      # Global error handling using HTTP status codes.
+      validate_response(_response)
+
+      # Try to cast response to desired type
+      if _response.body.instance_of? Hash
+        begin
+          MessageResponse.from_hash(_response.body)
+        rescue Exception
+          raise APIException.new "Invalid JSON returned.", _response.code, _response.body
+        end
+      end
+    end
+
+    # Delete all user metadata.
+    # @return MessageResponse response from the API call
+    def delete_all_user_metadata
+      # the base uri for api requests
+      _query_builder = Configuration.base_uri.dup
+
+      # prepare query string for API call
+      _query_builder << '/v1/users'
+
+      # validate and preprocess url
+      _query_url = APIHelper.clean_url _query_builder
+
+      # prepare headers
+      _headers = {
+        'user-agent' => 'SUGGESTGRID',
+        'accept' => 'application/json'
+      }
+
+      # invoke the API call request to fetch the response
+      _response = Unirest.delete _query_url, headers: _headers, auth: { :user => Configuration.basic_auth_user_name, :password => Configuration.basic_auth_password }
+
+      # Endpoint error handling using HTTP status codes.
+      if _response.code == 429
+        raise APIException.new 'Too many requests.', 429, _response.body
+      elsif _response.code == 500
+        raise APIException.new 'Unexpected internal error.', 500, _response.body
+      end
+
+      # Global error handling using HTTP status codes.
+      validate_response(_response)
+
+      # Try to cast response to desired type
+      if _response.body.instance_of? Hash
+        begin
+          MessageResponse.from_hash(_response.body)
+        rescue Exception
+          raise APIException.new "Invalid JSON returned.", _response.code, _response.body
+        end
+      end
+    end
+
+    # Create an item metadata.
+    # @param [Object] body Required parameter: Example: 
+    # @param [String] item_id Required parameter: The item_id to delete its metadata.
+    # @return MessageResponse response from the API call
+    def create_an_item_metadata(body, 
+                                item_id)
+      # the base uri for api requests
+      _query_builder = Configuration.base_uri.dup
+
+      # prepare query string for API call
+      _query_builder << '/v1/items/{item_id}'
+
+      # process optional query parameters
+      _query_builder = APIHelper.append_url_with_template_parameters _query_builder, {
+        'item_id' => item_id
+      }
+
+      # validate and preprocess url
+      _query_url = APIHelper.clean_url _query_builder
+
+      # prepare headers
+      _headers = {
+        'user-agent' => 'SUGGESTGRID',
+        'accept' => 'application/json',
+        'content-type' => 'application/json; charset=utf-8'
+      }
+
+      # invoke the API call request to fetch the response
+      _response = Unirest.put _query_url, headers: _headers, parameters: body.to_json, auth: { :user => Configuration.basic_auth_user_name, :password => Configuration.basic_auth_password }
+
+      # Endpoint error handling using HTTP status codes.
+      if _response.code == 400
+        raise APIException.new 'Metadata is invalid.', 400, _response.body
+      elsif _response.code == 429
+        raise APIException.new 'Too many requests.', 429, _response.body
+      elsif _response.code == 500
+        raise APIException.new 'Unexpected internal error.', 500, _response.body
+      end
+
+      # Global error handling using HTTP status codes.
+      validate_response(_response)
+
+      # Try to cast response to desired type
+      if _response.body.instance_of? Hash
+        begin
+          MessageResponse.from_hash(_response.body)
+        rescue Exception
+          raise APIException.new "Invalid JSON returned.", _response.code, _response.body
+        end
+      end
     end
 
     # Delete an item metadata.
     # @param [String] item_id Required parameter: The item_id to delete its metadata.
-    # @param [String] space Required parameter: TODO: type description here
     # @return MessageResponse response from the API call
-    def delete_an_item_metadata(item_id, space)
+    def delete_an_item_metadata(item_id)
       # the base uri for api requests
-      query_builder = Configuration.base_uri.dup
+      _query_builder = Configuration.base_uri.dup
 
       # prepare query string for API call
-      query_builder << '/v1/{space}/_item/{item_id}'
+      _query_builder << '/v1/items/{item_id}'
 
       # process optional query parameters
-      query_builder = APIHelper.append_url_with_template_parameters query_builder, {
-        'item_id' => item_id,
-        'space' => space
+      _query_builder = APIHelper.append_url_with_template_parameters _query_builder, {
+        'item_id' => item_id
       }
 
       # validate and preprocess url
-      query_url = APIHelper.clean_url query_builder
+      _query_url = APIHelper.clean_url _query_builder
 
       # prepare headers
-      headers = {
+      _headers = {
         'user-agent' => 'SUGGESTGRID',
         'accept' => 'application/json'
       }
 
       # invoke the API call request to fetch the response
-      response = Unirest.delete query_url, headers: headers, auth: { :user => Configuration.basic_auth_user_name, :password => Configuration.basic_auth_password }
+      _response = Unirest.delete _query_url, headers: _headers, auth: { :user => Configuration.basic_auth_user_name, :password => Configuration.basic_auth_password }
 
-      # Error handling using HTTP status codes
-      if response.code == 429
-        raise APIException.new 'Too many requests.', 429, response.raw_body
-      elsif response.code == 500
-        raise APIException.new 'Unexpected internal error.', 500, response.raw_body
-      elsif !response.code.between?(200, 206) # [200,206] = HTTP OK
-        raise APIException.new 'HTTP Response Not OK', response.code, response.raw_body
+      # Endpoint error handling using HTTP status codes.
+      if _response.code == 429
+        raise APIException.new 'Too many requests.', 429, _response.body
+      elsif _response.code == 500
+        raise APIException.new 'Unexpected internal error.', 500, _response.body
       end
 
-      response.body
+      # Global error handling using HTTP status codes.
+      validate_response(_response)
+
+      # Try to cast response to desired type
+      if _response.body.instance_of? Hash
+        begin
+          MessageResponse.from_hash(_response.body)
+        rescue Exception
+          raise APIException.new "Invalid JSON returned.", _response.code, _response.body
+        end
+      end
     end
 
-    # Delete all item metadatas of a space.
-    # @param [String] space Required parameter: TODO: type description here
+    # Delete all item metadata.
     # @return MessageResponse response from the API call
-    def delete_all_item_metadata(space)
+    def delete_all_item_metadata
       # the base uri for api requests
-      query_builder = Configuration.base_uri.dup
+      _query_builder = Configuration.base_uri.dup
 
       # prepare query string for API call
-      query_builder << '/v1/{space}/_item/_all'
-
-      # process optional query parameters
-      query_builder = APIHelper.append_url_with_template_parameters query_builder, {
-        'space' => space
-      }
+      _query_builder << '/v1/items'
 
       # validate and preprocess url
-      query_url = APIHelper.clean_url query_builder
+      _query_url = APIHelper.clean_url _query_builder
 
       # prepare headers
-      headers = {
+      _headers = {
         'user-agent' => 'SUGGESTGRID',
         'accept' => 'application/json'
       }
 
       # invoke the API call request to fetch the response
-      response = Unirest.delete query_url, headers: headers, auth: { :user => Configuration.basic_auth_user_name, :password => Configuration.basic_auth_password }
+      _response = Unirest.delete _query_url, headers: _headers, auth: { :user => Configuration.basic_auth_user_name, :password => Configuration.basic_auth_password }
 
-      # Error handling using HTTP status codes
-      if response.code == 429
-        raise APIException.new 'Too many requests.', 429, response.raw_body
-      elsif response.code == 500
-        raise APIException.new 'Unexpected internal error.', 500, response.raw_body
-      elsif !response.code.between?(200, 206) # [200,206] = HTTP OK
-        raise APIException.new 'HTTP Response Not OK', response.code, response.raw_body
+      # Endpoint error handling using HTTP status codes.
+      if _response.code == 429
+        raise APIException.new 'Too many requests.', 429, _response.body
+      elsif _response.code == 500
+        raise APIException.new 'Unexpected internal error.', 500, _response.body
       end
 
-      response.body
+      # Global error handling using HTTP status codes.
+      validate_response(_response)
+
+      # Try to cast response to desired type
+      if _response.body.instance_of? Hash
+        begin
+          MessageResponse.from_hash(_response.body)
+        rescue Exception
+          raise APIException.new "Invalid JSON returned.", _response.code, _response.body
+        end
+      end
     end
   end
 end

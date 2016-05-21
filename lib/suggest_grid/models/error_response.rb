@@ -1,20 +1,20 @@
 # This file was automatically generated for SuggestGrid by APIMATIC v2.0 ( https://apimatic.io ) on 05/21/2016
 
 module SuggestGrid
-  class SimilarItemsBody
+  class ErrorResponse
 
-    # TODO: Write general description for this method
+    # Message of the response.
+    # @return [String]
+    attr_accessor :message
+
+    # Status code of the response. It is not 2XX.
     # @return [Integer]
-    attr_accessor :size
+    attr_accessor :status
 
-    # These ids will not be included in the response.
-    # @return [List of String]
-    attr_accessor :except
-
-    def initialize(size = nil,
-                   except = nil)
-      @size = size
-      @except = except
+    def initialize(message = nil,
+                   status = nil)
+      @message = message
+      @status = status
 
     end
 
@@ -34,19 +34,19 @@ module SuggestGrid
         nil
       else
         # Extract variables from the hash
-        size = hash["size"]
-        except = hash["except"]
+        message = hash["message"]
+        status = hash["status"]
         # Create object from extracted values
-        SimilarItemsBody.new(size,
-                             except)
+        ErrorResponse.new(message,
+                          status)
       end
     end
 
     # Defines the key map for json serialization
     def key_map
       hash = {}
-      hash['size'] = size
-      hash['except'] = except
+      hash['message'] = message
+      hash['status'] = status
       hash
     end
   end

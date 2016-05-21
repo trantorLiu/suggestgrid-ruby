@@ -1,12 +1,4 @@
-# This file was automatically generated for SuggestGrid by APIMATIC v2.0 on 05/02/2016
-
-# Require controllers
-require 'controllers/action_controller.rb'
-require 'controllers/bulk_controller.rb'
-require 'controllers/metadata_controller.rb'
-require 'controllers/recommendation_controller.rb'
-require 'controllers/similarity_controller.rb'
-require 'controllers/state_controller.rb'
+# This file was automatically generated for SuggestGrid by APIMATIC v2.0 ( https://apimatic.io ) on 05/21/2016
 
 module SuggestGrid
   class SuggestGridClient
@@ -40,10 +32,10 @@ module SuggestGrid
       SimilarityController.instance
     end
 
-    # Singleton access to state controller
-    # @return [StateController] Returns the controller instance
-    def state
-      StateController.instance
+    # Singleton access to type controller
+    # @return [TypeController] Returns the controller instance
+    def type
+      TypeController.instance
     end
 
     # Initializer with authentication and configuration parameters

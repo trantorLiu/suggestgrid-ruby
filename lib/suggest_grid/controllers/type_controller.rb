@@ -1,33 +1,21 @@
 # This file was automatically generated for SuggestGrid by APIMATIC v2.0 ( https://apimatic.io ) on 05/21/2016
 
 module SuggestGrid
-  class SimilarityController < BaseController
-    @@instance = SimilarityController.new
+  class TypeController < BaseController
+    @@instance = TypeController.new
     # Singleton instance of the controller class
     def self.instance
       @@instance
     end
 
-    # Get similarity of two users.
-    # @param [String] type Required parameter: Example: 
-    # @param [String] user_id_1 Required parameter: Example: 
-    # @param [String] user_id_2 Required parameter: Example: 
-    # @return UserSimilarityResponse response from the API call
-    def get_user_similarity(type, 
-                            user_id_1, 
-                            user_id_2)
+    # Get all types
+    # @return GetTypesResponse response from the API call
+    def get_type_names
       # the base uri for api requests
       _query_builder = Configuration.base_uri.dup
 
       # prepare query string for API call
-      _query_builder << '/v1/{type}/_similarity/_users/{user_id1}/{user_id2}'
-
-      # process optional query parameters
-      _query_builder = APIHelper.append_url_with_template_parameters _query_builder, {
-        'type' => type,
-        'user_id1' => user_id_1,
-        'user_id2' => user_id_2
-      }
+      _query_builder << '/v1/types'
 
       # validate and preprocess url
       _query_url = APIHelper.clean_url _query_builder
@@ -44,8 +32,6 @@ module SuggestGrid
       # Endpoint error handling using HTTP status codes.
       if _response.code == 429
         raise APIException.new 'Too many requests.', 429, _response.body
-      elsif _response.code == 555
-        raise APIException.new 'Recommendation model is not found for the given type.', 555, _response.body
       elsif _response.code == 500
         raise APIException.new 'Unexpected internal error.', 500, _response.body
       end
@@ -56,31 +42,25 @@ module SuggestGrid
       # Try to cast response to desired type
       if _response.body.instance_of? Hash
         begin
-          UserSimilarityResponse.from_hash(_response.body)
+          GetTypesResponse.from_hash(_response.body)
         rescue Exception
           raise APIException.new "Invalid JSON returned.", _response.code, _response.body
         end
       end
     end
 
-    # Get similarity of two items.
-    # @param [String] item_id_1 Required parameter: Example: 
-    # @param [String] item_id_2 Required parameter: Example: 
+    # Get properties of a type
     # @param [String] type Required parameter: Example: 
-    # @return ItemSimilarityResponse response from the API call
-    def get_item_similarity(item_id_1, 
-                            item_id_2, 
-                            type)
+    # @return GetTypeResponse response from the API call
+    def get_type(type)
       # the base uri for api requests
       _query_builder = Configuration.base_uri.dup
 
       # prepare query string for API call
-      _query_builder << '/v1/{type}/_similarity/_items/{item_id1}/{item_id2}'
+      _query_builder << '/v1/types/{type}'
 
       # process optional query parameters
       _query_builder = APIHelper.append_url_with_template_parameters _query_builder, {
-        'item_id1' => item_id_1,
-        'item_id2' => item_id_2,
         'type' => type
       }
 
@@ -99,8 +79,6 @@ module SuggestGrid
       # Endpoint error handling using HTTP status codes.
       if _response.code == 429
         raise APIException.new 'Too many requests.', 429, _response.body
-      elsif _response.code == 555
-        raise APIException.new 'Recommendation model is not found for the given type.', 555, _response.body
       elsif _response.code == 500
         raise APIException.new 'Unexpected internal error.', 500, _response.body
       end
@@ -111,85 +89,27 @@ module SuggestGrid
       # Try to cast response to desired type
       if _response.body.instance_of? Hash
         begin
-          ItemSimilarityResponse.from_hash(_response.body)
+          GetTypeResponse.from_hash(_response.body)
         rescue Exception
           raise APIException.new "Invalid JSON returned.", _response.code, _response.body
         end
       end
     end
 
-    # Get similar users to a user.
-    # @param [SimilarUsersBody] body Required parameter: Example: 
+    # Create a new type.
     # @param [String] type Required parameter: Example: 
-    # @param [String] user_id Required parameter: Example: 
-    # @return UsersResponse response from the API call
-    def get_similar_users(body, 
-                          type, 
-                          user_id)
+    # @param [TypeRequestBody] body Optional parameter: Optional body for explicit parameter.
+    # @return MessageResponse response from the API call
+    def create_type(type, 
+                    body = nil)
       # the base uri for api requests
       _query_builder = Configuration.base_uri.dup
 
       # prepare query string for API call
-      _query_builder << '/v1/{type}/_similar/_users/{user_id}'
+      _query_builder << '/v1/types/{type}'
 
       # process optional query parameters
       _query_builder = APIHelper.append_url_with_template_parameters _query_builder, {
-        'type' => type,
-        'user_id' => user_id
-      }
-
-      # validate and preprocess url
-      _query_url = APIHelper.clean_url _query_builder
-
-      # prepare headers
-      _headers = {
-        'user-agent' => 'SUGGESTGRID',
-        'accept' => 'application/json',
-        'content-type' => 'application/json; charset=utf-8'
-      }
-
-      # invoke the API call request to fetch the response
-      _response = Unirest.post _query_url, headers: _headers, parameters: body.to_json, auth: { :user => Configuration.basic_auth_user_name, :password => Configuration.basic_auth_password }
-
-      # Endpoint error handling using HTTP status codes.
-      if _response.code == 429
-        raise APIException.new 'Too many requests.', 429, _response.body
-      elsif _response.code == 555
-        raise APIException.new 'Recommendation model is not found for the given type.', 555, _response.body
-      elsif _response.code == 500
-        raise APIException.new 'Unexpected internal error.', 500, _response.body
-      end
-
-      # Global error handling using HTTP status codes.
-      validate_response(_response)
-
-      # Try to cast response to desired type
-      if _response.body.instance_of? Hash
-        begin
-          UsersResponse.from_hash(_response.body)
-        rescue Exception
-          raise APIException.new "Invalid JSON returned.", _response.code, _response.body
-        end
-      end
-    end
-
-    # Get similar items to an item.
-    # @param [SimilarItemsBody] body Required parameter: Example: 
-    # @param [String] item_id Required parameter: Example: 
-    # @param [String] type Required parameter: Example: 
-    # @return ItemsResponse response from the API call
-    def get_similar_items(body, 
-                          item_id, 
-                          type)
-      # the base uri for api requests
-      _query_builder = Configuration.base_uri.dup
-
-      # prepare query string for API call
-      _query_builder << '/v1/{type}/_similar/_items/{item_id}'
-
-      # process optional query parameters
-      _query_builder = APIHelper.append_url_with_template_parameters _query_builder, {
-        'item_id' => item_id,
         'type' => type
       }
 
@@ -204,13 +124,19 @@ module SuggestGrid
       }
 
       # invoke the API call request to fetch the response
-      _response = Unirest.post _query_url, headers: _headers, parameters: body.to_json, auth: { :user => Configuration.basic_auth_user_name, :password => Configuration.basic_auth_password }
+      _response = Unirest.put _query_url, headers: _headers, parameters: body.to_json, auth: { :user => Configuration.basic_auth_user_name, :password => Configuration.basic_auth_password }
 
       # Endpoint error handling using HTTP status codes.
-      if _response.code == 429
+      if _response.code == 400
+        raise APIException.new 'Type already exists.', 400, _response.body
+      elsif _response.code == 402
+        raise APIException.new 'Type limit reached.', 402, _response.body
+      elsif _response.code == 422
+        raise APIException.new 'Rating type is not `implicit` or `explicit`.', 422, _response.body
+      elsif _response.code == 429
         raise APIException.new 'Too many requests.', 429, _response.body
       elsif _response.code == 500
-        raise APIException.new '', 500, _response.body
+        raise APIException.new 'Unexpected internal error.', 500, _response.body
       end
 
       # Global error handling using HTTP status codes.
@@ -219,7 +145,56 @@ module SuggestGrid
       # Try to cast response to desired type
       if _response.body.instance_of? Hash
         begin
-          ItemsResponse.from_hash(_response.body)
+          MessageResponse.from_hash(_response.body)
+        rescue Exception
+          raise APIException.new "Invalid JSON returned.", _response.code, _response.body
+        end
+      end
+    end
+
+    # Delete a type.
+    # @param [String] type Required parameter: Example: 
+    # @return MessageResponse response from the API call
+    def delete_type(type)
+      # the base uri for api requests
+      _query_builder = Configuration.base_uri.dup
+
+      # prepare query string for API call
+      _query_builder << '/v1/types/{type}'
+
+      # process optional query parameters
+      _query_builder = APIHelper.append_url_with_template_parameters _query_builder, {
+        'type' => type
+      }
+
+      # validate and preprocess url
+      _query_url = APIHelper.clean_url _query_builder
+
+      # prepare headers
+      _headers = {
+        'user-agent' => 'SUGGESTGRID',
+        'accept' => 'application/json'
+      }
+
+      # invoke the API call request to fetch the response
+      _response = Unirest.delete _query_url, headers: _headers, auth: { :user => Configuration.basic_auth_user_name, :password => Configuration.basic_auth_password }
+
+      # Endpoint error handling using HTTP status codes.
+      if _response.code == 400
+        raise APIException.new 'Type does not exists.', 400, _response.body
+      elsif _response.code == 429
+        raise APIException.new 'Too many requests.', 429, _response.body
+      elsif _response.code == 500
+        raise APIException.new 'Unexpected internal error.', 500, _response.body
+      end
+
+      # Global error handling using HTTP status codes.
+      validate_response(_response)
+
+      # Try to cast response to desired type
+      if _response.body.instance_of? Hash
+        begin
+          MessageResponse.from_hash(_response.body)
         rescue Exception
           raise APIException.new "Invalid JSON returned.", _response.code, _response.body
         end

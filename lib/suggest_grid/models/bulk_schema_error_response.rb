@@ -1,14 +1,20 @@
 # This file was automatically generated for SuggestGrid by APIMATIC v2.0 ( https://apimatic.io ) on 05/21/2016
 
 module SuggestGrid
-  class ItemsModel
+  class BulkSchemaErrorResponse
+
+    # Message of the response.
+    # @return [String]
+    attr_accessor :message
 
     # TODO: Write general description for this method
-    # @return [List of Metadata]
-    attr_accessor :items
+    # @return [List of SchemaErrorResponse]
+    attr_accessor :errors
 
-    def initialize(items = nil)
-      @items = items
+    def initialize(message = nil,
+                   errors = nil)
+      @message = message
+      @errors = errors
 
     end
 
@@ -28,21 +34,24 @@ module SuggestGrid
         nil
       else
         # Extract variables from the hash
+        message = hash["message"]
         # Parameter is an array, so we need to iterate through it
-        items = nil
-        if hash["items"] != nil
-          items = Array.new
-          hash["items"].each{|structure| items << Metadata.from_hash(structure)}
+        errors = nil
+        if hash["errors"] != nil
+          errors = Array.new
+          hash["errors"].each{|structure| errors << SchemaErrorResponse.from_hash(structure)}
         end
         # Create object from extracted values
-        ItemsModel.new(items)
+        BulkSchemaErrorResponse.new(message,
+                                    errors)
       end
     end
 
     # Defines the key map for json serialization
     def key_map
       hash = {}
-      hash['items'] = items.map(&:key_map)
+      hash['message'] = message
+      hash['errors'] = errors.map(&:key_map)
       hash
     end
   end

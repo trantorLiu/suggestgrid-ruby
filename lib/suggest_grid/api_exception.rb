@@ -1,4 +1,4 @@
-# This file was automatically generated for SuggestGrid by APIMATIC v2.0 on 05/02/2016
+# This file was automatically generated for SuggestGrid by APIMATIC v2.0 ( https://apimatic.io ) on 05/21/2016
 
 module SuggestGrid
   class APIException < StandardError
@@ -9,9 +9,9 @@ module SuggestGrid
     attr_reader :response_body
 
     # The HTTP response code from the API request
-    # @param [String] the reason for raising an exception
-    # @param [Numeric] the HTTP response code from the API request
-    # @param [Object] the HTTP unprased response from the API request
+    # @param [String]    reason    the reason for raising an exception
+    # @param [Numeric]   response_code    the HTTP response code from the API request
+    # @param [Object]    response_body    the HTTP unprased response from the API request
     def initialize(reason, response_code, response_body)
       super(reason)
       @response_code = response_code
