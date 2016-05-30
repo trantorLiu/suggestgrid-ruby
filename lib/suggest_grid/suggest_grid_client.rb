@@ -1,4 +1,4 @@
-# This file was automatically generated for SuggestGrid by APIMATIC v2.0 ( https://apimatic.io ) on 05/21/2016
+# This file was automatically generated for SuggestGrid by APIMATIC v2.0 ( https://apimatic.io ) on 05/30/2016
 
 module SuggestGrid
   class SuggestGridClient
@@ -6,12 +6,6 @@ module SuggestGrid
     # @return [ActionController] Returns the controller instance
     def action
       ActionController.instance
-    end
-
-    # Singleton access to bulk controller
-    # @return [BulkController] Returns the controller instance
-    def bulk
-      BulkController.instance
     end
 
     # Singleton access to metadata controller

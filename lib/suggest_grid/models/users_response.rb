@@ -1,14 +1,14 @@
-# This file was automatically generated for SuggestGrid by APIMATIC v2.0 ( https://apimatic.io ) on 05/21/2016
+# This file was automatically generated for SuggestGrid by APIMATIC v2.0 ( https://apimatic.io ) on 05/30/2016
 
 module SuggestGrid
   class UsersResponse
 
-    # The number of user_ids in the response.
+    # The number of users in the response.
     # @return [Long]
     attr_accessor :count
 
     # TODO: Write general description for this method
-    # @return [List of UsersModel]
+    # @return [List of Metadata]
     attr_accessor :users
 
     def initialize(count = nil,
@@ -39,7 +39,7 @@ module SuggestGrid
         users = nil
         if hash["users"] != nil
           users = Array.new
-          hash["users"].each{|structure| users << UsersModel.from_hash(structure)}
+          hash["users"].each{|structure| users << Metadata.from_hash(structure)}
         end
         # Create object from extracted values
         UsersResponse.new(count,

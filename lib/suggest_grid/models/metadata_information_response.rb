@@ -1,14 +1,14 @@
-# This file was automatically generated for SuggestGrid by APIMATIC v2.0 ( https://apimatic.io ) on 05/21/2016
+# This file was automatically generated for SuggestGrid by APIMATIC v2.0 ( https://apimatic.io ) on 05/30/2016
 
 module SuggestGrid
-  class ItemsModel
+  class MetadataInformationResponse
 
-    # TODO: Write general description for this method
-    # @return [List of Metadata]
-    attr_accessor :items
+    # The number of users or items with metadata.
+    # @return [Long]
+    attr_accessor :count
 
-    def initialize(items = nil)
-      @items = items
+    def initialize(count = nil)
+      @count = count
 
     end
 
@@ -28,21 +28,16 @@ module SuggestGrid
         nil
       else
         # Extract variables from the hash
-        # Parameter is an array, so we need to iterate through it
-        items = nil
-        if hash["items"] != nil
-          items = Array.new
-          hash["items"].each{|structure| items << Metadata.from_hash(structure)}
-        end
+        count = hash["count"]
         # Create object from extracted values
-        ItemsModel.new(items)
+        MetadataInformationResponse.new(count)
       end
     end
 
     # Defines the key map for json serialization
     def key_map
       hash = {}
-      hash['items'] = items.map(&:key_map)
+      hash['count'] = count
       hash
     end
   end

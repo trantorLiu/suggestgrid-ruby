@@ -1,4 +1,4 @@
-# This file was automatically generated for SuggestGrid by APIMATIC v2.0 ( https://apimatic.io ) on 05/21/2016
+# This file was automatically generated for SuggestGrid by APIMATIC v2.0 ( https://apimatic.io ) on 05/30/2016
 
 module SuggestGrid
   class Action
@@ -12,7 +12,7 @@ module SuggestGrid
     attr_accessor :item_id
 
     # TODO: Write general description for this method
-    # @return [Integer]
+    # @return [Float]
     attr_accessor :rating
 
     def initialize(user_id = nil,

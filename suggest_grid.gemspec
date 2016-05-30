@@ -1,11 +1,11 @@
 Gem::Specification.new do |s|
   s.name = 'suggest_grid'
-  s.version = '0.1.7'
+  s.version = '1.0'
   s.summary = 'suggest_grid'
-  s.description = 'Hosted Recommendation and Personalization API for developers'
-  s.authors = ['SuggestGrid']
-  s.email = 'support@suggestgrid.com'
-  s.homepage = 'http://www.suggestgrid.com'
+  s.description = 'SuggestGrid is an recommendation and personalization service.'
+  s.authors = ['APIMATIC', 'Zeeshan Ejaz Bhatti']
+  s.email = 'zeeshan@apimatic.io'
+  s.homepage = 'https://apimatic.io'
   s.license = 'MIT'
   s.add_dependency('unirest', '~> 1.1.2')
   s.add_dependency('json_mapper', '~> 0.2.1')

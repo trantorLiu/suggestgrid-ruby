@@ -1,4 +1,4 @@
-# This file was automatically generated for SuggestGrid by APIMATIC v2.0 ( https://apimatic.io ) on 05/21/2016
+# This file was automatically generated for SuggestGrid by APIMATIC v2.0 ( https://apimatic.io ) on 05/30/2016
 
 module SuggestGrid
   class MetadataController < BaseController
@@ -9,7 +9,7 @@ module SuggestGrid
     end
 
     # Create a user metadata.
-    # @param [Object] metadata Required parameter: Example: 
+    # @param [Metadata] metadata Required parameter: Example: 
     # @param [String] user_id Required parameter: The user_id to delete its metadata.
     # @return MessageResponse response from the API call
     def create_a_user_metadata(metadata, 
@@ -18,7 +18,7 @@ module SuggestGrid
       _query_builder = Configuration.base_uri.dup
 
       # prepare query string for API call
-      _query_builder << '/v1/_user/{user_id}'
+      _query_builder << '/v1/users/{user_id}'
 
       # process optional query parameters
       _query_builder = APIHelper.append_url_with_template_parameters _query_builder, {
@@ -68,7 +68,7 @@ module SuggestGrid
       _query_builder = Configuration.base_uri.dup
 
       # prepare query string for API call
-      _query_builder << '/v1/_user/{user_id}'
+      _query_builder << '/v1/users/{user_id}'
 
       # process optional query parameters
       _query_builder = APIHelper.append_url_with_template_parameters _query_builder, {
@@ -101,6 +101,47 @@ module SuggestGrid
       if _response.body.instance_of? Hash
         begin
           MessageResponse.from_hash(_response.body)
+        rescue Exception
+          raise APIException.new "Invalid JSON returned.", _response.code, _response.body
+        end
+      end
+    end
+
+    # Get information about users.
+    # @return MetadataInformationResponse response from the API call
+    def get_users
+      # the base uri for api requests
+      _query_builder = Configuration.base_uri.dup
+
+      # prepare query string for API call
+      _query_builder << '/v1/users'
+
+      # validate and preprocess url
+      _query_url = APIHelper.clean_url _query_builder
+
+      # prepare headers
+      _headers = {
+        'user-agent' => 'SUGGESTGRID',
+        'accept' => 'application/json'
+      }
+
+      # invoke the API call request to fetch the response
+      _response = Unirest.get _query_url, headers: _headers, auth: { :user => Configuration.basic_auth_user_name, :password => Configuration.basic_auth_password }
+
+      # Endpoint error handling using HTTP status codes.
+      if _response.code == 429
+        raise APIException.new 'Too many requests.', 429, _response.body
+      elsif _response.code == 500
+        raise APIException.new 'Unexpected internal error.', 500, _response.body
+      end
+
+      # Global error handling using HTTP status codes.
+      validate_response(_response)
+
+      # Try to cast response to desired type
+      if _response.body.instance_of? Hash
+        begin
+          MetadataInformationResponse.from_hash(_response.body)
         rescue Exception
           raise APIException.new "Invalid JSON returned.", _response.code, _response.body
         end
@@ -149,7 +190,7 @@ module SuggestGrid
     end
 
     # Create an item metadata.
-    # @param [Object] body Required parameter: Example: 
+    # @param [Metadata] body Required parameter: Example: 
     # @param [String] item_id Required parameter: The item_id to delete its metadata.
     # @return MessageResponse response from the API call
     def create_an_item_metadata(body, 
@@ -247,6 +288,47 @@ module SuggestGrid
       end
     end
 
+    # Get information about items.
+    # @return MetadataInformationResponse response from the API call
+    def get_items
+      # the base uri for api requests
+      _query_builder = Configuration.base_uri.dup
+
+      # prepare query string for API call
+      _query_builder << '/v1/items'
+
+      # validate and preprocess url
+      _query_url = APIHelper.clean_url _query_builder
+
+      # prepare headers
+      _headers = {
+        'user-agent' => 'SUGGESTGRID',
+        'accept' => 'application/json'
+      }
+
+      # invoke the API call request to fetch the response
+      _response = Unirest.get _query_url, headers: _headers, auth: { :user => Configuration.basic_auth_user_name, :password => Configuration.basic_auth_password }
+
+      # Endpoint error handling using HTTP status codes.
+      if _response.code == 429
+        raise APIException.new 'Too many requests.', 429, _response.body
+      elsif _response.code == 500
+        raise APIException.new 'Unexpected internal error.', 500, _response.body
+      end
+
+      # Global error handling using HTTP status codes.
+      validate_response(_response)
+
+      # Try to cast response to desired type
+      if _response.body.instance_of? Hash
+        begin
+          MetadataInformationResponse.from_hash(_response.body)
+        rescue Exception
+          raise APIException.new "Invalid JSON returned.", _response.code, _response.body
+        end
+      end
+    end
+
     # Delete all item metadata.
     # @return MessageResponse response from the API call
     def delete_all_item_metadata
@@ -270,6 +352,94 @@ module SuggestGrid
 
       # Endpoint error handling using HTTP status codes.
       if _response.code == 429
+        raise APIException.new 'Too many requests.', 429, _response.body
+      elsif _response.code == 500
+        raise APIException.new 'Unexpected internal error.', 500, _response.body
+      end
+
+      # Global error handling using HTTP status codes.
+      validate_response(_response)
+
+      # Try to cast response to desired type
+      if _response.body.instance_of? Hash
+        begin
+          MessageResponse.from_hash(_response.body)
+        rescue Exception
+          raise APIException.new "Invalid JSON returned.", _response.code, _response.body
+        end
+      end
+    end
+
+    # Post bulk user metadata.
+    # @param [String] body Required parameter: Example: 
+    # @return MessageResponse response from the API call
+    def post_bulk_user_metadata(body)
+      # the base uri for api requests
+      _query_builder = Configuration.base_uri.dup
+
+      # prepare query string for API call
+      _query_builder << '/v1/users/_bulk'
+
+      # validate and preprocess url
+      _query_url = APIHelper.clean_url _query_builder
+
+      # prepare headers
+      _headers = {
+        'user-agent' => 'SUGGESTGRID',
+        'accept' => 'application/json'
+      }
+
+      # invoke the API call request to fetch the response
+      _response = Unirest.post _query_url, headers: _headers, parameters: body, auth: { :user => Configuration.basic_auth_user_name, :password => Configuration.basic_auth_password }
+
+      # Endpoint error handling using HTTP status codes.
+      if _response.code == 207
+        raise APIException.new 'Some metadata is not uploaded successfully.', 207, _response.body
+      elsif _response.code == 429
+        raise APIException.new 'Too many requests.', 429, _response.body
+      elsif _response.code == 500
+        raise APIException.new 'Unexpected internal error.', 500, _response.body
+      end
+
+      # Global error handling using HTTP status codes.
+      validate_response(_response)
+
+      # Try to cast response to desired type
+      if _response.body.instance_of? Hash
+        begin
+          MessageResponse.from_hash(_response.body)
+        rescue Exception
+          raise APIException.new "Invalid JSON returned.", _response.code, _response.body
+        end
+      end
+    end
+
+    # Post bulk item metadata.
+    # @param [String] body Required parameter: Example: 
+    # @return MessageResponse response from the API call
+    def post_bulk_item_metadata(body)
+      # the base uri for api requests
+      _query_builder = Configuration.base_uri.dup
+
+      # prepare query string for API call
+      _query_builder << '/v1/items/_bulk'
+
+      # validate and preprocess url
+      _query_url = APIHelper.clean_url _query_builder
+
+      # prepare headers
+      _headers = {
+        'user-agent' => 'SUGGESTGRID',
+        'accept' => 'application/json'
+      }
+
+      # invoke the API call request to fetch the response
+      _response = Unirest.post _query_url, headers: _headers, parameters: body, auth: { :user => Configuration.basic_auth_user_name, :password => Configuration.basic_auth_password }
+
+      # Endpoint error handling using HTTP status codes.
+      if _response.code == 207
+        raise APIException.new 'Some metadata is not uploaded successfully.', 207, _response.body
+      elsif _response.code == 429
         raise APIException.new 'Too many requests.', 429, _response.body
       elsif _response.code == 500
         raise APIException.new 'Unexpected internal error.', 500, _response.body

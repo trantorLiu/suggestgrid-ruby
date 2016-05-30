@@ -1,4 +1,4 @@
-# This file was automatically generated for SuggestGrid by APIMATIC v2.0 ( https://apimatic.io ) on 05/21/2016
+# This file was automatically generated for SuggestGrid by APIMATIC v2.0 ( https://apimatic.io ) on 05/30/2016
 
 module SuggestGrid
   class APIHelper
@@ -7,7 +7,7 @@ module SuggestGrid
     # @param [Array] The parameters to replace in the url
     def self.append_url_with_template_parameters(query_builder, parameters)
       # perform parameter validation
-      raise ArgumentError, 'Given value for parameter \"query_builder\" is invalid.' unless query_builder.is_a? String
+      raise ArgumentError, 'Given value for parameter \"query_builder\" is invalid.' unless query_builder.instance_of? String
 
       # return if there are no parameters to replace
       if parameters.nil?
@@ -19,10 +19,11 @@ module SuggestGrid
 
           if value.nil?
             replace_value = ''
-          elsif value.is_a? Enumerable
+          elsif value.instance_of? Array
+            value.map!{|element| CGI.escape(element.to_s)}
             replace_value = value.join('/')
           else
-            replace_value = value.to_s
+            replace_value = CGI.escape(value.to_s)
           end
 
           # find the template parameter and replace it with its value
@@ -37,7 +38,7 @@ module SuggestGrid
     # @param [Array] The parameters to append
     def self.append_url_with_query_parameters(query_builder, parameters)
       # perform parameter validation
-      raise ArgumentError, 'Given value for parameter \"query_builder\" is invalid.' unless query_builder.is_a? String
+      raise ArgumentError, 'Given value for parameter \"query_builder\" is invalid.' unless query_builder.instance_of? String
 
       # return if there are no parameters to replace
       if parameters.nil?
@@ -60,7 +61,7 @@ module SuggestGrid
     # @return [String] Pre-processed Url as string
     def self.clean_url(url)
       # perform parameter validation
-      raise ArgumentError, 'Invalid Url.' unless url.is_a? String
+      raise ArgumentError, 'Invalid Url.' unless url.instance_of? String
 
       # ensure that the urls are absolute
       matches = url.match(%r{^(https?:\/\/[^\/]+)})
@@ -109,11 +110,11 @@ module SuggestGrid
       # Create a form encoded hash for this object.
       if obj == nil
         nil         
-      elsif obj.is_a? Array
+      elsif obj.instance_of? Array
         obj.each_with_index do |value, index|
           retval.merge!(APIHelper.form_encode(value, instance_name + "[" + index.to_s + "]"))
         end
-      elsif obj.is_a? Hash
+      elsif obj.instance_of? Hash
         obj.each do |key, value|
           retval.merge!(APIHelper.form_encode(value, instance_name + "[" + key + "]"))
         end

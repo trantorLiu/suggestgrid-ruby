@@ -1,14 +1,14 @@
-# This file was automatically generated for SuggestGrid by APIMATIC v2.0 ( https://apimatic.io ) on 05/21/2016
+# This file was automatically generated for SuggestGrid by APIMATIC v2.0 ( https://apimatic.io ) on 05/30/2016
 
 module SuggestGrid
   class ItemsResponse
 
-    # The number of item_ids in the response.
+    # The number of items in the response.
     # @return [Long]
     attr_accessor :count
 
     # TODO: Write general description for this method
-    # @return [List of ItemsModel]
+    # @return [List of Metadata]
     attr_accessor :items
 
     def initialize(count = nil,
@@ -39,7 +39,7 @@ module SuggestGrid
         items = nil
         if hash["items"] != nil
           items = Array.new
-          hash["items"].each{|structure| items << ItemsModel.from_hash(structure)}
+          hash["items"].each{|structure| items << Metadata.from_hash(structure)}
         end
         # Create object from extracted values
         ItemsResponse.new(count,
