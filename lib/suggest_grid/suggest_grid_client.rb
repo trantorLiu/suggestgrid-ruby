@@ -1,5 +1,7 @@
 # This file was automatically generated for SuggestGrid by APIMATIC v2.0 ( https://apimatic.io ) on 05/30/2016
 
+require 'uri'
+
 module SuggestGrid
   class SuggestGridClient
     # Singleton access to action controller
@@ -33,9 +35,13 @@ module SuggestGrid
     end
 
     # Initializer with authentication and configuration parameters
-    def initialize(basic_auth_user_name: nil, basic_auth_password: nil)
-      Configuration.basic_auth_user_name = basic_auth_user_name
-      Configuration.basic_auth_password = basic_auth_password
+    def initialize(connection_url)
+      uri = URI(connection_url)
+      Configuration.base_uri = "#{uri.scheme}://#{uri.host}:#{uri.port}#{uri.path}"
+      unless uri.user.nil?
+        Configuration.basic_auth_user_name = uri.user
+        Configuration.basic_auth_password = uri.password
+      end
     end
   end
 end

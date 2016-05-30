@@ -9,10 +9,10 @@ module SuggestGrid
     end
 
     # Create a user metadata.
-    # @param [Metadata] metadata Required parameter: Example: 
+    # @param [Metadata] metadata Required parameter: Example:
     # @param [String] user_id Required parameter: The user_id to delete its metadata.
     # @return MessageResponse response from the API call
-    def create_a_user_metadata(metadata, 
+    def create_a_user_metadata(metadata,
                                user_id)
       # the base uri for api requests
       _query_builder = Configuration.base_uri.dup
@@ -190,10 +190,10 @@ module SuggestGrid
     end
 
     # Create an item metadata.
-    # @param [Metadata] body Required parameter: Example: 
+    # @param [Metadata] body Required parameter: Example:
     # @param [String] item_id Required parameter: The item_id to delete its metadata.
     # @return MessageResponse response from the API call
-    def create_an_item_metadata(body, 
+    def create_an_item_metadata(body,
                                 item_id)
       # the base uri for api requests
       _query_builder = Configuration.base_uri.dup
@@ -371,9 +371,13 @@ module SuggestGrid
     end
 
     # Post bulk user metadata.
-    # @param [String] body Required parameter: Example: 
+    # @param [Collection] metas Required parameter: Example: [Metadata,Metadata,Metadata]
     # @return MessageResponse response from the API call
-    def post_bulk_user_metadata(body)
+    def post_bulk_user_metadata(metas)
+        body = ''
+        metas.each do |meta|
+            body += "#{meta.to_json}\n"
+        end
       # the base uri for api requests
       _query_builder = Configuration.base_uri.dup
 
@@ -415,9 +419,13 @@ module SuggestGrid
     end
 
     # Post bulk item metadata.
-    # @param [String] body Required parameter: Example: 
+    # @param [Collection] metas Required parameter: Example: [Metadata,Metadata,Metadata]
     # @return MessageResponse response from the API call
-    def post_bulk_item_metadata(body)
+    def post_bulk_item_metadata(metas)
+        body = ''
+        metas.each do |meta|
+            body += "#{meta.to_json}\n"
+        end
       # the base uri for api requests
       _query_builder = Configuration.base_uri.dup
 

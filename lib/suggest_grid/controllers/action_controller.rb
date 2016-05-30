@@ -9,10 +9,10 @@ module SuggestGrid
     end
 
     # Create an action.
-    # @param [Action] body Required parameter: Example: 
-    # @param [String] type Required parameter: Example: 
+    # @param [Action] body Required parameter: Example:
+    # @param [String] type Required parameter: Example:
     # @return MessageResponse response from the API call
-    def create_action(body, 
+    def create_action(body,
                       type)
       # the base uri for api requests
       _query_builder = Configuration.base_uri.dup
@@ -63,10 +63,10 @@ module SuggestGrid
     end
 
     # Deletes actions.
-    # @param [ActionsQuery] actions_query Required parameter: Example: 
-    # @param [String] type Required parameter: Example: 
+    # @param [ActionsQuery] actions_query Required parameter: Example:
+    # @param [String] type Required parameter: Example:
     # @return MessageResponse response from the API call
-    def delete_actions(actions_query, 
+    def delete_actions(actions_query,
                        type)
       # the base uri for api requests
       _query_builder = Configuration.base_uri.dup
@@ -115,11 +115,15 @@ module SuggestGrid
     end
 
     # Post bulk actions.
-    # @param [String] body Required parameter: Example: 
-    # @param [String] type Required parameter: Example: 
+    # @param [Collection] actions Required parameter: Example: [Action,Action,Action]
+    # @param [String] type Required parameter: Example:
     # @return MessageResponse response from the API call
-    def post_bulk_actions(body, 
+    def post_bulk_actions(actions,
                           type)
+        body = ''
+        actions.each do |action|
+            body += "#{action.to_json}\n"
+        end
       # the base uri for api requests
       _query_builder = Configuration.base_uri.dup
 
