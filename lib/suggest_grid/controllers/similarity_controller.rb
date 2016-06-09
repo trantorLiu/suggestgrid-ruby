@@ -1,4 +1,4 @@
-# This file was automatically generated for SuggestGrid by APIMATIC v2.0 ( https://apimatic.io ) on 05/30/2016
+# This file was automatically generated for SuggestGrid by APIMATIC v2.0 ( https://apimatic.io ) on 06/09/2016
 
 module SuggestGrid
   class SimilarityController < BaseController
@@ -64,13 +64,13 @@ module SuggestGrid
     end
 
     # Get similarity of two items.
+    # @param [String] type Required parameter: Example: 
     # @param [String] item_id_1 Required parameter: Example: 
     # @param [String] item_id_2 Required parameter: Example: 
-    # @param [String] type Required parameter: Example: 
     # @return ItemSimilarityResponse response from the API call
-    def get_item_similarity(item_id_1, 
-                            item_id_2, 
-                            type)
+    def get_item_similarity(type, 
+                            item_id_1, 
+                            item_id_2)
       # the base uri for api requests
       _query_builder = Configuration.base_uri.dup
 
@@ -79,9 +79,9 @@ module SuggestGrid
 
       # process optional query parameters
       _query_builder = APIHelper.append_url_with_template_parameters _query_builder, {
+        'type' => type,
         'item_id1' => item_id_1,
-        'item_id2' => item_id_2,
-        'type' => type
+        'item_id2' => item_id_2
       }
 
       # validate and preprocess url
@@ -119,13 +119,13 @@ module SuggestGrid
     end
 
     # Get similar users to a user.
-    # @param [SimilarUsersBody] body Required parameter: Example: 
     # @param [String] type Required parameter: Example: 
     # @param [String] user_id Required parameter: Example: 
+    # @param [SimilarUsersBody] body Required parameter: Example: 
     # @return UsersResponse response from the API call
-    def get_similar_users(body, 
-                          type, 
-                          user_id)
+    def get_similar_users(type, 
+                          user_id, 
+                          body)
       # the base uri for api requests
       _query_builder = Configuration.base_uri.dup
 
@@ -174,13 +174,13 @@ module SuggestGrid
     end
 
     # Get similar items to an item.
-    # @param [SimilarItemsBody] body Required parameter: Example: 
-    # @param [String] item_id Required parameter: Example: 
     # @param [String] type Required parameter: Example: 
+    # @param [String] item_id Required parameter: Example: 
+    # @param [SimilarItemsBody] body Required parameter: Example: 
     # @return ItemsResponse response from the API call
-    def get_similar_items(body, 
+    def get_similar_items(type, 
                           item_id, 
-                          type)
+                          body)
       # the base uri for api requests
       _query_builder = Configuration.base_uri.dup
 
@@ -189,8 +189,8 @@ module SuggestGrid
 
       # process optional query parameters
       _query_builder = APIHelper.append_url_with_template_parameters _query_builder, {
-        'item_id' => item_id,
-        'type' => type
+        'type' => type,
+        'item_id' => item_id
       }
 
       # validate and preprocess url

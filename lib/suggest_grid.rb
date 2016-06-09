@@ -1,4 +1,4 @@
-# This file was automatically generated for SuggestGrid by APIMATIC v2.0 ( https://apimatic.io ) on 05/30/2016
+# This file was automatically generated for SuggestGrid by APIMATIC v2.0 ( https://apimatic.io ) on 06/09/2016
 require 'openssl'
 require 'json'
 require 'unirest'
@@ -19,7 +19,6 @@ require_relative 'suggest_grid/controllers/type_controller.rb'
 
 # Models
 require_relative 'suggest_grid/models/action.rb'
-require_relative 'suggest_grid/models/actions_query.rb'
 require_relative 'suggest_grid/models/metadata.rb'
 require_relative 'suggest_grid/models/type_request_body.rb'
 require_relative 'suggest_grid/models/recommend_users_body.rb'
@@ -35,6 +34,5 @@ require_relative 'suggest_grid/models/schema_error_response.rb'
 require_relative 'suggest_grid/models/metadata_information_response.rb'
 require_relative 'suggest_grid/models/users_response.rb'
 require_relative 'suggest_grid/models/items_response.rb'
-require_relative 'suggest_grid/models/prediction_response.rb'
 require_relative 'suggest_grid/models/user_similarity_response.rb'
 require_relative 'suggest_grid/models/item_similarity_response.rb'

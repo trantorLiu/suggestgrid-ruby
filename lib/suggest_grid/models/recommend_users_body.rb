@@ -1,7 +1,11 @@
-# This file was automatically generated for SuggestGrid by APIMATIC v2.0 ( https://apimatic.io ) on 05/30/2016
+# This file was automatically generated for SuggestGrid by APIMATIC v2.0 ( https://apimatic.io ) on 06/09/2016
 
 module SuggestGrid
   class RecommendUsersBody
+
+    # TODO: Write general description for this method
+    # @return [String]
+    attr_accessor :type
 
     # TODO: Write general description for this method
     # @return [String]
@@ -27,12 +31,14 @@ module SuggestGrid
     # @return [List of String]
     attr_accessor :except
 
-    def initialize(item_id = nil,
+    def initialize(type = nil,
+                   item_id = nil,
                    item_ids = nil,
                    filter = nil,
                    size = nil,
                    similar_user_id = nil,
                    except = nil)
+      @type = type
       @item_id = item_id
       @item_ids = item_ids
       @filter = filter
@@ -58,6 +64,7 @@ module SuggestGrid
         nil
       else
         # Extract variables from the hash
+        type = hash["type"]
         item_id = hash["item_id"]
         item_ids = hash["item_ids"]
         filter = hash["filter"]
@@ -65,7 +72,8 @@ module SuggestGrid
         similar_user_id = hash["similar_user_id"]
         except = hash["except"]
         # Create object from extracted values
-        RecommendUsersBody.new(item_id,
+        RecommendUsersBody.new(type,
+                               item_id,
                                item_ids,
                                filter,
                                size,
@@ -77,6 +85,7 @@ module SuggestGrid
     # Defines the key map for json serialization
     def key_map
       hash = {}
+      hash['type'] = type
       hash['item_id'] = item_id
       hash['item_ids'] = item_ids
       hash['filter'] = filter
