@@ -1,4 +1,4 @@
-# This file was automatically generated for SuggestGrid by APIMATIC v2.0 ( https://apimatic.io ) on 06/09/2016
+# This file was automatically generated for SuggestGrid by APIMATIC v2.0 ( https://apimatic.io ) on 06/16/2016
 
 module SuggestGrid
   class ItemsResponse
@@ -18,10 +18,6 @@ module SuggestGrid
 
     end
 
-    def method_missing(method_name)
-      puts "There is no method called '#{method_name}'."
-    end
-
     # Creates JSON of the curent object
     def to_json(options = {})
       hash = key_map
@@ -39,7 +35,7 @@ module SuggestGrid
         items = nil
         if hash["items"] != nil
           items = Array.new
-          hash["items"].each{|structure| items << Metadata.from_hash(structure)}
+          hash["items"].each{|structure| items << (Metadata.from_hash(structure) if structure)}
         end
         # Create object from extracted values
         ItemsResponse.new(count,
@@ -51,7 +47,7 @@ module SuggestGrid
     def key_map
       hash = {}
       hash['count'] = count
-      hash['items'] = items.map(&:key_map)
+      hash['items'] = items ? items.map(&:key_map) : nil
       hash
     end
   end

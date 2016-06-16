@@ -1,4 +1,4 @@
-# This file was automatically generated for SuggestGrid by APIMATIC v2.0 ( https://apimatic.io ) on 06/09/2016
+# This file was automatically generated for SuggestGrid by APIMATIC v2.0 ( https://apimatic.io ) on 06/16/2016
 
 module SuggestGrid
   class SimilarUsersBody
@@ -28,10 +28,6 @@ module SuggestGrid
       @size = size
       @except = except
 
-    end
-
-    def method_missing(method_name)
-      puts "There is no method called '#{method_name}'."
     end
 
     # Creates JSON of the curent object

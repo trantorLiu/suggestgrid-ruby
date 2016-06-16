@@ -1,4 +1,4 @@
-# This file was automatically generated for SuggestGrid by APIMATIC v2.0 ( https://apimatic.io ) on 06/09/2016
+# This file was automatically generated for SuggestGrid by APIMATIC v2.0 ( https://apimatic.io ) on 06/16/2016
 
 module SuggestGrid
   class BulkSchemaErrorResponse
@@ -18,10 +18,6 @@ module SuggestGrid
 
     end
 
-    def method_missing(method_name)
-      puts "There is no method called '#{method_name}'."
-    end
-
     # Creates JSON of the curent object
     def to_json(options = {})
       hash = key_map
@@ -39,7 +35,7 @@ module SuggestGrid
         errors = nil
         if hash["errors"] != nil
           errors = Array.new
-          hash["errors"].each{|structure| errors << SchemaErrorResponse.from_hash(structure)}
+          hash["errors"].each{|structure| errors << (SchemaErrorResponse.from_hash(structure) if structure)}
         end
         # Create object from extracted values
         BulkSchemaErrorResponse.new(message,
@@ -51,7 +47,7 @@ module SuggestGrid
     def key_map
       hash = {}
       hash['message'] = message
-      hash['errors'] = errors.map(&:key_map)
+      hash['errors'] = errors ? errors.map(&:key_map) : nil
       hash
     end
   end

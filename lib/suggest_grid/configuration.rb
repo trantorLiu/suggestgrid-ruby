@@ -1,4 +1,4 @@
-# This file was automatically generated for SuggestGrid by APIMATIC v2.0 ( https://apimatic.io ) on 06/09/2016
+# This file was automatically generated for SuggestGrid by APIMATIC v2.0 ( https://apimatic.io ) on 06/16/2016
 
 module SuggestGrid
   class Configuration
@@ -14,8 +14,6 @@ module SuggestGrid
     # create the getters and setters
     class << self
       attr_accessor :base_uri
-      attr_accessor :basic_auth_user_name
-      attr_accessor :basic_auth_password
       attr_accessor :basic_auth_user_name
       attr_accessor :basic_auth_password
     end
