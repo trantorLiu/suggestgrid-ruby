@@ -1,4 +1,4 @@
-# This file was automatically generated for SuggestGrid by APIMATIC v2.0 ( https://apimatic.io ) on 06/16/2016
+# This file was automatically generated for SuggestGrid by APIMATIC v2.0 ( https://apimatic.io ).
 
 require 'uri'
 
@@ -6,31 +6,31 @@ module SuggestGrid
   class SuggestGridClient
     # Singleton access to action controller
     # @return [ActionController] Returns the controller instance
-    def action
+    def action_controller
       ActionController.instance
     end
 
     # Singleton access to metadata controller
     # @return [MetadataController] Returns the controller instance
-    def metadata
+    def metadata_controller
       MetadataController.instance
     end
 
     # Singleton access to recommendation controller
     # @return [RecommendationController] Returns the controller instance
-    def recommendation
+    def recommendation_controller
       RecommendationController.instance
     end
 
     # Singleton access to similarity controller
     # @return [SimilarityController] Returns the controller instance
-    def similarity
+    def similarity_controller
       SimilarityController.instance
     end
 
     # Singleton access to type controller
     # @return [TypeController] Returns the controller instance
-    def type
+    def type_controller
       TypeController.instance
     end
 

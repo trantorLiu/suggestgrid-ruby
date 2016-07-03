@@ -1,4 +1,4 @@
-# This file was automatically generated for SuggestGrid by APIMATIC v2.0 ( https://apimatic.io ) on 06/16/2016
+# This file was automatically generated for SuggestGrid by APIMATIC v2.0 ( https://apimatic.io ).
 
 module SuggestGrid
   class MetadataController < BaseController
@@ -8,12 +8,12 @@ module SuggestGrid
       @@instance
     end
 
-    # Create a user metadata.
+    # Posts a user metadata.
     # @param [Metadata] metadata Required parameter: Example:
     # @param [String] user_id Required parameter: The user_id to delete its metadata.
     # @return MessageResponse response from the API call
-    def create_a_user_metadata(metadata,
-                               user_id)
+    def post_user_metadata(metadata,
+                           user_id)
       # the base uri for api requests
       _query_builder = Configuration.base_uri.dup
 
@@ -35,29 +35,33 @@ module SuggestGrid
         'content-type' => 'application/json; charset=utf-8'
       }
 
-      # invoke the API call request to fetch the response
-      _response = Unirest.put _query_url, headers: _headers, parameters: metadata.to_json, auth: { :user => Configuration.basic_auth_user_name, :password => Configuration.basic_auth_password }
+      # Create the HttpRequest object for the call
+      _http_request = @http_client.put _query_url, headers: _headers, parameters: metadata.to_json, username: Configuration.basic_auth_user_name, password: Configuration.basic_auth_password
+
+      # Call the on_before_request callback
+      @http_call_back.on_before_request(_http_request) if @http_call_back
+
+      # Invoke the API call and get the response
+      _response = @http_client.execute_as_string(_http_request)
+
+      # Call the on_after_response callback
+      @http_call_back.on_after_response(_response) if @http_call_back
 
       # Endpoint error handling using HTTP status codes.
-      if _response.code == 400
-        raise APIException.new 'Metadata is invalid.', 400, _response.body
-      elsif _response.code == 429
-        raise APIException.new 'Too many requests.', 429, _response.body
-      elsif _response.code == 500
-        raise APIException.new 'Unexpected internal error.', 500, _response.body
+      if _response.status_code == 400
+        raise APIException.new 'Metadata is invalid.', 400, _response.raw_body
+      elsif _response.status_code == 429
+        raise APIException.new 'Too many requests.', 429, _response.raw_body
+      elsif _response.status_code == 500
+        raise APIException.new 'Unexpected internal error.', 500, _response.raw_body
       end
 
       # Global error handling using HTTP status codes.
       validate_response(_response)
 
-      # Try to cast response to desired type
-      if _response.body.instance_of? Hash
-        begin
-          MessageResponse.from_hash(_response.body)
-        rescue Exception
-          raise APIException.new "Invalid JSON returned.", _response.code, _response.body
-        end
-      end
+      # Return appropriate response type
+      decoded = APIHelper.json_deserialize(_response.raw_body)
+      return MessageResponse.from_hash(decoded)
     end
 
     # Delete a user metadata.
@@ -84,27 +88,31 @@ module SuggestGrid
         'accept' => 'application/json'
       }
 
-      # invoke the API call request to fetch the response
-      _response = Unirest.delete _query_url, headers: _headers, auth: { :user => Configuration.basic_auth_user_name, :password => Configuration.basic_auth_password }
+      # Create the HttpRequest object for the call
+      _http_request = @http_client.delete _query_url, headers: _headers, username: Configuration.basic_auth_user_name, password: Configuration.basic_auth_password
+
+      # Call the on_before_request callback
+      @http_call_back.on_before_request(_http_request) if @http_call_back
+
+      # Invoke the API call and get the response
+      _response = @http_client.execute_as_string(_http_request)
+
+      # Call the on_after_response callback
+      @http_call_back.on_after_response(_response) if @http_call_back
 
       # Endpoint error handling using HTTP status codes.
-      if _response.code == 429
-        raise APIException.new 'Too many requests.', 429, _response.body
-      elsif _response.code == 500
-        raise APIException.new 'Unexpected internal error.', 500, _response.body
+      if _response.status_code == 429
+        raise APIException.new 'Too many requests.', 429, _response.raw_body
+      elsif _response.status_code == 500
+        raise APIException.new 'Unexpected internal error.', 500, _response.raw_body
       end
 
       # Global error handling using HTTP status codes.
       validate_response(_response)
 
-      # Try to cast response to desired type
-      if _response.body.instance_of? Hash
-        begin
-          MessageResponse.from_hash(_response.body)
-        rescue Exception
-          raise APIException.new "Invalid JSON returned.", _response.code, _response.body
-        end
-      end
+      # Return appropriate response type
+      decoded = APIHelper.json_deserialize(_response.raw_body)
+      return MessageResponse.from_hash(decoded)
     end
 
     # Get information about users.
@@ -125,27 +133,31 @@ module SuggestGrid
         'accept' => 'application/json'
       }
 
-      # invoke the API call request to fetch the response
-      _response = Unirest.get _query_url, headers: _headers, auth: { :user => Configuration.basic_auth_user_name, :password => Configuration.basic_auth_password }
+      # Create the HttpRequest object for the call
+      _http_request = @http_client.get _query_url, headers: _headers, username: Configuration.basic_auth_user_name, password: Configuration.basic_auth_password
+
+      # Call the on_before_request callback
+      @http_call_back.on_before_request(_http_request) if @http_call_back
+
+      # Invoke the API call and get the response
+      _response = @http_client.execute_as_string(_http_request)
+
+      # Call the on_after_response callback
+      @http_call_back.on_after_response(_response) if @http_call_back
 
       # Endpoint error handling using HTTP status codes.
-      if _response.code == 429
-        raise APIException.new 'Too many requests.', 429, _response.body
-      elsif _response.code == 500
-        raise APIException.new 'Unexpected internal error.', 500, _response.body
+      if _response.status_code == 429
+        raise APIException.new 'Too many requests.', 429, _response.raw_body
+      elsif _response.status_code == 500
+        raise APIException.new 'Unexpected internal error.', 500, _response.raw_body
       end
 
       # Global error handling using HTTP status codes.
       validate_response(_response)
 
-      # Try to cast response to desired type
-      if _response.body.instance_of? Hash
-        begin
-          MetadataInformationResponse.from_hash(_response.body)
-        rescue Exception
-          raise APIException.new "Invalid JSON returned.", _response.code, _response.body
-        end
-      end
+      # Return appropriate response type
+      decoded = APIHelper.json_deserialize(_response.raw_body)
+      return MetadataInformationResponse.from_hash(decoded)
     end
 
     # Delete all user metadata.
@@ -166,35 +178,39 @@ module SuggestGrid
         'accept' => 'application/json'
       }
 
-      # invoke the API call request to fetch the response
-      _response = Unirest.delete _query_url, headers: _headers, auth: { :user => Configuration.basic_auth_user_name, :password => Configuration.basic_auth_password }
+      # Create the HttpRequest object for the call
+      _http_request = @http_client.delete _query_url, headers: _headers, username: Configuration.basic_auth_user_name, password: Configuration.basic_auth_password
+
+      # Call the on_before_request callback
+      @http_call_back.on_before_request(_http_request) if @http_call_back
+
+      # Invoke the API call and get the response
+      _response = @http_client.execute_as_string(_http_request)
+
+      # Call the on_after_response callback
+      @http_call_back.on_after_response(_response) if @http_call_back
 
       # Endpoint error handling using HTTP status codes.
-      if _response.code == 429
-        raise APIException.new 'Too many requests.', 429, _response.body
-      elsif _response.code == 500
-        raise APIException.new 'Unexpected internal error.', 500, _response.body
+      if _response.status_code == 429
+        raise APIException.new 'Too many requests.', 429, _response.raw_body
+      elsif _response.status_code == 500
+        raise APIException.new 'Unexpected internal error.', 500, _response.raw_body
       end
 
       # Global error handling using HTTP status codes.
       validate_response(_response)
 
-      # Try to cast response to desired type
-      if _response.body.instance_of? Hash
-        begin
-          MessageResponse.from_hash(_response.body)
-        rescue Exception
-          raise APIException.new "Invalid JSON returned.", _response.code, _response.body
-        end
-      end
+      # Return appropriate response type
+      decoded = APIHelper.json_deserialize(_response.raw_body)
+      return MessageResponse.from_hash(decoded)
     end
 
-    # Create an item metadata.
+    # Posts an item metadata.
     # @param [Metadata] body Required parameter: Example:
     # @param [String] item_id Required parameter: The item_id to delete its metadata.
     # @return MessageResponse response from the API call
-    def create_an_item_metadata(body,
-                                item_id)
+    def post_item_metadata(body,
+                           item_id)
       # the base uri for api requests
       _query_builder = Configuration.base_uri.dup
 
@@ -216,29 +232,33 @@ module SuggestGrid
         'content-type' => 'application/json; charset=utf-8'
       }
 
-      # invoke the API call request to fetch the response
-      _response = Unirest.put _query_url, headers: _headers, parameters: body.to_json, auth: { :user => Configuration.basic_auth_user_name, :password => Configuration.basic_auth_password }
+      # Create the HttpRequest object for the call
+      _http_request = @http_client.put _query_url, headers: _headers, parameters: body.to_json, username: Configuration.basic_auth_user_name, password: Configuration.basic_auth_password
+
+      # Call the on_before_request callback
+      @http_call_back.on_before_request(_http_request) if @http_call_back
+
+      # Invoke the API call and get the response
+      _response = @http_client.execute_as_string(_http_request)
+
+      # Call the on_after_response callback
+      @http_call_back.on_after_response(_response) if @http_call_back
 
       # Endpoint error handling using HTTP status codes.
-      if _response.code == 400
-        raise APIException.new 'Metadata is invalid.', 400, _response.body
-      elsif _response.code == 429
-        raise APIException.new 'Too many requests.', 429, _response.body
-      elsif _response.code == 500
-        raise APIException.new 'Unexpected internal error.', 500, _response.body
+      if _response.status_code == 400
+        raise APIException.new 'Metadata is invalid.', 400, _response.raw_body
+      elsif _response.status_code == 429
+        raise APIException.new 'Too many requests.', 429, _response.raw_body
+      elsif _response.status_code == 500
+        raise APIException.new 'Unexpected internal error.', 500, _response.raw_body
       end
 
       # Global error handling using HTTP status codes.
       validate_response(_response)
 
-      # Try to cast response to desired type
-      if _response.body.instance_of? Hash
-        begin
-          MessageResponse.from_hash(_response.body)
-        rescue Exception
-          raise APIException.new "Invalid JSON returned.", _response.code, _response.body
-        end
-      end
+      # Return appropriate response type
+      decoded = APIHelper.json_deserialize(_response.raw_body)
+      return MessageResponse.from_hash(decoded)
     end
 
     # Delete an item metadata.
@@ -265,27 +285,31 @@ module SuggestGrid
         'accept' => 'application/json'
       }
 
-      # invoke the API call request to fetch the response
-      _response = Unirest.delete _query_url, headers: _headers, auth: { :user => Configuration.basic_auth_user_name, :password => Configuration.basic_auth_password }
+      # Create the HttpRequest object for the call
+      _http_request = @http_client.delete _query_url, headers: _headers, username: Configuration.basic_auth_user_name, password: Configuration.basic_auth_password
+
+      # Call the on_before_request callback
+      @http_call_back.on_before_request(_http_request) if @http_call_back
+
+      # Invoke the API call and get the response
+      _response = @http_client.execute_as_string(_http_request)
+
+      # Call the on_after_response callback
+      @http_call_back.on_after_response(_response) if @http_call_back
 
       # Endpoint error handling using HTTP status codes.
-      if _response.code == 429
-        raise APIException.new 'Too many requests.', 429, _response.body
-      elsif _response.code == 500
-        raise APIException.new 'Unexpected internal error.', 500, _response.body
+      if _response.status_code == 429
+        raise APIException.new 'Too many requests.', 429, _response.raw_body
+      elsif _response.status_code == 500
+        raise APIException.new 'Unexpected internal error.', 500, _response.raw_body
       end
 
       # Global error handling using HTTP status codes.
       validate_response(_response)
 
-      # Try to cast response to desired type
-      if _response.body.instance_of? Hash
-        begin
-          MessageResponse.from_hash(_response.body)
-        rescue Exception
-          raise APIException.new "Invalid JSON returned.", _response.code, _response.body
-        end
-      end
+      # Return appropriate response type
+      decoded = APIHelper.json_deserialize(_response.raw_body)
+      return MessageResponse.from_hash(decoded)
     end
 
     # Get information about items.
@@ -306,27 +330,31 @@ module SuggestGrid
         'accept' => 'application/json'
       }
 
-      # invoke the API call request to fetch the response
-      _response = Unirest.get _query_url, headers: _headers, auth: { :user => Configuration.basic_auth_user_name, :password => Configuration.basic_auth_password }
+      # Create the HttpRequest object for the call
+      _http_request = @http_client.get _query_url, headers: _headers, username: Configuration.basic_auth_user_name, password: Configuration.basic_auth_password
+
+      # Call the on_before_request callback
+      @http_call_back.on_before_request(_http_request) if @http_call_back
+
+      # Invoke the API call and get the response
+      _response = @http_client.execute_as_string(_http_request)
+
+      # Call the on_after_response callback
+      @http_call_back.on_after_response(_response) if @http_call_back
 
       # Endpoint error handling using HTTP status codes.
-      if _response.code == 429
-        raise APIException.new 'Too many requests.', 429, _response.body
-      elsif _response.code == 500
-        raise APIException.new 'Unexpected internal error.', 500, _response.body
+      if _response.status_code == 429
+        raise APIException.new 'Too many requests.', 429, _response.raw_body
+      elsif _response.status_code == 500
+        raise APIException.new 'Unexpected internal error.', 500, _response.raw_body
       end
 
       # Global error handling using HTTP status codes.
       validate_response(_response)
 
-      # Try to cast response to desired type
-      if _response.body.instance_of? Hash
-        begin
-          MetadataInformationResponse.from_hash(_response.body)
-        rescue Exception
-          raise APIException.new "Invalid JSON returned.", _response.code, _response.body
-        end
-      end
+      # Return appropriate response type
+      decoded = APIHelper.json_deserialize(_response.raw_body)
+      return MetadataInformationResponse.from_hash(decoded)
     end
 
     # Delete all item metadata.
@@ -347,27 +375,31 @@ module SuggestGrid
         'accept' => 'application/json'
       }
 
-      # invoke the API call request to fetch the response
-      _response = Unirest.delete _query_url, headers: _headers, auth: { :user => Configuration.basic_auth_user_name, :password => Configuration.basic_auth_password }
+      # Create the HttpRequest object for the call
+      _http_request = @http_client.delete _query_url, headers: _headers, username: Configuration.basic_auth_user_name, password: Configuration.basic_auth_password
+
+      # Call the on_before_request callback
+      @http_call_back.on_before_request(_http_request) if @http_call_back
+
+      # Invoke the API call and get the response
+      _response = @http_client.execute_as_string(_http_request)
+
+      # Call the on_after_response callback
+      @http_call_back.on_after_response(_response) if @http_call_back
 
       # Endpoint error handling using HTTP status codes.
-      if _response.code == 429
-        raise APIException.new 'Too many requests.', 429, _response.body
-      elsif _response.code == 500
-        raise APIException.new 'Unexpected internal error.', 500, _response.body
+      if _response.status_code == 429
+        raise APIException.new 'Too many requests.', 429, _response.raw_body
+      elsif _response.status_code == 500
+        raise APIException.new 'Unexpected internal error.', 500, _response.raw_body
       end
 
       # Global error handling using HTTP status codes.
       validate_response(_response)
 
-      # Try to cast response to desired type
-      if _response.body.instance_of? Hash
-        begin
-          MessageResponse.from_hash(_response.body)
-        rescue Exception
-          raise APIException.new "Invalid JSON returned.", _response.code, _response.body
-        end
-      end
+      # Return appropriate response type
+      decoded = APIHelper.json_deserialize(_response.raw_body)
+      return MessageResponse.from_hash(decoded)
     end
 
     # Post bulk user metadata.
@@ -393,29 +425,33 @@ module SuggestGrid
         'accept' => 'application/json'
       }
 
-      # invoke the API call request to fetch the response
-      _response = Unirest.post _query_url, headers: _headers, parameters: body, auth: { :user => Configuration.basic_auth_user_name, :password => Configuration.basic_auth_password }
+      # Create the HttpRequest object for the call
+      _http_request = @http_client.post _query_url, headers: _headers, parameters: body, username: Configuration.basic_auth_user_name, password: Configuration.basic_auth_password
+
+      # Call the on_before_request callback
+      @http_call_back.on_before_request(_http_request) if @http_call_back
+
+      # Invoke the API call and get the response
+      _response = @http_client.execute_as_string(_http_request)
+
+      # Call the on_after_response callback
+      @http_call_back.on_after_response(_response) if @http_call_back
 
       # Endpoint error handling using HTTP status codes.
-      if _response.code == 207
-        raise APIException.new 'Some metadata is not uploaded successfully.', 207, _response.body
-      elsif _response.code == 429
-        raise APIException.new 'Too many requests.', 429, _response.body
-      elsif _response.code == 500
-        raise APIException.new 'Unexpected internal error.', 500, _response.body
+      if _response.status_code == 207
+        raise APIException.new 'Some metadata is not uploaded successfully.', 207, _response.raw_body
+      elsif _response.status_code == 429
+        raise APIException.new 'Too many requests.', 429, _response.raw_body
+      elsif _response.status_code == 500
+        raise APIException.new 'Unexpected internal error.', 500, _response.raw_body
       end
 
       # Global error handling using HTTP status codes.
       validate_response(_response)
 
-      # Try to cast response to desired type
-      if _response.body.instance_of? Hash
-        begin
-          MessageResponse.from_hash(_response.body)
-        rescue Exception
-          raise APIException.new "Invalid JSON returned.", _response.code, _response.body
-        end
-      end
+      # Return appropriate response type
+      decoded = APIHelper.json_deserialize(_response.raw_body)
+      return MessageResponse.from_hash(decoded)
     end
 
     # Post bulk item metadata.
@@ -441,29 +477,33 @@ module SuggestGrid
         'accept' => 'application/json'
       }
 
-      # invoke the API call request to fetch the response
-      _response = Unirest.post _query_url, headers: _headers, parameters: body, auth: { :user => Configuration.basic_auth_user_name, :password => Configuration.basic_auth_password }
+      # Create the HttpRequest object for the call
+      _http_request = @http_client.post _query_url, headers: _headers, parameters: body, username: Configuration.basic_auth_user_name, password: Configuration.basic_auth_password
+
+      # Call the on_before_request callback
+      @http_call_back.on_before_request(_http_request) if @http_call_back
+
+      # Invoke the API call and get the response
+      _response = @http_client.execute_as_string(_http_request)
+
+      # Call the on_after_response callback
+      @http_call_back.on_after_response(_response) if @http_call_back
 
       # Endpoint error handling using HTTP status codes.
-      if _response.code == 207
-        raise APIException.new 'Some metadata is not uploaded successfully.', 207, _response.body
-      elsif _response.code == 429
-        raise APIException.new 'Too many requests.', 429, _response.body
-      elsif _response.code == 500
-        raise APIException.new 'Unexpected internal error.', 500, _response.body
+      if _response.status_code == 207
+        raise APIException.new 'Some metadata is not uploaded successfully.', 207, _response.raw_body
+      elsif _response.status_code == 429
+        raise APIException.new 'Too many requests.', 429, _response.raw_body
+      elsif _response.status_code == 500
+        raise APIException.new 'Unexpected internal error.', 500, _response.raw_body
       end
 
       # Global error handling using HTTP status codes.
       validate_response(_response)
 
-      # Try to cast response to desired type
-      if _response.body.instance_of? Hash
-        begin
-          MessageResponse.from_hash(_response.body)
-        rescue Exception
-          raise APIException.new "Invalid JSON returned.", _response.code, _response.body
-        end
-      end
+      # Return appropriate response type
+      decoded = APIHelper.json_deserialize(_response.raw_body)
+      return MessageResponse.from_hash(decoded)
     end
   end
 end

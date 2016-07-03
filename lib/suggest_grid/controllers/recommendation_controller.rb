@@ -1,4 +1,4 @@
-# This file was automatically generated for SuggestGrid by APIMATIC v2.0 ( https://apimatic.io ) on 06/16/2016
+# This file was automatically generated for SuggestGrid by APIMATIC v2.0 ( https://apimatic.io ).
 
 module SuggestGrid
   class RecommendationController < BaseController
@@ -28,33 +28,37 @@ module SuggestGrid
         'content-type' => 'application/json; charset=utf-8'
       }
 
-      # invoke the API call request to fetch the response
-      _response = Unirest.post _query_url, headers: _headers, parameters: body.to_json, auth: { :user => Configuration.basic_auth_user_name, :password => Configuration.basic_auth_password }
+      # Create the HttpRequest object for the call
+      _http_request = @http_client.post _query_url, headers: _headers, parameters: body.to_json, username: Configuration.basic_auth_user_name, password: Configuration.basic_auth_password
+      
+      # Call the on_before_request callback
+      @http_call_back.on_before_request(_http_request) if @http_call_back
+
+      # Invoke the API call and get the response
+      _response = @http_client.execute_as_string(_http_request)
+
+      # Call the on_after_response callback
+      @http_call_back.on_after_response(_response) if @http_call_back
 
       # Endpoint error handling using HTTP status codes.
-      if _response.code == 400
-        raise APIException.new 'Request body is missing.', 400, _response.body
-      elsif _response.code == 422
-        raise APIException.new 'No `item_id` or `item_ids` are provided.', 422, _response.body
-      elsif _response.code == 429
-        raise APIException.new 'Too many requests.', 429, _response.body
-      elsif _response.code == 555
-        raise APIException.new 'Recommendation model is not found for the given type.', 555, _response.body
-      elsif _response.code == 500
-        raise APIException.new 'Unexpected internal error.', 500, _response.body
+      if _response.status_code == 400
+        raise APIException.new 'Request body is missing.', 400, _response.raw_body
+      elsif _response.status_code == 422
+        raise APIException.new 'No `item_id` or `item_ids` are provided.', 422, _response.raw_body
+      elsif _response.status_code == 429
+        raise APIException.new 'Too many requests.', 429, _response.raw_body
+      elsif _response.status_code == 555
+        raise APIException.new 'Recommendation model is not found for the given type.', 555, _response.raw_body
+      elsif _response.status_code == 500
+        raise APIException.new 'Unexpected internal error.', 500, _response.raw_body
       end
 
       # Global error handling using HTTP status codes.
       validate_response(_response)
 
-      # Try to cast response to desired type
-      if _response.body.instance_of? Hash
-        begin
-          UsersResponse.from_hash(_response.body)
-        rescue Exception
-          raise APIException.new "Invalid JSON returned.", _response.code, _response.body
-        end
-      end
+      # Return appropriate response type
+      decoded = APIHelper.json_deserialize(_response.raw_body)
+      return UsersResponse.from_hash(decoded)
     end
 
     # Recommend items for the given body parameters.
@@ -77,33 +81,37 @@ module SuggestGrid
         'content-type' => 'application/json; charset=utf-8'
       }
 
-      # invoke the API call request to fetch the response
-      _response = Unirest.post _query_url, headers: _headers, parameters: body.to_json, auth: { :user => Configuration.basic_auth_user_name, :password => Configuration.basic_auth_password }
+      # Create the HttpRequest object for the call
+      _http_request = @http_client.post _query_url, headers: _headers, parameters: body.to_json, username: Configuration.basic_auth_user_name, password: Configuration.basic_auth_password
+      
+      # Call the on_before_request callback
+      @http_call_back.on_before_request(_http_request) if @http_call_back
+
+      # Invoke the API call and get the response
+      _response = @http_client.execute_as_string(_http_request)
+
+      # Call the on_after_response callback
+      @http_call_back.on_after_response(_response) if @http_call_back
 
       # Endpoint error handling using HTTP status codes.
-      if _response.code == 400
-        raise APIException.new 'Request body is missing.', 400, _response.body
-      elsif _response.code == 422
-        raise APIException.new 'No `user_id` or `user_ids` are provided.', 422, _response.body
-      elsif _response.code == 429
-        raise APIException.new 'Too many requests.', 429, _response.body
-      elsif _response.code == 555
-        raise APIException.new 'Recommendation model is not found for the given type.', 555, _response.body
-      elsif _response.code == 500
-        raise APIException.new 'Unexpected internal error.', 500, _response.body
+      if _response.status_code == 400
+        raise APIException.new 'Request body is missing.', 400, _response.raw_body
+      elsif _response.status_code == 422
+        raise APIException.new 'No `user_id` or `user_ids` are provided.', 422, _response.raw_body
+      elsif _response.status_code == 429
+        raise APIException.new 'Too many requests.', 429, _response.raw_body
+      elsif _response.status_code == 555
+        raise APIException.new 'Recommendation model is not found for the given type.', 555, _response.raw_body
+      elsif _response.status_code == 500
+        raise APIException.new 'Unexpected internal error.', 500, _response.raw_body
       end
 
       # Global error handling using HTTP status codes.
       validate_response(_response)
 
-      # Try to cast response to desired type
-      if _response.body.instance_of? Hash
-        begin
-          ItemsResponse.from_hash(_response.body)
-        rescue Exception
-          raise APIException.new "Invalid JSON returned.", _response.code, _response.body
-        end
-      end
+      # Return appropriate response type
+      decoded = APIHelper.json_deserialize(_response.raw_body)
+      return ItemsResponse.from_hash(decoded)
     end
   end
 end

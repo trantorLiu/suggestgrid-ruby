@@ -1,4 +1,4 @@
-# This file was automatically generated for SuggestGrid by APIMATIC v2.0 ( https://apimatic.io ) on 06/16/2016
+# This file was automatically generated for SuggestGrid by APIMATIC v2.0 ( https://apimatic.io ).
 
 module SuggestGrid
   class ActionController < BaseController
@@ -41,35 +41,39 @@ module SuggestGrid
         'accept' => 'application/json'
       }
 
-      # invoke the API call request to fetch the response
-      _response = Unirest.get _query_url, headers: _headers, auth: { :user => Configuration.basic_auth_user_name, :password => Configuration.basic_auth_password }
+      # Create the HttpRequest object for the call
+      _http_request = @http_client.get _query_url, headers: _headers, username: Configuration.basic_auth_user_name, password: Configuration.basic_auth_password
+
+      # Call the on_before_request callback
+      @http_call_back.on_before_request(_http_request) if @http_call_back
+
+      # Invoke the API call and get the response
+      _response = @http_client.execute_as_string(_http_request)
+
+      # Call the on_after_response callback
+      @http_call_back.on_after_response(_response) if @http_call_back
 
       # Endpoint error handling using HTTP status codes.
-      if _response.code == 400
-        raise APIException.new 'Required `user_id` or `item_id` parameters are missing from the request body.', 400, _response.body
-      elsif _response.code == 429
-        raise APIException.new 'Too many requests.', 429, _response.body
-      elsif _response.code == 500
-        raise APIException.new 'Unexpected internal error.', 500, _response.body
+      if _response.status_code == 400
+        raise APIException.new 'Required `user_id` or `item_id` parameters are missing from the request body.', 400, _response.raw_body
+      elsif _response.status_code == 429
+        raise APIException.new 'Too many requests.', 429, _response.raw_body
+      elsif _response.status_code == 500
+        raise APIException.new 'Unexpected internal error.', 500, _response.raw_body
       end
 
       # Global error handling using HTTP status codes.
       validate_response(_response)
 
-      # Try to cast response to desired type
-      if _response.body.instance_of? Hash
-        begin
-          MessageResponse.from_hash(_response.body)
-        rescue Exception
-          raise APIException.new "Invalid JSON returned.", _response.code, _response.body
-        end
-      end
+      # Return appropriate response type
+      decoded = APIHelper.json_deserialize(_response.raw_body)
+      return MessageResponse.from_hash(decoded)
     end
 
-    # Create an action.
+    # Post an action.
     # @param [Action] body Required parameter: Example:
     # @return MessageResponse response from the API call
-    def create_action(body)
+    def post_action(body)
       # the base uri for api requests
       _query_builder = Configuration.base_uri.dup
 
@@ -86,33 +90,37 @@ module SuggestGrid
         'content-type' => 'application/json; charset=utf-8'
       }
 
-      # invoke the API call request to fetch the response
-      _response = Unirest.post _query_url, headers: _headers, parameters: body.to_json, auth: { :user => Configuration.basic_auth_user_name, :password => Configuration.basic_auth_password }
+      # Create the HttpRequest object for the call
+      _http_request = @http_client.post _query_url, headers: _headers, parameters: body.to_json, username: Configuration.basic_auth_user_name, password: Configuration.basic_auth_password
+
+      # Call the on_before_request callback
+      @http_call_back.on_before_request(_http_request) if @http_call_back
+
+      # Invoke the API call and get the response
+      _response = @http_client.execute_as_string(_http_request)
+
+      # Call the on_after_response callback
+      @http_call_back.on_after_response(_response) if @http_call_back
 
       # Endpoint error handling using HTTP status codes.
-      if _response.code == 400
-        raise APIException.new 'Required `user_id` or `item_id` parameters are missing from the request body.', 400, _response.body
-      elsif _response.code == 402
-        raise APIException.new 'Action limit exceeded.', 402, _response.body
-      elsif _response.code == 404
-        raise APIException.new 'Type does not exists.', 404, _response.body
-      elsif _response.code == 429
-        raise APIException.new 'Too many requests.', 429, _response.body
-      elsif _response.code == 500
-        raise APIException.new 'Unexpected internal error.', 500, _response.body
+      if _response.status_code == 400
+        raise APIException.new 'Required `user_id` or `item_id` parameters are missing from the request body.', 400, _response.raw_body
+      elsif _response.status_code == 402
+        raise APIException.new 'Action limit exceeded.', 402, _response.raw_body
+      elsif _response.status_code == 404
+        raise APIException.new 'Type does not exists.', 404, _response.raw_body
+      elsif _response.status_code == 429
+        raise APIException.new 'Too many requests.', 429, _response.raw_body
+      elsif _response.status_code == 500
+        raise APIException.new 'Unexpected internal error.', 500, _response.raw_body
       end
 
       # Global error handling using HTTP status codes.
       validate_response(_response)
 
-      # Try to cast response to desired type
-      if _response.body.instance_of? Hash
-        begin
-          MessageResponse.from_hash(_response.body)
-        rescue Exception
-          raise APIException.new "Invalid JSON returned.", _response.code, _response.body
-        end
-      end
+      # Return appropriate response type
+      decoded = APIHelper.json_deserialize(_response.raw_body)
+      return MessageResponse.from_hash(decoded)
     end
 
     # Deletes actions.
@@ -148,33 +156,37 @@ module SuggestGrid
         'accept' => 'application/json'
       }
 
-      # invoke the API call request to fetch the response
-      _response = Unirest.delete _query_url, headers: _headers, auth: { :user => Configuration.basic_auth_user_name, :password => Configuration.basic_auth_password }
+      # Create the HttpRequest object for the call
+      _http_request = @http_client.delete _query_url, headers: _headers, username: Configuration.basic_auth_user_name, password: Configuration.basic_auth_password
+
+      # Call the on_before_request callback
+      @http_call_back.on_before_request(_http_request) if @http_call_back
+
+      # Invoke the API call and get the response
+      _response = @http_client.execute_as_string(_http_request)
+
+      # Call the on_after_response callback
+      @http_call_back.on_after_response(_response) if @http_call_back
 
       # Endpoint error handling using HTTP status codes.
-      if _response.code == 400
-        raise APIException.new 'Required `user_id` or `item_id` parameters are missing from the request body.', 400, _response.body
-      elsif _response.code == 404
-        raise APIException.new 'Type does not exists.', 404, _response.body
-      elsif _response.code == 422
-        raise APIException.new 'No query parameter (`user_id`, `item_id`, or `older_than`) is given.  In order to delete all actionsdelete the type.', 422, _response.body
-      elsif _response.code == 429
-        raise APIException.new 'Too many requests.', 429, _response.body
-      elsif _response.code == 500
-        raise APIException.new 'Unexpected internal error.', 500, _response.body
+      if _response.status_code == 400
+        raise APIException.new 'Required `user_id` or `item_id` parameters are missing from the request body.', 400, _response.raw_body
+      elsif _response.status_code == 404
+        raise APIException.new 'Type does not exists.', 404, _response.raw_body
+      elsif _response.status_code == 422
+        raise APIException.new 'No query parameter (`user_id`, `item_id`, or `older_than`) is given.  In order to delete all actionsdelete the type.', 422, _response.raw_body
+      elsif _response.status_code == 429
+        raise APIException.new 'Too many requests.', 429, _response.raw_body
+      elsif _response.status_code == 500
+        raise APIException.new 'Unexpected internal error.', 500, _response.raw_body
       end
 
       # Global error handling using HTTP status codes.
       validate_response(_response)
 
-      # Try to cast response to desired type
-      if _response.body.instance_of? Hash
-        begin
-          MessageResponse.from_hash(_response.body)
-        rescue Exception
-          raise APIException.new "Invalid JSON returned.", _response.code, _response.body
-        end
-      end
+      # Return appropriate response type
+      decoded = APIHelper.json_deserialize(_response.raw_body)
+      return MessageResponse.from_hash(decoded)
     end
 
     # Post bulk actions.
@@ -207,29 +219,33 @@ module SuggestGrid
         'accept' => 'application/json'
       }
 
-      # invoke the API call request to fetch the response
-      _response = Unirest.post _query_url, headers: _headers, parameters: body, auth: { :user => Configuration.basic_auth_user_name, :password => Configuration.basic_auth_password }
+      # Create the HttpRequest object for the call
+      _http_request = @http_client.post _query_url, headers: _headers, parameters: body, username: Configuration.basic_auth_user_name, password: Configuration.basic_auth_password
+
+      # Call the on_before_request callback
+      @http_call_back.on_before_request(_http_request) if @http_call_back
+
+      # Invoke the API call and get the response
+      _response = @http_client.execute_as_string(_http_request)
+
+      # Call the on_after_response callback
+      @http_call_back.on_after_response(_response) if @http_call_back
 
       # Endpoint error handling using HTTP status codes.
-      if _response.code == 402
-        raise APIException.new 'Action limit exceeded.', 402, _response.body
-      elsif _response.code == 429
-        raise APIException.new 'Too many requests.', 429, _response.body
-      elsif _response.code == 500
-        raise APIException.new 'Unexpected internal error.', 500, _response.body
+      if _response.status_code == 402
+        raise APIException.new 'Action limit exceeded.', 402, _response.raw_body
+      elsif _response.status_code == 429
+        raise APIException.new 'Too many requests.', 429, _response.raw_body
+      elsif _response.status_code == 500
+        raise APIException.new 'Unexpected internal error.', 500, _response.raw_body
       end
 
       # Global error handling using HTTP status codes.
       validate_response(_response)
 
-      # Try to cast response to desired type
-      if _response.body.instance_of? Hash
-        begin
-          MessageResponse.from_hash(_response.body)
-        rescue Exception
-          raise APIException.new "Invalid JSON returned.", _response.code, _response.body
-        end
-      end
+      # Return appropriate response type
+      decoded = APIHelper.json_deserialize(_response.raw_body)
+      return MessageResponse.from_hash(decoded)
     end
   end
 end

@@ -1,4 +1,4 @@
-# This file was automatically generated for SuggestGrid by APIMATIC v2.0 ( https://apimatic.io ) on 06/16/2016
+# This file was automatically generated for SuggestGrid by APIMATIC v2.0 ( https://apimatic.io ).
 require 'openssl'
 require 'json'
 require 'unirest'
@@ -9,13 +9,13 @@ require_relative 'suggest_grid/api_exception.rb'
 require_relative 'suggest_grid/configuration.rb'
 require_relative 'suggest_grid/suggest_grid_client.rb'
 
-# Controllers
-require_relative 'suggest_grid/controllers/base_controller.rb'
-require_relative 'suggest_grid/controllers/action_controller.rb'
-require_relative 'suggest_grid/controllers/metadata_controller.rb'
-require_relative 'suggest_grid/controllers/recommendation_controller.rb'
-require_relative 'suggest_grid/controllers/similarity_controller.rb'
-require_relative 'suggest_grid/controllers/type_controller.rb'
+# Http
+require_relative 'suggest_grid/http/http_call_back.rb'
+require_relative 'suggest_grid/http/http_client.rb'
+require_relative 'suggest_grid/http/http_method_enum.rb'
+require_relative 'suggest_grid/http/http_request.rb'
+require_relative 'suggest_grid/http/http_response.rb'
+require_relative 'suggest_grid/http/unirest_client.rb'
 
 # Models
 require_relative 'suggest_grid/models/action.rb'
@@ -36,3 +36,11 @@ require_relative 'suggest_grid/models/users_response.rb'
 require_relative 'suggest_grid/models/items_response.rb'
 require_relative 'suggest_grid/models/user_similarity_response.rb'
 require_relative 'suggest_grid/models/item_similarity_response.rb'
+
+# Controllers
+require_relative 'suggest_grid/controllers/base_controller.rb'
+require_relative 'suggest_grid/controllers/action_controller.rb'
+require_relative 'suggest_grid/controllers/metadata_controller.rb'
+require_relative 'suggest_grid/controllers/recommendation_controller.rb'
+require_relative 'suggest_grid/controllers/similarity_controller.rb'
+require_relative 'suggest_grid/controllers/type_controller.rb'

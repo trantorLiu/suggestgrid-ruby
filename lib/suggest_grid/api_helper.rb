@@ -1,4 +1,4 @@
-# This file was automatically generated for SuggestGrid by APIMATIC v2.0 ( https://apimatic.io ) on 06/16/2016
+# This file was automatically generated for SuggestGrid by APIMATIC v2.0 ( https://apimatic.io ).
 
 module SuggestGrid
   class APIHelper
@@ -30,7 +30,7 @@ module SuggestGrid
           query_builder = query_builder.gsub('{' + key.to_s + '}', replace_value)
         end
       end
-      query_builder
+      return query_builder
     end
 
     # Appends the given set of parameters to the given query string
@@ -42,7 +42,7 @@ module SuggestGrid
 
       # return if there are no parameters to replace
       if parameters.nil?
-        query_builder
+        return query_builder
       else
         # remove any nil values
         parameters = parameters.reject { |_key, value| value.nil? }
@@ -51,8 +51,8 @@ module SuggestGrid
         has_params = query_builder.include? '?'
         separator = has_params ? '&' : '?'
 
-        # append query with separator and parameters
-        query_builder << separator << URI.encode_www_form(parameters)
+        # append query with separator and parameters and return
+        return query_builder << separator << URI.encode_www_form(parameters)
       end
     end
 
@@ -81,8 +81,18 @@ module SuggestGrid
       parameters = index != nil ? url[url.index('?')...url.length] : ""
 
       # return processed url
-      protocol + query  + parameters
+      return protocol + query  + parameters
     end	
+
+    # Parses JSON string.
+    # @param [String] A JSON string.
+    def self.json_deserialize(json)
+      begin
+        return JSON.parse(json)
+      rescue
+        raise TypeError, "Server responded with invalid JSON."
+      end
+    end
 
     # Form encodes a hash of parameters.
     # @param [Hash] The hash of parameters to encode.
@@ -92,7 +102,7 @@ module SuggestGrid
       form_parameters.each do |key, value|
         encoded.merge!(APIHelper.form_encode value, key)
       end 
-      encoded
+      return encoded
     end
 
     # Form encodes an object.
@@ -121,7 +131,7 @@ module SuggestGrid
       else
         retval[instance_name] = obj
       end
-      retval
+      return retval
     end
   end
 end
