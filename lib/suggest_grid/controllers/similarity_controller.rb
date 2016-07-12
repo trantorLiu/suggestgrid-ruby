@@ -48,7 +48,11 @@ module SuggestGrid
       @http_call_back.on_after_response(_response) if @http_call_back
 
       # Endpoint error handling using HTTP status codes.
-      if _response.status_code == 429
+      if _response.status_code == 400
+        raise APIException.new 'Request body is missing.', 400, _response.raw_body
+      elsif _response.status_code == 422
+        raise APIException.new 'Required parameters are missing.', 422, _response.raw_body
+      elsif _response.status_code == 429
         raise APIException.new 'Too many requests.', 429, _response.raw_body
       elsif _response.status_code == 555
         raise APIException.new 'Recommendation model is not found for the given type.', 555, _response.raw_body
@@ -104,10 +108,16 @@ module SuggestGrid
       @http_call_back.on_after_response(_response) if @http_call_back
 
       # Endpoint error handling using HTTP status codes.
-      if _response.status_code == 429
+      if _response.status_code == 400
+        raise APIException.new 'Request body is missing.', 400, _response.raw_body
+      elsif _response.status_code == 422
+        raise APIException.new 'Required parameters are missing.', 422, _response.raw_body
+      elsif _response.status_code == 429
         raise APIException.new 'Too many requests.', 429, _response.raw_body
+      elsif _response.status_code == 555
+        raise APIException.new 'Recommendation model is not found for the given type.', 555, _response.raw_body
       elsif _response.status_code == 500
-        raise APIException.new '', 500, _response.raw_body
+        raise APIException.new 'Unexpected internal error.', 500, _response.raw_body
       end
 
       # Global error handling using HTTP status codes.

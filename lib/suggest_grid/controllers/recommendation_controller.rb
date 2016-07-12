@@ -44,7 +44,7 @@ module SuggestGrid
       if _response.status_code == 400
         raise APIException.new 'Request body is missing.', 400, _response.raw_body
       elsif _response.status_code == 422
-        raise APIException.new 'No `item_id` or `item_ids` are provided.', 422, _response.raw_body
+        raise APIException.new 'Required parameters are missing.', 422, _response.raw_body
       elsif _response.status_code == 429
         raise APIException.new 'Too many requests.', 429, _response.raw_body
       elsif _response.status_code == 555
@@ -97,7 +97,7 @@ module SuggestGrid
       if _response.status_code == 400
         raise APIException.new 'Request body is missing.', 400, _response.raw_body
       elsif _response.status_code == 422
-        raise APIException.new 'No `user_id` or `user_ids` are provided.', 422, _response.raw_body
+        raise APIException.new 'Required parameters are missing.', 422, _response.raw_body
       elsif _response.status_code == 429
         raise APIException.new 'Too many requests.', 429, _response.raw_body
       elsif _response.status_code == 555

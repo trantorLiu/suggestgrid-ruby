@@ -35,8 +35,6 @@ It is very convenient to configure SuggestGrid by setting an authenticated `SUGG
 
 `http://{user}:{pass}@{app-uuid}.{region}.suggestgrid.space`
 
-If [SuggestGrid Heroku add-on](https://devcenter.heroku.com/articles/suggestgrid) is installed, `SUGGESTGRID_URL` is set automatically.
-
 You can authenticate your application using `SUGGESTGRID_URL` environment variable like the example below:
 
 ###### config/initializers/suggest_grid.rb
@@ -131,3 +129,9 @@ class MoviesController < ApplicationController
   private :get_recommendations
 end
 ```
+
+
+
+
+## Further Reference
+For the client reference please refer to the [SuggestGrid Ruby Client Documentation](https://suggestgrid.com/docs/ruby/api)
