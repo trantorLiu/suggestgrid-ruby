@@ -9,21 +9,14 @@ module SuggestGrid
     end
 
     # Get Similar Users
-    # @param [String] type Required parameter: The type for similar users method.
     # @param [GetSimilarUsersBody] body Required parameter: Similar users method parameters.
     # @return UsersResponse response from the API call
-    def get_similar_users(type, 
-                          body)
+    def get_similar_users(body)
       # the base uri for api requests
       _query_builder = Configuration.base_uri.dup
 
       # prepare query string for API call
-      _query_builder << '/v1/{type}/similar/users'
-
-      # process optional query parameters
-      _query_builder = APIHelper.append_url_with_template_parameters _query_builder, {
-        'type' => type
-      }
+      _query_builder << '/v1/similar/users'
 
       # validate and preprocess url
       _query_url = APIHelper.clean_url _query_builder
@@ -69,21 +62,14 @@ module SuggestGrid
     end
 
     # Get Similar Items
-    # @param [String] type Required parameter: The type for similar items method.
     # @param [GetSimilarItemsBody] body Required parameter: Similar items method parameter.
     # @return ItemsResponse response from the API call
-    def get_similar_items(type, 
-                          body)
+    def get_similar_items(body)
       # the base uri for api requests
       _query_builder = Configuration.base_uri.dup
 
       # prepare query string for API call
-      _query_builder << '/v1/{type}/similar/items'
-
-      # process optional query parameters
-      _query_builder = APIHelper.append_url_with_template_parameters _query_builder, {
-        'type' => type
-      }
+      _query_builder << '/v1/similar/items'
 
       # validate and preprocess url
       _query_url = APIHelper.clean_url _query_builder
