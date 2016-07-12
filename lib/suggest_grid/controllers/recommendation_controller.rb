@@ -8,10 +8,10 @@ module SuggestGrid
       @@instance
     end
 
-    # Recommend users for the given body parameters.
-    # @param [RecommendUsersBody] body Required parameter: Example: 
+    # Get Recommended Users
+    # @param [GetRecommendedUsersBody] body Required parameter: Parameters for recommend users method.
     # @return UsersResponse response from the API call
-    def recommend_users(body)
+    def get_recommended_users(body)
       # the base uri for api requests
       _query_builder = Configuration.base_uri.dup
 
@@ -61,10 +61,10 @@ module SuggestGrid
       return UsersResponse.from_hash(decoded)
     end
 
-    # Recommend items for the given body parameters.
-    # @param [RecommendItemsBody] body Required parameter: Example: 
+    # Get Recommended Items
+    # @param [GetRecommendedItemsBody] body Required parameter: Parameters for recommend items method.
     # @return ItemsResponse response from the API call
-    def recommend_items(body)
+    def get_recommended_items(body)
       # the base uri for api requests
       _query_builder = Configuration.base_uri.dup
 

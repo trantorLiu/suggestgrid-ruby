@@ -1,7 +1,7 @@
 # This file was automatically generated for SuggestGrid by APIMATIC v2.0 ( https://apimatic.io ).
 
 module SuggestGrid
-  class SimilarUsersBody
+  class GetSimilarItemsBody
 
     # TODO: Write general description for this method
     # @return [String]
@@ -9,7 +9,7 @@ module SuggestGrid
 
     # TODO: Write general description for this method
     # @return [String]
-    attr_accessor :user_id
+    attr_accessor :item_id
 
     # TODO: Write general description for this method
     # @return [Integer]
@@ -20,11 +20,11 @@ module SuggestGrid
     attr_accessor :except
 
     def initialize(type = nil,
-                   user_id = nil,
+                   item_id = nil,
                    size = nil,
                    except = nil)
       @type = type
-      @user_id = user_id
+      @item_id = item_id
       @size = size
       @except = except
 
@@ -43,14 +43,14 @@ module SuggestGrid
       else
         # Extract variables from the hash
         type = hash["type"]
-        user_id = hash["user_id"]
+        item_id = hash["item_id"]
         size = hash["size"]
         except = hash["except"]
         # Create object from extracted values
-        SimilarUsersBody.new(type,
-                             user_id,
-                             size,
-                             except)
+        GetSimilarItemsBody.new(type,
+                                item_id,
+                                size,
+                                except)
       end
     end
 
@@ -58,7 +58,7 @@ module SuggestGrid
     def key_map
       hash = {}
       hash['type'] = type
-      hash['user_id'] = user_id
+      hash['item_id'] = item_id
       hash['size'] = size
       hash['except'] = except
       hash

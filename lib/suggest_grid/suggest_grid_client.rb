@@ -4,6 +4,12 @@ require 'uri'
 
 module SuggestGrid
   class SuggestGridClient
+    # Singleton access to type controller
+    # @return [TypeController] Returns the controller instance
+    def type_controller
+      TypeController.instance
+    end
+
     # Singleton access to action controller
     # @return [ActionController] Returns the controller instance
     def action_controller
@@ -26,12 +32,6 @@ module SuggestGrid
     # @return [SimilarityController] Returns the controller instance
     def similarity_controller
       SimilarityController.instance
-    end
-
-    # Singleton access to type controller
-    # @return [TypeController] Returns the controller instance
-    def type_controller
-      TypeController.instance
     end
 
     # Initializer with authentication and configuration parameters

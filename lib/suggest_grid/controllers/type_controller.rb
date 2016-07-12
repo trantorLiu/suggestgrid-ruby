@@ -8,7 +8,7 @@ module SuggestGrid
       @@instance
     end
 
-    # Get all types
+    # Get All Types
     # @return GetTypesResponse response from the API call
     def get_all_types
       # the base uri for api requests
@@ -53,7 +53,7 @@ module SuggestGrid
       return GetTypesResponse.from_hash(decoded)
     end
 
-    # Delete all types
+    # Delete All Types
     # @return GetTypesResponse response from the API call
     def delete_all_types
       # the base uri for api requests
@@ -98,8 +98,8 @@ module SuggestGrid
       return GetTypesResponse.from_hash(decoded)
     end
 
-    # Get properties of a type
-    # @param [String] type Required parameter: Example: 
+    # Get Properties of a Type
+    # @param [String] type Required parameter: The name of the type to get properties.
     # @return GetTypeResponse response from the API call
     def get_type(type)
       # the base uri for api requests
@@ -149,9 +149,9 @@ module SuggestGrid
       return GetTypeResponse.from_hash(decoded)
     end
 
-    # Create a new type.
-    # @param [String] type Required parameter: Example: 
-    # @param [TypeRequestBody] body Optional parameter: Optional body for explicit parameter.
+    # Create a New Type
+    # @param [String] type Required parameter: The name of the type to be created.
+    # @param [TypeRequestBody] body Optional parameter: Optional body for the rating parameter.
     # @return MessageResponse response from the API call
     def create_type(type, 
                     body = nil)
@@ -209,8 +209,8 @@ module SuggestGrid
       return MessageResponse.from_hash(decoded)
     end
 
-    # Deletes a type ALL of its actions.
-    # @param [String] type Required parameter: Example: 
+    # Delete a Type
+    # @param [String] type Required parameter: The name of the type to be deleted.
     # @return MessageResponse response from the API call
     def delete_type(type)
       # the base uri for api requests

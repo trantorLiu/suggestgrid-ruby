@@ -8,16 +8,16 @@ module SuggestGrid
       @@instance
     end
 
-    # Returns actions count.
-    # @param [String] type Optional parameter: Example:
-    # @param [String] user_id Optional parameter: Example:
-    # @param [String] item_id Optional parameter: Example:
+    # Get Actions
+    # @param [String] type Optional parameter: The type of the actions. Will return count for all actions if not provided.
+    # @param [String] user_id Optional parameter: The user id of the actions. Wll return count for all user ids if not provided.
+    # @param [String] item_id Optional parameter: The item id of the actions. Wll return count for all item ids if not provided.
     # @param [String] older_than Optional parameter: Delete all actions of a type older than the given timestamp or time. Valid times are 1s, 1m, 1h, 1d, 1M, 1y, or unix timestamp (like 1443798195).
     # @return MessageResponse response from the API call
-    def get_actions_count(type = nil,
-                          user_id = nil,
-                          item_id = nil,
-                          older_than = nil)
+    def get_actions(type = nil,
+                    user_id = nil,
+                    item_id = nil,
+                    older_than = nil)
       # the base uri for api requests
       _query_builder = Configuration.base_uri.dup
 
@@ -70,8 +70,8 @@ module SuggestGrid
       return MessageResponse.from_hash(decoded)
     end
 
-    # Post an action.
-    # @param [Action] body Required parameter: Example:
+    # Post an Action
+    # @param [Action] body Required parameter: The action to be posted.
     # @return MessageResponse response from the API call
     def post_action(body)
       # the base uri for api requests
@@ -123,13 +123,13 @@ module SuggestGrid
       return MessageResponse.from_hash(decoded)
     end
 
-    # Deletes actions.
-    # @param [String] type Required parameter: Example:
-    # @param [String] user_id Optional parameter: Example:
-    # @param [String] item_id Optional parameter: Example:
+    # Delete Actions
+    # @param [String] type Optional parameter: The type of the actions. Will return count for all actions if not provided.
+    # @param [String] user_id Optional parameter: The user id of the actions. Wll return count for all user ids if not provided.
+    # @param [String] item_id Optional parameter: The item id of the actions. Wll return count for all item ids if not provided.
     # @param [String] older_than Optional parameter: Delete all actions of a type older than the given timestamp or time. Valid times are 1s, 1m, 1h, 1d, 1M, 1y, or unix timestamp (like 1443798195).
     # @return MessageResponse response from the API call
-    def delete_actions(type,
+    def delete_actions(type = nil,
                        user_id = nil,
                        item_id = nil,
                        older_than = nil)
@@ -189,12 +189,10 @@ module SuggestGrid
       return MessageResponse.from_hash(decoded)
     end
 
-    # Post bulk actions.
-    # @param [Collection] actions Required parameter: Example: [Action,Action,Action]
-    # @param [String] type Required parameter: Example:
+    # Post Bulk Actions
+# @param [Collection] actions Required parameter: List of actions to be posted.
     # @return MessageResponse response from the API call
-    def post_bulk_actions(actions,
-                          type)
+    def post_bulk_actions(actions)
         body = ''
         actions.each do |action|
             body += "#{action.to_json}\n"
@@ -203,12 +201,7 @@ module SuggestGrid
       _query_builder = Configuration.base_uri.dup
 
       # prepare query string for API call
-      _query_builder << '/v1/actions/{type}/_bulk'
-
-      # process optional query parameters
-      _query_builder = APIHelper.append_url_with_template_parameters _query_builder, {
-        'type' => type
-      }
+      _query_builder << '/v1/actions/_bulk'
 
       # validate and preprocess url
       _query_url = APIHelper.clean_url _query_builder

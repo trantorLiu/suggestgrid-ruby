@@ -8,12 +8,12 @@ module SuggestGrid
       @@instance
     end
 
-    # Posts a user metadata.
-    # @param [Metadata] metadata Required parameter: Example:
-    # @param [String] user_id Required parameter: The user_id to delete its metadata.
+    # Post a User
+    # @param [String] user_id Required parameter: The user id to associate with the metadata.
+    # @param [Metadata] metadata Required parameter: The metadata to be saved. Metadata format has its restrictions.
     # @return MessageResponse response from the API call
-    def post_user_metadata(metadata,
-                           user_id)
+    def post_user(user_id,
+                  metadata)
       # the base uri for api requests
       _query_builder = Configuration.base_uri.dup
 
@@ -64,10 +64,10 @@ module SuggestGrid
       return MessageResponse.from_hash(decoded)
     end
 
-    # Delete a user metadata.
+    # Delete a User
     # @param [String] user_id Required parameter: The user_id to delete its metadata.
     # @return MessageResponse response from the API call
-    def delete_a_user_metadata(user_id)
+    def delete_user(user_id)
       # the base uri for api requests
       _query_builder = Configuration.base_uri.dup
 
@@ -115,7 +115,7 @@ module SuggestGrid
       return MessageResponse.from_hash(decoded)
     end
 
-    # Get information about users.
+    # Get Users
     # @return MetadataInformationResponse response from the API call
     def get_users
       # the base uri for api requests
@@ -160,9 +160,9 @@ module SuggestGrid
       return MetadataInformationResponse.from_hash(decoded)
     end
 
-    # Delete all user metadata.
+    # Delete All Users
     # @return MessageResponse response from the API call
-    def delete_all_user_metadata
+    def delete_all_users
       # the base uri for api requests
       _query_builder = Configuration.base_uri.dup
 
@@ -205,12 +205,12 @@ module SuggestGrid
       return MessageResponse.from_hash(decoded)
     end
 
-    # Posts an item metadata.
-    # @param [Metadata] body Required parameter: Example:
-    # @param [String] item_id Required parameter: The item_id to delete its metadata.
+    # Post an Item
+    # @param [String] item_id Required parameter: The item id to associate with the metadata.
+    # @param [Metadata] body Required parameter: The metadata to be saved. Metadata format has its restrictions.
     # @return MessageResponse response from the API call
-    def post_item_metadata(body,
-                           item_id)
+    def post_item(item_id,
+                  body)
       # the base uri for api requests
       _query_builder = Configuration.base_uri.dup
 
@@ -261,10 +261,10 @@ module SuggestGrid
       return MessageResponse.from_hash(decoded)
     end
 
-    # Delete an item metadata.
+    # Delete an Item
     # @param [String] item_id Required parameter: The item_id to delete its metadata.
     # @return MessageResponse response from the API call
-    def delete_an_item_metadata(item_id)
+    def delete_item(item_id)
       # the base uri for api requests
       _query_builder = Configuration.base_uri.dup
 
@@ -312,7 +312,7 @@ module SuggestGrid
       return MessageResponse.from_hash(decoded)
     end
 
-    # Get information about items.
+    # Get Items
     # @return MetadataInformationResponse response from the API call
     def get_items
       # the base uri for api requests
@@ -357,9 +357,9 @@ module SuggestGrid
       return MetadataInformationResponse.from_hash(decoded)
     end
 
-    # Delete all item metadata.
+    # Delete All Items
     # @return MessageResponse response from the API call
-    def delete_all_item_metadata
+    def delete_all_items
       # the base uri for api requests
       _query_builder = Configuration.base_uri.dup
 
@@ -402,10 +402,10 @@ module SuggestGrid
       return MessageResponse.from_hash(decoded)
     end
 
-    # Post bulk user metadata.
-    # @param [Collection] metas Required parameter: Example: [Metadata,Metadata,Metadata]
+    # Post Bulk Users
+    # @param [Collection] metas Required parameter: List of metadata, size is limited to 10 thousand.
     # @return MessageResponse response from the API call
-    def post_bulk_user_metadata(metas)
+    def post_bulk_users(metas)
         body = ''
         metas.each do |meta|
             body += "#{meta.to_json}\n"
@@ -454,10 +454,10 @@ module SuggestGrid
       return MessageResponse.from_hash(decoded)
     end
 
-    # Post bulk item metadata.
-    # @param [Collection] metas Required parameter: Example: [Metadata,Metadata,Metadata]
+    # Post Bulk Items
+    # @param [Collection] metas Required parameter: List of metadata, size is limited to 10 thousand.
     # @return MessageResponse response from the API call
-    def post_bulk_item_metadata(metas)
+    def post_bulk_items(metas)
         body = ''
         metas.each do |meta|
             body += "#{meta.to_json}\n"

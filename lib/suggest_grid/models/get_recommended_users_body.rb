@@ -1,7 +1,7 @@
 # This file was automatically generated for SuggestGrid by APIMATIC v2.0 ( https://apimatic.io ).
 
 module SuggestGrid
-  class RecommendUsersBody
+  class GetRecommendedUsersBody
 
     # TODO: Write general description for this method
     # @return [String]
@@ -68,13 +68,13 @@ module SuggestGrid
         similar_user_id = hash["similar_user_id"]
         except = hash["except"]
         # Create object from extracted values
-        RecommendUsersBody.new(type,
-                               item_id,
-                               item_ids,
-                               filter,
-                               size,
-                               similar_user_id,
-                               except)
+        GetRecommendedUsersBody.new(type,
+                                    item_id,
+                                    item_ids,
+                                    filter,
+                                    size,
+                                    similar_user_id,
+                                    except)
       end
     end
 

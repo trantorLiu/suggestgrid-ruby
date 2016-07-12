@@ -1,7 +1,7 @@
 # This file was automatically generated for SuggestGrid by APIMATIC v2.0 ( https://apimatic.io ).
 
 module SuggestGrid
-  class RecommendItemsBody
+  class GetSimilarUsersBody
 
     # TODO: Write general description for this method
     # @return [String]
@@ -12,20 +12,8 @@ module SuggestGrid
     attr_accessor :user_id
 
     # TODO: Write general description for this method
-    # @return [List of String]
-    attr_accessor :user_ids
-
-    # TODO: Write general description for this method
-    # @return [Object]
-    attr_accessor :filter
-
-    # TODO: Write general description for this method
     # @return [Integer]
     attr_accessor :size
-
-    # TODO: Write general description for this method
-    # @return [String]
-    attr_accessor :similar_item_id
 
     # These ids will not be included in the response.
     # @return [List of String]
@@ -33,17 +21,11 @@ module SuggestGrid
 
     def initialize(type = nil,
                    user_id = nil,
-                   user_ids = nil,
-                   filter = nil,
                    size = nil,
-                   similar_item_id = nil,
                    except = nil)
       @type = type
       @user_id = user_id
-      @user_ids = user_ids
-      @filter = filter
       @size = size
-      @similar_item_id = similar_item_id
       @except = except
 
     end
@@ -62,19 +44,13 @@ module SuggestGrid
         # Extract variables from the hash
         type = hash["type"]
         user_id = hash["user_id"]
-        user_ids = hash["user_ids"]
-        filter = hash["filter"]
         size = hash["size"]
-        similar_item_id = hash["similar_item_id"]
         except = hash["except"]
         # Create object from extracted values
-        RecommendItemsBody.new(type,
-                               user_id,
-                               user_ids,
-                               filter,
-                               size,
-                               similar_item_id,
-                               except)
+        GetSimilarUsersBody.new(type,
+                                user_id,
+                                size,
+                                except)
       end
     end
 
@@ -83,10 +59,7 @@ module SuggestGrid
       hash = {}
       hash['type'] = type
       hash['user_id'] = user_id
-      hash['user_ids'] = user_ids
-      hash['filter'] = filter
       hash['size'] = size
-      hash['similar_item_id'] = similar_item_id
       hash['except'] = except
       hash
     end
