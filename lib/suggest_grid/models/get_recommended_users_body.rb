@@ -16,16 +16,20 @@ module SuggestGrid
     attr_accessor :item_ids
 
     # TODO: Write general description for this method
-    # @return [Object]
-    attr_accessor :filter
-
-    # TODO: Write general description for this method
     # @return [Integer]
     attr_accessor :size
 
     # TODO: Write general description for this method
     # @return [String]
     attr_accessor :similar_user_id
+
+    # TODO: Write general description for this method
+    # @return [List of String]
+    attr_accessor :fields
+
+    # TODO: Write general description for this method
+    # @return [Object]
+    attr_accessor :filter
 
     # These ids will not be included in the response.
     # @return [List of String]
@@ -34,16 +38,18 @@ module SuggestGrid
     def initialize(type = nil,
                    item_id = nil,
                    item_ids = nil,
-                   filter = nil,
                    size = nil,
                    similar_user_id = nil,
+                   fields = nil,
+                   filter = nil,
                    except = nil)
       @type = type
       @item_id = item_id
       @item_ids = item_ids
-      @filter = filter
       @size = size
       @similar_user_id = similar_user_id
+      @fields = fields
+      @filter = filter
       @except = except
 
     end
@@ -63,17 +69,19 @@ module SuggestGrid
         type = hash["type"]
         item_id = hash["item_id"]
         item_ids = hash["item_ids"]
-        filter = hash["filter"]
         size = hash["size"]
         similar_user_id = hash["similar_user_id"]
+        fields = hash["fields"]
+        filter = hash["filter"]
         except = hash["except"]
         # Create object from extracted values
         GetRecommendedUsersBody.new(type,
                                     item_id,
                                     item_ids,
-                                    filter,
                                     size,
                                     similar_user_id,
+                                    fields,
+                                    filter,
                                     except)
       end
     end
@@ -84,9 +92,10 @@ module SuggestGrid
       hash['type'] = type
       hash['item_id'] = item_id
       hash['item_ids'] = item_ids
-      hash['filter'] = filter
       hash['size'] = size
       hash['similar_user_id'] = similar_user_id
+      hash['fields'] = fields
+      hash['filter'] = filter
       hash['except'] = except
       hash
     end

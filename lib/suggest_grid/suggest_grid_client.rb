@@ -6,31 +6,31 @@ module SuggestGrid
   class SuggestGridClient
     # Singleton access to type controller
     # @return [TypeController] Returns the controller instance
-    def type_controller
+    def type
       TypeController.instance
     end
 
     # Singleton access to action controller
     # @return [ActionController] Returns the controller instance
-    def action_controller
+    def action
       ActionController.instance
     end
 
     # Singleton access to metadata controller
     # @return [MetadataController] Returns the controller instance
-    def metadata_controller
+    def metadata
       MetadataController.instance
     end
 
     # Singleton access to recommendation controller
     # @return [RecommendationController] Returns the controller instance
-    def recommendation_controller
+    def recommendation
       RecommendationController.instance
     end
 
     # Singleton access to similarity controller
     # @return [SimilarityController] Returns the controller instance
-    def similarity_controller
+    def similarity
       SimilarityController.instance
     end
 

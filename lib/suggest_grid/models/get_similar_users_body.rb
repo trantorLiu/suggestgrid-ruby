@@ -15,6 +15,14 @@ module SuggestGrid
     # @return [Integer]
     attr_accessor :size
 
+    # TODO: Write general description for this method
+    # @return [List of String]
+    attr_accessor :fields
+
+    # TODO: Write general description for this method
+    # @return [Object]
+    attr_accessor :filter
+
     # These ids will not be included in the response.
     # @return [List of String]
     attr_accessor :except
@@ -22,10 +30,14 @@ module SuggestGrid
     def initialize(type = nil,
                    user_id = nil,
                    size = nil,
+                   fields = nil,
+                   filter = nil,
                    except = nil)
       @type = type
       @user_id = user_id
       @size = size
+      @fields = fields
+      @filter = filter
       @except = except
 
     end
@@ -45,11 +57,15 @@ module SuggestGrid
         type = hash["type"]
         user_id = hash["user_id"]
         size = hash["size"]
+        fields = hash["fields"]
+        filter = hash["filter"]
         except = hash["except"]
         # Create object from extracted values
         GetSimilarUsersBody.new(type,
                                 user_id,
                                 size,
+                                fields,
+                                filter,
                                 except)
       end
     end
@@ -60,6 +76,8 @@ module SuggestGrid
       hash['type'] = type
       hash['user_id'] = user_id
       hash['size'] = size
+      hash['fields'] = fields
+      hash['filter'] = filter
       hash['except'] = except
       hash
     end
