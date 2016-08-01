@@ -438,8 +438,8 @@ module SuggestGrid
       @http_call_back.on_after_response(_response) if @http_call_back
 
       # Endpoint error handling using HTTP status codes.
-      if _response.status_code == 207
-        raise APIException.new 'Some metadata is not uploaded successfully.', 207, _response.raw_body
+      if _response.status_code == 209
+        raise APIException.new 'Some metadata is not uploaded successfully.', 209, _response.raw_body
       elsif _response.status_code == 429
         raise APIException.new 'Too many requests.', 429, _response.raw_body
       elsif _response.status_code == 500
@@ -490,8 +490,8 @@ module SuggestGrid
       @http_call_back.on_after_response(_response) if @http_call_back
 
       # Endpoint error handling using HTTP status codes.
-      if _response.status_code == 207
-        raise APIException.new 'Some metadata is not uploaded successfully.', 207, _response.raw_body
+      if _response.status_code == 209
+        raise APIException.new 'Some metadata is not uploaded successfully.', 209, _response.raw_body
       elsif _response.status_code == 429
         raise APIException.new 'Too many requests.', 429, _response.raw_body
       elsif _response.status_code == 500

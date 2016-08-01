@@ -12,6 +12,10 @@ module SuggestGrid
     attr_accessor :item_id
 
     # TODO: Write general description for this method
+    # @return [List of String]
+    attr_accessor :item_ids
+
+    # TODO: Write general description for this method
     # @return [Integer]
     attr_accessor :size
 
@@ -29,12 +33,14 @@ module SuggestGrid
 
     def initialize(type = nil,
                    item_id = nil,
+                   item_ids = nil,
                    size = nil,
                    fields = nil,
                    filter = nil,
                    except = nil)
       @type = type
       @item_id = item_id
+      @item_ids = item_ids
       @size = size
       @fields = fields
       @filter = filter
@@ -56,6 +62,7 @@ module SuggestGrid
         # Extract variables from the hash
         type = hash["type"]
         item_id = hash["item_id"]
+        item_ids = hash["item_ids"]
         size = hash["size"]
         fields = hash["fields"]
         filter = hash["filter"]
@@ -63,6 +70,7 @@ module SuggestGrid
         # Create object from extracted values
         GetSimilarItemsBody.new(type,
                                 item_id,
+                                item_ids,
                                 size,
                                 fields,
                                 filter,
@@ -75,6 +83,7 @@ module SuggestGrid
       hash = {}
       hash['type'] = type
       hash['item_id'] = item_id
+      hash['item_ids'] = item_ids
       hash['size'] = size
       hash['fields'] = fields
       hash['filter'] = filter

@@ -47,8 +47,6 @@ module SuggestGrid
         raise APIException.new 'Required parameters are missing.', 422, _response.raw_body
       elsif _response.status_code == 429
         raise APIException.new 'Too many requests.', 429, _response.raw_body
-      elsif _response.status_code == 555
-        raise APIException.new 'Recommendation model is not found for the given type.', 555, _response.raw_body
       elsif _response.status_code == 500
         raise APIException.new 'Unexpected internal error.', 500, _response.raw_body
       end
@@ -100,8 +98,6 @@ module SuggestGrid
         raise APIException.new 'Required parameters are missing.', 422, _response.raw_body
       elsif _response.status_code == 429
         raise APIException.new 'Too many requests.', 429, _response.raw_body
-      elsif _response.status_code == 555
-        raise APIException.new 'Recommendation model is not found for the given type.', 555, _response.raw_body
       elsif _response.status_code == 500
         raise APIException.new 'Unexpected internal error.', 500, _response.raw_body
       end
