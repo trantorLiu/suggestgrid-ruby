@@ -9,9 +9,9 @@ module SuggestGrid
     end
 
     # Get Actions
-    # @param [String] type Optional parameter: The type of the actions. Will return count for all actions if not provided.
-    # @param [String] user_id Optional parameter: The user id of the actions. Wll return count for all user ids if not provided.
-    # @param [String] item_id Optional parameter: The item id of the actions. Wll return count for all item ids if not provided.
+    # @param [String] type Optional parameter: The type of the actions.
+    # @param [String] user_id Optional parameter: The user id of the actions.
+    # @param [String] item_id Optional parameter: The item id of the actions.
     # @param [String] older_than Optional parameter: Delete all actions of a type older than the given timestamp or time. Valid times are 1s, 1m, 1h, 1d, 1M, 1y, or unix timestamp (like 1443798195).
     # @return MessageResponse response from the API call
     def get_actions(type = nil,
@@ -124,9 +124,9 @@ module SuggestGrid
     end
 
     # Delete Actions
-    # @param [String] type Optional parameter: The type of the actions. Will return count for all actions if not provided.
-    # @param [String] user_id Optional parameter: The user id of the actions. Wll return count for all user ids if not provided.
-    # @param [String] item_id Optional parameter: The item id of the actions. Wll return count for all item ids if not provided.
+    # @param [String] type Optional parameter: The type of the actions.
+    # @param [String] user_id Optional parameter: The user id of the actions.
+    # @param [String] item_id Optional parameter: The item id of the actions.
     # @param [String] older_than Optional parameter: Delete all actions of a type older than the given timestamp or time. Valid times are 1s, 1m, 1h, 1d, 1M, 1y, or unix timestamp (like 1443798195).
     # @return MessageResponse response from the API call
     def delete_actions(type = nil,
