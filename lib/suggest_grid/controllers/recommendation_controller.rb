@@ -10,7 +10,7 @@ module SuggestGrid
 
     # Get Recommended Users
     # @param [GetRecommendedUsersBody] body Required parameter: Parameters for recommend users method.
-    # @return UsersResponse response from the API call
+    # @return ErrorResponse response from the API call
     def get_recommended_users(body)
       # the base uri for api requests
       _query_builder = Configuration.base_uri.dup
@@ -56,12 +56,12 @@ module SuggestGrid
 
       # Return appropriate response type
       decoded = APIHelper.json_deserialize(_response.raw_body)
-      return UsersResponse.from_hash(decoded)
+      return ErrorResponse.from_hash(decoded)
     end
 
     # Get Recommended Items
     # @param [GetRecommendedItemsBody] body Required parameter: Parameters for recommend items method.
-    # @return ItemsResponse response from the API call
+    # @return ErrorResponse response from the API call
     def get_recommended_items(body)
       # the base uri for api requests
       _query_builder = Configuration.base_uri.dup
@@ -107,7 +107,7 @@ module SuggestGrid
 
       # Return appropriate response type
       decoded = APIHelper.json_deserialize(_response.raw_body)
-      return ItemsResponse.from_hash(decoded)
+      return ErrorResponse.from_hash(decoded)
     end
   end
 end

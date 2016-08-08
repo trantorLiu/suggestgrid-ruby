@@ -13,7 +13,7 @@ module SuggestGrid
     # @param [String] user_id Optional parameter: The user id of the actions.
     # @param [String] item_id Optional parameter: The item id of the actions.
     # @param [String] older_than Optional parameter: Delete all actions of a type older than the given timestamp or time. Valid times are 1s, 1m, 1h, 1d, 1M, 1y, or unix timestamp (like 1443798195).
-    # @return MessageResponse response from the API call
+    # @return ErrorResponse response from the API call
     def get_actions(type = nil,
                     user_id = nil,
                     item_id = nil,
@@ -67,12 +67,12 @@ module SuggestGrid
 
       # Return appropriate response type
       decoded = APIHelper.json_deserialize(_response.raw_body)
-      return MessageResponse.from_hash(decoded)
+      return ErrorResponse.from_hash(decoded)
     end
 
     # Post an Action
     # @param [Action] body Required parameter: The action to be posted.
-    # @return MessageResponse response from the API call
+    # @return ErrorResponse response from the API call
     def post_action(body)
       # the base uri for api requests
       _query_builder = Configuration.base_uri.dup
@@ -120,7 +120,7 @@ module SuggestGrid
 
       # Return appropriate response type
       decoded = APIHelper.json_deserialize(_response.raw_body)
-      return MessageResponse.from_hash(decoded)
+      return ErrorResponse.from_hash(decoded)
     end
 
     # Delete Actions
@@ -128,7 +128,7 @@ module SuggestGrid
     # @param [String] user_id Optional parameter: The user id of the actions.
     # @param [String] item_id Optional parameter: The item id of the actions.
     # @param [String] older_than Optional parameter: Delete all actions of a type older than the given timestamp or time. Valid times are 1s, 1m, 1h, 1d, 1M, 1y, or unix timestamp (like 1443798195).
-    # @return MessageResponse response from the API call
+    # @return ErrorResponse response from the API call
     def delete_actions(type = nil,
                        user_id = nil,
                        item_id = nil,
@@ -186,12 +186,12 @@ module SuggestGrid
 
       # Return appropriate response type
       decoded = APIHelper.json_deserialize(_response.raw_body)
-      return MessageResponse.from_hash(decoded)
+      return ErrorResponse.from_hash(decoded)
     end
 
     # Post Bulk Actions
 # @param [Collection] actions Required parameter: List of actions to be posted.
-    # @return MessageResponse response from the API call
+    # @return ErrorResponse response from the API call
     def post_bulk_actions(actions)
         body = ''
         actions.each do |action|
@@ -238,7 +238,7 @@ module SuggestGrid
 
       # Return appropriate response type
       decoded = APIHelper.json_deserialize(_response.raw_body)
-      return MessageResponse.from_hash(decoded)
+      return ErrorResponse.from_hash(decoded)
     end
   end
 end
