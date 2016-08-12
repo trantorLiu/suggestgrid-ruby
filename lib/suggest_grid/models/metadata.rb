@@ -1,21 +1,21 @@
 # This file was automatically generated for SuggestGrid by APIMATIC v2.0 ( https://apimatic.io ).
 
-require 'ostruct'
-require 'json'
-
 module SuggestGrid
-  class Metadata < OpenStruct
+  class Metadata
 
     # TODO: Write general description for this method
-    #  attr_accessor :id
+    # @return [String]
+    attr_accessor :id
 
-    def initialize(props = {})
-      super(props)
+    def initialize(id = nil)
+      @id = id
+
     end
 
     # Creates JSON of the curent object
     def to_json(options = {})
-      key_map.to_json(options)
+      hash = key_map
+      hash.to_json(options)
     end
 
     # Creates an instance of the object from a hash
@@ -23,14 +23,18 @@ module SuggestGrid
       if hash == nil
         nil
       else
+        # Extract variables from the hash
+        id = hash["id"]
         # Create object from extracted values
-        Metadata.new(hash)
+        Metadata.new(id)
       end
     end
 
     # Defines the key map for json serialization
     def key_map
-      self.marshal_dump
+      hash = {}
+      hash['id'] = id
+      hash
     end
   end
 end
