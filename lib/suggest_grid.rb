@@ -1,7 +1,7 @@
 # This file was automatically generated for SuggestGrid by APIMATIC v2.0 ( https://apimatic.io ).
 require 'openssl'
 require 'json'
-require 'unirest'
+require 'faraday'
 
 # APIMATIC Helper Files
 require_relative 'suggest_grid/api_helper.rb'
@@ -40,6 +40,7 @@ require_relative 'suggest_grid/models/items_response.rb'
 require_relative 'suggest_grid/controllers/base_controller.rb'
 require_relative 'suggest_grid/controllers/type_controller.rb'
 require_relative 'suggest_grid/controllers/action_controller.rb'
+require_relative 'suggest_grid/controllers/acti_v_1_userson_controller.rb'
 require_relative 'suggest_grid/controllers/metadata_controller.rb'
 require_relative 'suggest_grid/controllers/recommendation_controller.rb'
 require_relative 'suggest_grid/controllers/similarity_controller.rb'
