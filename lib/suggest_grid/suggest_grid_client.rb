@@ -16,12 +16,6 @@ module SuggestGrid
       ActionController.instance
     end
 
-    # Singleton access to acti_v_1_userson controller
-    # @return [ActiV1UsersonController] Returns the controller instance
-    def acti_v_1_userson
-      ActiV1UsersonController.instance
-    end
-
     # Singleton access to metadata controller
     # @return [MetadataController] Returns the controller instance
     def metadata

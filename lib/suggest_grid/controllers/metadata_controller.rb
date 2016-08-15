@@ -10,7 +10,7 @@ module SuggestGrid
 
     # Delete a User
     # @param [String] user_id Required parameter: The user_id to delete its metadata.
-    # @return ErrorResponse response from the API call
+    # @return MessageResponse response from the API call
     def delete_user(user_id)
       # the base uri for api requests
       _query_builder = Configuration.base_uri.dup
@@ -56,11 +56,11 @@ module SuggestGrid
 
       # Return appropriate response type
       decoded = APIHelper.json_deserialize(_response.raw_body)
-      return ErrorResponse.from_hash(decoded)
+      return MessageResponse.from_hash(decoded)
     end
 
     # Get Users
-    # @return ErrorResponse response from the API call
+    # @return MetadataInformationResponse response from the API call
     def get_users
       # the base uri for api requests
       _query_builder = Configuration.base_uri.dup
@@ -101,12 +101,12 @@ module SuggestGrid
 
       # Return appropriate response type
       decoded = APIHelper.json_deserialize(_response.raw_body)
-      return ErrorResponse.from_hash(decoded)
+      return MetadataInformationResponse.from_hash(decoded)
     end
 
     # Post a User
     # @param [Metadata] metadata Required parameter: The metadata to be saved. Metadata format has its restrictions.
-    # @return ErrorResponse response from the API call
+    # @return MessageResponse response from the API call
     def post_user(metadata)
       # the base uri for api requests
       _query_builder = Configuration.base_uri.dup
@@ -150,11 +150,11 @@ module SuggestGrid
 
       # Return appropriate response type
       decoded = APIHelper.json_deserialize(_response.raw_body)
-      return ErrorResponse.from_hash(decoded)
+      return MessageResponse.from_hash(decoded)
     end
 
     # Delete All Users
-    # @return ErrorResponse response from the API call
+    # @return MessageResponse response from the API call
     def delete_all_users
       # the base uri for api requests
       _query_builder = Configuration.base_uri.dup
@@ -195,12 +195,12 @@ module SuggestGrid
 
       # Return appropriate response type
       decoded = APIHelper.json_deserialize(_response.raw_body)
-      return ErrorResponse.from_hash(decoded)
+      return MessageResponse.from_hash(decoded)
     end
 
     # Delete an Item
     # @param [String] item_id Required parameter: The item_id to delete its metadata.
-    # @return ErrorResponse response from the API call
+    # @return MessageResponse response from the API call
     def delete_item(item_id)
       # the base uri for api requests
       _query_builder = Configuration.base_uri.dup
@@ -246,11 +246,11 @@ module SuggestGrid
 
       # Return appropriate response type
       decoded = APIHelper.json_deserialize(_response.raw_body)
-      return ErrorResponse.from_hash(decoded)
+      return MessageResponse.from_hash(decoded)
     end
 
     # Get Items
-    # @return ErrorResponse response from the API call
+    # @return MetadataInformationResponse response from the API call
     def get_items
       # the base uri for api requests
       _query_builder = Configuration.base_uri.dup
@@ -291,12 +291,12 @@ module SuggestGrid
 
       # Return appropriate response type
       decoded = APIHelper.json_deserialize(_response.raw_body)
-      return ErrorResponse.from_hash(decoded)
+      return MetadataInformationResponse.from_hash(decoded)
     end
 
     # Post an Item
     # @param [Metadata] body Required parameter: The metadata to be saved. Metadata format has its restrictions.
-    # @return ErrorResponse response from the API call
+    # @return MessageResponse response from the API call
     def post_item(body)
       # the base uri for api requests
       _query_builder = Configuration.base_uri.dup
@@ -340,11 +340,11 @@ module SuggestGrid
 
       # Return appropriate response type
       decoded = APIHelper.json_deserialize(_response.raw_body)
-      return ErrorResponse.from_hash(decoded)
+      return MessageResponse.from_hash(decoded)
     end
 
     # Delete All Items
-    # @return ErrorResponse response from the API call
+    # @return MessageResponse response from the API call
     def delete_all_items
       # the base uri for api requests
       _query_builder = Configuration.base_uri.dup
@@ -385,12 +385,12 @@ module SuggestGrid
 
       # Return appropriate response type
       decoded = APIHelper.json_deserialize(_response.raw_body)
-      return ErrorResponse.from_hash(decoded)
+      return MessageResponse.from_hash(decoded)
     end
 
     # Post Bulk Users
     # @param [Collection] metas Required parameter: List of metadata, size is limited to 10 thousand.
-    # @return ErrorResponse response from the API call
+    # @return MessageResponse response from the API call
     def post_bulk_users(metas)
         body = ''
         metas.each do |meta|
@@ -437,12 +437,12 @@ module SuggestGrid
 
       # Return appropriate response type
       decoded = APIHelper.json_deserialize(_response.raw_body)
-      return ErrorResponse.from_hash(decoded)
+      return MessageResponse.from_hash(decoded)
     end
 
     # Post Bulk Items
     # @param [Collection] metas Required parameter: List of metadata, size is limited to 10 thousand.
-    # @return ErrorResponse response from the API call
+    # @return MessageResponse response from the API call
     def post_bulk_items(metas)
         body = ''
         metas.each do |meta|
@@ -489,7 +489,7 @@ module SuggestGrid
 
       # Return appropriate response type
       decoded = APIHelper.json_deserialize(_response.raw_body)
-      return ErrorResponse.from_hash(decoded)
+      return MessageResponse.from_hash(decoded)
     end
   end
 end

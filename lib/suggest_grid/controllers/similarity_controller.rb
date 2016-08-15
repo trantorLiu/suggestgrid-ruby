@@ -10,7 +10,7 @@ module SuggestGrid
 
     # Get Similar Users
     # @param [GetSimilarUsersBody] body Required parameter: Similar users method parameters.
-    # @return ErrorResponse response from the API call
+    # @return UsersResponse response from the API call
     def get_similar_users(body)
       # the base uri for api requests
       _query_builder = Configuration.base_uri.dup
@@ -56,12 +56,12 @@ module SuggestGrid
 
       # Return appropriate response type
       decoded = APIHelper.json_deserialize(_response.raw_body)
-      return ErrorResponse.from_hash(decoded)
+      return UsersResponse.from_hash(decoded)
     end
 
     # Get Similar Items
     # @param [GetSimilarItemsBody] body Required parameter: Similar items method parameter.
-    # @return ErrorResponse response from the API call
+    # @return ItemsResponse response from the API call
     def get_similar_items(body)
       # the base uri for api requests
       _query_builder = Configuration.base_uri.dup
@@ -107,7 +107,7 @@ module SuggestGrid
 
       # Return appropriate response type
       decoded = APIHelper.json_deserialize(_response.raw_body)
-      return ErrorResponse.from_hash(decoded)
+      return ItemsResponse.from_hash(decoded)
     end
   end
 end
