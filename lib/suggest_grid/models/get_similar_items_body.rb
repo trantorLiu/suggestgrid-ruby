@@ -2,7 +2,6 @@
 
 module SuggestGrid
   class GetSimilarItemsBody
-
     # TODO: Write general description for this method
     # @return [String]
     attr_accessor :type
@@ -11,23 +10,23 @@ module SuggestGrid
     # @return [String]
     attr_accessor :types
 
-    # TODO: Write general description for this method
+    # Get similar items to given item id. Either item id or item ids must be provided.
     # @return [String]
     attr_accessor :item_id
 
-    # TODO: Write general description for this method
+    # Get similar items to given item ids. Either item id or item ids must be provided.
     # @return [List of String]
     attr_accessor :item_ids
 
-    # TODO: Write general description for this method
+    # Get similar items to given item ids. Either item id or item ids must be provided.
     # @return [Integer]
     attr_accessor :size
 
-    # TODO: Write general description for this method
+    # Get similar items to given item ids. Either item id or item ids must be provided.
     # @return [List of String]
     attr_accessor :fields
 
-    # TODO: Write general description for this method
+    # Get similar items to given item ids. Either item id or item ids must be provided.
     # @return [Object]
     attr_accessor :filter
 

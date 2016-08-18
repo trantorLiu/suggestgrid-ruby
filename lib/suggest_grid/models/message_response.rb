@@ -2,7 +2,6 @@
 
 module SuggestGrid
   class MessageResponse
-
     # Message of the response.
     # @return [String]
     attr_accessor :message

@@ -2,7 +2,6 @@
 
 module SuggestGrid
   class TypeRequestBody
-
     # Could be "explicit" or "implicit"
     # The default is "implicit".
     # @return [String]

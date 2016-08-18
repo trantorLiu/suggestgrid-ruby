@@ -2,7 +2,6 @@
 
 module SuggestGrid
   class GetTypeResponse
-
     # Either 'implicit' or 'explicit'
     # @return [String]
     attr_accessor :rating

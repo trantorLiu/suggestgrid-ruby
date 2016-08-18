@@ -122,9 +122,9 @@ SuggestGridClient.action.post_action(SuggestGrid::Action.new('views','10', '20',
 Name | Type |Required| Description
 --- | --- | --- | ---
 type|string|true|The type that the action belongs to.
-rating|number|false|The optional rating, if the type is explicit.
 item_id|string|true|The item id of the item the action is performed on.
 user_id|string|true|The user id of the performer of the action.
+rating|number|false|The optional rating, if the type is explicit.
 ### Post Bulk Actions
 > `post_bulk_actions(actions)`
 
@@ -298,7 +298,7 @@ Name | Type |Required| Description
 --- | --- | --- | ---
 id|string|true|
 ### Post Bulk Users
-> `post_user(metadata)`
+> `post_bulk_users(metadata)`
 
 Post user metadata in bulk.
 This metadata can be used to filter or to be included in recommendations and similars methods.
@@ -474,7 +474,7 @@ users = response.users # [{id:"1"},{id:"84"},{id:"9"},{id:"32"},{id:"45"}]
 
 
 ```ruby
-response = SuggestGridClient.recommendation.get_recommended_users({type: 'view', item_id: "42", size: 5, fields: ["name"], filter: { range: {age: { gte: 20, lte: 60}}}})
+response = SuggestGridClient.recommendation.get_recommended_users({type: 'view', item_id: "42", size: 5, fields: ["name"], filter: { less_equal: {age: 60}}})
 users = response.users # [{id:"11",name:"Robert"},{id:"848",name:"Mike"},{id:"2",name:"Jennifer"}]
 ```
 
@@ -487,15 +487,15 @@ You can read [filters](/docs/concepts#filters) and [fields](/docs/concepts#field
 
 Name | Type |Required| Description
 --- | --- | --- | ---
-size|integer|false|
-item_id|string|false|
-fields|array|false|
-except|array|false|These ids will not be included in the response. 
-type|string|false|
-item_ids|array|false|
 similar_user_id|string|false|
+size|integer|false|
 types|string|false|
 filter||false|
+item_id|string|false|
+except|array|false|These ids will not be included in the response. 
+fields|array|false|
+type|string|false|
+item_ids|array|false|
 ### Get Recommended Items
 > `get_recommended_items(body)`
 
@@ -519,7 +519,7 @@ items = response.items # [{id:"13"},{id:"65"},{id:"102"}]
 ```
 
 ```ruby
-response = SuggestGridClient.recommendation.get_recommended_items({type: 'view', user_id: "42", size: 5, filter: {range: {price: {lte: 100}}}})
+response = SuggestGridClient.recommendation.get_recommended_items({type: 'view', user_id: "42", size: 5, filter: {less_equal: {price: 100}}})
 items = response.items # [{id:"930"},{id:"848"},{id:"102"},{id:"303"},{id:"593"}]
 ```
 
@@ -537,15 +537,15 @@ You can read [filters](/docs/concepts#filters) and [fields](/docs/concepts#field
 
 Name | Type |Required| Description
 --- | --- | --- | ---
-size|integer|false|
-fields|array|false|
-user_id|string|false|
-user_ids|array|false|
-except|array|false|These ids will not be included in the response. 
-type|string|false|
 similar_item_id|string|false|
+size|integer|false|
 types|string|false|
 filter||false|
+user_ids|array|false|
+user_id|string|false|
+except|array|false|These ids will not be included in the response. 
+fields|array|false|
+type|string|false|
 
 
 ## Similarity Methods
@@ -570,7 +570,7 @@ users = response.users # [{id:"451"},{id:"456"}]
 ```
 
 ```ruby
-response = SuggestGridClient.similarity.get_similar_users({type: "views", user_ids: ["42", "532", "841"], size: 3, fields: ["name"], filter: { range: { age: 20, lte: 60}}})
+response = SuggestGridClient.similarity.get_similar_users({type: "views", user_ids: ["42", "532", "841"], size: 3, fields: ["name"], filter: { less_equal: { age: 20}})
 users = response.users # [{id:"400", name:"Jason"},{id:"132", name:"Scarlett"},{id:"503", name:"Amy"}]
 ```
 
@@ -584,13 +584,13 @@ You can read [filters](/docs/concepts#filters) and [fields](/docs/concepts#field
 Name | Type |Required| Description
 --- | --- | --- | ---
 size|integer|false|
-fields|array|false|
-user_id|string|false|
-user_ids|array|false|
-except|array|false|These ids will not be included in the response. 
-type|string|false|
 types|string|false|
 filter||false|
+user_ids|array|false|
+user_id|string|false|
+except|array|false|These ids will not be included in the response. 
+fields|array|false|
+type|string|false|
 ### Get Similar Items
 > `get_similar_items(body)`
 
@@ -600,7 +600,7 @@ examples:
 
 ```ruby
 response = SuggestGridClient.similarity.get_similar_items({type: "views", item_id: "1"})
-items = response.items # [{id:"451"},{id:"456"}]
+items = response.items # [{id:"1"},{id:"451"},{id:"456"}]
 ```
 
 ```ruby
@@ -609,7 +609,7 @@ items = response.items # [{id:"451"},{id:"456"}]
 ```
 
 ```ruby
-response = SuggestGridClient.similarity.get_similar_items({type: "views", item_ids:  ["3","5","8"], size: 3, fields: ["category"], filter: { range: { capacity: 20, lte: 60}}})
+response = SuggestGridClient.similarity.get_similar_items({type: "views", item_ids:  ["3","5","8"], size: 3, fields: ["category"], filter: { greater: { capacity: 60}})
 items = response.items # [{id:"451",category:"television"},{id:"656",category:"blu-ray-dvd-players"}]
 ```
 
@@ -623,10 +623,10 @@ You can read [filters](/docs/concepts#filters) and [fields](/docs/concepts#field
 Name | Type |Required| Description
 --- | --- | --- | ---
 size|integer|false|
-item_id|string|false|
-fields|array|false|
-except|array|false|These ids will not be included in the response. 
-type|string|false|
-item_ids|array|false|
 types|string|false|
 filter||false|
+item_id|string|false|Get similar items to given item id. Either item id or item ids must be provided. 
+except|array|false|These ids will not be included in the response. 
+fields|array|false|
+type|string|false|
+item_ids|array|false|Get similar items to given item ids. Either item id or item ids must be provided. 

@@ -2,7 +2,6 @@
 
 module SuggestGrid
   class SchemaErrorResponse
-
     # Message of the response.
     # @return [String]
     attr_accessor :message

@@ -2,7 +2,6 @@
 
 module SuggestGrid
   class GetTypesResponse
-
     # The list of type names
     # @return [List of String]
     attr_accessor :types

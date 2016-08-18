@@ -42,13 +42,13 @@ module SuggestGrid
 
       # Endpoint error handling using HTTP status codes.
       if _response.status_code == 400
-        raise APIException.new 'Request body is invalid.', 400, _response.raw_body
+        raise APIException.new APIException, _response
       elsif _response.status_code == 422
-        raise APIException.new 'Required parameters are missing.', 422, _response.raw_body
+        raise APIException.new APIException, _response
       elsif _response.status_code == 429
-        raise APIException.new 'Too many requests.', 429, _response.raw_body
+        raise APIException.new APIException, _response
       elsif _response.status_code == 500
-        raise APIException.new 'Unexpected internal error.', 500, _response.raw_body
+        raise APIException.new APIException, _response
       end
 
       # Global error handling using HTTP status codes.
@@ -93,13 +93,13 @@ module SuggestGrid
 
       # Endpoint error handling using HTTP status codes.
       if _response.status_code == 400
-        raise APIException.new 'Request body is invalid.', 400, _response.raw_body
+        raise APIException.new APIException, _response
       elsif _response.status_code == 422
-        raise APIException.new 'Required parameters are missing.', 422, _response.raw_body
+        raise APIException.new APIException, _response
       elsif _response.status_code == 429
-        raise APIException.new 'Too many requests.', 429, _response.raw_body
+        raise APIException.new APIException, _response
       elsif _response.status_code == 500
-        raise APIException.new 'Unexpected internal error.', 500, _response.raw_body
+        raise APIException.new APIException, _response
       end
 
       # Global error handling using HTTP status codes.

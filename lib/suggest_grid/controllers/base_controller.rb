@@ -13,7 +13,7 @@ module SuggestGrid
 
     def validate_response(response)			
       if !response.status_code.between?(200, 208) #[200,208] = HTTP OK
-        raise APIException.new 'HTTP Response Not OK', response.status_code, response.raw_body
+        raise APIException.new 'HTTP Response Not OK', response
       end
     end
   end

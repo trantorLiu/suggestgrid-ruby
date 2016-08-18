@@ -55,11 +55,11 @@ module SuggestGrid
 
       # Endpoint error handling using HTTP status codes.
       if _response.status_code == 400
-        raise APIException.new 'Required `user_id` or `item_id` parameters are missing from the request body.', 400, _response.raw_body
+        raise APIException.new APIException, _response
       elsif _response.status_code == 429
-        raise APIException.new 'Too many requests.', 429, _response.raw_body
+        raise APIException.new APIException, _response
       elsif _response.status_code == 500
-        raise APIException.new 'Unexpected internal error.', 500, _response.raw_body
+        raise APIException.new APIException, _response
       end
 
       # Global error handling using HTTP status codes.
@@ -104,15 +104,15 @@ module SuggestGrid
 
       # Endpoint error handling using HTTP status codes.
       if _response.status_code == 400
-        raise APIException.new 'Required `user_id` or `item_id` parameters are missing from the request body.', 400, _response.raw_body
+        raise APIException.new APIException, _response
       elsif _response.status_code == 402
-        raise APIException.new 'Action limit exceeded.', 402, _response.raw_body
+        raise APIException.new APIException, _response
       elsif _response.status_code == 404
-        raise APIException.new 'Type does not exists.', 404, _response.raw_body
+        raise APIException.new APIException, _response
       elsif _response.status_code == 429
-        raise APIException.new 'Too many requests.', 429, _response.raw_body
+        raise APIException.new APIException, _response
       elsif _response.status_code == 500
-        raise APIException.new 'Unexpected internal error.', 500, _response.raw_body
+        raise APIException.new APIException, _response
       end
 
       # Global error handling using HTTP status codes.
@@ -170,15 +170,15 @@ module SuggestGrid
 
       # Endpoint error handling using HTTP status codes.
       if _response.status_code == 400
-        raise APIException.new 'Required `user_id` or `item_id` parameters are missing from the request body.', 400, _response.raw_body
+        raise APIException.new APIException, _response
       elsif _response.status_code == 404
-        raise APIException.new 'Type does not exists.', 404, _response.raw_body
+        raise APIException.new APIException, _response
       elsif _response.status_code == 422
-        raise APIException.new 'No query parameter (`user_id`, `item_id`, or `older_than`) is given.  In order to delete all actionsdelete the type.', 422, _response.raw_body
+        raise APIException.new APIException, _response
       elsif _response.status_code == 429
-        raise APIException.new 'Too many requests.', 429, _response.raw_body
+        raise APIException.new APIException, _response
       elsif _response.status_code == 500
-        raise APIException.new 'Unexpected internal error.', 500, _response.raw_body
+        raise APIException.new APIException, _response
       end
 
       # Global error handling using HTTP status codes.
@@ -209,7 +209,8 @@ module SuggestGrid
       # prepare headers
       _headers = {
         'user-agent' => 'SUGGESTGRID',
-        'accept' => 'application/json'
+        'accept' => 'application/json',
+        'content-type' => 'text/plain; charset=utf-8'
       }
 
       # Create the HttpRequest object for the call
@@ -226,11 +227,11 @@ module SuggestGrid
 
       # Endpoint error handling using HTTP status codes.
       if _response.status_code == 402
-        raise APIException.new 'Action limit exceeded.', 402, _response.raw_body
+        raise APIException.new APIException, _response
       elsif _response.status_code == 429
-        raise APIException.new 'Too many requests.', 429, _response.raw_body
+        raise APIException.new APIException, _response
       elsif _response.status_code == 500
-        raise APIException.new 'Unexpected internal error.', 500, _response.raw_body
+        raise APIException.new APIException, _response
       end
 
       # Global error handling using HTTP status codes.

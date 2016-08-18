@@ -5,7 +5,6 @@ require 'faraday'
 
 # APIMATIC Helper Files
 require_relative 'suggest_grid/api_helper.rb'
-require_relative 'suggest_grid/api_exception.rb'
 require_relative 'suggest_grid/configuration.rb'
 require_relative 'suggest_grid/suggest_grid_client.rb'
 
@@ -35,6 +34,9 @@ require_relative 'suggest_grid/models/schema_error_response.rb'
 require_relative 'suggest_grid/models/metadata_information_response.rb'
 require_relative 'suggest_grid/models/users_response.rb'
 require_relative 'suggest_grid/models/items_response.rb'
+
+# Exceptions
+require_relative 'suggest_grid/exceptions/api_exception.rb'
 
 # Controllers
 require_relative 'suggest_grid/controllers/base_controller.rb'

@@ -2,12 +2,11 @@
 
 module SuggestGrid
   class BulkSchemaErrorResponse
-
     # Message of the response.
     # @return [String]
     attr_accessor :message
 
-    # TODO: Write general description for this method
+    # Message of the response.
     # @return [List of SchemaErrorResponse]
     attr_accessor :errors
 

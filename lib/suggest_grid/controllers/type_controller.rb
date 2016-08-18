@@ -40,9 +40,9 @@ module SuggestGrid
 
       # Endpoint error handling using HTTP status codes.
       if _response.status_code == 429
-        raise APIException.new 'Too many requests.', 429, _response.raw_body
+        raise APIException.new APIException, _response
       elsif _response.status_code == 500
-        raise APIException.new 'Unexpected internal error.', 500, _response.raw_body
+        raise APIException.new APIException, _response
       end
 
       # Global error handling using HTTP status codes.
@@ -85,9 +85,9 @@ module SuggestGrid
 
       # Endpoint error handling using HTTP status codes.
       if _response.status_code == 429
-        raise APIException.new 'Too many requests.', 429, _response.raw_body
+        raise APIException.new APIException, _response
       elsif _response.status_code == 500
-        raise APIException.new 'Unexpected internal error.', 500, _response.raw_body
+        raise APIException.new APIException, _response
       end
 
       # Global error handling using HTTP status codes.
@@ -136,9 +136,9 @@ module SuggestGrid
 
       # Endpoint error handling using HTTP status codes.
       if _response.status_code == 429
-        raise APIException.new 'Too many requests.', 429, _response.raw_body
+        raise APIException.new APIException, _response
       elsif _response.status_code == 500
-        raise APIException.new 'Unexpected internal error.', 500, _response.raw_body
+        raise APIException.new APIException, _response
       end
 
       # Global error handling using HTTP status codes.
@@ -190,15 +190,15 @@ module SuggestGrid
 
       # Endpoint error handling using HTTP status codes.
       if _response.status_code == 402
-        raise APIException.new 'Type limit reached.', 402, _response.raw_body
+        raise APIException.new APIException, _response
       elsif _response.status_code == 409
-        raise APIException.new 'Type already exists.', 409, _response.raw_body
+        raise APIException.new APIException, _response
       elsif _response.status_code == 422
-        raise APIException.new 'Rating type is not `implicit` or `explicit`.', 422, _response.raw_body
+        raise APIException.new APIException, _response
       elsif _response.status_code == 429
-        raise APIException.new 'Too many requests.', 429, _response.raw_body
+        raise APIException.new APIException, _response
       elsif _response.status_code == 500
-        raise APIException.new 'Unexpected internal error.', 500, _response.raw_body
+        raise APIException.new APIException, _response
       end
 
       # Global error handling using HTTP status codes.
@@ -247,11 +247,11 @@ module SuggestGrid
 
       # Endpoint error handling using HTTP status codes.
       if _response.status_code == 404
-        raise APIException.new 'Type does not exists.', 404, _response.raw_body
+        raise APIException.new APIException, _response
       elsif _response.status_code == 429
-        raise APIException.new 'Too many requests.', 429, _response.raw_body
+        raise APIException.new APIException, _response
       elsif _response.status_code == 500
-        raise APIException.new 'Unexpected internal error.', 500, _response.raw_body
+        raise APIException.new APIException, _response
       end
 
       # Global error handling using HTTP status codes.

@@ -2,7 +2,6 @@
 
 module SuggestGrid
   class CountResponse
-
     # TODO: Write general description for this method
     # @return [Integer]
     attr_accessor :count

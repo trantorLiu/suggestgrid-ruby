@@ -2,7 +2,6 @@
 
 module SuggestGrid
   class ErrorResponse
-
     # Message of the response.
     # @return [String]
     attr_accessor :message

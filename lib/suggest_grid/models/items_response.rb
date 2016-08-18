@@ -2,12 +2,11 @@
 
 module SuggestGrid
   class ItemsResponse
-
     # The number of items in the response.
     # @return [Long]
     attr_accessor :count
 
-    # TODO: Write general description for this method
+    # The number of items in the response.
     # @return [List of Metadata]
     attr_accessor :items
 

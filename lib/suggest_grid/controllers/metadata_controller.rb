@@ -46,9 +46,9 @@ module SuggestGrid
 
       # Endpoint error handling using HTTP status codes.
       if _response.status_code == 429
-        raise APIException.new 'Too many requests.', 429, _response.raw_body
+        raise APIException.new APIException, _response
       elsif _response.status_code == 500
-        raise APIException.new 'Unexpected internal error.', 500, _response.raw_body
+        raise APIException.new APIException, _response
       end
 
       # Global error handling using HTTP status codes.
@@ -91,9 +91,9 @@ module SuggestGrid
 
       # Endpoint error handling using HTTP status codes.
       if _response.status_code == 429
-        raise APIException.new 'Too many requests.', 429, _response.raw_body
+        raise APIException.new APIException, _response
       elsif _response.status_code == 500
-        raise APIException.new 'Unexpected internal error.', 500, _response.raw_body
+        raise APIException.new APIException, _response
       end
 
       # Global error handling using HTTP status codes.
@@ -138,11 +138,11 @@ module SuggestGrid
 
       # Endpoint error handling using HTTP status codes.
       if _response.status_code == 400
-        raise APIException.new 'Metadata is invalid.', 400, _response.raw_body
+        raise APIException.new APIException, _response
       elsif _response.status_code == 429
-        raise APIException.new 'Too many requests.', 429, _response.raw_body
+        raise APIException.new APIException, _response
       elsif _response.status_code == 500
-        raise APIException.new 'Unexpected internal error.', 500, _response.raw_body
+        raise APIException.new APIException, _response
       end
 
       # Global error handling using HTTP status codes.
@@ -185,9 +185,9 @@ module SuggestGrid
 
       # Endpoint error handling using HTTP status codes.
       if _response.status_code == 429
-        raise APIException.new 'Too many requests.', 429, _response.raw_body
+        raise APIException.new APIException, _response
       elsif _response.status_code == 500
-        raise APIException.new 'Unexpected internal error.', 500, _response.raw_body
+        raise APIException.new APIException, _response
       end
 
       # Global error handling using HTTP status codes.
@@ -236,9 +236,9 @@ module SuggestGrid
 
       # Endpoint error handling using HTTP status codes.
       if _response.status_code == 429
-        raise APIException.new 'Too many requests.', 429, _response.raw_body
+        raise APIException.new APIException, _response
       elsif _response.status_code == 500
-        raise APIException.new 'Unexpected internal error.', 500, _response.raw_body
+        raise APIException.new APIException, _response
       end
 
       # Global error handling using HTTP status codes.
@@ -281,9 +281,9 @@ module SuggestGrid
 
       # Endpoint error handling using HTTP status codes.
       if _response.status_code == 429
-        raise APIException.new 'Too many requests.', 429, _response.raw_body
+        raise APIException.new APIException, _response
       elsif _response.status_code == 500
-        raise APIException.new 'Unexpected internal error.', 500, _response.raw_body
+        raise APIException.new APIException, _response
       end
 
       # Global error handling using HTTP status codes.
@@ -328,11 +328,11 @@ module SuggestGrid
 
       # Endpoint error handling using HTTP status codes.
       if _response.status_code == 400
-        raise APIException.new 'Metadata is invalid.', 400, _response.raw_body
+        raise APIException.new APIException, _response
       elsif _response.status_code == 429
-        raise APIException.new 'Too many requests.', 429, _response.raw_body
+        raise APIException.new APIException, _response
       elsif _response.status_code == 500
-        raise APIException.new 'Unexpected internal error.', 500, _response.raw_body
+        raise APIException.new APIException, _response
       end
 
       # Global error handling using HTTP status codes.
@@ -375,9 +375,9 @@ module SuggestGrid
 
       # Endpoint error handling using HTTP status codes.
       if _response.status_code == 429
-        raise APIException.new 'Too many requests.', 429, _response.raw_body
+        raise APIException.new APIException, _response
       elsif _response.status_code == 500
-        raise APIException.new 'Unexpected internal error.', 500, _response.raw_body
+        raise APIException.new APIException, _response
       end
 
       # Global error handling using HTTP status codes.
@@ -408,7 +408,8 @@ module SuggestGrid
       # prepare headers
       _headers = {
         'user-agent' => 'SUGGESTGRID',
-        'accept' => 'application/json'
+        'accept' => 'application/json',
+        'content-type' => 'text/plain; charset=utf-8'
       }
 
       # Create the HttpRequest object for the call
@@ -425,11 +426,11 @@ module SuggestGrid
 
       # Endpoint error handling using HTTP status codes.
       if _response.status_code == 209
-        raise APIException.new 'Some metadata is not uploaded successfully.', 209, _response.raw_body
+        raise APIException.new APIException, _response
       elsif _response.status_code == 429
-        raise APIException.new 'Too many requests.', 429, _response.raw_body
+        raise APIException.new APIException, _response
       elsif _response.status_code == 500
-        raise APIException.new 'Unexpected internal error.', 500, _response.raw_body
+        raise APIException.new APIException, _response
       end
 
       # Global error handling using HTTP status codes.
@@ -460,7 +461,8 @@ module SuggestGrid
       # prepare headers
       _headers = {
         'user-agent' => 'SUGGESTGRID',
-        'accept' => 'application/json'
+        'accept' => 'application/json',
+        'content-type' => 'text/plain; charset=utf-8'
       }
 
       # Create the HttpRequest object for the call
@@ -477,11 +479,11 @@ module SuggestGrid
 
       # Endpoint error handling using HTTP status codes.
       if _response.status_code == 209
-        raise APIException.new 'Some metadata is not uploaded successfully.', 209, _response.raw_body
+        raise APIException.new APIException, _response
       elsif _response.status_code == 429
-        raise APIException.new 'Too many requests.', 429, _response.raw_body
+        raise APIException.new APIException, _response
       elsif _response.status_code == 500
-        raise APIException.new 'Unexpected internal error.', 500, _response.raw_body
+        raise APIException.new APIException, _response
       end
 
       # Global error handling using HTTP status codes.

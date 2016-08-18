@@ -2,7 +2,6 @@
 
 module SuggestGrid
   class Action
-
     # The type that the action belongs to.
     # @return [String]
     attr_accessor :type

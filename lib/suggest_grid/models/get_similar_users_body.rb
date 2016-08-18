@@ -2,7 +2,6 @@
 
 module SuggestGrid
   class GetSimilarUsersBody
-
     # TODO: Write general description for this method
     # @return [String]
     attr_accessor :type

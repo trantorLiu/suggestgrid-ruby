@@ -2,7 +2,6 @@
 
 module SuggestGrid
   class Metadata
-
     # TODO: Write general description for this method
     # @return [String]
     attr_accessor :id

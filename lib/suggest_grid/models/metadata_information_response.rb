@@ -2,7 +2,6 @@
 
 module SuggestGrid
   class MetadataInformationResponse
-
     # The number of users or items with metadata.
     # @return [Long]
     attr_accessor :count
