@@ -1,2 +1,5 @@
+test:
+  override:
+    - echo "test"
 deployment:
   - ./.deploy
