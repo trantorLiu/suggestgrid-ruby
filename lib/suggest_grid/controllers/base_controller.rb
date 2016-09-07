@@ -11,9 +11,9 @@ module SuggestGrid
       @http_call_back = http_call_back
     end
 
-    def validate_response(response)			
-      if !response.status_code.between?(200, 208) #[200,208] = HTTP OK
-        raise APIException.new 'HTTP Response Not OK', response
+    def validate_response(context)			
+      if !context.response.status_code.between?(200, 208) #[200,208] = HTTP OK
+        raise APIException.new 'HTTP Response Not OK', context
       end
     end
   end

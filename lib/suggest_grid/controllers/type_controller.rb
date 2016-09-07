@@ -27,26 +27,29 @@ module SuggestGrid
       }
 
       # Create the HttpRequest object for the call
-      _http_request = @http_client.get _query_url, headers: _headers, username: Configuration.basic_auth_user_name, password: Configuration.basic_auth_password
+      _request = @http_client.get _query_url, headers: _headers, username: Configuration.basic_auth_user_name, password: Configuration.basic_auth_password
       
       # Call the on_before_request callback
-      @http_call_back.on_before_request(_http_request) if @http_call_back
+      @http_call_back.on_before_request(_request) if @http_call_back
 
       # Invoke the API call and get the response
-      _response = @http_client.execute_as_string(_http_request)
+      _response = @http_client.execute_as_string(_request)
+
+      # Wrap the request and response in an HttpContext object
+      _context = HttpContext.new(_request, _response)
 
       # Call the on_after_response callback
-      @http_call_back.on_after_response(_response) if @http_call_back
+      @http_call_back.on_after_response(_context) if @http_call_back
 
       # Endpoint error handling using HTTP status codes.
       if _response.status_code == 429
-        raise APIException.new APIException, _response
+        raise APIException.new '429 - Too many requests.', _context
       elsif _response.status_code == 500
-        raise APIException.new APIException, _response
+        raise APIException.new '500 - Unexpected internal error.', _context
       end
 
       # Global error handling using HTTP status codes.
-      validate_response(_response)
+      validate_response(_context)
 
       # Return appropriate response type
       decoded = APIHelper.json_deserialize(_response.raw_body)
@@ -72,26 +75,29 @@ module SuggestGrid
       }
 
       # Create the HttpRequest object for the call
-      _http_request = @http_client.delete _query_url, headers: _headers, username: Configuration.basic_auth_user_name, password: Configuration.basic_auth_password
+      _request = @http_client.delete _query_url, headers: _headers, username: Configuration.basic_auth_user_name, password: Configuration.basic_auth_password
       
       # Call the on_before_request callback
-      @http_call_back.on_before_request(_http_request) if @http_call_back
+      @http_call_back.on_before_request(_request) if @http_call_back
 
       # Invoke the API call and get the response
-      _response = @http_client.execute_as_string(_http_request)
+      _response = @http_client.execute_as_string(_request)
+
+      # Wrap the request and response in an HttpContext object
+      _context = HttpContext.new(_request, _response)
 
       # Call the on_after_response callback
-      @http_call_back.on_after_response(_response) if @http_call_back
+      @http_call_back.on_after_response(_context) if @http_call_back
 
       # Endpoint error handling using HTTP status codes.
       if _response.status_code == 429
-        raise APIException.new APIException, _response
+        raise APIException.new '429 - Too many requests.', _context
       elsif _response.status_code == 500
-        raise APIException.new APIException, _response
+        raise APIException.new '500 - Unexpected internal error.', _context
       end
 
       # Global error handling using HTTP status codes.
-      validate_response(_response)
+      validate_response(_context)
 
       # Return appropriate response type
       decoded = APIHelper.json_deserialize(_response.raw_body)
@@ -123,26 +129,29 @@ module SuggestGrid
       }
 
       # Create the HttpRequest object for the call
-      _http_request = @http_client.get _query_url, headers: _headers, username: Configuration.basic_auth_user_name, password: Configuration.basic_auth_password
+      _request = @http_client.get _query_url, headers: _headers, username: Configuration.basic_auth_user_name, password: Configuration.basic_auth_password
       
       # Call the on_before_request callback
-      @http_call_back.on_before_request(_http_request) if @http_call_back
+      @http_call_back.on_before_request(_request) if @http_call_back
 
       # Invoke the API call and get the response
-      _response = @http_client.execute_as_string(_http_request)
+      _response = @http_client.execute_as_string(_request)
+
+      # Wrap the request and response in an HttpContext object
+      _context = HttpContext.new(_request, _response)
 
       # Call the on_after_response callback
-      @http_call_back.on_after_response(_response) if @http_call_back
+      @http_call_back.on_after_response(_context) if @http_call_back
 
       # Endpoint error handling using HTTP status codes.
       if _response.status_code == 429
-        raise APIException.new APIException, _response
+        raise APIException.new '429 - Too many requests.', _context
       elsif _response.status_code == 500
-        raise APIException.new APIException, _response
+        raise APIException.new '500 - Unexpected internal error.', _context
       end
 
       # Global error handling using HTTP status codes.
-      validate_response(_response)
+      validate_response(_context)
 
       # Return appropriate response type
       decoded = APIHelper.json_deserialize(_response.raw_body)
@@ -177,32 +186,35 @@ module SuggestGrid
       }
 
       # Create the HttpRequest object for the call
-      _http_request = @http_client.put _query_url, headers: _headers, parameters: body.to_json, username: Configuration.basic_auth_user_name, password: Configuration.basic_auth_password
+      _request = @http_client.put _query_url, headers: _headers, parameters: body.to_json, username: Configuration.basic_auth_user_name, password: Configuration.basic_auth_password
       
       # Call the on_before_request callback
-      @http_call_back.on_before_request(_http_request) if @http_call_back
+      @http_call_back.on_before_request(_request) if @http_call_back
 
       # Invoke the API call and get the response
-      _response = @http_client.execute_as_string(_http_request)
+      _response = @http_client.execute_as_string(_request)
+
+      # Wrap the request and response in an HttpContext object
+      _context = HttpContext.new(_request, _response)
 
       # Call the on_after_response callback
-      @http_call_back.on_after_response(_response) if @http_call_back
+      @http_call_back.on_after_response(_context) if @http_call_back
 
       # Endpoint error handling using HTTP status codes.
       if _response.status_code == 402
-        raise APIException.new APIException, _response
+        raise APIException.new '402 - Type limit reached.', _context
       elsif _response.status_code == 409
-        raise APIException.new APIException, _response
+        raise APIException.new '409 - Type already exists.', _context
       elsif _response.status_code == 422
-        raise APIException.new APIException, _response
+        raise APIException.new '422 - Rating type is not `implicit` or `explicit`.', _context
       elsif _response.status_code == 429
-        raise APIException.new APIException, _response
+        raise APIException.new '429 - Too many requests.', _context
       elsif _response.status_code == 500
-        raise APIException.new APIException, _response
+        raise APIException.new '500 - Unexpected internal error.', _context
       end
 
       # Global error handling using HTTP status codes.
-      validate_response(_response)
+      validate_response(_context)
 
       # Return appropriate response type
       decoded = APIHelper.json_deserialize(_response.raw_body)
@@ -234,28 +246,31 @@ module SuggestGrid
       }
 
       # Create the HttpRequest object for the call
-      _http_request = @http_client.delete _query_url, headers: _headers, username: Configuration.basic_auth_user_name, password: Configuration.basic_auth_password
+      _request = @http_client.delete _query_url, headers: _headers, username: Configuration.basic_auth_user_name, password: Configuration.basic_auth_password
       
       # Call the on_before_request callback
-      @http_call_back.on_before_request(_http_request) if @http_call_back
+      @http_call_back.on_before_request(_request) if @http_call_back
 
       # Invoke the API call and get the response
-      _response = @http_client.execute_as_string(_http_request)
+      _response = @http_client.execute_as_string(_request)
+
+      # Wrap the request and response in an HttpContext object
+      _context = HttpContext.new(_request, _response)
 
       # Call the on_after_response callback
-      @http_call_back.on_after_response(_response) if @http_call_back
+      @http_call_back.on_after_response(_context) if @http_call_back
 
       # Endpoint error handling using HTTP status codes.
       if _response.status_code == 404
-        raise APIException.new APIException, _response
+        raise APIException.new '404 - Type does not exists.', _context
       elsif _response.status_code == 429
-        raise APIException.new APIException, _response
+        raise APIException.new '429 - Too many requests.', _context
       elsif _response.status_code == 500
-        raise APIException.new APIException, _response
+        raise APIException.new '500 - Unexpected internal error.', _context
       end
 
       # Global error handling using HTTP status codes.
-      validate_response(_response)
+      validate_response(_context)
 
       # Return appropriate response type
       decoded = APIHelper.json_deserialize(_response.raw_body)

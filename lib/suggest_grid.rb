@@ -14,6 +14,7 @@ require_relative 'suggest_grid/http/http_client.rb'
 require_relative 'suggest_grid/http/http_method_enum.rb'
 require_relative 'suggest_grid/http/http_request.rb'
 require_relative 'suggest_grid/http/http_response.rb'
+require_relative 'suggest_grid/http/http_context.rb'
 require_relative 'suggest_grid/http/unirest_client.rb'
 
 # Models

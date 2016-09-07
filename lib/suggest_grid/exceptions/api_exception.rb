@@ -2,20 +2,15 @@
 
 module SuggestGrid
   class APIException < StandardError
-    attr_reader :response
+    attr_reader :context, :response_code
 
     # The constructor.
     # @param [String] The reason for raising an exception
-    # @param [HttpResponse] The HttpResponse object returned by the HttpClient.
-    def initialize(reason, response)
+    # @param [HttpContext] The HttpContext of the API call.
+    def initialize(reason, context)
       super(reason)
-      @response = response
-	  unbox() if not self.instance_of? APIException
+      @context = context
+	  @response_code = context.response.status_code
     end
-
-	# Extracts the required properties from the response body
-	def unbox
-	  raise NotImplementedError, "This method needs to be implemented in a child class."
-	end
   end
 end

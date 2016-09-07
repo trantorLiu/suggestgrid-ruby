@@ -1,0 +1,15 @@
+#! /usr/bin/expect -f
+
+set gem [lindex $argv 0];
+set password $::env(PACKAGE_MANAGER_PASSWORD)
+set email $::env(PACKAGE_MANAGER_EMAIL)
+
+spawn gem push $gem
+
+expect "   Email:   "
+send "$email\r"
+
+expect "Password:   "
+send "$password\r"
+
+interact
