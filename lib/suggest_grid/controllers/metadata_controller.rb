@@ -34,7 +34,7 @@ module SuggestGrid
 
       # Create the HttpRequest object for the call
       _request = @http_client.delete _query_url, headers: _headers, username: Configuration.basic_auth_user_name, password: Configuration.basic_auth_password
-
+      
       # Call the on_before_request callback
       @http_call_back.on_before_request(_request) if @http_call_back
 
@@ -82,7 +82,7 @@ module SuggestGrid
 
       # Create the HttpRequest object for the call
       _request = @http_client.get _query_url, headers: _headers, username: Configuration.basic_auth_user_name, password: Configuration.basic_auth_password
-
+      
       # Call the on_before_request callback
       @http_call_back.on_before_request(_request) if @http_call_back
 
@@ -132,7 +132,7 @@ module SuggestGrid
 
       # Create the HttpRequest object for the call
       _request = @http_client.post _query_url, headers: _headers, parameters: metadata.to_json, username: Configuration.basic_auth_user_name, password: Configuration.basic_auth_password
-
+      
       # Call the on_before_request callback
       @http_call_back.on_before_request(_request) if @http_call_back
 
@@ -182,7 +182,7 @@ module SuggestGrid
 
       # Create the HttpRequest object for the call
       _request = @http_client.delete _query_url, headers: _headers, username: Configuration.basic_auth_user_name, password: Configuration.basic_auth_password
-
+      
       # Call the on_before_request callback
       @http_call_back.on_before_request(_request) if @http_call_back
 
@@ -236,7 +236,7 @@ module SuggestGrid
 
       # Create the HttpRequest object for the call
       _request = @http_client.delete _query_url, headers: _headers, username: Configuration.basic_auth_user_name, password: Configuration.basic_auth_password
-
+      
       # Call the on_before_request callback
       @http_call_back.on_before_request(_request) if @http_call_back
 
@@ -284,7 +284,7 @@ module SuggestGrid
 
       # Create the HttpRequest object for the call
       _request = @http_client.get _query_url, headers: _headers, username: Configuration.basic_auth_user_name, password: Configuration.basic_auth_password
-
+      
       # Call the on_before_request callback
       @http_call_back.on_before_request(_request) if @http_call_back
 
@@ -334,7 +334,7 @@ module SuggestGrid
 
       # Create the HttpRequest object for the call
       _request = @http_client.post _query_url, headers: _headers, parameters: body.to_json, username: Configuration.basic_auth_user_name, password: Configuration.basic_auth_password
-
+      
       # Call the on_before_request callback
       @http_call_back.on_before_request(_request) if @http_call_back
 
@@ -384,7 +384,7 @@ module SuggestGrid
 
       # Create the HttpRequest object for the call
       _request = @http_client.delete _query_url, headers: _headers, username: Configuration.basic_auth_user_name, password: Configuration.basic_auth_password
-
+      
       # Call the on_before_request callback
       @http_call_back.on_before_request(_request) if @http_call_back
 
@@ -413,13 +413,9 @@ module SuggestGrid
     end
 
     # Post Bulk Users
-    # @param [Collection] metas Required parameter: List of metadata, size is limited to 10 thousand.
+    # @param [String] body Required parameter: A number of user metadata objects separated with newlines. Each user metadata object must have its id field. Note that this is not a valid JSON data structure. The body size is limited to 10 thousand lines.
     # @return MessageResponse response from the API call
-    def post_bulk_users(metas)
-        body = ''
-        metas.each do |meta|
-            body += "#{meta.to_json}\n"
-        end
+    def post_bulk_users(body)
       # the base uri for api requests
       _query_builder = Configuration.base_uri.dup
 
@@ -438,7 +434,7 @@ module SuggestGrid
 
       # Create the HttpRequest object for the call
       _request = @http_client.post _query_url, headers: _headers, parameters: body, username: Configuration.basic_auth_user_name, password: Configuration.basic_auth_password
-
+      
       # Call the on_before_request callback
       @http_call_back.on_before_request(_request) if @http_call_back
 
@@ -469,13 +465,9 @@ module SuggestGrid
     end
 
     # Post Bulk Items
-    # @param [Collection] metas Required parameter: List of metadata, size is limited to 10 thousand.
+    # @param [String] body Required parameter: A number of item metadata objects separated with newlines. Each item metadata object must have its id field. Note that this is not a valid JSON data structure. The body size is limited to 10 thousand lines.
     # @return MessageResponse response from the API call
-    def post_bulk_items(metas)
-        body = ''
-        metas.each do |meta|
-            body += "#{meta.to_json}\n"
-        end
+    def post_bulk_items(body)
       # the base uri for api requests
       _query_builder = Configuration.base_uri.dup
 
@@ -494,7 +486,7 @@ module SuggestGrid
 
       # Create the HttpRequest object for the call
       _request = @http_client.post _query_url, headers: _headers, parameters: body, username: Configuration.basic_auth_user_name, password: Configuration.basic_auth_password
-
+      
       # Call the on_before_request callback
       @http_call_back.on_before_request(_request) if @http_call_back
 

@@ -1,7 +1,7 @@
 # This file was automatically generated for SuggestGrid by APIMATIC v2.0 ( https://apimatic.io ).
 
 module SuggestGrid
-  class GetRecommendedUsersBody
+  class GetRecommendedUsersBody < BaseModel
     # TODO: Write general description for this method
     # @return [String]
     attr_accessor :type
@@ -38,6 +38,23 @@ module SuggestGrid
     # @return [List of String]
     attr_accessor :except
 
+    # A mapping from model property names to API property names
+    def self.names
+      if @hash.nil?
+        @hash = {}
+        @hash["type"] = "type"
+        @hash["types"] = "types"
+        @hash["item_id"] = "item_id"
+        @hash["item_ids"] = "item_ids"
+        @hash["size"] = "size"
+        @hash["similar_user_id"] = "similar_user_id"
+        @hash["fields"] = "fields"
+        @hash["filter"] = "filter"
+        @hash["except"] = "except"
+      end
+      @hash
+    end
+
     def initialize(type = nil,
                    types = nil,
                    item_id = nil,
@@ -56,13 +73,6 @@ module SuggestGrid
       @fields = fields
       @filter = filter
       @except = except
-
-    end
-
-    # Creates JSON of the curent object
-    def to_json(options = {})
-      hash = key_map
-      hash.to_json(options)
     end
 
     # Creates an instance of the object from a hash
@@ -80,6 +90,7 @@ module SuggestGrid
         fields = hash["fields"]
         filter = hash["filter"]
         except = hash["except"]
+
         # Create object from extracted values
         GetRecommendedUsersBody.new(type,
                                     types,
@@ -91,21 +102,6 @@ module SuggestGrid
                                     filter,
                                     except)
       end
-    end
-
-    # Defines the key map for json serialization
-    def key_map
-      hash = {}
-      hash['type'] = type
-      hash['types'] = types
-      hash['item_id'] = item_id
-      hash['item_ids'] = item_ids
-      hash['size'] = size
-      hash['similar_user_id'] = similar_user_id
-      hash['fields'] = fields
-      hash['filter'] = filter
-      hash['except'] = except
-      hash
     end
   end
 end

@@ -1,20 +1,22 @@
 # This file was automatically generated for SuggestGrid by APIMATIC v2.0 ( https://apimatic.io ).
 
 module SuggestGrid
-  class GetTypeResponse
+  class GetTypeResponse < BaseModel
     # Either 'implicit' or 'explicit'
     # @return [String]
     attr_accessor :rating
 
-    def initialize(rating = nil)
-      @rating = rating
-
+    # A mapping from model property names to API property names
+    def self.names
+      if @hash.nil?
+        @hash = {}
+        @hash["rating"] = "rating"
+      end
+      @hash
     end
 
-    # Creates JSON of the curent object
-    def to_json(options = {})
-      hash = key_map
-      hash.to_json(options)
+    def initialize(rating = nil)
+      @rating = rating
     end
 
     # Creates an instance of the object from a hash
@@ -24,16 +26,10 @@ module SuggestGrid
       else
         # Extract variables from the hash
         rating = hash["rating"]
+
         # Create object from extracted values
         GetTypeResponse.new(rating)
       end
-    end
-
-    # Defines the key map for json serialization
-    def key_map
-      hash = {}
-      hash['rating'] = rating
-      hash
     end
   end
 end

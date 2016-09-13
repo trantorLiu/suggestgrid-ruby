@@ -1,7 +1,7 @@
 # This file was automatically generated for SuggestGrid by APIMATIC v2.0 ( https://apimatic.io ).
 
 module SuggestGrid
-  class SchemaErrorResponse
+  class SchemaErrorResponse < BaseModel
     # Message of the response.
     # @return [String]
     attr_accessor :message
@@ -14,19 +14,23 @@ module SuggestGrid
     # @return [Object]
     attr_accessor :error
 
+    # A mapping from model property names to API property names
+    def self.names
+      if @hash.nil?
+        @hash = {}
+        @hash["message"] = "message"
+        @hash["value"] = "value"
+        @hash["error"] = "error"
+      end
+      @hash
+    end
+
     def initialize(message = nil,
                    value = nil,
                    error = nil)
       @message = message
       @value = value
       @error = error
-
-    end
-
-    # Creates JSON of the curent object
-    def to_json(options = {})
-      hash = key_map
-      hash.to_json(options)
     end
 
     # Creates an instance of the object from a hash
@@ -38,20 +42,12 @@ module SuggestGrid
         message = hash["message"]
         value = hash["value"]
         error = hash["error"]
+
         # Create object from extracted values
         SchemaErrorResponse.new(message,
                                 value,
                                 error)
       end
-    end
-
-    # Defines the key map for json serialization
-    def key_map
-      hash = {}
-      hash['message'] = message
-      hash['value'] = value
-      hash['error'] = error
-      hash
     end
   end
 end

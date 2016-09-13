@@ -1,20 +1,22 @@
 # This file was automatically generated for SuggestGrid by APIMATIC v2.0 ( https://apimatic.io ).
 
 module SuggestGrid
-  class Metadata
+  class Metadata < BaseModel
     # TODO: Write general description for this method
     # @return [String]
     attr_accessor :id
 
-    def initialize(id = nil)
-      @id = id
-
+    # A mapping from model property names to API property names
+    def self.names
+      if @hash.nil?
+        @hash = {}
+        @hash["id"] = "id"
+      end
+      @hash
     end
 
-    # Creates JSON of the curent object
-    def to_json(options = {})
-      hash = key_map
-      hash.to_json(options)
+    def initialize(id = nil)
+      @id = id
     end
 
     # Creates an instance of the object from a hash
@@ -24,16 +26,10 @@ module SuggestGrid
       else
         # Extract variables from the hash
         id = hash["id"]
+
         # Create object from extracted values
         Metadata.new(id)
       end
-    end
-
-    # Defines the key map for json serialization
-    def key_map
-      hash = {}
-      hash['id'] = id
-      hash
     end
   end
 end

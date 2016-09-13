@@ -113,8 +113,8 @@ module SuggestGrid
       retval = Hash.new
 
       # If this is a structure, resolve it's field names.
-      if obj.respond_to? :key_map
-        obj = obj.key_map
+      if obj.kind_of? BaseModel
+        obj = obj.to_hash
       end
       
       # Create a form encoded hash for this object.

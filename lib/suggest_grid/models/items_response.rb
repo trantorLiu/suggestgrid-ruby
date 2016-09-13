@@ -1,7 +1,7 @@
 # This file was automatically generated for SuggestGrid by APIMATIC v2.0 ( https://apimatic.io ).
 
 module SuggestGrid
-  class ItemsResponse
+  class ItemsResponse < BaseModel
     # The number of items in the response.
     # @return [Long]
     attr_accessor :count
@@ -10,17 +10,20 @@ module SuggestGrid
     # @return [List of Metadata]
     attr_accessor :items
 
+    # A mapping from model property names to API property names
+    def self.names
+      if @hash.nil?
+        @hash = {}
+        @hash["count"] = "count"
+        @hash["items"] = "items"
+      end
+      @hash
+    end
+
     def initialize(count = nil,
                    items = nil)
       @count = count
       @items = items
-
-    end
-
-    # Creates JSON of the curent object
-    def to_json(options = {})
-      hash = key_map
-      hash.to_json(options)
     end
 
     # Creates an instance of the object from a hash
@@ -36,18 +39,11 @@ module SuggestGrid
           items = Array.new
           hash["items"].each{|structure| items << (Metadata.from_hash(structure) if structure)}
         end
+
         # Create object from extracted values
         ItemsResponse.new(count,
                           items)
       end
-    end
-
-    # Defines the key map for json serialization
-    def key_map
-      hash = {}
-      hash['count'] = count
-      hash['items'] = items ? items.map(&:key_map) : nil
-      hash
     end
   end
 end
