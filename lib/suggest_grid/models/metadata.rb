@@ -3,8 +3,7 @@
 module SuggestGrid
   class Metadata < BaseModel
     # TODO: Write general description for this method
-    # @return [String]
-    attr_accessor :id
+    #  attr_accessor :id
 
     # A mapping from model property names to API property names
     def self.names
