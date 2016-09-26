@@ -43,7 +43,7 @@ module SuggestGrid
 
       # Endpoint error handling using HTTP status codes.
       if _response.status_code == 429
-        raise APIException.new '429 - Too many requests.', _context
+        raise ErrorResponseException.new '429 - Too many requests.', _context
       elsif _response.status_code == 500
         raise APIException.new '500 - Unexpected internal error.', _context
       end
@@ -91,7 +91,7 @@ module SuggestGrid
 
       # Endpoint error handling using HTTP status codes.
       if _response.status_code == 429
-        raise APIException.new '429 - Too many requests.', _context
+        raise ErrorResponseException.new '429 - Too many requests.', _context
       elsif _response.status_code == 500
         raise APIException.new '500 - Unexpected internal error.', _context
       end
@@ -145,7 +145,7 @@ module SuggestGrid
 
       # Endpoint error handling using HTTP status codes.
       if _response.status_code == 429
-        raise APIException.new '429 - Too many requests.', _context
+        raise ErrorResponseException.new '429 - Too many requests.', _context
       elsif _response.status_code == 500
         raise APIException.new '500 - Unexpected internal error.', _context
       end
@@ -202,13 +202,13 @@ module SuggestGrid
 
       # Endpoint error handling using HTTP status codes.
       if _response.status_code == 402
-        raise APIException.new '402 - Type limit reached.', _context
+        raise ErrorResponseException.new '402 - Type limit reached.', _context
       elsif _response.status_code == 409
-        raise APIException.new '409 - Type already exists.', _context
+        raise ErrorResponseException.new '409 - Type already exists.', _context
       elsif _response.status_code == 422
-        raise APIException.new '422 - Rating type is not `implicit` or `explicit`.', _context
+        raise ErrorResponseException.new '422 - Rating type is not `implicit` or `explicit`.', _context
       elsif _response.status_code == 429
-        raise APIException.new '429 - Too many requests.', _context
+        raise ErrorResponseException.new '429 - Too many requests.', _context
       elsif _response.status_code == 500
         raise APIException.new '500 - Unexpected internal error.', _context
       end
@@ -262,9 +262,9 @@ module SuggestGrid
 
       # Endpoint error handling using HTTP status codes.
       if _response.status_code == 404
-        raise APIException.new '404 - Type does not exists.', _context
+        raise ErrorResponseException.new '404 - Type does not exists.', _context
       elsif _response.status_code == 429
-        raise APIException.new '429 - Too many requests.', _context
+        raise ErrorResponseException.new '429 - Too many requests.', _context
       elsif _response.status_code == 500
         raise APIException.new '500 - Unexpected internal error.', _context
       end

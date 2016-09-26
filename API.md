@@ -487,15 +487,15 @@ You can read [filters](/docs/concepts#filters-parameter) and [fields](/docs/conc
 
 Name | Type |Required| Description
 --- | --- | --- | ---
-except|array|false|These ids will not be included in the response. 
-item_id|string|false|
 fields|array|false|
-type|string|false|
-item_ids|array|false|
 filter||false|
+item_id|string|false|
+except|array|false|These ids will not be included in the response. 
 size|integer|false|
-similar_user_id|string|false|
 types|string|false|
+item_ids|array|false|
+type|string|false|
+similar_user_id|string|false|
 ### Get Recommended Items
 > `get_recommended_items(body)`
 
@@ -537,15 +537,15 @@ You can read [filters](/docs/concepts#filters-parameter) and [fields](/docs/conc
 
 Name | Type |Required| Description
 --- | --- | --- | ---
-except|array|false|These ids will not be included in the response. 
-fields|array|false|
-type|string|false|
-user_ids|array|false|
 user_id|string|false|
+user_ids|array|false|
+fields|array|false|
 filter||false|
 similar_item_id|string|false|
+except|array|false|These ids will not be included in the response. 
 size|integer|false|
 types|string|false|
+type|string|false|
 
 
 ## Similarity Methods
@@ -583,14 +583,14 @@ You can read [filters](/docs/concepts#filters-parameter) and [fields](/docs/conc
 
 Name | Type |Required| Description
 --- | --- | --- | ---
-except|array|false|These ids will not be included in the response. 
-fields|array|false|
-type|string|false|
-user_ids|array|false|
 user_id|string|false|
+user_ids|array|false|
+fields|array|false|
 filter||false|
+except|array|false|These ids will not be included in the response. 
 size|integer|false|
 types|string|false|
+type|string|false|
 ### Get Similar Items
 > `get_similar_items(body)`
 
@@ -622,11 +622,11 @@ You can read [filters](/docs/concepts#filters-parameter) and [fields](/docs/conc
 
 Name | Type |Required| Description
 --- | --- | --- | ---
-except|array|false|These ids will not be included in the response. 
-item_id|string|false|Get similar items to given item id. Either item id or item ids must be provided. 
 fields|array|false|
-type|string|false|
-item_ids|array|false|Get similar items to given item ids. Either item id or item ids must be provided. 
 filter||false|
+item_id|string|false|Get similar items to given item id. Either item id or item ids must be provided. 
+except|array|false|These ids will not be included in the response. 
 size|integer|false|
 types|string|false|
+item_ids|array|false|Get similar items to given item ids. Either item id or item ids must be provided. 
+type|string|false|

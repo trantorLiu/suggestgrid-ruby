@@ -28,17 +28,17 @@ require_relative 'suggest_grid/models/get_similar_users_body.rb'
 require_relative 'suggest_grid/models/get_similar_items_body.rb'
 require_relative 'suggest_grid/models/message_response.rb'
 require_relative 'suggest_grid/models/count_response.rb'
-require_relative 'suggest_grid/models/error_response.rb'
 require_relative 'suggest_grid/models/get_types_response.rb'
 require_relative 'suggest_grid/models/get_type_response.rb'
-require_relative 'suggest_grid/models/bulk_schema_error_response.rb'
-require_relative 'suggest_grid/models/schema_error_response.rb'
 require_relative 'suggest_grid/models/metadata_information_response.rb'
 require_relative 'suggest_grid/models/users_response.rb'
 require_relative 'suggest_grid/models/items_response.rb'
 
 # Exceptions
 require_relative 'suggest_grid/exceptions/api_exception.rb'
+require_relative 'suggest_grid/exceptions/error_response_exception.rb'
+require_relative 'suggest_grid/exceptions/bulk_schema_error_response_exception.rb'
+require_relative 'suggest_grid/exceptions/schema_error_response_exception.rb'
 
 # Controllers
 require_relative 'suggest_grid/controllers/base_controller.rb'

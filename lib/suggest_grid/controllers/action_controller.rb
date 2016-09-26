@@ -58,9 +58,9 @@ module SuggestGrid
 
       # Endpoint error handling using HTTP status codes.
       if _response.status_code == 400
-        raise APIException.new '400 - Required `user_id` or `item_id` parameters are missing from the request body.', _context
+        raise ErrorResponseException.new '400 - Required `user_id` or `item_id` parameters are missing from the request body.', _context
       elsif _response.status_code == 429
-        raise APIException.new '429 - Too many requests.', _context
+        raise ErrorResponseException.new '429 - Too many requests.', _context
       elsif _response.status_code == 500
         raise APIException.new '500 - Unexpected internal error.', _context
       end
@@ -110,13 +110,13 @@ module SuggestGrid
 
       # Endpoint error handling using HTTP status codes.
       if _response.status_code == 400
-        raise APIException.new '400 - Required `user_id` or `item_id` parameters are missing from the request body.', _context
+        raise ErrorResponseException.new '400 - Required `user_id` or `item_id` parameters are missing from the request body.', _context
       elsif _response.status_code == 402
-        raise APIException.new '402 - Action limit exceeded.', _context
+        raise ErrorResponseException.new '402 - Action limit exceeded.', _context
       elsif _response.status_code == 404
-        raise APIException.new '404 - Type does not exists.', _context
+        raise ErrorResponseException.new '404 - Type does not exists.', _context
       elsif _response.status_code == 429
-        raise APIException.new '429 - Too many requests.', _context
+        raise ErrorResponseException.new '429 - Too many requests.', _context
       elsif _response.status_code == 500
         raise APIException.new '500 - Unexpected internal error.', _context
       end
@@ -179,13 +179,13 @@ module SuggestGrid
 
       # Endpoint error handling using HTTP status codes.
       if _response.status_code == 400
-        raise APIException.new '400 - Required `user_id` or `item_id` parameters are missing from the request body.', _context
+        raise ErrorResponseException.new '400 - Required `user_id` or `item_id` parameters are missing from the request body.', _context
       elsif _response.status_code == 404
-        raise APIException.new '404 - Type does not exists.', _context
+        raise ErrorResponseException.new '404 - Type does not exists.', _context
       elsif _response.status_code == 422
-        raise APIException.new '422 - No query parameter (`user_id`, `item_id`, or `older_than`) is given.  In order to delete all actionsdelete the type.', _context
+        raise ErrorResponseException.new '422 - No query parameter (`user_id`, `item_id`, or `older_than`) is given.  In order to delete all actionsdelete the type.', _context
       elsif _response.status_code == 429
-        raise APIException.new '429 - Too many requests.', _context
+        raise ErrorResponseException.new '429 - Too many requests.', _context
       elsif _response.status_code == 500
         raise APIException.new '500 - Unexpected internal error.', _context
       end
@@ -238,10 +238,12 @@ module SuggestGrid
       @http_call_back.on_after_response(_context) if @http_call_back
 
       # Endpoint error handling using HTTP status codes.
-      if _response.status_code == 402
-        raise APIException.new '402 - Action limit exceeded.', _context
+      if _response.status_code == 400
+        raise ErrorResponseException.new '400 - Body is missing.', _context
+      elsif _response.status_code == 402
+        raise ErrorResponseException.new '402 - Action limit exceeded.', _context
       elsif _response.status_code == 429
-        raise APIException.new '429 - Too many requests.', _context
+        raise ErrorResponseException.new '429 - Too many requests.', _context
       elsif _response.status_code == 500
         raise APIException.new '500 - Unexpected internal error.', _context
       end

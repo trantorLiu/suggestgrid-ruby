@@ -49,7 +49,7 @@ module SuggestGrid
 
       # Endpoint error handling using HTTP status codes.
       if _response.status_code == 429
-        raise APIException.new '429 - Too many requests.', _context
+        raise ErrorResponseException.new '429 - Too many requests.', _context
       elsif _response.status_code == 500
         raise APIException.new '500 - Unexpected internal error.', _context
       end
@@ -97,7 +97,7 @@ module SuggestGrid
 
       # Endpoint error handling using HTTP status codes.
       if _response.status_code == 429
-        raise APIException.new '429 - Too many requests.', _context
+        raise ErrorResponseException.new '429 - Too many requests.', _context
       elsif _response.status_code == 500
         raise APIException.new '500 - Unexpected internal error.', _context
       end
@@ -147,9 +147,9 @@ module SuggestGrid
 
       # Endpoint error handling using HTTP status codes.
       if _response.status_code == 400
-        raise APIException.new '400 - Metadata is invalid.', _context
+        raise SchemaErrorResponseException.new '400 - Metadata is invalid.', _context
       elsif _response.status_code == 429
-        raise APIException.new '429 - Too many requests.', _context
+        raise ErrorResponseException.new '429 - Too many requests.', _context
       elsif _response.status_code == 500
         raise APIException.new '500 - Unexpected internal error.', _context
       end
@@ -197,7 +197,7 @@ module SuggestGrid
 
       # Endpoint error handling using HTTP status codes.
       if _response.status_code == 429
-        raise APIException.new '429 - Too many requests.', _context
+        raise ErrorResponseException.new '429 - Too many requests.', _context
       elsif _response.status_code == 500
         raise APIException.new '500 - Unexpected internal error.', _context
       end
@@ -251,7 +251,7 @@ module SuggestGrid
 
       # Endpoint error handling using HTTP status codes.
       if _response.status_code == 429
-        raise APIException.new '429 - Too many requests.', _context
+        raise ErrorResponseException.new '429 - Too many requests.', _context
       elsif _response.status_code == 500
         raise APIException.new '500 - Unexpected internal error.', _context
       end
@@ -299,7 +299,7 @@ module SuggestGrid
 
       # Endpoint error handling using HTTP status codes.
       if _response.status_code == 429
-        raise APIException.new '429 - Too many requests.', _context
+        raise ErrorResponseException.new '429 - Too many requests.', _context
       elsif _response.status_code == 500
         raise APIException.new '500 - Unexpected internal error.', _context
       end
@@ -349,9 +349,9 @@ module SuggestGrid
 
       # Endpoint error handling using HTTP status codes.
       if _response.status_code == 400
-        raise APIException.new '400 - Metadata is invalid.', _context
+        raise SchemaErrorResponseException.new '400 - Metadata is invalid.', _context
       elsif _response.status_code == 429
-        raise APIException.new '429 - Too many requests.', _context
+        raise ErrorResponseException.new '429 - Too many requests.', _context
       elsif _response.status_code == 500
         raise APIException.new '500 - Unexpected internal error.', _context
       end
@@ -399,7 +399,7 @@ module SuggestGrid
 
       # Endpoint error handling using HTTP status codes.
       if _response.status_code == 429
-        raise APIException.new '429 - Too many requests.', _context
+        raise ErrorResponseException.new '429 - Too many requests.', _context
       elsif _response.status_code == 500
         raise APIException.new '500 - Unexpected internal error.', _context
       end
@@ -453,9 +453,11 @@ module SuggestGrid
 
       # Endpoint error handling using HTTP status codes.
       if _response.status_code == 209
-        raise APIException.new '209 - Some metadata is not uploaded successfully.', _context
+        raise BulkSchemaErrorResponseException.new '209 - Some metadata is not uploaded successfully.', _context
+      elsif _response.status_code == 400
+        raise ErrorResponseException.new '400 - Body is missing.', _context
       elsif _response.status_code == 429
-        raise APIException.new '429 - Too many requests.', _context
+        raise ErrorResponseException.new '429 - Too many requests.', _context
       elsif _response.status_code == 500
         raise APIException.new '500 - Unexpected internal error.', _context
       end
@@ -509,9 +511,11 @@ module SuggestGrid
 
       # Endpoint error handling using HTTP status codes.
       if _response.status_code == 209
-        raise APIException.new '209 - Some metadata is not uploaded successfully.', _context
+        raise BulkSchemaErrorResponseException.new '209 - Some metadata is not uploaded successfully.', _context
+      elsif _response.status_code == 400
+        raise ErrorResponseException.new '400 - Body is missing.', _context
       elsif _response.status_code == 429
-        raise APIException.new '429 - Too many requests.', _context
+        raise ErrorResponseException.new '429 - Too many requests.', _context
       elsif _response.status_code == 500
         raise APIException.new '500 - Unexpected internal error.', _context
       end
