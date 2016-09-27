@@ -26,7 +26,7 @@ module SuggestGrid
     # @return [List of String]
     attr_accessor :fields
 
-    # Get similar items to given item ids. Either item id or item ids must be provided.
+    # Contraints on the returned users or items. Filter structure is defined in [the filter parameter documentation](http://www.suggestgrid.com/docs/concepts#filters-parameter).
     # @return [Object]
     attr_accessor :filter
 
