@@ -2,7 +2,7 @@
 
 module SuggestGrid
   class GetTypeResponse < BaseModel
-    # Either 'implicit' or 'explicit'
+    # Rating type of the type that is either implicit or explicit.
     # @return [String]
     attr_accessor :rating
 

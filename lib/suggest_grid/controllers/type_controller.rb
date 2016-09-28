@@ -160,10 +160,10 @@ module SuggestGrid
 
     # Create a New Type
     # @param [String] type Required parameter: The name of the type to be created.
-    # @param [TypeRequestBody] body Optional parameter: Optional body for the rating parameter.
+    # @param [TypeRequestBody] settings Optional parameter: Optional settings for the rating parameter.
     # @return MessageResponse response from the API call
     def create_type(type, 
-                    body = nil)
+                    settings = nil)
       # the base uri for api requests
       _query_builder = Configuration.base_uri.dup
 
@@ -186,7 +186,7 @@ module SuggestGrid
       }
 
       # Create the HttpRequest object for the call
-      _request = @http_client.put _query_url, headers: _headers, parameters: body.to_json, username: Configuration.basic_auth_user_name, password: Configuration.basic_auth_password
+      _request = @http_client.put _query_url, headers: _headers, parameters: settings.to_json, username: Configuration.basic_auth_user_name, password: Configuration.basic_auth_password
       
       # Call the on_before_request callback
       @http_call_back.on_before_request(_request) if @http_call_back

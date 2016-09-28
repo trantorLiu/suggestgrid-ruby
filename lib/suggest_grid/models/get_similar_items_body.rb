@@ -2,35 +2,36 @@
 
 module SuggestGrid
   class GetSimilarItemsBody < BaseModel
-    # TODO: Write general description for this method
+    # The type of the query.
     # @return [String]
     attr_accessor :type
 
-    # TODO: Write general description for this method
+    # The types of the query. Exactly one of type or types parameters must be provided.
     # @return [String]
     attr_accessor :types
 
-    # Get similar items to given item id. Either item id or item ids must be provided.
+    # The item id of the query. Get similar items to given item id. Either item id or item ids must be provided.
     # @return [String]
     attr_accessor :item_id
 
-    # Get similar items to given item ids. Either item id or item ids must be provided.
+    # The item ids of the query. Exactly one of item id or item ids parameters must be provided. Get similar items to given item ids. Either item id or item ids must be provided.
     # @return [List of String]
     attr_accessor :item_ids
 
-    # Get similar items to given item ids. Either item id or item ids must be provided.
+    # The number of users asked to return in the response.
     # @return [Integer]
     attr_accessor :size
 
-    # Get similar items to given item ids. Either item id or item ids must be provided.
+    # The metadata fields that are to be included in returned users.
     # @return [List of String]
     attr_accessor :fields
 
-    # Contraints on the returned users or items. Filter structure is defined in [the filter parameter documentation](http://www.suggestgrid.com/docs/concepts#filters-parameter).
+    # Contraints on the returned users or items. 
+    # Filter structure is defined in [the filter parameter documentation](http://www.suggestgrid.com/docs/concepts#filters-parameter).
     # @return [Object]
     attr_accessor :filter
 
-    # These ids will not be included in the response.
+    # These user ids that will not be included in the response.
     # @return [List of String]
     attr_accessor :except
 

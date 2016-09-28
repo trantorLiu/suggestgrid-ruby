@@ -9,7 +9,7 @@ module SuggestGrid
     end
 
     # Delete a User
-    # @param [String] user_id Required parameter: The user_id to delete its metadata.
+    # @param [String] user_id Required parameter: The user id to delete its metadata.
     # @return MessageResponse response from the API call
     def delete_user(user_id)
       # the base uri for api requests
@@ -111,9 +111,9 @@ module SuggestGrid
     end
 
     # Post a User
-    # @param [Metadata] metadata Required parameter: The metadata to be saved. Metadata format has its restrictions.
+    # @param [Metadata] user Required parameter: The metadata to be saved. Metadata format has its restrictions.
     # @return MessageResponse response from the API call
-    def post_user(metadata)
+    def post_user(user)
       # the base uri for api requests
       _query_builder = Configuration.base_uri.dup
 
@@ -131,7 +131,7 @@ module SuggestGrid
       }
 
       # Create the HttpRequest object for the call
-      _request = @http_client.post _query_url, headers: _headers, parameters: metadata.to_json, username: Configuration.basic_auth_user_name, password: Configuration.basic_auth_password
+      _request = @http_client.post _query_url, headers: _headers, parameters: user.to_json, username: Configuration.basic_auth_user_name, password: Configuration.basic_auth_password
 
       # Call the on_before_request callback
       @http_call_back.on_before_request(_request) if @http_call_back
@@ -211,7 +211,7 @@ module SuggestGrid
     end
 
     # Delete an Item
-    # @param [String] item_id Required parameter: The item_id to delete its metadata.
+    # @param [String] item_id Required parameter: The item id to delete its metadata.
     # @return MessageResponse response from the API call
     def delete_item(item_id)
       # the base uri for api requests
@@ -313,9 +313,9 @@ module SuggestGrid
     end
 
     # Post an Item
-    # @param [Metadata] body Required parameter: The metadata to be saved. Metadata format has its restrictions.
+    # @param [Metadata] item Required parameter: The metadata to be saved. Metadata format has its restrictions.
     # @return MessageResponse response from the API call
-    def post_item(body)
+    def post_item(item)
       # the base uri for api requests
       _query_builder = Configuration.base_uri.dup
 
@@ -333,7 +333,7 @@ module SuggestGrid
       }
 
       # Create the HttpRequest object for the call
-      _request = @http_client.post _query_url, headers: _headers, parameters: body.to_json, username: Configuration.basic_auth_user_name, password: Configuration.basic_auth_password
+      _request = @http_client.post _query_url, headers: _headers, parameters: item.to_json, username: Configuration.basic_auth_user_name, password: Configuration.basic_auth_password
 
       # Call the on_before_request callback
       @http_call_back.on_before_request(_request) if @http_call_back
@@ -413,12 +413,12 @@ module SuggestGrid
     end
 
     # Post Bulk Users
-    # @param [Collection] metas Required parameter: List of metadata, size is limited to 10 thousand.
+    # @param [Collection] users Required parameter: List of user metadata, whose size is limited to 10 thousand.
     # @return MessageResponse response from the API call
-    def post_bulk_users(metas)
+    def post_bulk_users(users)
         body = ''
-        metas.each do |meta|
-            body += "#{meta.to_json}\n"
+        users.each do |user|
+            body += "#{user.to_json}\n"
         end
       # the base uri for api requests
       _query_builder = Configuration.base_uri.dup
@@ -437,7 +437,7 @@ module SuggestGrid
       }
 
       # Create the HttpRequest object for the call
-      _request = @http_client.post _query_url, headers: _headers, parameters: body, username: Configuration.basic_auth_user_name, password: Configuration.basic_auth_password
+      _request = @http_client.post _query_url, headers: _headers, parameters: users, username: Configuration.basic_auth_user_name, password: Configuration.basic_auth_password
 
       # Call the on_before_request callback
       @http_call_back.on_before_request(_request) if @http_call_back
@@ -471,12 +471,12 @@ module SuggestGrid
     end
 
     # Post Bulk Items
-    # @param [Collection] metas Required parameter: List of metadata, size is limited to 10 thousand.
+    # @param [Collection] items Required parameter: List of item metadata, whose size is limited to 10 thousand.
     # @return MessageResponse response from the API call
-    def post_bulk_items(metas)
+    def post_bulk_items(items)
         body = ''
-        metas.each do |meta|
-            body += "#{meta.to_json}\n"
+        items.each do |item|
+            body += "#{item.to_json}\n"
         end
       # the base uri for api requests
       _query_builder = Configuration.base_uri.dup
@@ -495,7 +495,7 @@ module SuggestGrid
       }
 
       # Create the HttpRequest object for the call
-      _request = @http_client.post _query_url, headers: _headers, parameters: body, username: Configuration.basic_auth_user_name, password: Configuration.basic_auth_password
+      _request = @http_client.post _query_url, headers: _headers, parameters: items, username: Configuration.basic_auth_user_name, password: Configuration.basic_auth_password
 
       # Call the on_before_request callback
       @http_call_back.on_before_request(_request) if @http_call_back

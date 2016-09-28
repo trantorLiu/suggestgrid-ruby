@@ -9,9 +9,9 @@ module SuggestGrid
     end
 
     # Get Recommended Users
-    # @param [GetRecommendedUsersBody] body Required parameter: Parameters for recommend users method.
+    # @param [GetRecommendedUsersBody] query Required parameter: The query for recommended users.
     # @return UsersResponse response from the API call
-    def get_recommended_users(body)
+    def get_recommended_users(query)
       # the base uri for api requests
       _query_builder = Configuration.base_uri.dup
 
@@ -29,7 +29,7 @@ module SuggestGrid
       }
 
       # Create the HttpRequest object for the call
-      _request = @http_client.post _query_url, headers: _headers, parameters: body.to_json, username: Configuration.basic_auth_user_name, password: Configuration.basic_auth_password
+      _request = @http_client.post _query_url, headers: _headers, parameters: query.to_json, username: Configuration.basic_auth_user_name, password: Configuration.basic_auth_password
       
       # Call the on_before_request callback
       @http_call_back.on_before_request(_request) if @http_call_back
@@ -63,9 +63,9 @@ module SuggestGrid
     end
 
     # Get Recommended Items
-    # @param [GetRecommendedItemsBody] body Required parameter: Parameters for recommend items method.
+    # @param [GetRecommendedItemsBody] query Required parameter: The query for recommended items.
     # @return ItemsResponse response from the API call
-    def get_recommended_items(body)
+    def get_recommended_items(query)
       # the base uri for api requests
       _query_builder = Configuration.base_uri.dup
 
@@ -83,7 +83,7 @@ module SuggestGrid
       }
 
       # Create the HttpRequest object for the call
-      _request = @http_client.post _query_url, headers: _headers, parameters: body.to_json, username: Configuration.basic_auth_user_name, password: Configuration.basic_auth_password
+      _request = @http_client.post _query_url, headers: _headers, parameters: query.to_json, username: Configuration.basic_auth_user_name, password: Configuration.basic_auth_password
       
       # Call the on_before_request callback
       @http_call_back.on_before_request(_request) if @http_call_back

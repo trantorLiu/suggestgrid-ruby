@@ -14,7 +14,7 @@ module SuggestGrid
     # @return [String]
     attr_accessor :item_id
 
-    # The optional rating, if the type is explicit.
+    # The optional rating given by the user, if the type is explicit.
     # @return [Float]
     attr_accessor :rating
 

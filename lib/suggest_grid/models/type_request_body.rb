@@ -2,6 +2,7 @@
 
 module SuggestGrid
   class TypeRequestBody < BaseModel
+    # The rating type of the type to be created.
     # Could be "explicit" or "implicit"
     # The default is "implicit".
     # @return [String]

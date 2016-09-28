@@ -2,35 +2,36 @@
 
 module SuggestGrid
   class GetSimilarUsersBody < BaseModel
-    # TODO: Write general description for this method
+    # The type of the query.
     # @return [String]
     attr_accessor :type
 
-    # TODO: Write general description for this method
+    # The types of the query. Exactly one of type or types parameters must be provided.
     # @return [String]
     attr_accessor :types
 
-    # TODO: Write general description for this method
+    # The user id of the query.
     # @return [String]
     attr_accessor :user_id
 
-    # TODO: Write general description for this method
+    # The user ids of the query. Exactly one of user id or user ids parameters must be provided.
     # @return [List of String]
     attr_accessor :user_ids
 
-    # TODO: Write general description for this method
+    # The number of users asked to return in the response.
     # @return [Integer]
     attr_accessor :size
 
-    # TODO: Write general description for this method
+    # The metadata fields that are to be included in returned users.
     # @return [List of String]
     attr_accessor :fields
 
-    # Contraints on the returned users or items. Filter structure is defined in [the filter parameter documentation](http://www.suggestgrid.com/docs/concepts#filters-parameter).
+    # Contraints on the returned users or items. 
+    # Filter structure is defined in [the filter parameter documentation](http://www.suggestgrid.com/docs/concepts#filters-parameter).
     # @return [Object]
     attr_accessor :filter
 
-    # These ids will not be included in the response.
+    # These user ids that will not be included in the response.
     # @return [List of String]
     attr_accessor :except
 

@@ -2,7 +2,8 @@
 
 module SuggestGrid
   class Metadata < BaseModel
-    # TODO: Write general description for this method
+    # The id of the user or the item that the metadata is associated with.
+    # Id parameter is necessary for all metadata.
     #  attr_accessor :id
 
     # A mapping from model property names to API property names

@@ -2,7 +2,7 @@
 
 module SuggestGrid
   class CountResponse < BaseModel
-    # TODO: Write general description for this method
+    # The count that is asked in the query.
     # @return [Integer]
     attr_accessor :count
 

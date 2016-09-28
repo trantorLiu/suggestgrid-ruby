@@ -3,7 +3,7 @@
 module SuggestGrid
   class Configuration
     # The base Uri for API calls
-    @base_uri = 'http://localhost:9090'
+    @base_uri = 'https://example.com/api'
 
     # The username to use with basic authentication
     @basic_auth_user_name = 'TODO: Replace'

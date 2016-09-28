@@ -4,11 +4,15 @@ module SuggestGrid
   class ErrorResponseException < APIException
     # Message of the response.
     # @return [String]
-    attr_accessor :message
+    attr_accessor :error_text
 
-    # Status code of the response. It is not 2XX.
-    # @return [Integer]
-    attr_accessor :status
+    # Description of the response.
+    # @return [String]
+    attr_accessor :error_description
+
+    # URI of the response for more details.
+    # @return [String]
+    attr_accessor :error_uri
 
     # The constructor.
     # @param [String] The reason for raising an exception
@@ -25,8 +29,9 @@ module SuggestGrid
     # Populates this object by extracting properties from a hash.
     # @param [Hash] The deserialized response sent by the server in the response body.
     def unbox(hash)
-      @message = hash["message"]
-      @status = hash["status"]
+      @error_text = hash["error_text"]
+      @error_description = hash["error_description"]
+      @error_uri = hash["error_uri"]
     end
   end
 end

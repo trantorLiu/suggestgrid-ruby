@@ -9,9 +9,9 @@ module SuggestGrid
     end
 
     # Get Similar Users
-    # @param [GetSimilarUsersBody] body Required parameter: Similar users method parameters.
+    # @param [GetSimilarUsersBody] query Required parameter: The query for similar users.
     # @return UsersResponse response from the API call
-    def get_similar_users(body)
+    def get_similar_users(query)
       # the base uri for api requests
       _query_builder = Configuration.base_uri.dup
 
@@ -29,7 +29,7 @@ module SuggestGrid
       }
 
       # Create the HttpRequest object for the call
-      _request = @http_client.post _query_url, headers: _headers, parameters: body.to_json, username: Configuration.basic_auth_user_name, password: Configuration.basic_auth_password
+      _request = @http_client.post _query_url, headers: _headers, parameters: query.to_json, username: Configuration.basic_auth_user_name, password: Configuration.basic_auth_password
       
       # Call the on_before_request callback
       @http_call_back.on_before_request(_request) if @http_call_back
@@ -63,9 +63,9 @@ module SuggestGrid
     end
 
     # Get Similar Items
-    # @param [GetSimilarItemsBody] body Required parameter: Similar items method parameter.
+    # @param [GetSimilarItemsBody] query Required parameter: The query for similar items.
     # @return ItemsResponse response from the API call
-    def get_similar_items(body)
+    def get_similar_items(query)
       # the base uri for api requests
       _query_builder = Configuration.base_uri.dup
 
@@ -83,7 +83,7 @@ module SuggestGrid
       }
 
       # Create the HttpRequest object for the call
-      _request = @http_client.post _query_url, headers: _headers, parameters: body.to_json, username: Configuration.basic_auth_user_name, password: Configuration.basic_auth_password
+      _request = @http_client.post _query_url, headers: _headers, parameters: query.to_json, username: Configuration.basic_auth_user_name, password: Configuration.basic_auth_password
       
       # Call the on_before_request callback
       @http_call_back.on_before_request(_request) if @http_call_back

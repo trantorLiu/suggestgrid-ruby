@@ -74,9 +74,9 @@ module SuggestGrid
     end
 
     # Post an Action
-    # @param [Action] body Required parameter: The action to be posted.
+    # @param [Action] action Required parameter: The action to be posted.
     # @return MessageResponse response from the API call
-    def post_action(body)
+    def post_action(action)
       # the base uri for api requests
       _query_builder = Configuration.base_uri.dup
 
@@ -94,7 +94,7 @@ module SuggestGrid
       }
 
       # Create the HttpRequest object for the call
-      _request = @http_client.post _query_url, headers: _headers, parameters: body.to_json, username: Configuration.basic_auth_user_name, password: Configuration.basic_auth_password
+      _request = @http_client.post _query_url, headers: _headers, parameters: action.to_json, username: Configuration.basic_auth_user_name, password: Configuration.basic_auth_password
 
       # Call the on_before_request callback
       @http_call_back.on_before_request(_request) if @http_call_back
@@ -199,7 +199,7 @@ module SuggestGrid
     end
 
     # Post Bulk Actions
-# @param [Collection] actions Required parameter: List of actions to be posted.
+    # @param [Collection] actions Required parameter: List of actions to be posted.
     # @return MessageResponse response from the API call
     def post_bulk_actions(actions)
         body = ''
@@ -223,7 +223,7 @@ module SuggestGrid
       }
 
       # Create the HttpRequest object for the call
-      _request = @http_client.post _query_url, headers: _headers, parameters: body, username: Configuration.basic_auth_user_name, password: Configuration.basic_auth_password
+      _request = @http_client.post _query_url, headers: _headers, parameters: actions, username: Configuration.basic_auth_user_name, password: Configuration.basic_auth_password
 
       # Call the on_before_request callback
       @http_call_back.on_before_request(_request) if @http_call_back

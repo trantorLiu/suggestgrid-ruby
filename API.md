@@ -7,7 +7,7 @@ For more information on types, refer to [Types concept documentation](http://www
 ### Create a New Type
 > `create_type(type, body)`
 
-Creates a new implicit or explicit type.
+Creates a new type.
 
 ```ruby
 SuggestGridClient.type.create_type('views')
@@ -33,11 +33,11 @@ type|string|true|The name of the type to be created.
 
 Name | Type |Required| Description
 --- | --- | --- | ---
-rating|string|false|Could be "explicit" or "implicit" The default is "implicit".
+rating|string|false|The rating type of the type to be created. Could be "explicit" or "implicit" The default is "implicit". 
 ### Get Properties of a Type
 > `get_type(type)`
 
-Get the options of a type. Has rating parameter.
+Returns the options of a type. The response rating parameter.
 
 
 ```ruby
@@ -73,7 +73,7 @@ type|string|true|The name of the type to be deleted.
 ### Get All Types
 > `get_all_types()`
 
-Get all type names in an array named types.
+Returns all type names in an array named types.
 
 
 ```ruby
@@ -86,7 +86,7 @@ Get all type names in an array named types.
 ### Delete All Types
 > `delete_all_types`
 
-Deletes ALL types and ALL actions.
+Deletes ALL the types and ALL the actions.
 
 ```ruby
 SuggestGridClient.type.delete_all_types
@@ -121,10 +121,10 @@ SuggestGridClient.action.post_action(SuggestGrid::Action.new('views','10', '20',
 
 Name | Type |Required| Description
 --- | --- | --- | ---
-item_id|string|true|The item id of the item the action is performed on.
-user_id|string|true|The user id of the performer of the action.
 type|string|true|The type that the action belongs to.
-rating|number|false|The optional rating, if the type is explicit.
+item_id|string|true|The item id of the item the action is performed on.
+rating|number|false|The optional rating given by the user, if the type is explicit.
+user_id|string|true|The user id of the performer of the action.
 ### Post Bulk Actions
 > `post_bulk_actions(actions)`
 
@@ -296,7 +296,7 @@ SuggestGridClient.metadata.post_user({id: "9394182", age: 28, name: "Avis Horton
 
 Name | Type |Required| Description
 --- | --- | --- | ---
-id|string|true|
+id|string|true|The id of the user or the item that the metadata is associated with. Id parameter is necessary for all metadata. 
 ### Post Bulk Users
 > `post_bulk_users(metadata)`
 
@@ -339,7 +339,7 @@ Get information about users. Only returns count at the moment.
 ### Delete a User
 > `delete_user(user_id)`
 
-Delete a user metadata with the given user_id.
+Deletes a user metadata with the given user id.
 
 ```ruby
 SuggestGridClient.metadata.delete_user("10")
@@ -350,7 +350,7 @@ SuggestGridClient.metadata.delete_user("10")
 
 Name | Type |Required| Description
 --- | --- | --- | ---
-user_id|string|true|The user_id to delete its metadata.
+user_id|string|true|The user id to delete its metadata.
 ### Delete All Users
 > `delete_all_users`
 
@@ -378,7 +378,7 @@ SuggestGridClient.metadata.post_item({id: "25922342", manufacturer: "Vicon", pri
 
 Name | Type |Required| Description
 --- | --- | --- | ---
-id|string|true|
+id|string|true|The id of the user or the item that the metadata is associated with. Id parameter is necessary for all metadata. 
 ### Post Bulk Items
 > `post_bulk_items(metadata)`
 
@@ -421,7 +421,7 @@ Get information about items. Only returns count at the moment.
 ### Delete an Item
 > `delete_item(item_id)`
 
-Delete an item metadata with the given item_id.
+Deletes an item metadata with the given item id.
 
 ```ruby
 SuggestGridClient.metadata.delete_user("10")
@@ -432,7 +432,7 @@ SuggestGridClient.metadata.delete_user("10")
 
 Name | Type |Required| Description
 --- | --- | --- | ---
-item_id|string|true|The item_id to delete its metadata.
+item_id|string|true|The item id to delete its metadata.
 ### Delete All Items
 > `delete_all_items`
 
@@ -453,7 +453,7 @@ For more information on recommendations, refer to [Recommendations concept docum
 ### Get Recommended Users
 > `get_recommended_users(body)`
 
-Recommend users for the given body parameters.
+Returns recommended users for the given query.
 
 examples:
 
@@ -487,19 +487,20 @@ You can read [filters](/docs/concepts#filters-parameter) and [fields](/docs/conc
 
 Name | Type |Required| Description
 --- | --- | --- | ---
-fields|array|false|
-item_ids|array|false|
-size|integer|false|
-types|string|false|
-except|array|false|These ids will not be included in the response. 
-similar_user_id|string|false|
-item_id|string|false|
+item_id|string|false|The item id of the query.
+similar_user_id|string|false|Similar user that the response should be similar to.
+size|integer|false|The number of users asked to return in the response.
+type|string|false|The type of the query.
+item_ids|array|false|The item ids of the query. Exactly one of item id or item ids parameters must be provided.
 filter||false|
-type|string|false|
+fields|array|false|The metadata fields that are to be included in returned users.
+similar_user_ids|string|false|Similar users that the response should be similar to. At most one of similar user and similar users parameters can be provided. 
+except|array|false|These user ids that will not be included in the response.
+types|string|false|The types of the query. Exactly one of type or types parameters must be provided.
 ### Get Recommended Items
 > `get_recommended_items(body)`
 
-Recommend items for the given body parameters.
+Returns recommended items for the given query.
 
 examples:
 
@@ -537,15 +538,16 @@ You can read [filters](/docs/concepts#filters-parameter) and [fields](/docs/conc
 
 Name | Type |Required| Description
 --- | --- | --- | ---
-fields|array|false|
-size|integer|false|
-user_id|string|false|
-user_ids|array|false|
-types|string|false|
-except|array|false|These ids will not be included in the response. 
+user_ids|array|false|The user ids of the query. Exactly one of user id or user ids parameters must be provided.
+user_id|string|false|The user id of the query.
+similar_item_id|string|false|Similar item that the response should be similar to.
+size|integer|false|The number of users asked to return in the response.
+type|string|false|The type of the query.
+similar_item_ids|string|false|Similar items that the response should be similar to. At most one of similar item and similar items parameters can be provided. 
 filter||false|
-similar_item_id|string|false|
-type|string|false|
+fields|array|false|The metadata fields that are to be included in returned users.
+except|array|false|These user ids that will not be included in the response.
+types|string|false|The types of the query. Exactly one of type or types parameters must be provided.
 
 
 ## Similarity Methods
@@ -555,7 +557,7 @@ For more information on similars, refer to [Similarities concept documentation](
 ### Get Similar Users
 > `get_similar_users(body)`
 
-Get similar users to a user.
+Returns similar users for the query.
 
 examples:
 
@@ -583,18 +585,18 @@ You can read [filters](/docs/concepts#filters-parameter) and [fields](/docs/conc
 
 Name | Type |Required| Description
 --- | --- | --- | ---
-fields|array|false|
-size|integer|false|
-user_id|string|false|
-user_ids|array|false|
-types|string|false|
-except|array|false|These ids will not be included in the response. 
+user_ids|array|false|The user ids of the query. Exactly one of user id or user ids parameters must be provided.
+user_id|string|false|The user id of the query.
+size|integer|false|The number of users asked to return in the response.
+type|string|false|The type of the query.
 filter||false|
-type|string|false|
+fields|array|false|The metadata fields that are to be included in returned users.
+except|array|false|These user ids that will not be included in the response.
+types|string|false|The types of the query. Exactly one of type or types parameters must be provided.
 ### Get Similar Items
 > `get_similar_items(body)`
 
-Get similar items to an item.
+Returns similar items for the query.
 
 examples:
 
@@ -622,11 +624,11 @@ You can read [filters](/docs/concepts#filters-parameter) and [fields](/docs/conc
 
 Name | Type |Required| Description
 --- | --- | --- | ---
-fields|array|false|
-item_ids|array|false|Get similar items to given item ids. Either item id or item ids must be provided. 
-size|integer|false|
-types|string|false|
-except|array|false|These ids will not be included in the response. 
-item_id|string|false|Get similar items to given item id. Either item id or item ids must be provided. 
+item_id|string|false|The item id of the query. Get similar items to given item id. Either item id or item ids must be provided.
+item_ids|array|false|The item ids of the query. Exactly one of item id or item ids parameters must be provided. Get similar items to given item ids. Either item id or item ids must be provided.
+size|integer|false|The number of users asked to return in the response.
+type|string|false|The type of the query.
 filter||false|
-type|string|false|
+fields|array|false|The metadata fields that are to be included in returned users.
+except|array|false|These user ids that will not be included in the response.
+types|string|false|The types of the query. Exactly one of type or types parameters must be provided.

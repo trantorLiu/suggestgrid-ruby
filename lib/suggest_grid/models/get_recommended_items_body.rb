@@ -2,39 +2,45 @@
 
 module SuggestGrid
   class GetRecommendedItemsBody < BaseModel
-    # TODO: Write general description for this method
+    # The type of the query.
     # @return [String]
     attr_accessor :type
 
-    # TODO: Write general description for this method
+    # The types of the query. Exactly one of type or types parameters must be provided.
     # @return [String]
     attr_accessor :types
 
-    # TODO: Write general description for this method
+    # The user id of the query.
     # @return [String]
     attr_accessor :user_id
 
-    # TODO: Write general description for this method
+    # The user ids of the query. Exactly one of user id or user ids parameters must be provided.
     # @return [List of String]
     attr_accessor :user_ids
 
-    # TODO: Write general description for this method
+    # The number of users asked to return in the response.
     # @return [Integer]
     attr_accessor :size
 
-    # TODO: Write general description for this method
+    # Similar item that the response should be similar to.
     # @return [String]
     attr_accessor :similar_item_id
 
-    # TODO: Write general description for this method
+    # Similar items that the response should be similar to.
+    # At most one of similar item and similar items parameters can be provided.
+    # @return [String]
+    attr_accessor :similar_item_ids
+
+    # The metadata fields that are to be included in returned users.
     # @return [List of String]
     attr_accessor :fields
 
-    # Contraints on the returned users or items. Filter structure is defined in [the filter parameter documentation](http://www.suggestgrid.com/docs/concepts#filters-parameter).
+    # Contraints on the returned users or items. 
+    # Filter structure is defined in [the filter parameter documentation](http://www.suggestgrid.com/docs/concepts#filters-parameter).
     # @return [Object]
     attr_accessor :filter
 
-    # These ids will not be included in the response.
+    # These user ids that will not be included in the response.
     # @return [List of String]
     attr_accessor :except
 
@@ -48,6 +54,7 @@ module SuggestGrid
         @hash["user_ids"] = "user_ids"
         @hash["size"] = "size"
         @hash["similar_item_id"] = "similar_item_id"
+        @hash["similar_item_ids"] = "similar_item_ids"
         @hash["fields"] = "fields"
         @hash["filter"] = "filter"
         @hash["except"] = "except"
@@ -61,6 +68,7 @@ module SuggestGrid
                    user_ids = nil,
                    size = nil,
                    similar_item_id = nil,
+                   similar_item_ids = nil,
                    fields = nil,
                    filter = nil,
                    except = nil)
@@ -70,6 +78,7 @@ module SuggestGrid
       @user_ids = user_ids
       @size = size
       @similar_item_id = similar_item_id
+      @similar_item_ids = similar_item_ids
       @fields = fields
       @filter = filter
       @except = except
@@ -87,6 +96,7 @@ module SuggestGrid
         user_ids = hash["user_ids"]
         size = hash["size"]
         similar_item_id = hash["similar_item_id"]
+        similar_item_ids = hash["similar_item_ids"]
         fields = hash["fields"]
         filter = hash["filter"]
         except = hash["except"]
@@ -98,6 +108,7 @@ module SuggestGrid
                                     user_ids,
                                     size,
                                     similar_item_id,
+                                    similar_item_ids,
                                     fields,
                                     filter,
                                     except)
