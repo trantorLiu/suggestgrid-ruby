@@ -238,7 +238,9 @@ module SuggestGrid
       @http_call_back.on_after_response(_context) if @http_call_back
 
       # Endpoint error handling using HTTP status codes.
-      if _response.status_code == 400
+      if _response.status_code == 209
+        raise BulkSchemaErrorResponseException.new '209 - Some metadata is not uploaded successfully.', _context
+      elsif _response.status_code == 400
         raise ErrorResponseException.new '400 - Body is missing.', _context
       elsif _response.status_code == 402
         raise ErrorResponseException.new '402 - Action limit exceeded.', _context
