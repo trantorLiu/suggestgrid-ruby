@@ -202,7 +202,7 @@ module SuggestGrid
 
       # Endpoint error handling using HTTP status codes.
       if _response.status_code == 402
-        raise ErrorResponseException.new '402 - Type limit reached.', _context
+        raise LimitExceededErrorResponseException.new '402 - Type limit reached.', _context
       elsif _response.status_code == 409
         raise ErrorResponseException.new '409 - Type already exists.', _context
       elsif _response.status_code == 422

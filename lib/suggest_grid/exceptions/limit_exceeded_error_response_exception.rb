@@ -1,18 +1,26 @@
 # This file was automatically generated for SuggestGrid by APIMATIC v2.0 ( https://apimatic.io ).
 
 module SuggestGrid
-  class SchemaErrorResponseException < APIException
+  class LimitExceededErrorResponseException < APIException
     # Message of the response.
     # @return [String]
-    attr_accessor :message
+    attr_accessor :error_text
 
-    # The cause of the error.
-    # @return [Object]
-    attr_accessor :value
+    # Description of the response.
+    # @return [String]
+    attr_accessor :error_description
 
-    # Programatic description of the error.
-    # @return [Object]
-    attr_accessor :error
+    # URI of the response for more details.
+    # @return [String]
+    attr_accessor :error_uri
+
+    # The quantity used by the account.
+    # @return [Integer]
+    attr_accessor :used
+
+    # The limit quantity of the account.
+    # @return [Integer]
+    attr_accessor :limit
 
     # The constructor.
     # @param [String] The reason for raising an exception
@@ -29,9 +37,11 @@ module SuggestGrid
     # Populates this object by extracting properties from a hash.
     # @param [Hash] The deserialized response sent by the server in the response body.
     def unbox(hash)
-      @message = hash["message"]
-      @value = hash["value"]
-      @error = hash["error"]
+      @error_text = hash["error_text"]
+      @error_description = hash["error_description"]
+      @error_uri = hash["error_uri"]
+      @used = hash["used"]
+      @limit = hash["limit"]
     end
   end
 end

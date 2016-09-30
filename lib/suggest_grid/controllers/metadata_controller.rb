@@ -147,7 +147,7 @@ module SuggestGrid
 
       # Endpoint error handling using HTTP status codes.
       if _response.status_code == 400
-        raise SchemaErrorResponseException.new '400 - Metadata is invalid.', _context
+        raise DetailedErrorResponseException.new '400 - Metadata is invalid.', _context
       elsif _response.status_code == 429
         raise ErrorResponseException.new '429 - Too many requests.', _context
       elsif _response.status_code == 500
@@ -349,7 +349,7 @@ module SuggestGrid
 
       # Endpoint error handling using HTTP status codes.
       if _response.status_code == 400
-        raise SchemaErrorResponseException.new '400 - Metadata is invalid.', _context
+        raise DetailedErrorResponseException.new '400 - Metadata is invalid.', _context
       elsif _response.status_code == 429
         raise ErrorResponseException.new '429 - Too many requests.', _context
       elsif _response.status_code == 500

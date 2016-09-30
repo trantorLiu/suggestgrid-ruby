@@ -1,14 +1,22 @@
 # This file was automatically generated for SuggestGrid by APIMATIC v2.0 ( https://apimatic.io ).
 
 module SuggestGrid
-  class BulkSchemaErrorResponseException < APIException
+  class DetailedErrorResponseException < APIException
     # Message of the response.
     # @return [String]
-    attr_accessor :message
+    attr_accessor :error_text
 
-    # Message of the response.
-    # @return [List of SchemaErrorResponse]
-    attr_accessor :errors
+    # Description of the response.
+    # @return [String]
+    attr_accessor :error_description
+
+    # URI of the response for more details.
+    # @return [String]
+    attr_accessor :error_uri
+
+    # Specific details of the response.
+    # @return [String]
+    attr_accessor :error_details
 
     # The constructor.
     # @param [String] The reason for raising an exception
@@ -25,13 +33,10 @@ module SuggestGrid
     # Populates this object by extracting properties from a hash.
     # @param [Hash] The deserialized response sent by the server in the response body.
     def unbox(hash)
-      @message = hash["message"]
-      # Parameter is an array, so we need to iterate through it
-      @errors = nil
-      if hash["errors"] != nil
-        @errors = Array.new
-        hash["errors"].each{|structure| @errors << (SchemaErrorResponse.from_hash(structure) if structure)}
-      end
+      @error_text = hash["error_text"]
+      @error_description = hash["error_description"]
+      @error_uri = hash["error_uri"]
+      @error_details = hash["error_details"]
     end
   end
 end

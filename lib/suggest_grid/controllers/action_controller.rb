@@ -186,6 +186,8 @@ module SuggestGrid
         raise ErrorResponseException.new '422 - No query parameter (`user_id`, `item_id`, or `older_than`) is given.  In order to delete all actionsdelete the type.', _context
       elsif _response.status_code == 429
         raise ErrorResponseException.new '429 - Too many requests.', _context
+      elsif _response.status_code == 505
+        raise ErrorResponseException.new '505 - Request timed out.', _context
       elsif _response.status_code == 500
         raise APIException.new '500 - Unexpected internal error.', _context
       end
