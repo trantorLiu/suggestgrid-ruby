@@ -4,21 +4,20 @@ module SuggestGrid
   class Metadata < BaseModel
     # The id of the user or the item that the metadata is associated with.
     # Id parameter is necessary for all metadata.
-    #  attr_accessor :id
+    # @return [String]
+    attr_accessor :id
 
     # A mapping from model property names to API property names
     def self.names
       if @hash.nil?
-        @hash = self.instance_variables.inject({}) { |h, (k, v)| h[k] = k; h }
+        @hash = {}
+        @hash["id"] = "id"
       end
       @hash
     end
 
-    def initialize(props = {})
-        props.each do |name, value|
-            instance_variable_set("@#{name}", value)
-            singleton_class.class_eval { attr_accessor name }
-        end
+    def initialize(id = nil)
+      @id = id
     end
 
     # Creates an instance of the object from a hash
@@ -26,8 +25,11 @@ module SuggestGrid
       if hash == nil
         nil
       else
+        # Extract variables from the hash
+        id = hash["id"]
+
         # Create object from extracted values
-        Metadata.new(hash)
+        Metadata.new(id)
       end
     end
   end
