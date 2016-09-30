@@ -1,7 +1,7 @@
 # This file was automatically generated for SuggestGrid by APIMATIC v2.0 ( https://apimatic.io ).
 require 'openssl'
 require 'json'
-require 'faraday'
+require 'unirest'
 
 # APIMATIC Helper Files
 require_relative 'suggest_grid/api_helper.rb'
