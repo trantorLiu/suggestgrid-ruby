@@ -14,9 +14,9 @@ module SuggestGrid
     # @param [String] item_id Optional parameter: The item id of the actions.
     # @param [String] older_than Optional parameter: Delete all actions of a type older than the given timestamp or time. Valid times are 1s, 1m, 1h, 1d, 1M, 1y, or unix timestamp (like 1443798195).
     # @return CountResponse response from the API call
-    def get_actions(type = nil, 
-                    user_id = nil, 
-                    item_id = nil, 
+    def get_actions(type = nil,
+                    user_id = nil,
+                    item_id = nil,
                     older_than = nil)
       # the base uri for api requests
       _query_builder = Configuration.base_uri.dup
@@ -43,7 +43,7 @@ module SuggestGrid
 
       # Create the HttpRequest object for the call
       _request = @http_client.get _query_url, headers: _headers, username: Configuration.basic_auth_user_name, password: Configuration.basic_auth_password
-      
+
       # Call the on_before_request callback
       @http_call_back.on_before_request(_request) if @http_call_back
 
@@ -95,7 +95,7 @@ module SuggestGrid
 
       # Create the HttpRequest object for the call
       _request = @http_client.post _query_url, headers: _headers, parameters: action.to_json, username: Configuration.basic_auth_user_name, password: Configuration.basic_auth_password
-      
+
       # Call the on_before_request callback
       @http_call_back.on_before_request(_request) if @http_call_back
 
@@ -135,9 +135,9 @@ module SuggestGrid
     # @param [String] item_id Optional parameter: The item id of the actions.
     # @param [String] older_than Optional parameter: Delete all actions of a type older than the given timestamp or time. Valid times are 1s, 1m, 1h, 1d, 1M, 1y, or unix timestamp (like 1443798195).
     # @return MessageResponse response from the API call
-    def delete_actions(type = nil, 
-                       user_id = nil, 
-                       item_id = nil, 
+    def delete_actions(type = nil,
+                       user_id = nil,
+                       item_id = nil,
                        older_than = nil)
       # the base uri for api requests
       _query_builder = Configuration.base_uri.dup
@@ -164,7 +164,7 @@ module SuggestGrid
 
       # Create the HttpRequest object for the call
       _request = @http_client.delete _query_url, headers: _headers, username: Configuration.basic_auth_user_name, password: Configuration.basic_auth_password
-      
+
       # Call the on_before_request callback
       @http_call_back.on_before_request(_request) if @http_call_back
 
@@ -201,9 +201,13 @@ module SuggestGrid
     end
 
     # Post Bulk Actions
-    # @param [String] actions Required parameter: A number of action objects separated with newlines. Note that this is not a valid JSON data structure. The body size is limited to 10 thousand lines.
+    # @param [Collection] actions Required parameter: List of actions to be posted.
     # @return MessageResponse response from the API call
     def post_bulk_actions(actions)
+        body = ''
+        actions.each do |action|
+            body += "#{action.to_json}\n"
+        end
       # the base uri for api requests
       _query_builder = Configuration.base_uri.dup
 
@@ -222,7 +226,7 @@ module SuggestGrid
 
       # Create the HttpRequest object for the call
       _request = @http_client.post _query_url, headers: _headers, parameters: actions, username: Configuration.basic_auth_user_name, password: Configuration.basic_auth_password
-      
+
       # Call the on_before_request callback
       @http_call_back.on_before_request(_request) if @http_call_back
 
