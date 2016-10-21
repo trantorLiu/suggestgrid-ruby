@@ -123,8 +123,8 @@ Name | Type |Required| Description
 --- | --- | --- | ---
 rating|number|false|The optional rating given by the user, if the type is explicit.
 item_id|string|true|The item id of the item the action is performed on.
-type|string|true|The type that the action belongs to.
 user_id|string|true|The user id of the performer of the action.
+type|string|true|The type that the action belongs to.
 ### Post Bulk Actions
 > `post_bulk_actions(actions)`
 
@@ -487,16 +487,16 @@ You can read [filters](/docs/concepts#filters-parameter) and [fields](/docs/conc
 
 Name | Type |Required| Description
 --- | --- | --- | ---
-types|string|false|The types of the query. Exactly one of type or types parameters must be provided.
-except|array|false|These user ids that will not be included in the response.
 item_ids|array|false|The item ids of the query. Exactly one of item id or item ids parameters must be provided.
-fields|array|false|The metadata fields that are to be included in returned users.
-size|integer|false|The number of users asked to return in the response.
+similar_user_id|string|false|Similar user that the response should be similar to.
 item_id|string|false|The item id of the query.
 similar_user_ids|string|false|Similar users that the response should be similar to. At most one of similar user and similar users parameters can be provided. 
-type|string|false|The type of the query.
+except|array|false|These user ids that will not be included in the response.
+size|integer|false|The number of users asked to return in the response.
+types|string|false|The types of the query. Exactly one of type or types parameters must be provided.
 filter||false|
-similar_user_id|string|false|Similar user that the response should be similar to.
+type|string|false|The type of the query.
+fields|array|false|The metadata fields that are to be included in returned users.
 ### Get Recommended Items
 > `get_recommended_items(body)`
 
@@ -538,16 +538,16 @@ You can read [filters](/docs/concepts#filters-parameter) and [fields](/docs/conc
 
 Name | Type |Required| Description
 --- | --- | --- | ---
-types|string|false|The types of the query. Exactly one of type or types parameters must be provided.
-except|array|false|These user ids that will not be included in the response.
-fields|array|false|The metadata fields that are to be included in returned users.
-size|integer|false|The number of users asked to return in the response.
-user_ids|array|false|The user ids of the query. Exactly one of user id or user ids parameters must be provided.
-user_id|string|false|The user id of the query.
-type|string|false|The type of the query.
-filter||false|
 similar_item_id|string|false|Similar item that the response should be similar to.
+user_id|string|false|The user id of the query.
+except|array|false|These user ids that will not be included in the response.
+filter||false|
+types|string|false|The types of the query. Exactly one of type or types parameters must be provided.
 similar_item_ids|string|false|Similar items that the response should be similar to. At most one of similar item and similar items parameters can be provided. 
+user_ids|array|false|The user ids of the query. Exactly one of user id or user ids parameters must be provided.
+size|integer|false|The number of users asked to return in the response.
+type|string|false|The type of the query.
+fields|array|false|The metadata fields that are to be included in returned users.
 
 
 ## Similarity Methods
@@ -585,14 +585,14 @@ You can read [filters](/docs/concepts#filters-parameter) and [fields](/docs/conc
 
 Name | Type |Required| Description
 --- | --- | --- | ---
-types|string|false|The types of the query. Exactly one of type or types parameters must be provided.
 except|array|false|These user ids that will not be included in the response.
-fields|array|false|The metadata fields that are to be included in returned users.
 size|integer|false|The number of users asked to return in the response.
-user_ids|array|false|The user ids of the query. Exactly one of user id or user ids parameters must be provided.
+types|string|false|The types of the query. Exactly one of type or types parameters must be provided.
 user_id|string|false|The user id of the query.
-type|string|false|The type of the query.
+user_ids|array|false|The user ids of the query. Exactly one of user id or user ids parameters must be provided.
 filter||false|
+type|string|false|The type of the query.
+fields|array|false|The metadata fields that are to be included in returned users.
 ### Get Similar Items
 > `get_similar_items(body)`
 
@@ -624,11 +624,11 @@ You can read [filters](/docs/concepts#filters-parameter) and [fields](/docs/conc
 
 Name | Type |Required| Description
 --- | --- | --- | ---
-types|string|false|The types of the query. Exactly one of type or types parameters must be provided.
-except|array|false|These user ids that will not be included in the response.
 item_ids|array|false|The item ids of the query. Exactly one of item id or item ids parameters must be provided. Get similar items to given item ids. Either item id or item ids must be provided.
-fields|array|false|The metadata fields that are to be included in returned users.
-size|integer|false|The number of users asked to return in the response.
 item_id|string|false|The item id of the query. Get similar items to given item id. Either item id or item ids must be provided.
-type|string|false|The type of the query.
+except|array|false|These user ids that will not be included in the response.
+size|integer|false|The number of users asked to return in the response.
+types|string|false|The types of the query. Exactly one of type or types parameters must be provided.
 filter||false|
+type|string|false|The type of the query.
+fields|array|false|The metadata fields that are to be included in returned users.
