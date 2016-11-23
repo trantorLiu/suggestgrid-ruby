@@ -107,7 +107,7 @@ module SuggestGrid
     # Get Users
     # @param [Integer] size Optional parameter: The number of the users response. Defaults to 10. Must be between 1 and 10.000 inclusive. This parameter must be string represetation of an integer like "1".
     # @param [Integer] from Optional parameter: The number of users to be skipped for response. Defaults to 0. Must be bigger than or equal to 0. This parameter must be string represetation of an integer like "1".
-    # @return GetUsersResponse response from the API call
+    # @return UsersResponse response from the API call
     def get_users(size = nil,
                   from = nil)
 
@@ -152,7 +152,7 @@ module SuggestGrid
 
       # return appropriate response type
       decoded = APIHelper.json_deserialize(_context.response.raw_body)
-      return GetUsersResponse.from_hash(decoded)
+      return UsersResponse.from_hash(decoded)
     end
 
     # Post a User
@@ -342,7 +342,7 @@ module SuggestGrid
     # Get Items
     # @param [Integer] size Optional parameter: The number of the users response. Defaults to 10. Must be between 1 and 10.000 inclusive. This parameter must be string represetation of an integer like "1".
     # @param [Integer] from Optional parameter: The number of users to be skipped for response. Defaults to 0. Must be bigger than or equal to 0. This parameter must be string represetation of an integer like "1".
-    # @return GetItemsResponse response from the API call
+    # @return ItemsResponse response from the API call
     def get_items(size = nil,
                   from = nil)
 
@@ -387,7 +387,7 @@ module SuggestGrid
 
       # return appropriate response type
       decoded = APIHelper.json_deserialize(_context.response.raw_body)
-      return GetItemsResponse.from_hash(decoded)
+      return ItemsResponse.from_hash(decoded)
     end
 
     # Post an Item

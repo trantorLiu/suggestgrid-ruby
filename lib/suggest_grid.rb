@@ -31,9 +31,7 @@ require_relative 'suggest_grid/models/get_types_response.rb'
 require_relative 'suggest_grid/models/get_type_response.rb'
 require_relative 'suggest_grid/models/schema_error_response.rb'
 require_relative 'suggest_grid/models/users_response.rb'
-require_relative 'suggest_grid/models/get_users_response.rb'
 require_relative 'suggest_grid/models/items_response.rb'
-require_relative 'suggest_grid/models/get_items_response.rb'
 
 # Exceptions
 require_relative 'suggest_grid/exceptions/api_exception.rb'

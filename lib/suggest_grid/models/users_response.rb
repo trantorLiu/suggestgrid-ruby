@@ -6,7 +6,11 @@ module SuggestGrid
     # @return [Long]
     attr_accessor :count
 
-    # The number of users in the response.
+    # The total number of users available.
+    # @return [Long]
+    attr_accessor :total_count
+
+    # The total number of users available.
     # @return [List of Metadata]
     attr_accessor :users
 
@@ -15,14 +19,17 @@ module SuggestGrid
       if @hash.nil?
         @hash = {}
         @hash["count"] = "count"
+        @hash["total_count"] = "total_count"
         @hash["users"] = "users"
       end
       @hash
     end
 
     def initialize(count = nil,
+                   total_count = nil,
                    users = nil)
       @count = count
+      @total_count = total_count
       @users = users
     end
 
@@ -33,6 +40,7 @@ module SuggestGrid
       else
         # Extract variables from the hash
         count = hash["count"]
+        total_count = hash["total_count"]
         # Parameter is an array, so we need to iterate through it
         users = nil
         if hash["users"] != nil
@@ -42,6 +50,7 @@ module SuggestGrid
 
         # Create object from extracted values
         UsersResponse.new(count,
+                          total_count,
                           users)
       end
     end
