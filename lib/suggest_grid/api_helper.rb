@@ -4,7 +4,7 @@ module SuggestGrid
   class APIHelper
     # Replaces template parameters in the given url
     # @param [String] The query string builder to replace the template parameters
-    # @param [Array] The parameters to replace in the url
+    # @param [Hash] The parameters to replace in the url
     def self.append_url_with_template_parameters(query_builder, parameters)
       # perform parameter validation
       raise ArgumentError, 'Given value for parameter \"query_builder\" is invalid.' unless query_builder.instance_of? String
@@ -35,7 +35,7 @@ module SuggestGrid
 
     # Appends the given set of parameters to the given query string
     # @param [String] The query string builder to replace the template parameters
-    # @param [Array] The parameters to append
+    # @param [Hash] The parameters to append
     def self.append_url_with_query_parameters(query_builder, parameters)
       # perform parameter validation
       raise ArgumentError, 'Given value for parameter \"query_builder\" is invalid.' unless query_builder.instance_of? String

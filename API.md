@@ -170,14 +170,8 @@ SuggestGridClient.action.post_bulk_actions(actions)
 ### Get Actions
 > `get_actions(type = nil, user_id = nil, item_id = nil, older_than = nil)`
 
-Type must be provided. Additionally,
-
-* If both `user_id` and `item_id` are supplied it returns the count of the corresponding actions.
-* If only `user_id` is provided, it returns the count of all the action of the given user.
-* If only `user_id` is provided, it returns the count of all the action of the given item.
-* If only `older_than` is provided, it returns the count of actions older than the given timestamp.
-* If a few of these parameters are provided, it returns the count of the intersection of these parameters.
-* If none of these are provided, it returns the count of the whole type.
+Get actions. Defaut responses will be paged by 10 actios each.
+Type, user id, item id, or older than parameters could be provided.
 
 
 
@@ -210,8 +204,10 @@ response.count
 
 Name | Type |Required| Description
 --- | --- | --- | ---
+from|integer||The number of users to be skipped for response. Defaults to 0. Must be bigger than or equal to 0. This parameter must be string represetation of an integer like "1". 
 item_id|string||The item id of the actions.
-older_than|string||Delete all actions of a type older than the given timestamp or time. Valid times are 1s, 1m, 1h, 1d, 1M, 1y, or unix timestamp (like 1443798195). 
+older_than|string||Maxium timestamp of the actions. Valid times are 1s, 1m, 1h, 1d, 1M, 1y, or unix timestamp (like 1443798195). 
+size|integer||The number of the users response. Defaults to 10. Must be between 1 and 10.000 inclusive. This parameter must be string represetation of an integer like "1". 
 type|string||The type of the actions.
 user_id|string||The user id of the actions.
 ### Delete Actions
@@ -323,10 +319,28 @@ SuggestGridClient.metadata.post_bulk_users(users)
 ```
 
 #### Parameters
+### Get An User
+> `get_user(user_id)`
+
+Returns an user metadata if it exists.
+
+
+```ruby
+  user42 = SuggestGridClient.metadata.get_user("42")
+```
+
+#### Parameters
+##### URI/Query Parameters
+
+Name | Type |Required| Description
+--- | --- | --- | ---
+user_id|string|true|The user id to delete its metadata.
 ### Get Users
 > `get_users`
 
-Get information about users. Only returns count at the moment.
+Get items and total count of items.
+Page and per-page parameters could be set.
+
 
 
 ```ruby
@@ -336,6 +350,13 @@ Get information about users. Only returns count at the moment.
   response.count
 ```
 
+#### Parameters
+##### URI/Query Parameters
+
+Name | Type |Required| Description
+--- | --- | --- | ---
+from|integer||The number of users to be skipped for response. Defaults to 0. Must be bigger than or equal to 0. This parameter must be string represetation of an integer like "1". 
+size|integer||The number of the users response. Defaults to 10. Must be between 1 and 10.000 inclusive. This parameter must be string represetation of an integer like "1". 
 ### Delete a User
 > `delete_user(user_id)`
 
@@ -405,10 +426,28 @@ SuggestGridClient.metadata.post_bulk_items(items)
 ```
 
 #### Parameters
+### Get An Item
+> `get_item(item_id)`
+
+Returns an item metadata if it exists.
+
+
+```ruby
+  item42 = SuggestGridClient.metadata.get_item(42)
+```
+
+#### Parameters
+##### URI/Query Parameters
+
+Name | Type |Required| Description
+--- | --- | --- | ---
+item_id|string|true|The item id to delete its metadata.
 ### Get Items
 > `get_items`
 
-Get information about items. Only returns count at the moment.
+Get items and total count of items.
+Page and per-page parameters could be set.
+
 
 
 ```ruby
@@ -418,7 +457,14 @@ Get information about items. Only returns count at the moment.
   response.count
 ```
 
-### Delete an Item
+#### Parameters
+##### URI/Query Parameters
+
+Name | Type |Required| Description
+--- | --- | --- | ---
+from|integer||The number of users to be skipped for response. Defaults to 0. Must be bigger than or equal to 0. This parameter must be string represetation of an integer like "1". 
+size|integer||The number of the users response. Defaults to 10. Must be between 1 and 10.000 inclusive. This parameter must be string represetation of an integer like "1". 
+### Delete An Item
 > `delete_item(item_id)`
 
 Deletes an item metadata with the given item id.

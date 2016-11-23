@@ -35,7 +35,7 @@ module SuggestGrid
     # @return [List of String]
     attr_accessor :fields
 
-    # Contraints on the returned users or items. 
+    # Contraints on the returned users or items.
     # Filter structure is defined in [the filter parameter documentation](http://www.suggestgrid.com/docs/concepts#filters-parameter).
     # @return [Object]
     attr_accessor :filter

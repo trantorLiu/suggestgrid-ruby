@@ -1,7 +1,7 @@
 # This file was automatically generated for SuggestGrid by APIMATIC v2.0 ( https://apimatic.io ).
 
 module SuggestGrid
-  class LimitExceededErrorResponseException < APIException
+  class DeleteErrorResponseException < APIException
     # Message of the response.
     # @return [String]
     attr_accessor :error_text
@@ -14,13 +14,17 @@ module SuggestGrid
     # @return [String]
     attr_accessor :error_uri
 
-    # The quantity used by the account.
+    # The number of records found for the delete query.
     # @return [Integer]
-    attr_accessor :used
+    attr_accessor :found
 
-    # The limit quantity of the account.
+    # The number of records deleted for the delete query.
     # @return [Integer]
-    attr_accessor :limit
+    attr_accessor :deleted
+
+    # The number of records found but not deleted for the delete query.
+    # @return [Integer]
+    attr_accessor :failed
 
     # The constructor.
     # @param [String] The reason for raising an exception
@@ -40,8 +44,9 @@ module SuggestGrid
       @error_text = hash["error_text"]
       @error_description = hash["error_description"]
       @error_uri = hash["error_uri"]
-      @used = hash["used"]
-      @limit = hash["limit"]
+      @found = hash["found"]
+      @deleted = hash["deleted"]
+      @failed = hash["failed"]
     end
   end
 end

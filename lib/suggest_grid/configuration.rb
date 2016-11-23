@@ -11,11 +11,12 @@ module SuggestGrid
     # The password to use with basic authentication
     @basic_auth_password = 'TODO: Replace'
 
-    # create the getters and setters
+    # The attribute accessors for public properties
     class << self
       attr_accessor :base_uri
       attr_accessor :basic_auth_user_name
       attr_accessor :basic_auth_password
     end
+ 
   end
 end

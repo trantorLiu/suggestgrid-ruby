@@ -23,90 +23,60 @@ module SuggestGrid
     # Get a GET HttpRequest object.
     # @param [String] The URL to send the request to.
     # @param [Hash, Optional] The headers for the HTTP Request.
-    # @param [String, Optional] Username for Basic Auth requests.
-    # @param [String, Optional] Password for Basic Auth requests.
     def get(query_url,
-            headers: nil,
-            username: nil,
-            password: nil)
+            headers: {})
       return HttpRequest.new(HttpMethodEnum::GET,
                              query_url,
-                             headers: headers,
-                             username: username,
-                             password: password)
+                             headers: headers)
     end
     
     # Get a POST HttpRequest object.
     # @param [String] The URL to send the request to.
     # @param [Hash, Optional] The headers for the HTTP Request.
     # @param [Hash, Optional] The parameters for the HTTP Request.
-    # @param [String, Optional] Username for Basic Auth requests.
-    # @param [String, Optional] Password for Basic Auth requests.
     def post(query_url,
-             headers: nil,
-             parameters: nil,
-             username: nil,
-             password: nil)
+             headers: {},
+             parameters: {})
       return HttpRequest.new(HttpMethodEnum::POST,
                              query_url,
                              headers: headers,
-                             parameters: parameters,
-                             username: username,
-                             password: password)
+                             parameters: parameters)
     end
     
     # Get a PUT HttpRequest object.
     # @param [String] The URL to send the request to.
     # @param [Hash, Optional] The headers for the HTTP Request.
     # @param [Hash, Optional] The parameters for the HTTP Request.
-    # @param [String, Optional] Username for Basic Auth requests.
-    # @param [String, Optional] Password for Basic Auth requests.
     def put(query_url,
-            headers: nil,
-            parameters: nil,
-            username: nil,
-            password: nil)
+            headers: {},
+            parameters: {})
       return HttpRequest.new(HttpMethodEnum::PUT,
                              query_url,
                              headers: headers,
-                             parameters: parameters,
-                             username: username,
-                             password: password)
+                             parameters: parameters)
     end
     
     # Get a PATCH HttpRequest object.
     # @param [String] The URL to send the request to.
     # @param [Hash, Optional] The headers for the HTTP Request.
     # @param [Hash, Optional] The parameters for the HTTP Request.
-    # @param [String, Optional] Username for Basic Auth requests.
-    # @param [String, Optional] Password for Basic Auth requests.
     def patch(query_url,
-              headers: nil,
-              parameters: nil,
-              username: nil,
-              password: nil)
+              headers: {},
+              parameters: {})
       return HttpRequest.new(HttpMethodEnum::PATCH,
                              query_url,
                              headers: headers,
-                             parameters: parameters,
-                             username: username,
-                             password: password)
+                             parameters: parameters)
     end
     
     # Get a DELETE HttpRequest object.
     # @param [String] The URL to send the request to.
     # @param [Hash, Optional] The headers for the HTTP Request.
-    # @param [String, Optional] Username for Basic Auth requests.
-    # @param [String, Optional] Password for Basic Auth requests.
     def delete(query_url,
-               headers: nil,
-               username: nil,
-               password: nil)
+               headers: {})
       return HttpRequest.new(HttpMethodEnum::DELETE,
                              query_url,
-                             headers: headers,
-                             username: username,
-                             password: password)
+                             headers: headers)
     end
   end
 end

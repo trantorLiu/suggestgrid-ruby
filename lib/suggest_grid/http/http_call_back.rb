@@ -9,8 +9,8 @@ module SuggestGrid
     end
     
     # A controller will call this method after making an HTTP Request.
-    # @param [HttpResponse] The HttpResponse object received from the HttpClient.
-    def on_after_response(http_response)
+    # @param [HttpContext] The HttpContext of the API call.
+    def on_after_response(http_context)
       raise NotImplementedError, "This method needs to be implemented in a child class."
     end
   end

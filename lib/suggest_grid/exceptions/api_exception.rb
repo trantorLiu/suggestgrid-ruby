@@ -10,7 +10,7 @@ module SuggestGrid
     def initialize(reason, context)
       super(reason)
       @context = context
-	  @response_code = context.response.status_code
+      @response_code = context.response.status_code
     end
   end
 end

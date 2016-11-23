@@ -1,11 +1,9 @@
 # This file was automatically generated for SuggestGrid by APIMATIC v2.0 ( https://apimatic.io ).
-require 'openssl'
 require 'json'
 require 'faraday'
+require 'certifi'
 
-# APIMATIC Helper Files
 require_relative 'suggest_grid/api_helper.rb'
-require_relative 'suggest_grid/configuration.rb'
 require_relative 'suggest_grid/suggest_grid_client.rb'
 
 # Http
@@ -15,7 +13,8 @@ require_relative 'suggest_grid/http/http_method_enum.rb'
 require_relative 'suggest_grid/http/http_request.rb'
 require_relative 'suggest_grid/http/http_response.rb'
 require_relative 'suggest_grid/http/http_context.rb'
-require_relative 'suggest_grid/http/unirest_client.rb'
+require_relative 'suggest_grid/http/faraday_client.rb'
+require_relative 'suggest_grid/http/auth/basic_auth.rb'
 
 # Models
 require_relative 'suggest_grid/models/base_model.rb'
@@ -27,22 +26,25 @@ require_relative 'suggest_grid/models/get_recommended_items_body.rb'
 require_relative 'suggest_grid/models/get_similar_users_body.rb'
 require_relative 'suggest_grid/models/get_similar_items_body.rb'
 require_relative 'suggest_grid/models/message_response.rb'
-require_relative 'suggest_grid/models/count_response.rb'
-require_relative 'suggest_grid/models/delete_error_response.rb'
-require_relative 'suggest_grid/models/delete_success_response.rb'
+require_relative 'suggest_grid/models/actions_response.rb'
 require_relative 'suggest_grid/models/get_types_response.rb'
 require_relative 'suggest_grid/models/get_type_response.rb'
 require_relative 'suggest_grid/models/schema_error_response.rb'
-require_relative 'suggest_grid/models/metadata_information_response.rb'
 require_relative 'suggest_grid/models/users_response.rb'
+require_relative 'suggest_grid/models/get_users_response.rb'
 require_relative 'suggest_grid/models/items_response.rb'
+require_relative 'suggest_grid/models/get_items_response.rb'
 
 # Exceptions
 require_relative 'suggest_grid/exceptions/api_exception.rb'
 require_relative 'suggest_grid/exceptions/error_response_exception.rb'
 require_relative 'suggest_grid/exceptions/detailed_error_response_exception.rb'
 require_relative 'suggest_grid/exceptions/limit_exceeded_error_response_exception.rb'
+require_relative 'suggest_grid/exceptions/delete_error_response_exception.rb'
+require_relative 'suggest_grid/exceptions/delete_success_response_exception.rb'
 require_relative 'suggest_grid/exceptions/bulk_schema_error_response_exception.rb'
+
+require_relative 'suggest_grid/configuration.rb'
 
 # Controllers
 require_relative 'suggest_grid/controllers/base_controller.rb'
