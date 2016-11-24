@@ -1,7 +1,7 @@
 # This file was automatically generated for SuggestGrid by APIMATIC v2.0 ( https://apimatic.io ).
 
 module SuggestGrid
-  class SchemaErrorResponse < BaseModel
+  class BulkPostError < BaseModel
     # Message of the response.
     # @return [String]
     attr_accessor :message
@@ -44,9 +44,9 @@ module SuggestGrid
         error = hash["error"]
 
         # Create object from extracted values
-        SchemaErrorResponse.new(message,
-                                value,
-                                error)
+        BulkPostError.new(message,
+                          value,
+                          error)
       end
     end
   end

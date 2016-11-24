@@ -29,7 +29,8 @@ require_relative 'suggest_grid/models/message_response.rb'
 require_relative 'suggest_grid/models/actions_response.rb'
 require_relative 'suggest_grid/models/get_types_response.rb'
 require_relative 'suggest_grid/models/get_type_response.rb'
-require_relative 'suggest_grid/models/schema_error_response.rb'
+require_relative 'suggest_grid/models/bulk_post_response.rb'
+require_relative 'suggest_grid/models/bulk_post_error.rb'
 require_relative 'suggest_grid/models/users_response.rb'
 require_relative 'suggest_grid/models/items_response.rb'
 
@@ -40,7 +41,6 @@ require_relative 'suggest_grid/exceptions/detailed_error_response_exception.rb'
 require_relative 'suggest_grid/exceptions/limit_exceeded_error_response_exception.rb'
 require_relative 'suggest_grid/exceptions/delete_error_response_exception.rb'
 require_relative 'suggest_grid/exceptions/delete_success_response_exception.rb'
-require_relative 'suggest_grid/exceptions/bulk_schema_error_response_exception.rb'
 
 require_relative 'suggest_grid/configuration.rb'
 

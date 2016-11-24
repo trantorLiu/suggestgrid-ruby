@@ -480,7 +480,7 @@ module SuggestGrid
 
     # Post Bulk Users
     # @param [Collection] users Required parameter: List of user metadata, whose size is limited to 10 thousand.
-    # @return MessageResponse response from the API call
+    # @return BulkPostResponse response from the API call
     def post_bulk_users(users)
         body = ''
         users.each do |user|
@@ -512,9 +512,7 @@ module SuggestGrid
       _context = execute_request(_request)
 
       # endpoint error handling using HTTP status codes.
-      if _context.response.status_code == 209
-        raise BulkSchemaErrorResponseException.new '209 - Some metadata is not uploaded successfully.', _context
-      elsif _context.response.status_code == 400
+      if _context.response.status_code == 400
         raise ErrorResponseException.new '400 - Body is missing.', _context
       elsif _context.response.status_code == 429
         raise ErrorResponseException.new '429 - Too many requests.', _context
@@ -527,12 +525,12 @@ module SuggestGrid
 
       # return appropriate response type
       decoded = APIHelper.json_deserialize(_context.response.raw_body)
-      return MessageResponse.from_hash(decoded)
+      return BulkPostResponse.from_hash(decoded)
     end
 
     # Post Bulk Items
     # @param [Collection] items Required parameter: List of item metadata, whose size is limited to 10 thousand.
-    # @return MessageResponse response from the API call
+    # @return BulkPostResponse response from the API call
     def post_bulk_items(items)
         body = ''
         items.each do |item|
@@ -564,9 +562,7 @@ module SuggestGrid
       _context = execute_request(_request)
 
       # endpoint error handling using HTTP status codes.
-      if _context.response.status_code == 209
-        raise BulkSchemaErrorResponseException.new '209 - Some metadata is not uploaded successfully.', _context
-      elsif _context.response.status_code == 400
+      if _context.response.status_code == 400
         raise ErrorResponseException.new '400 - Body is missing.', _context
       elsif _context.response.status_code == 429
         raise ErrorResponseException.new '429 - Too many requests.', _context
@@ -579,7 +575,7 @@ module SuggestGrid
 
       # return appropriate response type
       decoded = APIHelper.json_deserialize(_context.response.raw_body)
-      return MessageResponse.from_hash(decoded)
+      return BulkPostResponse.from_hash(decoded)
     end
   end
 end

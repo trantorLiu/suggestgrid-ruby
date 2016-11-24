@@ -184,7 +184,7 @@ module SuggestGrid
 
     # Post Bulk Actions
     # @param [Collection] actions Required parameter: List of actions to be posted.
-    # @return MessageResponse response from the API call
+    # @return BulkPostResponse response from the API call
     def post_bulk_actions(actions)
         body = ''
         actions.each do |action|
@@ -216,9 +216,7 @@ module SuggestGrid
       _context = execute_request(_request)
 
       # endpoint error handling using HTTP status codes.
-      if _context.response.status_code == 209
-        raise BulkSchemaErrorResponseException.new '209 - Some metadata is not uploaded successfully.', _context
-      elsif _context.response.status_code == 400
+      if _context.response.status_code == 400
         raise ErrorResponseException.new '400 - Body is missing.', _context
       elsif _context.response.status_code == 402
         raise ErrorResponseException.new '402 - Action limit exceeded.', _context
@@ -233,7 +231,7 @@ module SuggestGrid
 
       # return appropriate response type
       decoded = APIHelper.json_deserialize(_context.response.raw_body)
-      return MessageResponse.from_hash(decoded)
+      return BulkPostResponse.from_hash(decoded)
     end
   end
 end
