@@ -18,7 +18,11 @@ module SuggestGrid
     # @return [List of String]
     attr_accessor :user_ids
 
-    # The number of users asked to return in the response.
+    # The number of most recommended items to be skipped.
+    # @return [Integer]
+    attr_accessor :from
+
+    # The number of items asked to return in the response.
     # @return [Integer]
     attr_accessor :size
 
@@ -31,7 +35,7 @@ module SuggestGrid
     # @return [String]
     attr_accessor :similar_item_ids
 
-    # The metadata fields that are to be included in returned users.
+    # The metadata fields that are to be included in returned items.
     # @return [List of String]
     attr_accessor :fields
 
@@ -40,7 +44,7 @@ module SuggestGrid
     # @return [Object]
     attr_accessor :filter
 
-    # These user ids that will not be included in the response.
+    # These item ids that will not be included in the response.
     # @return [List of String]
     attr_accessor :except
 
@@ -52,6 +56,7 @@ module SuggestGrid
         @hash["types"] = "types"
         @hash["user_id"] = "user_id"
         @hash["user_ids"] = "user_ids"
+        @hash["from"] = "from"
         @hash["size"] = "size"
         @hash["similar_item_id"] = "similar_item_id"
         @hash["similar_item_ids"] = "similar_item_ids"
@@ -66,6 +71,7 @@ module SuggestGrid
                    types = nil,
                    user_id = nil,
                    user_ids = nil,
+                   from = nil,
                    size = nil,
                    similar_item_id = nil,
                    similar_item_ids = nil,
@@ -76,6 +82,7 @@ module SuggestGrid
       @types = types
       @user_id = user_id
       @user_ids = user_ids
+      @from = from
       @size = size
       @similar_item_id = similar_item_id
       @similar_item_ids = similar_item_ids
@@ -94,6 +101,7 @@ module SuggestGrid
         types = hash["types"]
         user_id = hash["user_id"]
         user_ids = hash["user_ids"]
+        from = hash["from"]
         size = hash["size"]
         similar_item_id = hash["similar_item_id"]
         similar_item_ids = hash["similar_item_ids"]
@@ -106,6 +114,7 @@ module SuggestGrid
                                     types,
                                     user_id,
                                     user_ids,
+                                    from,
                                     size,
                                     similar_item_id,
                                     similar_item_ids,

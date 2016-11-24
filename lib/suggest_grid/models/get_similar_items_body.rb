@@ -18,11 +18,15 @@ module SuggestGrid
     # @return [List of String]
     attr_accessor :item_ids
 
-    # The number of users asked to return in the response.
+    # The number of most similar items to be skipped.
+    # @return [Integer]
+    attr_accessor :from
+
+    # The number of items asked to return in the response.
     # @return [Integer]
     attr_accessor :size
 
-    # The metadata fields that are to be included in returned users.
+    # The metadata fields that are to be included in returned items.
     # @return [List of String]
     attr_accessor :fields
 
@@ -31,7 +35,7 @@ module SuggestGrid
     # @return [Object]
     attr_accessor :filter
 
-    # These user ids that will not be included in the response.
+    # These item ids that will not be included in the response.
     # @return [List of String]
     attr_accessor :except
 
@@ -43,6 +47,7 @@ module SuggestGrid
         @hash["types"] = "types"
         @hash["item_id"] = "item_id"
         @hash["item_ids"] = "item_ids"
+        @hash["from"] = "from"
         @hash["size"] = "size"
         @hash["fields"] = "fields"
         @hash["filter"] = "filter"
@@ -55,6 +60,7 @@ module SuggestGrid
                    types = nil,
                    item_id = nil,
                    item_ids = nil,
+                   from = nil,
                    size = nil,
                    fields = nil,
                    filter = nil,
@@ -63,6 +69,7 @@ module SuggestGrid
       @types = types
       @item_id = item_id
       @item_ids = item_ids
+      @from = from
       @size = size
       @fields = fields
       @filter = filter
@@ -79,6 +86,7 @@ module SuggestGrid
         types = hash["types"]
         item_id = hash["item_id"]
         item_ids = hash["item_ids"]
+        from = hash["from"]
         size = hash["size"]
         fields = hash["fields"]
         filter = hash["filter"]
@@ -89,6 +97,7 @@ module SuggestGrid
                                 types,
                                 item_id,
                                 item_ids,
+                                from,
                                 size,
                                 fields,
                                 filter,

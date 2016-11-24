@@ -18,6 +18,10 @@ module SuggestGrid
     # @return [List of String]
     attr_accessor :item_ids
 
+    # The number of most recommended items to be skipped.
+    # @return [Integer]
+    attr_accessor :from
+
     # The number of users asked to return in the response.
     # @return [Integer]
     attr_accessor :size
@@ -52,6 +56,7 @@ module SuggestGrid
         @hash["types"] = "types"
         @hash["item_id"] = "item_id"
         @hash["item_ids"] = "item_ids"
+        @hash["from"] = "from"
         @hash["size"] = "size"
         @hash["similar_user_id"] = "similar_user_id"
         @hash["similar_user_ids"] = "similar_user_ids"
@@ -66,6 +71,7 @@ module SuggestGrid
                    types = nil,
                    item_id = nil,
                    item_ids = nil,
+                   from = nil,
                    size = nil,
                    similar_user_id = nil,
                    similar_user_ids = nil,
@@ -76,6 +82,7 @@ module SuggestGrid
       @types = types
       @item_id = item_id
       @item_ids = item_ids
+      @from = from
       @size = size
       @similar_user_id = similar_user_id
       @similar_user_ids = similar_user_ids
@@ -94,6 +101,7 @@ module SuggestGrid
         types = hash["types"]
         item_id = hash["item_id"]
         item_ids = hash["item_ids"]
+        from = hash["from"]
         size = hash["size"]
         similar_user_id = hash["similar_user_id"]
         similar_user_ids = hash["similar_user_ids"]
@@ -106,6 +114,7 @@ module SuggestGrid
                                     types,
                                     item_id,
                                     item_ids,
+                                    from,
                                     size,
                                     similar_user_id,
                                     similar_user_ids,
