@@ -126,7 +126,7 @@ module SuggestGrid
     # @param [String] user_id Optional parameter: The user id of the actions.
     # @param [String] item_id Optional parameter: The item id of the actions.
     # @param [String] older_than Optional parameter: Delete all actions of a type older than the given timestamp or time. Valid times are 1s, 1m, 1h, 1d, 1M, 1y, or unix timestamp (like 1443798195).
-    # @return DeleteSuccessResponseException response from the API call
+    # @return DeleteSuccessResponse response from the API call
     def delete_actions(type = nil,
                        user_id = nil,
                        item_id = nil,
@@ -149,8 +149,13 @@ module SuggestGrid
       # validate and preprocess url
       _query_url = APIHelper.clean_url _query_builder
 
+      # prepare headers
+      _headers = {
+        'accept' => 'application/json'
+      }
+
       # create the HttpRequest object for the call
-      _request = @http_client.delete _query_url
+      _request = @http_client.delete _query_url, headers: _headers
 
       # apply authentication
       BasicAuth.apply(_request)
@@ -159,9 +164,7 @@ module SuggestGrid
       _context = execute_request(_request)
 
       # endpoint error handling using HTTP status codes.
-      if _context.response.status_code == 209
-        raise DeleteSuccessResponseException.new '209 - Some actions are deleted successfully.', _context
-      elsif _context.response.status_code == 400
+      if _context.response.status_code == 400
         raise ErrorResponseException.new '400 - Required `user_id` or `item_id` parameters are missing from the request body.', _context
       elsif _context.response.status_code == 404
         raise DeleteErrorResponseException.new '404 - Delete actions not found.', _context
@@ -179,7 +182,8 @@ module SuggestGrid
       validate_response(_context)
 
       # return appropriate response type
-      return _context.response.raw_body
+      decoded = APIHelper.json_deserialize(_context.response.raw_body)
+      return DeleteSuccessResponse.from_hash(decoded)
     end
 
     # Post Bulk Actions
