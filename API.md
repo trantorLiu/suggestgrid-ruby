@@ -2,7 +2,7 @@
 
 ## Type Methods
 Type methods are used for managing SuggestGrid types.
-For more information on types, refer to [Types concept documentation](http://www.suggestgrid.com/docs/concepts#types).
+For more information on types, refer to [Types concept documentation](http://www.suggestgrid.com/docs/types).
 
 ### Create a New Type
 > `create_type(type, body)`
@@ -96,7 +96,7 @@ SuggestGridClient.type.delete_all_types
 
 ## Action Methods
 Action methods are for posting and deleting actions.
-For more information on actions, refer to [Actions concept documentation](http://www.suggestgrid.com/docs/concepts#actions).
+For more information on actions, refer to [Actions concept documentation](http://www.suggestgrid.com/docs/actions).
 
 ### Post an Action
 > `post_action(SuggestGrid::Action.new(type, user_id, item_id, rating = nil))`
@@ -274,7 +274,7 @@ user_id|string||The user id of the actions.
 
 ## Metadata Methods
 Metadata methods are for posting and deleting metadata.
-For more information on metadata, refer to [Metadata concept documentation ](http://www.suggestgrid.com/docs/concepts#metadata).
+For more information on metadata, refer to [Metadata concept documentation ](http://www.suggestgrid.com/docs/metadata).
 
 ### Post a User
 > `post_user(metadata)`
@@ -494,7 +494,7 @@ SuggestGridClient.metadata.delete_all_items
 
 ## Recommnedation Methods
 Recommnedation methods are for getting recommended items or users responses from SuggestGrid.
-For more information on recommendations, refer to [Recommendations concept documentation](http://www.suggestgrid.com/docs/concepts#recommendations).
+For more information on recommendations, refer to [Recommendations concept documentation](http://www.suggestgrid.com/docs/recommendations).
 
 ### Get Recommended Users
 > `get_recommended_users(body)`
@@ -598,7 +598,7 @@ user_ids|array|false|The user ids of the query. Exactly one of user id or user i
 
 ## Similarity Methods
 Similarity methods are for getting similar items or users responses from SuggestGrid.
-For more information on similars, refer to [Similarities concept documentation](http://www.suggestgrid.com/docs/concepts#similarities).
+For more information on similars, refer to [Similarities concept documentation](http://www.suggestgrid.com/docs/similarities).
 
 ### Get Similar Users
 > `get_similar_users(body)`
