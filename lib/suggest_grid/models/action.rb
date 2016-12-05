@@ -18,6 +18,10 @@ module SuggestGrid
     # @return [Float]
     attr_accessor :rating
 
+    # The optional UNIX epoch timestamp of the action. Defaults to the current timestamp.
+    # @return [Float]
+    attr_accessor :timestamp
+
     # A mapping from model property names to API property names
     def self.names
       if @hash.nil?
@@ -26,6 +30,7 @@ module SuggestGrid
         @hash["user_id"] = "user_id"
         @hash["item_id"] = "item_id"
         @hash["rating"] = "rating"
+        @hash["timestamp"] = "timestamp"
       end
       @hash
     end
@@ -33,11 +38,13 @@ module SuggestGrid
     def initialize(type = nil,
                    user_id = nil,
                    item_id = nil,
-                   rating = nil)
+                   rating = nil,
+                   timestamp = nil)
       @type = type
       @user_id = user_id
       @item_id = item_id
       @rating = rating
+      @timestamp = timestamp
     end
 
     # Creates an instance of the object from a hash
@@ -50,12 +57,14 @@ module SuggestGrid
         user_id = hash["user_id"]
         item_id = hash["item_id"]
         rating = hash["rating"]
+        timestamp = hash["timestamp"]
 
         # Create object from extracted values
         Action.new(type,
                    user_id,
                    item_id,
-                   rating)
+                   rating,
+                   timestamp)
       end
     end
   end

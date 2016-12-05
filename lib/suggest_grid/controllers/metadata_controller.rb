@@ -503,7 +503,7 @@ module SuggestGrid
       }
 
       # create the HttpRequest object for the call
-      _request = @http_client.post _query_url, headers: _headers, parameters: users
+      _request = @http_client.post _query_url, headers: _headers, parameters: body
 
       # apply authentication
       BasicAuth.apply(_request)
@@ -553,7 +553,7 @@ module SuggestGrid
       }
 
       # create the HttpRequest object for the call
-      _request = @http_client.post _query_url, headers: _headers, parameters: items
+      _request = @http_client.post _query_url, headers: _headers, parameters: body
 
       # apply authentication
       BasicAuth.apply(_request)
