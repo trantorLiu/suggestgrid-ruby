@@ -1,15 +1,49 @@
 machine:
+  java:
+    version: openjdk8
+  environment:
+    ZOOKEEPER_VERSION: 3.4.8
+    ELASTICSEARCH_VERSION: 2.3.2
+    ELASTICSEARCH_DIR: /home/ubuntu/elasticsearch
+    SDK_PATH: /home/ubuntu/suggestgrid-ruby
+    KIRK_PATH: /home/ubuntu/kirk
+    PROXY_PATH: /home/ubuntu/proxy
+    MALIK_PATH: /home/ubuntu/malik
+    MALIK_MODE: proxy
+  python:
+    version: 3.5.1
   pre:
     - sudo apt-get update
     - sudo apt-get install expect
+    - sudo apt-get install leiningen
+    - sudo apt-get install zookeeper
+    - sudo apt-get install zookeeperd
+
+dependencies:
+  cache_directories:
+    - ~/.m2
+    - ~/.lein
+    - ~/docker
+  override:
+    - if [ -n "${CIRCLE_BRANCH}" ] ; then ./bin/ci/branch/install_malik.sh ; fi
+    - if [ -n "${CIRCLE_BRANCH}" ] ; then ./bin/ci/branch/install_kirk.sh ; fi
+    - if [ -n "${CIRCLE_BRANCH}" ] ; then ./bin/ci/branch/install_proxy.sh ; fi
+    - if [ -n "${CIRCLE_TAG}" ] ; then ./bin/ci/tag/install_malik.sh ; fi
+    - if [ -n "${CIRCLE_TAG}" ] ; then ./bin/ci/tag/install_kirk.sh ; fi
+    - if [ -n "${CIRCLE_TAG}" ] ; then ./bin/ci/tag/install_proxy.sh ; fi
+    - ./bin/ci/common/install_elasticsearch.sh
 
 test:
+  pre:
+    - ${ELASTICSEARCH_DIR}/bin/elasticsearch: {background: true}
   override:
-    - echo "test"
+    - eval $(cat ${MALIK_PATH}/config/kirk_env) && export JVM_OPTS=\ -Xmx2G && cd ${KIRK_PATH} && lein trampoline run: {background: true}
+    - sleep 60
+    - npm --prefix ${MALIK_PATH} test
 
 deployment:
-  release:
+  tag:
     tag: /[0-9]+(\.[0-9]+)+/
     owner: suggestgrid
     commands:
-      - ./.deploy
+      - ./bin/ci/tag/deploy.sh
