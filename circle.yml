@@ -36,9 +36,10 @@ dependencies:
 test:
   pre:
     - ${ELASTICSEARCH_DIR}/bin/elasticsearch: {background: true}
-  override:
     - eval $(cat ${MALIK_PATH}/config/kirk_env) && export JVM_OPTS=\ -Xmx2G && cd ${KIRK_PATH} && lein trampoline run: {background: true}
+    - BUNDLE_GEMFILE=${PROXY_PATH}/Gemfile bundle exec rackup ${PROXY_PATH}/config.ru : {background: true}
     - sleep 60
+  override:
     - npm --prefix ${MALIK_PATH} test
 
 deployment:
