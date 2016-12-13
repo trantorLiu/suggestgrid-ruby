@@ -8,7 +8,7 @@ module SuggestGrid
       @@instance
     end
 
-    # Get An User
+    # Get A User
     # @param [String] user_id Required parameter: The user id to delete its metadata.
     # @return Metadata response from the API call
     def get_user(user_id)
