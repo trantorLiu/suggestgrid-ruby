@@ -51,7 +51,7 @@ module SuggestGrid
     end
 
     # Delete All Types
-    # @return GetTypesResponse response from the API call
+    # @return MessageResponse response from the API call
     def delete_all_types
 
       # the base uri for api requests
@@ -89,7 +89,7 @@ module SuggestGrid
 
       # return appropriate response type
       decoded = APIHelper.json_deserialize(_context.response.raw_body)
-      return GetTypesResponse.from_hash(decoded)
+      return MessageResponse.from_hash(decoded)
     end
 
     # Get Properties of a Type

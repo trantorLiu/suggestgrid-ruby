@@ -320,10 +320,10 @@ SuggestGridClient.metadata.post_bulk_users(users)
 ```
 
 #### Parameters
-### Get An User
+### Get A User
 > `get_user(user_id)`
 
-Returns an user metadata if it exists.
+Returns a user metadata if it exists.
 
 
 ```ruby
