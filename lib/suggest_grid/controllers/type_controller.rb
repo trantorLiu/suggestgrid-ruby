@@ -126,7 +126,9 @@ module SuggestGrid
       _context = execute_request(_request)
 
       # endpoint error handling using HTTP status codes.
-      if _context.response.status_code == 429
+      if _context.response.status_code == 404
+        raise ErrorResponseException.new '404 - Type not found.', _context
+      elsif _context.response.status_code == 429
         raise ErrorResponseException.new '429 - Too many requests.', _context
       elsif _context.response.status_code == 500
         raise APIException.new '500 - Unexpected internal error.', _context
