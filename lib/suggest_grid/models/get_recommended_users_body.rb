@@ -35,7 +35,7 @@ module SuggestGrid
     # @return [String]
     attr_accessor :similar_user_ids
 
-    # The metadata fields that are to be included in returned users.
+    # The metadata fields to be included in returned user objects.
     # @return [List of String]
     attr_accessor :fields
 

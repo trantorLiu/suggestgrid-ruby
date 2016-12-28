@@ -26,7 +26,7 @@ module SuggestGrid
     # @return [Integer]
     attr_accessor :size
 
-    # The metadata fields that are to be included in returned items.
+    # The metadata fields to be included in returned item objects.
     # @return [List of String]
     attr_accessor :fields
 
