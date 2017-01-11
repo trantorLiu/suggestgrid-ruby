@@ -14,7 +14,7 @@ dependencies:
   cache_directories:
     - ~/docker
   override:
-    - git clone https://${GITHUB_USERNAME}:${GITHUB_PASSWORD}@github.com/suggestgrid/suggestgrid-ruby-test-proxy.git $PROXY_PATH}
+    - git clone https://${GITHUB_USERNAME}:${GITHUB_PASSWORD}@github.com/suggestgrid/suggestgrid-ruby-test-proxy.git ${PROXY_PATH}
     - git -C ${PROXY_PATH} checkout master
     - git clone https://${GITHUB_USERNAME}:${GITHUB_PASSWORD}@github.com/suggestgrid/kirk.git ${KIRK_PATH}
     - git -C ${KIRK_PATH} checkout ${CIRCLE_BRANCH:-master}
