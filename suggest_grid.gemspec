@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name = 'suggestgrid'
-  s.version = '0.1.28'
+  s.version = '0.1.28-SNAPSHOT'
   s.summary = 'suggest_grid'
   s.description = 'SuggestGrid is a recommendation and personalization service.'
   s.authors = ['SuggestGrid']
