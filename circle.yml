@@ -1,11 +1,31 @@
 machine:
+  services:
+    - docker
+  environment:
+    SDK_PATH: /home/ubuntu/suggestgrid-ruby
+    PROXY_PATH: /home/ubuntu/suggestgrid-ruby-test-proxy
+    KIRK_PATH: /home/ubuntu/kirk
+    MALIK_PATH: /home/ubuntu/malik
   pre:
     - sudo apt-get update
     - sudo apt-get install expect
 
+dependencies:
+  cache_directories:
+    - ~/docker
+  override:
+    - git clone https://${GITHUB_USERNAME}:${GITHUB_PASSWORD}@github.com/suggestgrid/suggestgrid-ruby-test-proxy.git $PROXY_PATH}
+    - git -C ${PROXY_PATH} checkout master
+    - git clone https://${GITHUB_USERNAME}:${GITHUB_PASSWORD}@github.com/suggestgrid/kirk.git ${KIRK_PATH}
+    - git -C ${KIRK_PATH} checkout ${CIRCLE_BRANCH:-master}
+    - git clone https://${GITHUB_USERNAME}:${GITHUB_PASSWORD}@github.com/suggestgrid/malik.git ${MALIK_PATH}
+    - git -C ${MALIK_PATH} checkout ${CIRCLE_BRANCH:-master}
+
 test:
   override:
-    - echo "test"
+    - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
+    - docker pull suggestgrid/c-12
+    - docker run -v ${KIRK_PATH}:/repos/kirk -v ${MALIK_PATH}:/repos/malik -v ${SDK_PATH}:/repos/sdk -v ${PROXY_PATH}:/repos/proxy suggestgrid/c-12
 
 deployment:
   release:
