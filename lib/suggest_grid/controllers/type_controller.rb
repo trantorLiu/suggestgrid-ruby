@@ -143,7 +143,7 @@ module SuggestGrid
     end
 
     # Create a New Type
-    # @param [String] type Required parameter: The name of the type to be created.
+    # @param [String] type Required parameter: The name of the type.
     # @param [TypeRequestBody] settings Optional parameter: Optional settings for the rating parameter.
     # @return MessageResponse response from the API call
     def create_type(type, 
