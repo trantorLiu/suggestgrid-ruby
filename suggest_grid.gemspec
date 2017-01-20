@@ -2,7 +2,7 @@ Gem::Specification.new do |s|
   s.name = 'suggestgrid'
   s.version = '0.1.28-SNAPSHOT'
   s.summary = 'suggest_grid'
-  s.description = 'SuggestGrid is a recommendation and personalization service.'
+  s.description = 'Personalization made Simple'
   s.authors = ['SuggestGrid']
   s.email = 'support@suggestgrid.com'
   s.homepage = 'http://www.suggestgrid.com'
