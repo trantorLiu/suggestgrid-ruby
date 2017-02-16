@@ -12,9 +12,9 @@ module SuggestGrid
     # @param [String] type Optional parameter: The type of the actions.
     # @param [String] user_id Optional parameter: The user id of the actions.
     # @param [String] item_id Optional parameter: The item id of the actions.
-    # @param [String] older_than Optional parameter: Maxium timestamp of the actions. Valid times are 1s, 1m, 1h, 1d, 1M, 1y, or unix timestamp (like 1443798195).
-    # @param [Integer] size Optional parameter: The number of the users response. Defaults to 10. Must be between 1 and 10.000 inclusive. This parameter must be string represetation of an integer like "1".
-    # @param [Integer] from Optional parameter: The number of users to be skipped for response. Defaults to 0. Must be bigger than or equal to 0. This parameter must be string represetation of an integer like "1".
+    # @param [String] older_than Optional parameter: Maxium timestamp of the actions. Valid times are in form of 1s, 1m, 1h, 1d, 1M, 1y, where 1 can be any integer, or a UNIX timestamp like 1443798195.
+    # @param [Long] size Optional parameter: The number of the users response. Defaults to 10. Must be between 1 and 10.000 inclusive. This parameter must be string represetation of an integer like "1".
+    # @param [Long] from Optional parameter: The number of users to be skipped for response. Defaults to 0. Must be bigger than or equal to 0. This parameter must be string represetation of an integer like "1".
     # @return ActionsResponse response from the API call
     def get_actions(type = nil,
                     user_id = nil,
@@ -125,7 +125,7 @@ module SuggestGrid
     # @param [String] type Optional parameter: The type of the actions.
     # @param [String] user_id Optional parameter: The user id of the actions.
     # @param [String] item_id Optional parameter: The item id of the actions.
-    # @param [String] older_than Optional parameter: Delete all actions of a type older than the given timestamp or time. Valid times are 1s, 1m, 1h, 1d, 1M, 1y, or unix timestamp (like 1443798195).
+    # @param [String] older_than Optional parameter: Delete all actions of a type older than the given timestamp or time. Valid times are in form of 1s, 1m, 1h, 1d, 1M, 1y, where 1 can be any integer, or a UNIX timestamp like 1443798195.
     # @return DeleteSuccessResponse response from the API call
     def delete_actions(type = nil,
                        user_id = nil,
