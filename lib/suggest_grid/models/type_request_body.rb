@@ -2,9 +2,7 @@
 
 module SuggestGrid
   class TypeRequestBody < BaseModel
-    # The rating type of the type to be created.
-    # Could be "explicit" or "implicit"
-    # The default is "implicit".
+    # The rating type of the type. Could be "explicit" or "implicit", where "implicit" is the default.
     # @return [String]
     attr_accessor :rating
 

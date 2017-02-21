@@ -14,12 +14,9 @@ dependencies:
   cache_directories:
     - ~/docker
   override:
-    - git clone https://${GITHUB_USERNAME}:${GITHUB_PASSWORD}@github.com/suggestgrid/suggestgrid-ruby-test-proxy.git ${PROXY_PATH}
-    - git -C ${PROXY_PATH} checkout master
-    - git clone https://${GITHUB_USERNAME}:${GITHUB_PASSWORD}@github.com/suggestgrid/kirk.git ${KIRK_PATH}
-    - git -C ${KIRK_PATH} checkout ${CIRCLE_BRANCH:-master}
-    - git clone https://${GITHUB_USERNAME}:${GITHUB_PASSWORD}@github.com/suggestgrid/malik.git ${MALIK_PATH}
-    - git -C ${MALIK_PATH} checkout ${CIRCLE_BRANCH:-master}
+    - git clone --depth 1 -b master https://${GITHUB_USERNAME}:${GITHUB_PASSWORD}@github.com/suggestgrid/suggestgrid-ruby-test-proxy.git ${PROXY_PATH}
+    - git clone --depth 1 -b ${CIRCLE_BRANCH:-master} https://${GITHUB_USERNAME}:${GITHUB_PASSWORD}@github.com/suggestgrid/kirk.git ${KIRK_PATH}
+    - git clone --depth 1 -b ${CIRCLE_BRANCH:-master} https://${GITHUB_USERNAME}:${GITHUB_PASSWORD}@github.com/suggestgrid/malik.git ${MALIK_PATH}
 
 test:
   override:

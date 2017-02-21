@@ -15,11 +15,11 @@ module SuggestGrid
     attr_accessor :error_uri
 
     # The quantity used by the account.
-    # @return [Integer]
+    # @return [Long]
     attr_accessor :used
 
     # The limit quantity of the account.
-    # @return [Integer]
+    # @return [Long]
     attr_accessor :limit
 
     # The constructor.

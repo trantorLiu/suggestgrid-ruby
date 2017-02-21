@@ -22,7 +22,7 @@ module SuggestGrid
     # @return [Integer]
     attr_accessor :from
 
-    # The number of items asked to return in the response.
+    # The number of items asked to return in the response. Defaults to 10. Must be between 1 and 10.000 inclusive.
     # @return [Integer]
     attr_accessor :size
 
@@ -35,7 +35,7 @@ module SuggestGrid
     # @return [String]
     attr_accessor :similar_item_ids
 
-    # The metadata fields that are to be included in returned items.
+    # The metadata fields to be included in returned item objects.
     # @return [List of String]
     attr_accessor :fields
 

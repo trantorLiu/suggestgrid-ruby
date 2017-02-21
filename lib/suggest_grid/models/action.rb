@@ -19,7 +19,7 @@ module SuggestGrid
     attr_accessor :rating
 
     # The optional UNIX epoch timestamp of the action. Defaults to the current timestamp.
-    # @return [Float]
+    # @return [Long]
     attr_accessor :timestamp
 
     # A mapping from model property names to API property names
