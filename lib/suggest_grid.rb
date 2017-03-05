@@ -1,7 +1,9 @@
 # This file was automatically generated for SuggestGrid by APIMATIC v2.0 ( https://apimatic.io ).
+require 'date'
 require 'json'
 require 'faraday'
 require 'certifi'
+require 'logging'
 
 require_relative 'suggest_grid/api_helper.rb'
 require_relative 'suggest_grid/suggest_grid_client.rb'

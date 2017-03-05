@@ -94,6 +94,12 @@ module SuggestGrid
       end
     end
 
+    # Removes elements with empty values from a hash.
+    # @param [Hash] The hash to clean.
+    def self.clean_hash(hash)
+      hash.delete_if { |key, value| value.to_s.strip.empty? }
+    end
+
     # Form encodes a hash of parameters.
     # @param [Hash] The hash of parameters to encode.
     # @return [Hash] A hash with the same parameters form encoded.

@@ -32,7 +32,7 @@ module SuggestGrid
 
     # Contraints on the returned users or items.
     # Filter structure is defined in [the filter parameter documentation](http://www.suggestgrid.com/docs/advanced-features#filters-parameter).
-    # @return [Object]
+    # @return [Array<String, Boolean>]
     attr_accessor :filter
 
     # These item ids that will not be included in the response.
@@ -64,7 +64,8 @@ module SuggestGrid
                    size = nil,
                    fields = nil,
                    filter = nil,
-                   except = nil)
+                   except = nil,
+                   additional_properties = {})
       @type = type
       @types = types
       @item_id = item_id
@@ -74,6 +75,9 @@ module SuggestGrid
       @fields = fields
       @filter = filter
       @except = except
+
+      # Add additional model properties to the instance
+      additional_properties.each {|name, value| instance_variable_set("@#{name}", value)}
     end
 
     # Creates an instance of the object from a hash
@@ -92,6 +96,9 @@ module SuggestGrid
         filter = hash["filter"]
         except = hash["except"]
 
+        # Clean out expected properties from Hash
+        names.values.each {|k| hash.delete(k)}
+
         # Create object from extracted values
         GetSimilarItemsBody.new(type,
                                 types,
@@ -101,7 +108,8 @@ module SuggestGrid
                                 size,
                                 fields,
                                 filter,
-                                except)
+                                except,
+                                hash)
       end
     end
   end

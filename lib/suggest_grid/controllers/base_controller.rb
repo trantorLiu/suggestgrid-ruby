@@ -18,14 +18,15 @@ module SuggestGrid
     def validate_parameters(args)
       args.each do |name, value|
         if value == nil
-            raise ArgumentError.new "Required parameter #{name} cannot be nil."
+          raise ArgumentError.new 'Required parameter #{name} cannot be nil.'
         end
       end
     end
 
-    def execute_request(request, binary: false) 
+    def execute_request(request, binary: false)
       @http_call_back.on_before_request(request) if @http_call_back
 
+      APIHelper.clean_hash(request.headers)
       request.headers = @@global_headers.clone.merge(request.headers)
       
       response = binary ? @http_client.execute_as_binary(request) : @http_client.execute_as_string(request)

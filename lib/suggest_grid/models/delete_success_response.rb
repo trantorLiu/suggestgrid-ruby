@@ -33,11 +33,15 @@ module SuggestGrid
     def initialize(message = nil,
                    found = nil,
                    deleted = nil,
-                   failed = nil)
+                   failed = nil,
+                   additional_properties = {})
       @message = message
       @found = found
       @deleted = deleted
       @failed = failed
+
+      # Add additional model properties to the instance
+      additional_properties.each {|name, value| instance_variable_set("@#{name}", value)}
     end
 
     # Creates an instance of the object from a hash
@@ -51,11 +55,15 @@ module SuggestGrid
         deleted = hash["deleted"]
         failed = hash["failed"]
 
+        # Clean out expected properties from Hash
+        names.values.each {|k| hash.delete(k)}
+
         # Create object from extracted values
         DeleteSuccessResponse.new(message,
                                   found,
                                   deleted,
-                                  failed)
+                                  failed,
+                                  hash)
       end
     end
   end

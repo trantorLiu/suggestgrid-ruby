@@ -21,9 +21,13 @@ module SuggestGrid
     end
 
     def initialize(message = nil,
-                   errors = nil)
+                   errors = nil,
+                   additional_properties = {})
       @message = message
       @errors = errors
+
+      # Add additional model properties to the instance
+      additional_properties.each {|name, value| instance_variable_set("@#{name}", value)}
     end
 
     # Creates an instance of the object from a hash
@@ -40,9 +44,13 @@ module SuggestGrid
           hash["errors"].each{|structure| errors << (BulkPostError.from_hash(structure) if structure)}
         end
 
+        # Clean out expected properties from Hash
+        names.values.each {|k| hash.delete(k)}
+
         # Create object from extracted values
         BulkPostResponse.new(message,
-                             errors)
+                             errors,
+                             hash)
       end
     end
   end

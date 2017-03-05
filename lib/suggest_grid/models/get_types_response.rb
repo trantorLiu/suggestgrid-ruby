@@ -15,8 +15,12 @@ module SuggestGrid
       @hash
     end
 
-    def initialize(types = nil)
+    def initialize(types = nil,
+                   additional_properties = {})
       @types = types
+
+      # Add additional model properties to the instance
+      additional_properties.each {|name, value| instance_variable_set("@#{name}", value)}
     end
 
     # Creates an instance of the object from a hash
@@ -27,8 +31,12 @@ module SuggestGrid
         # Extract variables from the hash
         types = hash["types"]
 
+        # Clean out expected properties from Hash
+        names.values.each {|k| hash.delete(k)}
+
         # Create object from extracted values
-        GetTypesResponse.new(types)
+        GetTypesResponse.new(types,
+                             hash)
       end
     end
   end

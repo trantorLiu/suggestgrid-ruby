@@ -27,10 +27,14 @@ module SuggestGrid
 
     def initialize(count = nil,
                    total_count = nil,
-                   items = nil)
+                   items = nil,
+                   additional_properties = {})
       @count = count
       @total_count = total_count
       @items = items
+
+      # Add additional model properties to the instance
+      additional_properties.each {|name, value| instance_variable_set("@#{name}", value)}
     end
 
     # Creates an instance of the object from a hash
@@ -48,10 +52,14 @@ module SuggestGrid
           hash["items"].each{|structure| items << (Metadata.from_hash(structure) if structure)}
         end
 
+        # Clean out expected properties from Hash
+        names.values.each {|k| hash.delete(k)}
+
         # Create object from extracted values
         ItemsResponse.new(count,
                           total_count,
-                          items)
+                          items,
+                          hash)
       end
     end
   end
