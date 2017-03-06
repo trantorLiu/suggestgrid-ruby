@@ -32,7 +32,7 @@ module SuggestGrid
 
     # Similar users that the response should be similar to.
     # At most one of similar user and similar users parameters can be provided.
-    # @return [String]
+    # @return [List of String]
     attr_accessor :similar_user_ids
 
     # The metadata fields to be included in returned user objects.

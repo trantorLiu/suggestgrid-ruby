@@ -32,7 +32,7 @@ module SuggestGrid
 
     # Similar items that the response should be similar to.
     # At most one of similar item and similar items parameters can be provided.
-    # @return [String]
+    # @return [List of String]
     attr_accessor :similar_item_ids
 
     # The metadata fields to be included in returned item objects.
