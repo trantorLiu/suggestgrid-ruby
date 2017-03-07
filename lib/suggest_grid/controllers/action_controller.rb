@@ -8,6 +8,88 @@ module SuggestGrid
       @@instance
     end
 
+    # Post an Action
+    # @param [Action] action Required parameter: The action to be posted.
+    # @return MessageResponse response from the API call
+    def post_action(action)
+
+      # prepare query url
+      _query_builder = Configuration.base_uri.dup
+      _query_builder << '/v1/actions'
+      _query_url = APIHelper.clean_url _query_builder
+
+      # prepare headers
+      _headers = {
+        'accept' => 'application/json',
+        'content-type' => 'application/json; charset=utf-8'
+      }
+
+      # prepare and execute HttpRequest
+      _request = @http_client.post _query_url, headers: _headers, parameters: action.to_json
+      BasicAuth.apply(_request)
+      _context = execute_request(_request)
+
+      # validate response against endpoint and global error codes
+      if _context.response.status_code == 400
+        raise ErrorResponseException.new 'Required `user_id` or `item_id` parameters are missing from the request body.', _context
+      elsif _context.response.status_code == 402
+        raise ErrorResponseException.new 'Action limit exceeded.', _context
+      elsif _context.response.status_code == 404
+        raise ErrorResponseException.new 'Type does not exists.', _context
+      elsif _context.response.status_code == 429
+        raise ErrorResponseException.new 'Too many requests.', _context
+      elsif !_context.response.status_code.between?(200, 208)
+        raise ErrorResponseException.new 'Unexpected internal error.', _context
+      end
+      validate_response(_context)
+
+      # return appropriate response type
+      decoded = APIHelper.json_deserialize(_context.response.raw_body)
+      return MessageResponse.from_hash(decoded)
+    end
+
+    # Post Bulk Actions
+    # @param [Collection] actions Required parameter: List of actions to be posted.
+    # @return BulkPostResponse response from the API call
+    def post_bulk_actions(actions)
+        body = ''
+        actions.each do |action|
+            body += "#{action.to_json}\n"
+        end
+
+      # prepare query url
+      _query_builder = Configuration.base_uri.dup
+      _query_builder << '/v1/actions/_bulk'
+      _query_url = APIHelper.clean_url _query_builder
+
+      # prepare headers
+      _headers = {
+        'accept' => 'application/json',
+        'content-type' => 'text/plain; charset=utf-8'
+      }
+
+      # prepare and execute HttpRequest
+      _request = @http_client.post _query_url, headers: _headers, parameters: body
+      BasicAuth.apply(_request)
+      _context = execute_request(_request)
+
+      # validate response against endpoint and global error codes
+      if _context.response.status_code == 400
+        raise ErrorResponseException.new 'Body is missing.', _context
+      elsif _context.response.status_code == 402
+        raise ErrorResponseException.new 'Action limit exceeded.', _context
+      elsif _context.response.status_code == 429
+        raise ErrorResponseException.new 'Too many requests.', _context
+      elsif !_context.response.status_code.between?(200, 208)
+        raise ErrorResponseException.new 'Unexpected internal error.', _context
+      end
+      validate_response(_context)
+
+      # return appropriate response type
+      decoded = APIHelper.json_deserialize(_context.response.raw_body)
+      return BulkPostResponse.from_hash(decoded)
+    end
+
     # Get Actions
     # @param [String] type Optional parameter: The type of the actions.
     # @param [String] user_id Optional parameter: The user id of the actions.
@@ -23,13 +105,9 @@ module SuggestGrid
                     size = nil,
                     from = nil)
 
-      # the base uri for api requests
+      # prepare query url
       _query_builder = Configuration.base_uri.dup
-
-      # prepare query string for API call
       _query_builder << '/v1/actions'
-
-      # process optional query parameters
       _query_builder = APIHelper.append_url_with_query_parameters _query_builder, {
         'type' => type,
         'user_id' => user_id,
@@ -38,8 +116,6 @@ module SuggestGrid
         'size' => size,
         'from' => from
       }
-
-      # validate and preprocess url
       _query_url = APIHelper.clean_url _query_builder
 
       # prepare headers
@@ -47,78 +123,22 @@ module SuggestGrid
         'accept' => 'application/json'
       }
 
-      # create the HttpRequest object for the call
+      # prepare and execute HttpRequest
       _request = @http_client.get _query_url, headers: _headers
-
-      # apply authentication
       BasicAuth.apply(_request)
-
-      # execute the request
       _context = execute_request(_request)
 
-      # endpoint error handling using HTTP status codes.
+      # validate response against endpoint and global error codes
       if _context.response.status_code == 429
-        raise ErrorResponseException.new '429 - Too many requests.', _context
-      elsif _context.response.status_code == 500
-        raise APIException.new '500 - Unexpected internal error.', _context
+        raise ErrorResponseException.new 'Too many requests.', _context
+      elsif !_context.response.status_code.between?(200, 208)
+        raise ErrorResponseException.new 'Unexpected internal error.', _context
       end
-
-      # global error handling using HTTP status codes.
       validate_response(_context)
 
       # return appropriate response type
       decoded = APIHelper.json_deserialize(_context.response.raw_body)
       return ActionsResponse.from_hash(decoded)
-    end
-
-    # Post an Action
-    # @param [Action] action Required parameter: The action to be posted.
-    # @return MessageResponse response from the API call
-    def post_action(action)
-
-      # the base uri for api requests
-      _query_builder = Configuration.base_uri.dup
-
-      # prepare query string for API call
-      _query_builder << '/v1/actions'
-
-      # validate and preprocess url
-      _query_url = APIHelper.clean_url _query_builder
-
-      # prepare headers
-      _headers = {
-        'accept' => 'application/json',
-        'content-type' => 'application/json; charset=utf-8'
-      }
-
-      # create the HttpRequest object for the call
-      _request = @http_client.post _query_url, headers: _headers, parameters: action.to_json
-
-      # apply authentication
-      BasicAuth.apply(_request)
-
-      # execute the request
-      _context = execute_request(_request)
-
-      # endpoint error handling using HTTP status codes.
-      if _context.response.status_code == 400
-        raise ErrorResponseException.new '400 - Required `user_id` or `item_id` parameters are missing from the request body.', _context
-      elsif _context.response.status_code == 402
-        raise ErrorResponseException.new '402 - Action limit exceeded.', _context
-      elsif _context.response.status_code == 404
-        raise ErrorResponseException.new '404 - Type does not exists.', _context
-      elsif _context.response.status_code == 429
-        raise ErrorResponseException.new '429 - Too many requests.', _context
-      elsif _context.response.status_code == 500
-        raise APIException.new '500 - Unexpected internal error.', _context
-      end
-
-      # global error handling using HTTP status codes.
-      validate_response(_context)
-
-      # return appropriate response type
-      decoded = APIHelper.json_deserialize(_context.response.raw_body)
-      return MessageResponse.from_hash(decoded)
     end
 
     # Delete Actions
@@ -132,21 +152,15 @@ module SuggestGrid
                        item_id = nil,
                        older_than = nil)
 
-      # the base uri for api requests
+      # prepare query url
       _query_builder = Configuration.base_uri.dup
-
-      # prepare query string for API call
       _query_builder << '/v1/actions'
-
-      # process optional query parameters
       _query_builder = APIHelper.append_url_with_query_parameters _query_builder, {
         'type' => type,
         'user_id' => user_id,
         'item_id' => item_id,
         'older_than' => older_than
       }
-
-      # validate and preprocess url
       _query_url = APIHelper.clean_url _query_builder
 
       # prepare headers
@@ -154,88 +168,30 @@ module SuggestGrid
         'accept' => 'application/json'
       }
 
-      # create the HttpRequest object for the call
+      # prepare and execute HttpRequest
       _request = @http_client.delete _query_url, headers: _headers
-
-      # apply authentication
       BasicAuth.apply(_request)
-
-      # execute the request
       _context = execute_request(_request)
 
-      # endpoint error handling using HTTP status codes.
+      # validate response against endpoint and global error codes
       if _context.response.status_code == 400
-        raise ErrorResponseException.new '400 - Required `user_id` or `item_id` parameters are missing from the request body.', _context
+        raise ErrorResponseException.new 'Required `user_id` or `item_id` parameters are missing from the request body.', _context
       elsif _context.response.status_code == 404
-        raise DeleteErrorResponseException.new '404 - Delete actions not found.', _context
+        raise DeleteErrorResponseException.new 'Delete actions not found.', _context
       elsif _context.response.status_code == 422
-        raise ErrorResponseException.new '422 - No query parameter (`user_id`, `item_id`, or `older_than`) is given.  In order to delete all actionsdelete the type.', _context
+        raise ErrorResponseException.new 'No query parameter (`user_id`, `item_id`, or `older_than`) is given.  In order to delete all actionsdelete the type.', _context
       elsif _context.response.status_code == 429
-        raise ErrorResponseException.new '429 - Too many requests.', _context
+        raise ErrorResponseException.new 'Too many requests.', _context
       elsif _context.response.status_code == 505
-        raise ErrorResponseException.new '505 - Request timed out.', _context
-      elsif _context.response.status_code == 500
-        raise APIException.new '500 - Unexpected internal error.', _context
+        raise ErrorResponseException.new 'Request timed out.', _context
+      elsif !_context.response.status_code.between?(200, 208)
+        raise ErrorResponseException.new 'Unexpected internal error.', _context
       end
-
-      # global error handling using HTTP status codes.
       validate_response(_context)
 
       # return appropriate response type
       decoded = APIHelper.json_deserialize(_context.response.raw_body)
       return DeleteSuccessResponse.from_hash(decoded)
-    end
-
-    # Post Bulk Actions
-    # @param [Collection] actions Required parameter: List of actions to be posted.
-    # @return BulkPostResponse response from the API call
-    def post_bulk_actions(actions)
-        body = ''
-        actions.each do |action|
-            body += "#{action.to_json}\n"
-        end
-
-      # the base uri for api requests
-      _query_builder = Configuration.base_uri.dup
-
-      # prepare query string for API call
-      _query_builder << '/v1/actions/_bulk'
-
-      # validate and preprocess url
-      _query_url = APIHelper.clean_url _query_builder
-
-      # prepare headers
-      _headers = {
-        'accept' => 'application/json',
-        'content-type' => 'text/plain; charset=utf-8'
-      }
-
-      # create the HttpRequest object for the call
-      _request = @http_client.post _query_url, headers: _headers, parameters: body
-
-      # apply authentication
-      BasicAuth.apply(_request)
-
-      # execute the request
-      _context = execute_request(_request)
-
-      # endpoint error handling using HTTP status codes.
-      if _context.response.status_code == 400
-        raise ErrorResponseException.new '400 - Body is missing.', _context
-      elsif _context.response.status_code == 402
-        raise ErrorResponseException.new '402 - Action limit exceeded.', _context
-      elsif _context.response.status_code == 429
-        raise ErrorResponseException.new '429 - Too many requests.', _context
-      elsif _context.response.status_code == 500
-        raise APIException.new '500 - Unexpected internal error.', _context
-      end
-
-      # global error handling using HTTP status codes.
-      validate_response(_context)
-
-      # return appropriate response type
-      decoded = APIHelper.json_deserialize(_context.response.raw_body)
-      return BulkPostResponse.from_hash(decoded)
     end
   end
 end

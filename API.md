@@ -1,8 +1,8 @@
 
 
 ## Type Methods
-Type methods are used for managing SuggestGrid types.
-For more information on types, refer to [Types concept documentation](http://www.suggestgrid.com/docs/types).
+Type methods are used for creating, inspecting, and deleting SuggestGrid types.
+For more information, you may refer to [types documentation](http://www.suggestgrid.com/docs/types).
 
 ### Create a New Type
 > `create_type(type, body)`
@@ -95,8 +95,8 @@ SuggestGridClient.type.delete_all_types
 
 
 ## Action Methods
-Action methods are for posting and deleting actions.
-For more information on actions, refer to [Actions concept documentation](http://www.suggestgrid.com/docs/actions).
+Action methods are for creating, inspecting, and deleting actions.
+For more information, you may refer to [actions documentation](http://www.suggestgrid.com/docs/actions).
 
 ### Post an Action
 > `post_action(SuggestGrid::Action.new(type, user_id, item_id, rating = nil))`
@@ -274,8 +274,8 @@ user_id|string||The user id of the actions.
 
 
 ## Metadata Methods
-Metadata methods are for posting and deleting metadata.
-For more information on metadata, refer to [Metadata concept documentation ](http://www.suggestgrid.com/docs/metadata).
+Metadata methods are for creating, inspecting, and deleting metadata.
+For more information, you may refer to [metadata documentation ](http://www.suggestgrid.com/docs/metadata).
 
 ### Post a User
 > `post_user(metadata)`
@@ -494,8 +494,8 @@ SuggestGridClient.metadata.delete_all_items
 
 
 ## Recommnedation Methods
-Recommnedation methods are for getting recommended items or users responses from SuggestGrid.
-For more information on recommendations, refer to [Recommendations concept documentation](http://www.suggestgrid.com/docs/recommendations).
+Recommnedation methods are for getting recommended items or users from SuggestGrid.
+For more information, you may refer to [recommendations documentation](http://www.suggestgrid.com/docs/recommendations).
 
 ### Get Recommended Users
 > `get_recommended_users(body)`
@@ -541,7 +541,7 @@ from|integer|false|The number of most recommended items to be skipped.
 item_id|string|false|The item id of the query.
 item_ids|array|false|The item ids of the query. Exactly one of item id or item ids parameters must be provided.
 similar_user_id|string|false|Similar user that the response should be similar to.
-similar_user_ids|string|false|Similar users that the response should be similar to. At most one of similar user and similar users parameters can be provided. 
+similar_user_ids|array|false|Similar users that the response should be similar to. At most one of similar user and similar users parameters can be provided. 
 size|integer|false|The number of users asked to return in the response. Defaults to 10. Must be between 1 and 10.000 inclusive.
 type|string|false|The type of the query.
 types|string|false|The types of the query. Exactly one of type or types parameters must be provided.
@@ -591,7 +591,7 @@ fields|array|false|The metadata fields to be included in returned item objects.
 filter||false|
 from|integer|false|The number of most recommended items to be skipped.
 similar_item_id|string|false|Similar item that the response should be similar to.
-similar_item_ids|string|false|Similar items that the response should be similar to. At most one of similar item and similar items parameters can be provided. 
+similar_item_ids|array|false|Similar items that the response should be similar to. At most one of similar item and similar items parameters can be provided. 
 size|integer|false|The number of items asked to return in the response. Defaults to 10. Must be between 1 and 10.000 inclusive.
 type|string|false|The type of the query.
 types|string|false|The types of the query. Exactly one of type or types parameters must be provided.
@@ -600,8 +600,8 @@ user_ids|array|false|The user ids of the query. Exactly one of user id or user i
 
 
 ## Similarity Methods
-Similarity methods are for getting similar items or users responses from SuggestGrid.
-For more information on similars, refer to [Similarities concept documentation](http://www.suggestgrid.com/docs/similarities).
+Similarity methods are for getting similar items or users from SuggestGrid.
+For more information, you may refer to [similarities documentation](http://www.suggestgrid.com/docs/similarities).
 
 ### Get Similar Users
 > `get_similar_users(body)`

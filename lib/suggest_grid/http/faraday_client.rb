@@ -4,14 +4,16 @@ require 'faraday/http_cache'
 module SuggestGrid
   class FaradayClient < HttpClient
     # The constructor.
-    def initialize(timeout: nil, cache: false)
+    def initialize(timeout: nil, cache: false, max_retries: nil, retry_interval: nil)
       @connection = Faraday.new do |faraday|
         faraday.use Faraday::HttpCache, serializer: Marshal if cache
         faraday.request :multipart
         faraday.request :url_encoded
         faraday.ssl[:ca_file] = Certifi.where
         faraday.adapter Faraday.default_adapter
+        faraday.options[:params_encoder] = Faraday::FlatParamsEncoder
         faraday.options[:open_timeout] = timeout if timeout
+        faraday.request :retry, max: max_retries, interval: retry_interval if (max_retries and retry_interval)
       end
     end
 

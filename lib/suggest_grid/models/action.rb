@@ -39,12 +39,16 @@ module SuggestGrid
                    user_id = nil,
                    item_id = nil,
                    rating = nil,
-                   timestamp = nil)
+                   timestamp = nil,
+                   additional_properties = {})
       @type = type
       @user_id = user_id
       @item_id = item_id
       @rating = rating
       @timestamp = timestamp
+
+      # Add additional model properties to the instance
+      additional_properties.each {|name, value| instance_variable_set("@#{name}", value)}
     end
 
     # Creates an instance of the object from a hash
@@ -59,12 +63,16 @@ module SuggestGrid
         rating = hash["rating"]
         timestamp = hash["timestamp"]
 
+        # Clean out expected properties from Hash
+        names.values.each {|k| hash.delete(k)}
+
         # Create object from extracted values
         Action.new(type,
                    user_id,
                    item_id,
                    rating,
-                   timestamp)
+                   timestamp,
+                   hash)
       end
     end
   end

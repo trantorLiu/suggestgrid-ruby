@@ -13,13 +13,9 @@ module SuggestGrid
     # @return UsersResponse response from the API call
     def get_similar_users(query)
 
-      # the base uri for api requests
+      # prepare query url
       _query_builder = Configuration.base_uri.dup
-
-      # prepare query string for API call
       _query_builder << '/v1/similar/users'
-
-      # validate and preprocess url
       _query_url = APIHelper.clean_url _query_builder
 
       # prepare headers
@@ -28,27 +24,21 @@ module SuggestGrid
         'content-type' => 'application/json; charset=utf-8'
       }
 
-      # create the HttpRequest object for the call
+      # prepare and execute HttpRequest
       _request = @http_client.post _query_url, headers: _headers, parameters: query.to_json
-
-      # apply authentication
       BasicAuth.apply(_request)
-
-      # execute the request
       _context = execute_request(_request)
 
-      # endpoint error handling using HTTP status codes.
+      # validate response against endpoint and global error codes
       if _context.response.status_code == 400
-        raise ErrorResponseException.new '400 - Request body is invalid.', _context
+        raise ErrorResponseException.new 'Request body is invalid.', _context
       elsif _context.response.status_code == 422
-        raise ErrorResponseException.new '422 - Required parameters are missing.', _context
+        raise ErrorResponseException.new 'Required parameters are missing.', _context
       elsif _context.response.status_code == 429
-        raise ErrorResponseException.new '429 - Too many requests.', _context
-      elsif _context.response.status_code == 500
-        raise APIException.new '500 - Unexpected internal error.', _context
+        raise ErrorResponseException.new 'Too many requests.', _context
+      elsif !_context.response.status_code.between?(200, 208)
+        raise ErrorResponseException.new 'Unexpected internal error.', _context
       end
-
-      # global error handling using HTTP status codes.
       validate_response(_context)
 
       # return appropriate response type
@@ -61,13 +51,9 @@ module SuggestGrid
     # @return ItemsResponse response from the API call
     def get_similar_items(query)
 
-      # the base uri for api requests
+      # prepare query url
       _query_builder = Configuration.base_uri.dup
-
-      # prepare query string for API call
       _query_builder << '/v1/similar/items'
-
-      # validate and preprocess url
       _query_url = APIHelper.clean_url _query_builder
 
       # prepare headers
@@ -76,27 +62,21 @@ module SuggestGrid
         'content-type' => 'application/json; charset=utf-8'
       }
 
-      # create the HttpRequest object for the call
+      # prepare and execute HttpRequest
       _request = @http_client.post _query_url, headers: _headers, parameters: query.to_json
-
-      # apply authentication
       BasicAuth.apply(_request)
-
-      # execute the request
       _context = execute_request(_request)
 
-      # endpoint error handling using HTTP status codes.
+      # validate response against endpoint and global error codes
       if _context.response.status_code == 400
-        raise ErrorResponseException.new '400 - Request body is invalid.', _context
+        raise ErrorResponseException.new 'Request body is invalid.', _context
       elsif _context.response.status_code == 422
-        raise ErrorResponseException.new '422 - Required parameters are missing.', _context
+        raise ErrorResponseException.new 'Required parameters are missing.', _context
       elsif _context.response.status_code == 429
-        raise ErrorResponseException.new '429 - Too many requests.', _context
-      elsif _context.response.status_code == 500
-        raise APIException.new '500 - Unexpected internal error.', _context
+        raise ErrorResponseException.new 'Too many requests.', _context
+      elsif !_context.response.status_code.between?(200, 208)
+        raise ErrorResponseException.new 'Unexpected internal error.', _context
       end
-
-      # global error handling using HTTP status codes.
       validate_response(_context)
 
       # return appropriate response type
