@@ -293,7 +293,7 @@ SuggestGridClient.metadata.post_user({id: "9394182", age: 28, name: "Avis Horton
 
 Name | Type |Required| Description
 --- | --- | --- | ---
-id|string|true|The id of the user or the item that the metadata is associated with. Id parameter is necessary for all metadata. 
+id|string|true|The id of the metadata of a user or an item. 
 ### Post Bulk Users
 > `post_bulk_users(metadata)`
 
@@ -400,7 +400,7 @@ SuggestGridClient.metadata.post_item({id: "25922342", manufacturer: "Vicon", pri
 
 Name | Type |Required| Description
 --- | --- | --- | ---
-id|string|true|The id of the user or the item that the metadata is associated with. Id parameter is necessary for all metadata. 
+id|string|true|The id of the metadata of a user or an item. 
 ### Post Bulk Items
 > `post_bulk_items(metadata)`
 

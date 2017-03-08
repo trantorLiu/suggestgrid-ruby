@@ -2,8 +2,7 @@
 
 module SuggestGrid
   class Metadata < BaseModel
-    # The id of the user or the item that the metadata is associated with.
-    # Id parameter is necessary for all metadata.
+    # The id of the metadata of a user or an item.
     # @return [String]
     attr_accessor :id
 
