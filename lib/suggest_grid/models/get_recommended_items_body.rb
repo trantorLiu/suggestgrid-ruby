@@ -18,7 +18,7 @@ module SuggestGrid
     # @return [List of String]
     attr_accessor :user_ids
 
-    # The number of most recommended items to be skipped.
+    # The number of most recommended items to be skipped from the response. Defaults to 0.
     # @return [Integer]
     attr_accessor :from
 
