@@ -22,7 +22,7 @@ module SuggestGrid
     # @return [Integer]
     attr_accessor :from
 
-    # The number of items asked to return in the response. Defaults to 10. Must be between 1 and 10.000 inclusive.
+    # The number of items requested. Defaults to 10. Must be between 1 and 10,000 inclusive.
     # @return [Integer]
     attr_accessor :size
 
