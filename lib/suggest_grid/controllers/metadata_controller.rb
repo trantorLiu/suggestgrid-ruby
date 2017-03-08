@@ -110,6 +110,8 @@ module SuggestGrid
       # validate response against endpoint and global error codes
       if _context.response.status_code == 404
         raise ErrorResponseException.new 'User not found.', _context
+      elsif _context.response.status_code == 429
+        raise ErrorResponseException.new 'Too many requests.', _context
       elsif !_context.response.status_code.between?(200, 208)
         raise ErrorResponseException.new 'Unexpected internal error.', _context
       end
