@@ -9,7 +9,7 @@ module SuggestGrid
     end
 
     # Get Similar Users
-    # @param [GetSimilarUsersBody] query Required parameter: The query for similar users.
+    # @param [GetSimilarUsersBody] query Required parameter: Query for similar users.
     # @return UsersResponse response from the API call
     def get_similar_users(query)
 
@@ -47,7 +47,7 @@ module SuggestGrid
     end
 
     # Get Similar Items
-    # @param [GetSimilarItemsBody] query Required parameter: The query for similar items.
+    # @param [GetSimilarItemsBody] query Required parameter: Query for similar items.
     # @return ItemsResponse response from the API call
     def get_similar_items(query)
 
