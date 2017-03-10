@@ -172,6 +172,7 @@ SuggestGridClient.action.post_bulk_actions(actions)
 
 Get actions. Defaut responses will be paged by 10 actios each.
 Type, user id, item id, or older than parameters could be provided.
+The intersection of the provided parameters will be returned.
 
 
 
