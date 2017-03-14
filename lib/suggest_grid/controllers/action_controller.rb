@@ -36,8 +36,6 @@ module SuggestGrid
         raise ErrorResponseException.new 'Action limit exceeded.', _context
       elsif _context.response.status_code == 404
         raise ErrorResponseException.new 'Type does not exists.', _context
-      elsif _context.response.status_code == 429
-        raise ErrorResponseException.new 'Too many requests.', _context
       elsif !_context.response.status_code.between?(200, 208)
         raise ErrorResponseException.new 'Unexpected internal error.', _context
       end
@@ -78,8 +76,6 @@ module SuggestGrid
         raise ErrorResponseException.new 'Body is missing.', _context
       elsif _context.response.status_code == 402
         raise ErrorResponseException.new 'Action limit exceeded.', _context
-      elsif _context.response.status_code == 429
-        raise ErrorResponseException.new 'Too many requests.', _context
       elsif !_context.response.status_code.between?(200, 208)
         raise ErrorResponseException.new 'Unexpected internal error.', _context
       end
@@ -129,9 +125,7 @@ module SuggestGrid
       _context = execute_request(_request)
 
       # validate response against endpoint and global error codes
-      if _context.response.status_code == 429
-        raise ErrorResponseException.new 'Too many requests.', _context
-      elsif !_context.response.status_code.between?(200, 208)
+      if _context.response.status_code == 0
         raise ErrorResponseException.new 'Unexpected internal error.', _context
       end
       validate_response(_context)
@@ -180,8 +174,6 @@ module SuggestGrid
         raise DeleteErrorResponseException.new 'Delete actions not found.', _context
       elsif _context.response.status_code == 422
         raise ErrorResponseException.new 'No query parameter (`user_id`, `item_id`, or `older_than`) is given.  In order to delete all actionsdelete the type.', _context
-      elsif _context.response.status_code == 429
-        raise ErrorResponseException.new 'Too many requests.', _context
       elsif _context.response.status_code == 505
         raise ErrorResponseException.new 'Request timed out.', _context
       elsif !_context.response.status_code.between?(200, 208)
