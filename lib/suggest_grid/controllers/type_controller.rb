@@ -76,7 +76,7 @@ module SuggestGrid
 
       # validate response against endpoint and global error codes
       if _context.response.status_code == 404
-        raise ErrorResponseException.new 'Type not found.', _context
+        raise ErrorResponseException.new 'Type does not exists.', _context
       elsif !_context.response.status_code.between?(200, 208)
         raise ErrorResponseException.new 'Unexpected internal error.', _context
       end
@@ -112,7 +112,7 @@ module SuggestGrid
 
       # validate response against endpoint and global error codes
       if _context.response.status_code == 404
-        raise ErrorResponseException.new 'Type does not exists.', _context
+        raise ErrorResponseException.new 'Action type does not exists.', _context
       elsif !_context.response.status_code.between?(200, 208)
         raise ErrorResponseException.new 'Unexpected internal error.', _context
       end
