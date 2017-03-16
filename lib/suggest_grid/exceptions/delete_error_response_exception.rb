@@ -10,7 +10,7 @@ module SuggestGrid
     # @return [String]
     attr_accessor :error_description
 
-    # URI of the response for more details.
+    # The URI of the error for more details.
     # @return [String]
     attr_accessor :error_uri
 
