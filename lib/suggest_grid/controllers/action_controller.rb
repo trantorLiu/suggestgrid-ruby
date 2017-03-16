@@ -31,7 +31,7 @@ module SuggestGrid
 
       # validate response against endpoint and global error codes
       if _context.response.status_code == 400
-        raise ErrorResponseException.new 'Required `user_id` or `item_id` parameters are missing from the request body.', _context
+        raise ErrorResponseException.new 'Required user id or item id parameters are missing from the request.', _context
       elsif _context.response.status_code == 402
         raise ErrorResponseException.new 'Action limit exceeded.', _context
       elsif _context.response.status_code == 404
@@ -173,11 +173,11 @@ module SuggestGrid
 
       # validate response against endpoint and global error codes
       if _context.response.status_code == 400
-        raise ErrorResponseException.new 'Required `user_id` or `item_id` parameters are missing from the request body.', _context
+        raise ErrorResponseException.new 'Required user id or item id parameters are missing.', _context
       elsif _context.response.status_code == 404
         raise DeleteErrorResponseException.new 'Delete actions not found.', _context
       elsif _context.response.status_code == 422
-        raise ErrorResponseException.new 'No query parameter (`user_id`, `item_id`, or `older_than`) is given.  In order to delete all actionsdelete the type.', _context
+        raise ErrorResponseException.new 'No query parameter (user id, item id, or older than) is given. qIn order to delete all actionsdelete the type.', _context
       elsif _context.response.status_code == 505
         raise ErrorResponseException.new 'Request timed out.', _context
       elsif !_context.response.status_code.between?(200, 208)
