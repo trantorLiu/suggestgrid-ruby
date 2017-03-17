@@ -500,7 +500,7 @@ For more information, you may refer to [recommendations documentation](http://ww
 ### Get Recommended Users
 > `get_recommended_users(body)`
 
-Returns recommended users for the given query.
+Returns recommended users for the query.
 
 examples:
 
@@ -548,7 +548,7 @@ types|string|false|The types of the query. Exactly one of type or types paramete
 ### Get Recommended Items
 > `get_recommended_items(body)`
 
-Returns recommended items for the given query.
+Returns recommended items for the query.
 
 examples:
 
