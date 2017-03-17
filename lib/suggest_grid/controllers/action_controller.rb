@@ -31,13 +31,11 @@ module SuggestGrid
 
       # validate response against endpoint and global error codes
       if _context.response.status_code == 400
-        raise ErrorResponseException.new 'Required `user_id` or `item_id` parameters are missing from the request body.', _context
+        raise ErrorResponseException.new 'Required user id or item id parameters are missing from the request.', _context
       elsif _context.response.status_code == 402
         raise ErrorResponseException.new 'Action limit exceeded.', _context
       elsif _context.response.status_code == 404
-        raise ErrorResponseException.new 'Type does not exists.', _context
-      elsif _context.response.status_code == 429
-        raise ErrorResponseException.new 'Too many requests.', _context
+        raise ErrorResponseException.new 'Action type does not exists.', _context
       elsif !_context.response.status_code.between?(200, 208)
         raise ErrorResponseException.new 'Unexpected internal error.', _context
       end
@@ -78,8 +76,10 @@ module SuggestGrid
         raise ErrorResponseException.new 'Body is missing.', _context
       elsif _context.response.status_code == 402
         raise ErrorResponseException.new 'Action limit exceeded.', _context
-      elsif _context.response.status_code == 429
-        raise ErrorResponseException.new 'Too many requests.', _context
+      elsif _context.response.status_code == 404
+        raise ErrorResponseException.new 'Action type does not exists.', _context
+      elsif _context.response.status_code == 413
+        raise ErrorResponseException.new 'Bulk request maximum line count exceeded.', _context
       elsif !_context.response.status_code.between?(200, 208)
         raise ErrorResponseException.new 'Unexpected internal error.', _context
       end
@@ -95,8 +95,8 @@ module SuggestGrid
     # @param [String] user_id Optional parameter: The user id of the actions.
     # @param [String] item_id Optional parameter: The item id of the actions.
     # @param [String] older_than Optional parameter: Maxium timestamp of the actions. Valid times are in form of 1s, 1m, 1h, 1d, 1M, 1y, where 1 can be any integer, or a UNIX timestamp like 1443798195.
-    # @param [Long] size Optional parameter: The number of the users response. Defaults to 10. Must be between 1 and 10.000 inclusive. This parameter must be string represetation of an integer like "1".
-    # @param [Long] from Optional parameter: The number of users to be skipped for response. Defaults to 0. Must be bigger than or equal to 0. This parameter must be string represetation of an integer like "1".
+    # @param [Long] size Optional parameter: The number of the users response. Defaults to 10. Must be between 1 and 10,000 inclusive. This parameter must be string represetation of an integer like "1".
+    # @param [Long] from Optional parameter: The number of users to be skipped from the response. Defaults to 0. Must be bigger than or equal to 0. This parameter must be string represetation of an integer like "1".
     # @return ActionsResponse response from the API call
     def get_actions(type = nil,
                     user_id = nil,
@@ -129,9 +129,7 @@ module SuggestGrid
       _context = execute_request(_request)
 
       # validate response against endpoint and global error codes
-      if _context.response.status_code == 429
-        raise ErrorResponseException.new 'Too many requests.', _context
-      elsif !_context.response.status_code.between?(200, 208)
+      if _context.response.status_code == 0
         raise ErrorResponseException.new 'Unexpected internal error.', _context
       end
       validate_response(_context)
@@ -175,13 +173,11 @@ module SuggestGrid
 
       # validate response against endpoint and global error codes
       if _context.response.status_code == 400
-        raise ErrorResponseException.new 'Required `user_id` or `item_id` parameters are missing from the request body.', _context
+        raise ErrorResponseException.new 'Required user id or item id parameters are missing.', _context
       elsif _context.response.status_code == 404
         raise DeleteErrorResponseException.new 'Delete actions not found.', _context
       elsif _context.response.status_code == 422
-        raise ErrorResponseException.new 'No query parameter (`user_id`, `item_id`, or `older_than`) is given.  In order to delete all actionsdelete the type.', _context
-      elsif _context.response.status_code == 429
-        raise ErrorResponseException.new 'Too many requests.', _context
+        raise ErrorResponseException.new 'No query parameter (user id, item id, or older than) is given. qIn order to delete all actionsdelete the type.', _context
       elsif _context.response.status_code == 505
         raise ErrorResponseException.new 'Request timed out.', _context
       elsif !_context.response.status_code.between?(200, 208)

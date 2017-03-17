@@ -2,7 +2,7 @@
 
 ## Type Methods
 Type methods are used for creating, inspecting, and deleting SuggestGrid types.
-For more information, you may refer to [types documentation](http://www.suggestgrid.com/docs/types).
+[Types documentation](http://www.suggestgrid.com/docs/types) is available for an overview.
 
 ### Create a New Type
 > `create_type(type, body)`
@@ -56,8 +56,7 @@ type|string|true|The name of the type to get properties.
 ### Delete a Type
 > `delete_type(type)`
 
-Deletes a type with ALL of its actions and recommendation model.
-Do not use this if you will need the type.
+Warning: Deletes the type with all of its actions and its recommendation model.
 
 
 ```ruby
@@ -96,7 +95,7 @@ SuggestGridClient.type.delete_all_types
 
 ## Action Methods
 Action methods are for creating, inspecting, and deleting actions.
-For more information, you may refer to [actions documentation](http://www.suggestgrid.com/docs/actions).
+[Actions documentation](http://www.suggestgrid.com/docs/actions) is available for an overview.
 
 ### Post an Action
 > `post_action(SuggestGrid::Action.new(type, user_id, item_id, rating = nil))`
@@ -173,6 +172,7 @@ SuggestGridClient.action.post_bulk_actions(actions)
 
 Get actions. Defaut responses will be paged by 10 actios each.
 Type, user id, item id, or older than parameters could be provided.
+The intersection of the provided parameters will be returned.
 
 
 
@@ -205,23 +205,23 @@ response.count
 
 Name | Type |Required| Description
 --- | --- | --- | ---
-from|integer||The number of users to be skipped for response. Defaults to 0. Must be bigger than or equal to 0. This parameter must be string represetation of an integer like "1". 
+from|integer||The number of users to be skipped from the response. Defaults to 0. Must be bigger than or equal to 0. This parameter must be string represetation of an integer like "1". 
 item_id|string||The item id of the actions.
 older_than|string||Maxium timestamp of the actions. Valid times are in form of 1s, 1m, 1h, 1d, 1M, 1y, where 1 can be any integer, or a UNIX timestamp like 1443798195. 
-size|integer||The number of the users response. Defaults to 10. Must be between 1 and 10.000 inclusive. This parameter must be string represetation of an integer like "1". 
+size|integer||The number of the users response. Defaults to 10. Must be between 1 and 10,000 inclusive. This parameter must be string represetation of an integer like "1". 
 type|string||The type of the actions.
 user_id|string||The user id of the actions.
 ### Delete Actions
 > `delete_actions(type = nil, user_id = nil, item_id = nil, older_than = nil)`
 
-Type must be provided. Additionally,
+Warning: Please use get actions with the exact parameters first to inspect the actions to be deleted.
 
-* If both user id and item id are supplied the user's actions on the item will be deleted.
-* If only user id is provided, all actions of the user will be deleted.
-* If only item id is provided, all actions on the item will be deleted.
-* If only older than is provided, all actions older than the timestamp or the duration will be deleted.
-* If a few of these parameters are provided, delete action will be executed within intersection of these parameters.
-* One of these parameters must be provided. In order to delete all actions, delete the type.
+* Type must be provided. 
+* If user id is provided, all actions of the user will be deleted.
+* If item id is provided, all actions on the item will be deleted.
+* If older than is provided, all actions older than the timestamp or the duration will be deleted.
+* If a number of these parameters are provided, the intersection of these parameters will be deleted.
+* In addition to a type, at least one of these parameters must be provided. In order to delete all the actions of a type, delete the type.
 
 
 
@@ -275,7 +275,7 @@ user_id|string||The user id of the actions.
 
 ## Metadata Methods
 Metadata methods are for creating, inspecting, and deleting metadata.
-For more information, you may refer to [metadata documentation ](http://www.suggestgrid.com/docs/metadata).
+[Metadata documentation ](http://www.suggestgrid.com/docs/metadata) is available for an overview.
 
 ### Post a User
 > `post_user(metadata)`
@@ -293,7 +293,7 @@ SuggestGridClient.metadata.post_user({id: "9394182", age: 28, name: "Avis Horton
 
 Name | Type |Required| Description
 --- | --- | --- | ---
-id|string|true|The id of the user or the item that the metadata is associated with. Id parameter is necessary for all metadata. 
+id|string|true|The id of the metadata of a user or an item. 
 ### Post Bulk Users
 > `post_bulk_users(metadata)`
 
@@ -356,8 +356,8 @@ Page and per-page parameters could be set.
 
 Name | Type |Required| Description
 --- | --- | --- | ---
-from|integer||The number of users to be skipped for response. Defaults to 0. Must be bigger than or equal to 0. This parameter must be string represetation of an integer like "1". 
-size|integer||The number of the users response. Defaults to 10. Must be between 1 and 10.000 inclusive. This parameter must be string represetation of an integer like "1". 
+from|integer||The number of users to be skipped from the response. Defaults to 0. Must be bigger than or equal to 0. This parameter must be string represetation of an integer like "1". 
+size|integer||The number of the users response. Defaults to 10. Must be between 1 and 10,000 inclusive. This parameter must be string represetation of an integer like "1". 
 ### Delete a User
 > `delete_user(user_id)`
 
@@ -376,7 +376,8 @@ user_id|string|true|The user id to delete its metadata.
 ### Delete All Users
 > `delete_all_users`
 
-Deletes all user metadata from SuggestGrid.
+Warning: Deletes all user metadata from SuggestGrid.
+
 
 ```ruby
 SuggestGridClient.metadata.delete_all_users
@@ -400,7 +401,7 @@ SuggestGridClient.metadata.post_item({id: "25922342", manufacturer: "Vicon", pri
 
 Name | Type |Required| Description
 --- | --- | --- | ---
-id|string|true|The id of the user or the item that the metadata is associated with. Id parameter is necessary for all metadata. 
+id|string|true|The id of the metadata of a user or an item. 
 ### Post Bulk Items
 > `post_bulk_items(metadata)`
 
@@ -463,8 +464,8 @@ Page and per-page parameters could be set.
 
 Name | Type |Required| Description
 --- | --- | --- | ---
-from|integer||The number of users to be skipped for response. Defaults to 0. Must be bigger than or equal to 0. This parameter must be string represetation of an integer like "1". 
-size|integer||The number of the users response. Defaults to 10. Must be between 1 and 10.000 inclusive. This parameter must be string represetation of an integer like "1". 
+from|integer||The number of users to be skipped from the response. Defaults to 0. Must be bigger than or equal to 0. This parameter must be string represetation of an integer like "1". 
+size|integer||The number of the users response. Defaults to 10. Must be between 1 and 10,000 inclusive. This parameter must be string represetation of an integer like "1". 
 ### Delete An Item
 > `delete_item(item_id)`
 
@@ -483,8 +484,7 @@ item_id|string|true|The item id to delete its metadata.
 ### Delete All Items
 > `delete_all_items`
 
-Delete all items metadata.
-This method would flush all items metadata on SuggestGrid.
+Warning: Deletes all item metadata from SuggestGrid.
 
 
 ```ruby
@@ -494,13 +494,13 @@ SuggestGridClient.metadata.delete_all_items
 
 
 ## Recommnedation Methods
-Recommnedation methods are for getting recommended items or users from SuggestGrid.
-For more information, you may refer to [recommendations documentation](http://www.suggestgrid.com/docs/recommendations).
+Recommnedation methods are for getting recommended items, or recommended users from SuggestGrid.
+[Recommendations documentation](http://www.suggestgrid.com/docs/recommendations) is available for an overview.
 
 ### Get Recommended Users
 > `get_recommended_users(body)`
 
-Returns recommended users for the given query.
+Returns recommended users for the query.
 
 examples:
 
@@ -537,18 +537,18 @@ Name | Type |Required| Description
 except|array|false|These user ids that will not be included in the response.
 fields|array|false|The metadata fields to be included in returned user objects.
 filter||false|
-from|integer|false|The number of most recommended items to be skipped.
+from|integer|false|The number of most recommended items to be skipped from the response. Defaults to 0.
 item_id|string|false|The item id of the query.
 item_ids|array|false|The item ids of the query. Exactly one of item id or item ids parameters must be provided.
 similar_user_id|string|false|Similar user that the response should be similar to.
 similar_user_ids|array|false|Similar users that the response should be similar to. At most one of similar user and similar users parameters can be provided. 
-size|integer|false|The number of users asked to return in the response. Defaults to 10. Must be between 1 and 10.000 inclusive.
+size|integer|false|The number of users requested. Defaults to 10. Must be between 1 and 10,000 inclusive.
 type|string|false|The type of the query.
 types|string|false|The types of the query. Exactly one of type or types parameters must be provided.
 ### Get Recommended Items
 > `get_recommended_items(body)`
 
-Returns recommended items for the given query.
+Returns recommended items for the query.
 
 examples:
 
@@ -589,10 +589,10 @@ Name | Type |Required| Description
 except|array|false|These item ids that will not be included in the response.
 fields|array|false|The metadata fields to be included in returned item objects.
 filter||false|
-from|integer|false|The number of most recommended items to be skipped.
+from|integer|false|The number of most recommended items to be skipped from the response. Defaults to 0.
 similar_item_id|string|false|Similar item that the response should be similar to.
 similar_item_ids|array|false|Similar items that the response should be similar to. At most one of similar item and similar items parameters can be provided. 
-size|integer|false|The number of items asked to return in the response. Defaults to 10. Must be between 1 and 10.000 inclusive.
+size|integer|false|The number of items requested. Defaults to 10. Must be between 1 and 10,000 inclusive.
 type|string|false|The type of the query.
 types|string|false|The types of the query. Exactly one of type or types parameters must be provided.
 user_id|string|false|The user id of the query.
@@ -600,8 +600,8 @@ user_ids|array|false|The user ids of the query. Exactly one of user id or user i
 
 
 ## Similarity Methods
-Similarity methods are for getting similar items or users from SuggestGrid.
-For more information, you may refer to [similarities documentation](http://www.suggestgrid.com/docs/similarities).
+Similarity methods are for getting similar items, or similar users from SuggestGrid.
+[Similarities documentation](http://www.suggestgrid.com/docs/similarities) is available for an overview.
 
 ### Get Similar Users
 > `get_similar_users(body)`
@@ -637,8 +637,8 @@ Name | Type |Required| Description
 except|array|false|These user ids that will not be included in the response.
 fields|array|false|The metadata fields to be included in returned user objects.
 filter||false|
-from|integer|false|The number of most similar users to be skipped.
-size|integer|false|The number of users asked to return in the response. Defaults to 10. Must be between 1 and 10.000 inclusive.
+from|integer|false|The number of most similar users to be skipped from the response. Defaults to 0.
+size|integer|false|The number of users requested. Defaults to 10. Must be between 1 and 10,000 inclusive.
 type|string|false|The type of the query.
 types|string|false|The types of the query. Exactly one of type or types parameters must be provided.
 user_id|string|false|The user id of the query.
@@ -677,9 +677,9 @@ Name | Type |Required| Description
 except|array|false|These item ids that will not be included in the response.
 fields|array|false|The metadata fields to be included in returned item objects.
 filter||false|
-from|integer|false|The number of most similar items to be skipped.
+from|integer|false|The number of most similar items to be skipped from the response. Defaults to 0.
 item_id|string|false|The item id of the query. Get similar items to given item id. Either item id or item ids must be provided.
 item_ids|array|false|The item ids of the query. Exactly one of item id or item ids parameters must be provided. Get similar items to given item ids. Either item id or item ids must be provided.
-size|integer|false|The number of items asked to return in the response. Defaults to 10. Must be between 1 and 10.000 inclusive.
+size|integer|false|The number of items requested. Defaults to 10. Must be between 1 and 10,000 inclusive.
 type|string|false|The type of the query.
 types|string|false|The types of the query. Exactly one of type or types parameters must be provided.

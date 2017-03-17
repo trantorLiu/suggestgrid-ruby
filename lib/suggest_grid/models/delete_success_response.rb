@@ -6,15 +6,15 @@ module SuggestGrid
     # @return [String]
     attr_accessor :message
 
-    # The number of records found for the delete query.
+    # The number of records found.
     # @return [Long]
     attr_accessor :found
 
-    # The number of records deleted for the delete query.
+    # The number of records deleted.
     # @return [Long]
     attr_accessor :deleted
 
-    # The number of records found but not deleted for the delete query.
+    # The number of records failed to be deleted.
     # @return [Long]
     attr_accessor :failed
 

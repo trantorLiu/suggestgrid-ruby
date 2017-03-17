@@ -9,7 +9,7 @@ module SuggestGrid
     end
 
     # Get Similar Users
-    # @param [GetSimilarUsersBody] query Required parameter: The query for similar users.
+    # @param [GetSimilarUsersBody] query Required parameter: Query for similar users.
     # @return UsersResponse response from the API call
     def get_similar_users(query)
 
@@ -34,8 +34,6 @@ module SuggestGrid
         raise ErrorResponseException.new 'Request body is invalid.', _context
       elsif _context.response.status_code == 422
         raise ErrorResponseException.new 'Required parameters are missing.', _context
-      elsif _context.response.status_code == 429
-        raise ErrorResponseException.new 'Too many requests.', _context
       elsif !_context.response.status_code.between?(200, 208)
         raise ErrorResponseException.new 'Unexpected internal error.', _context
       end
@@ -47,7 +45,7 @@ module SuggestGrid
     end
 
     # Get Similar Items
-    # @param [GetSimilarItemsBody] query Required parameter: The query for similar items.
+    # @param [GetSimilarItemsBody] query Required parameter: Query for similar items.
     # @return ItemsResponse response from the API call
     def get_similar_items(query)
 
@@ -72,8 +70,6 @@ module SuggestGrid
         raise ErrorResponseException.new 'Request body is invalid.', _context
       elsif _context.response.status_code == 422
         raise ErrorResponseException.new 'Required parameters are missing.', _context
-      elsif _context.response.status_code == 429
-        raise ErrorResponseException.new 'Too many requests.', _context
       elsif !_context.response.status_code.between?(200, 208)
         raise ErrorResponseException.new 'Unexpected internal error.', _context
       end

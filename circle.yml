@@ -17,12 +17,17 @@ dependencies:
     - git clone --depth 1 -b master https://${GITHUB_USERNAME}:${GITHUB_PASSWORD}@github.com/suggestgrid/suggestgrid-ruby-test-proxy.git ${PROXY_PATH}
     - git clone --depth 1 -b ${CIRCLE_BRANCH:-master} https://${GITHUB_USERNAME}:${GITHUB_PASSWORD}@github.com/suggestgrid/kirk.git ${KIRK_PATH}
     - git clone --depth 1 -b ${CIRCLE_BRANCH:-master} https://${GITHUB_USERNAME}:${GITHUB_PASSWORD}@github.com/suggestgrid/malik.git ${MALIK_PATH}
+    - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
+    - docker pull suggestgrid/c-12
 
 test:
   override:
-    - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
-    - docker pull suggestgrid/c-12
-    - docker run -v ${KIRK_PATH}:/repos/kirk -v ${MALIK_PATH}:/repos/malik -v ${SDK_PATH}:/repos/sdk -v ${PROXY_PATH}:/repos/proxy suggestgrid/c-12
+    - >
+      docker run -v ${KIRK_PATH}:/repos/kirk \
+                 -v ${MALIK_PATH}:/repos/malik \
+                 -v ${SDK_PATH}:/repos/sdk \
+                 -v ${PROXY_PATH}:/repos/proxy \
+                 suggestgrid/c-12
 
 deployment:
   release:

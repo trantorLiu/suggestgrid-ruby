@@ -32,8 +32,6 @@ module SuggestGrid
       # validate response against endpoint and global error codes
       if _context.response.status_code == 400
         raise DetailedErrorResponseException.new 'Metadata is invalid.', _context
-      elsif _context.response.status_code == 429
-        raise ErrorResponseException.new 'Too many requests.', _context
       elsif !_context.response.status_code.between?(200, 208)
         raise ErrorResponseException.new 'Unexpected internal error.', _context
       end
@@ -72,8 +70,8 @@ module SuggestGrid
       # validate response against endpoint and global error codes
       if _context.response.status_code == 400
         raise ErrorResponseException.new 'Body is missing.', _context
-      elsif _context.response.status_code == 429
-        raise ErrorResponseException.new 'Too many requests.', _context
+      elsif _context.response.status_code == 413
+        raise ErrorResponseException.new 'Bulk request maximum line count exceeded.', _context
       elsif !_context.response.status_code.between?(200, 208)
         raise ErrorResponseException.new 'Unexpected internal error.', _context
       end
@@ -109,7 +107,7 @@ module SuggestGrid
 
       # validate response against endpoint and global error codes
       if _context.response.status_code == 404
-        raise ErrorResponseException.new 'User not found.', _context
+        raise ErrorResponseException.new 'User does not exists.', _context
       elsif !_context.response.status_code.between?(200, 208)
         raise ErrorResponseException.new 'Unexpected internal error.', _context
       end
@@ -121,8 +119,8 @@ module SuggestGrid
     end
 
     # Get Users
-    # @param [Long] size Optional parameter: The number of the users response. Defaults to 10. Must be between 1 and 10.000 inclusive. This parameter must be string represetation of an integer like "1".
-    # @param [Long] from Optional parameter: The number of users to be skipped for response. Defaults to 0. Must be bigger than or equal to 0. This parameter must be string represetation of an integer like "1".
+    # @param [Long] size Optional parameter: The number of the users response. Defaults to 10. Must be between 1 and 10,000 inclusive. This parameter must be string represetation of an integer like "1".
+    # @param [Long] from Optional parameter: The number of users to be skipped from the response. Defaults to 0. Must be bigger than or equal to 0. This parameter must be string represetation of an integer like "1".
     # @return UsersResponse response from the API call
     def get_users(size = nil,
                   from = nil)
@@ -147,9 +145,7 @@ module SuggestGrid
       _context = execute_request(_request)
 
       # validate response against endpoint and global error codes
-      if _context.response.status_code == 429
-        raise ErrorResponseException.new 'Too many requests.', _context
-      elsif !_context.response.status_code.between?(200, 208)
+      if _context.response.status_code == 0
         raise ErrorResponseException.new 'Unexpected internal error.', _context
       end
       validate_response(_context)
@@ -183,9 +179,7 @@ module SuggestGrid
       _context = execute_request(_request)
 
       # validate response against endpoint and global error codes
-      if _context.response.status_code == 429
-        raise ErrorResponseException.new 'Too many requests.', _context
-      elsif !_context.response.status_code.between?(200, 208)
+      if _context.response.status_code == 0
         raise ErrorResponseException.new 'Unexpected internal error.', _context
       end
       validate_response(_context)
@@ -215,9 +209,7 @@ module SuggestGrid
       _context = execute_request(_request)
 
       # validate response against endpoint and global error codes
-      if _context.response.status_code == 429
-        raise ErrorResponseException.new 'Too many requests.', _context
-      elsif !_context.response.status_code.between?(200, 208)
+      if _context.response.status_code == 0
         raise ErrorResponseException.new 'Unexpected internal error.', _context
       end
       validate_response(_context)
@@ -251,8 +243,6 @@ module SuggestGrid
       # validate response against endpoint and global error codes
       if _context.response.status_code == 400
         raise DetailedErrorResponseException.new 'Metadata is invalid.', _context
-      elsif _context.response.status_code == 429
-        raise ErrorResponseException.new 'Too many requests.', _context
       elsif !_context.response.status_code.between?(200, 208)
         raise ErrorResponseException.new 'Unexpected internal error.', _context
       end
@@ -291,8 +281,8 @@ module SuggestGrid
       # validate response against endpoint and global error codes
       if _context.response.status_code == 400
         raise ErrorResponseException.new 'Body is missing.', _context
-      elsif _context.response.status_code == 429
-        raise ErrorResponseException.new 'Too many requests.', _context
+      elsif _context.response.status_code == 413
+        raise ErrorResponseException.new 'Bulk request maximum line count exceeded.', _context
       elsif !_context.response.status_code.between?(200, 208)
         raise ErrorResponseException.new 'Unexpected internal error.', _context
       end
@@ -328,7 +318,7 @@ module SuggestGrid
 
       # validate response against endpoint and global error codes
       if _context.response.status_code == 404
-        raise ErrorResponseException.new 'Item not found.', _context
+        raise ErrorResponseException.new 'Item does not exists.', _context
       elsif !_context.response.status_code.between?(200, 208)
         raise ErrorResponseException.new 'Unexpected internal error.', _context
       end
@@ -340,8 +330,8 @@ module SuggestGrid
     end
 
     # Get Items
-    # @param [Long] size Optional parameter: The number of the users response. Defaults to 10. Must be between 1 and 10.000 inclusive. This parameter must be string represetation of an integer like "1".
-    # @param [Long] from Optional parameter: The number of users to be skipped for response. Defaults to 0. Must be bigger than or equal to 0. This parameter must be string represetation of an integer like "1".
+    # @param [Long] size Optional parameter: The number of the users response. Defaults to 10. Must be between 1 and 10,000 inclusive. This parameter must be string represetation of an integer like "1".
+    # @param [Long] from Optional parameter: The number of users to be skipped from the response. Defaults to 0. Must be bigger than or equal to 0. This parameter must be string represetation of an integer like "1".
     # @return ItemsResponse response from the API call
     def get_items(size = nil,
                   from = nil)
@@ -366,9 +356,7 @@ module SuggestGrid
       _context = execute_request(_request)
 
       # validate response against endpoint and global error codes
-      if _context.response.status_code == 429
-        raise ErrorResponseException.new 'Too many requests.', _context
-      elsif !_context.response.status_code.between?(200, 208)
+      if _context.response.status_code == 0
         raise ErrorResponseException.new 'Unexpected internal error.', _context
       end
       validate_response(_context)
@@ -402,9 +390,7 @@ module SuggestGrid
       _context = execute_request(_request)
 
       # validate response against endpoint and global error codes
-      if _context.response.status_code == 429
-        raise ErrorResponseException.new 'Too many requests.', _context
-      elsif !_context.response.status_code.between?(200, 208)
+      if _context.response.status_code == 0
         raise ErrorResponseException.new 'Unexpected internal error.', _context
       end
       validate_response(_context)
@@ -434,9 +420,7 @@ module SuggestGrid
       _context = execute_request(_request)
 
       # validate response against endpoint and global error codes
-      if _context.response.status_code == 429
-        raise ErrorResponseException.new 'Too many requests.', _context
-      elsif !_context.response.status_code.between?(200, 208)
+      if _context.response.status_code == 0
         raise ErrorResponseException.new 'Unexpected internal error.', _context
       end
       validate_response(_context)

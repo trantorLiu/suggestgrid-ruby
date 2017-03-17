@@ -9,7 +9,7 @@ module SuggestGrid
     end
 
     # Get Recommended Users
-    # @param [GetRecommendedUsersBody] query Required parameter: The query for recommended users.
+    # @param [GetRecommendedUsersBody] query Required parameter: Query for recommended users.
     # @return UsersResponse response from the API call
     def get_recommended_users(query)
 
@@ -34,8 +34,6 @@ module SuggestGrid
         raise ErrorResponseException.new 'Request body is invalid.', _context
       elsif _context.response.status_code == 422
         raise ErrorResponseException.new 'Required parameters are missing.', _context
-      elsif _context.response.status_code == 429
-        raise ErrorResponseException.new 'Too many requests.', _context
       elsif !_context.response.status_code.between?(200, 208)
         raise ErrorResponseException.new 'Unexpected internal error.', _context
       end
@@ -47,7 +45,7 @@ module SuggestGrid
     end
 
     # Get Recommended Items
-    # @param [GetRecommendedItemsBody] query Required parameter: The query for recommended items.
+    # @param [GetRecommendedItemsBody] query Required parameter: Query for recommended items.
     # @return ItemsResponse response from the API call
     def get_recommended_items(query)
 
@@ -72,8 +70,6 @@ module SuggestGrid
         raise ErrorResponseException.new 'Request body is invalid.', _context
       elsif _context.response.status_code == 422
         raise ErrorResponseException.new 'Required parameters are missing.', _context
-      elsif _context.response.status_code == 429
-        raise ErrorResponseException.new 'Too many requests.', _context
       elsif !_context.response.status_code.between?(200, 208)
         raise ErrorResponseException.new 'Unexpected internal error.', _context
       end
