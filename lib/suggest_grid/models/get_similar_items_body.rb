@@ -2,7 +2,7 @@
 
 module SuggestGrid
   class GetSimilarItemsBody < BaseModel
-    # The type of the query.
+    # The type of the query. Similarities will be calculated based on actions of this type.
     # @return [String]
     attr_accessor :type
 
