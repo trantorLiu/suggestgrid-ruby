@@ -525,7 +525,7 @@ response = SuggestGridClient.recommendation.get_recommended_users({type: 'view',
 users = response.users # [{id:"11",name:"Robert"},{id:"848",name:"Mike"},{id:"2",name:"Jennifer"}]
 ```
 
-You can read [filters](/docs/concepts#filters-parameter) and [fields](/docs/concepts#fields-parameter) documentations for further reference.
+You can read [filters](http://suggestgrid.com/docs/advanced-features#filters-parameter) and [fields](http://suggestgrid.com/docs/advanced-features#fields-parameter) documentations for further reference.
 
 #### Parameters
 ##### Body Parameters
@@ -577,7 +577,7 @@ response = SuggestGridClient.recommendation.get_recommended_items({type: 'view',
 items = response.items # [{id:"930",category:"notebook"},{id:"848",category:"keyboard"},{id:"102",category:"watch"}]
 ```
 
-You can read [filters](/docs/concepts#filters-parameter) and [fields](/docs/concepts#fields-parameter) documentations for further reference.
+You can read [filters](http://suggestgrid.com/docs/advanced-features#filters-parameter) and [fields](http://suggestgrid.com/docs/advanced-features#fields-parameter) documentations for further reference.
 
 #### Parameters
 ##### Body Parameters
@@ -625,7 +625,7 @@ response = SuggestGridClient.similarity.get_similar_users({type: "views", user_i
 users = response.users # [{id:"400", name:"Jason"},{id:"132", name:"Scarlett"},{id:"503", name:"Amy"}]
 ```
 
-You can read [filters](/docs/concepts#filters-parameter) and [fields](/docs/concepts#fields-parameter) documentations for further reference.
+You can read [filters](http://suggestgrid.com/docs/advanced-features#filters-parameter) and [fields](http://suggestgrid.com/docs/advanced-features#fields-parameter) documentations for further reference.
 
 #### Parameters
 ##### Body Parameters
@@ -665,7 +665,7 @@ response = SuggestGridClient.similarity.get_similar_items({type: "views", item_i
 items = response.items # [{id:"451",category:"television"},{id:"656",category:"blu-ray-dvd-players"}]
 ```
 
-You can read [filters](/docs/concepts#filters-parameter) and [fields](/docs/concepts#fields-parameter) documentations for further reference.
+You can read [filters](http://suggestgrid.com/docs/advanced-features#filters-parameter) and [fields](http://suggestgrid.com/docs/advanced-features#fields-parameter) documentations for further reference.
 
 #### Parameters
 ##### Body Parameters
