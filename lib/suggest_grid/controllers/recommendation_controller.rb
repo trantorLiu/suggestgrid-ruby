@@ -8,7 +8,7 @@ module SuggestGrid
       @@instance
     end
 
-    # Get Recommended Users
+    # Gets Recommended Users
     # @param [GetRecommendedUsersBody] query Required parameter: Query for recommended users.
     # @return UsersResponse response from the API call
     def get_recommended_users(query)
@@ -44,7 +44,7 @@ module SuggestGrid
       return UsersResponse.from_hash(decoded)
     end
 
-    # Get Recommended Items
+    # Gets Recommended Items
     # @param [GetRecommendedItemsBody] query Required parameter: Query for recommended items.
     # @return ItemsResponse response from the API call
     def get_recommended_items(query)

@@ -8,7 +8,7 @@ module SuggestGrid
       @@instance
     end
 
-    # Post an Action
+    # Posts an Action
     # @param [Action] action Required parameter: The action to be posted.
     # @return MessageResponse response from the API call
     def post_action(action)
@@ -46,7 +46,7 @@ module SuggestGrid
       return MessageResponse.from_hash(decoded)
     end
 
-    # Post Bulk Actions
+    # Posts Actions
     # @param [Collection] actions Required parameter: List of actions to be posted.
     # @return BulkPostResponse response from the API call
     def post_bulk_actions(actions)
@@ -90,7 +90,7 @@ module SuggestGrid
       return BulkPostResponse.from_hash(decoded)
     end
 
-    # Get Actions
+    # Gets Actions
     # @param [String] type Optional parameter: The type of the actions.
     # @param [String] user_id Optional parameter: The user id of the actions.
     # @param [String] item_id Optional parameter: The item id of the actions.

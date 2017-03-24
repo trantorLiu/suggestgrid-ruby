@@ -4,7 +4,7 @@
 Type methods are used for creating, inspecting, and deleting SuggestGrid types.
 [Types documentation](http://www.suggestgrid.com/docs/types) is available for an overview.
 
-### Create a New Type
+### Creates a Type
 > `create_type(type, body)`
 
 Creates a new type.
@@ -34,7 +34,7 @@ Name | Type |Required| Description
 --- | --- | --- | ---
 rating|string|false|The rating type of the type. Could be "explicit" or "implicit", where "implicit" is the default.
 type|string|true|The name of the type.
-### Get Properties of a Type
+### Gets Properties of a Type
 > `get_type(type)`
 
 Returns the options of a type. The response rating parameter.
@@ -53,7 +53,7 @@ Returns the options of a type. The response rating parameter.
 Name | Type |Required| Description
 --- | --- | --- | ---
 type|string|true|The name of the type to get properties.
-### Delete a Type
+### Deletes a Type
 > `delete_type(type)`
 
 Warning: Deletes the type with all of its actions and its recommendation model.
@@ -69,7 +69,7 @@ SuggestGridClient.type.delete_type('views')
 Name | Type |Required| Description
 --- | --- | --- | ---
 type|string|true|The name of the type to be deleted.
-### Get All Types
+### Gets All Types
 > `get_all_types()`
 
 Returns all type names in an array named types.
@@ -82,7 +82,7 @@ Returns all type names in an array named types.
   response.types
 ```
 
-### Delete All Types
+### Deletes All Types
 > `delete_all_types`
 
 Deletes ALL the types and ALL the actions.
@@ -97,7 +97,7 @@ SuggestGridClient.type.delete_all_types
 Action methods are for creating, inspecting, and deleting actions.
 [Actions documentation](http://www.suggestgrid.com/docs/actions) is available for an overview.
 
-### Post an Action
+### Posts an Action
 > `post_action(SuggestGrid::Action.new(type, user_id, item_id, rating = nil))`
 
 Posts an action to the given type in the body.
@@ -125,7 +125,7 @@ rating|number|false|The optional rating given by the user, if the type is explic
 timestamp|integer|false|The optional UNIX epoch timestamp of the action. Defaults to the current timestamp.
 type|string|true|The type that the action belongs to.
 user_id|string|true|The user id of the performer of the action.
-### Post Bulk Actions
+### Posts Actions
 > `post_bulk_actions(actions)`
 
 Posts bulk actions to SuggestGrid.
@@ -167,7 +167,7 @@ SuggestGridClient.action.post_bulk_actions(actions)
 ```
 
 #### Parameters
-### Get Actions
+### Gets Actions
 > `get_actions(type = nil, user_id = nil, item_id = nil, older_than = nil)`
 
 Get actions. Defaut responses will be paged by 10 actios each.
@@ -277,10 +277,12 @@ user_id|string||The user id of the actions.
 Metadata methods are for creating, inspecting, and deleting metadata.
 [Metadata documentation ](http://www.suggestgrid.com/docs/metadata) is available for an overview.
 
-### Post a User
+### Posts a User
 > `post_user(metadata)`
 
 Posts a user metadata.
+Note that this operation completely overrides previous metadata for the id, if it exists.
+
 
 ```ruby
 SuggestGridClient.metadata.post_user({id: "9394182", age: 28, name: "Avis Horton"})
@@ -294,11 +296,11 @@ SuggestGridClient.metadata.post_user({id: "9394182", age: 28, name: "Avis Horton
 Name | Type |Required| Description
 --- | --- | --- | ---
 id|string|true|The id of the metadata of a user or an item. 
-### Post Bulk Users
+### Posts Users
 > `post_bulk_users(metadata)`
 
-Post user metadata in bulk.
-This metadata can be used to filter or to be included in recommendations and similars methods.
+Posts user metadata in bulk.
+Note that this operation completely overrides metadata with the same ids, if they exist.
 
 
 
@@ -320,7 +322,7 @@ SuggestGridClient.metadata.post_bulk_users(users)
 ```
 
 #### Parameters
-### Get A User
+### Gets A User
 > `get_user(user_id)`
 
 Returns a user metadata if it exists.
@@ -336,7 +338,7 @@ Returns a user metadata if it exists.
 Name | Type |Required| Description
 --- | --- | --- | ---
 user_id|string|true|The user id to delete its metadata.
-### Get Users
+### Gets Users
 > `get_users`
 
 Get items and total count of items.
@@ -358,7 +360,7 @@ Name | Type |Required| Description
 --- | --- | --- | ---
 from|integer||The number of users to be skipped from the response. Defaults to 0. Must be bigger than or equal to 0. This parameter must be string represetation of an integer like "1". 
 size|integer||The number of the users response. Defaults to 10. Must be between 1 and 10,000 inclusive. This parameter must be string represetation of an integer like "1". 
-### Delete a User
+### Deletes a User
 > `delete_user(user_id)`
 
 Deletes a user metadata with the given user id.
@@ -373,7 +375,7 @@ SuggestGridClient.metadata.delete_user("10")
 Name | Type |Required| Description
 --- | --- | --- | ---
 user_id|string|true|The user id to delete its metadata.
-### Delete All Users
+### Deletes All Users
 > `delete_all_users`
 
 Warning: Deletes all user metadata from SuggestGrid.
@@ -383,11 +385,11 @@ Warning: Deletes all user metadata from SuggestGrid.
 SuggestGridClient.metadata.delete_all_users
 ```
 
-### Post an Item
+### Posts An Item
 > `post_item(metadata)`
 
 Posts an item metadata.
-This metadata can be used to filter or to be included in recommendations and similars methods.
+Note that this operation completely overrides previous metadata for the id, if it exists.
 
 
 ```ruby
@@ -402,11 +404,11 @@ SuggestGridClient.metadata.post_item({id: "25922342", manufacturer: "Vicon", pri
 Name | Type |Required| Description
 --- | --- | --- | ---
 id|string|true|The id of the metadata of a user or an item. 
-### Post Bulk Items
+### Posts Items
 > `post_bulk_items(metadata)`
 
-Post item metadata in bulk.
-This method is recommended for sharing stored data with SuggestGrid.
+Posts item metadata in bulk.
+Note that this operation completely overrides metadata with the same ids, if they exist.
 
 
 
@@ -428,7 +430,7 @@ SuggestGridClient.metadata.post_bulk_items(items)
 ```
 
 #### Parameters
-### Get An Item
+### Gets An Item
 > `get_item(item_id)`
 
 Returns an item metadata if it exists.
@@ -444,10 +446,10 @@ Returns an item metadata if it exists.
 Name | Type |Required| Description
 --- | --- | --- | ---
 item_id|string|true|The item id to delete its metadata.
-### Get Items
+### Gets Items
 > `get_items`
 
-Get items and total count of items.
+Gets items and total count of items.
 Page and per-page parameters could be set.
 
 
@@ -481,7 +483,7 @@ SuggestGridClient.metadata.delete_user("10")
 Name | Type |Required| Description
 --- | --- | --- | ---
 item_id|string|true|The item id to delete its metadata.
-### Delete All Items
+### Deletes All Items
 > `delete_all_items`
 
 Warning: Deletes all item metadata from SuggestGrid.
@@ -497,7 +499,7 @@ SuggestGridClient.metadata.delete_all_items
 Recommnedation methods are for getting recommended items, or recommended users from SuggestGrid.
 [Recommendations documentation](http://www.suggestgrid.com/docs/recommendations) is available for an overview.
 
-### Get Recommended Users
+### Gets Recommended Users
 > `get_recommended_users(body)`
 
 Returns recommended users for the query.
@@ -545,7 +547,7 @@ similar_user_ids|array|false|Similar users that the response should be similar t
 size|integer|false|The number of users requested. Defaults to 10. Must be between 1 and 10,000 inclusive.
 type|string|false|The type of the query. Recommendations will be calculated based on actions of this type.
 types|string|false|The types of the query. Exactly one of type or types parameters must be provided.
-### Get Recommended Items
+### Gets Recommended Items
 > `get_recommended_items(body)`
 
 Returns recommended items for the query.
@@ -603,7 +605,7 @@ user_ids|array|false|The user ids of the query. Exactly one of user id or user i
 Similarity methods are for getting similar items, or similar users from SuggestGrid.
 [Similarities documentation](http://www.suggestgrid.com/docs/similarities) is available for an overview.
 
-### Get Similar Users
+### Gets Similar Users
 > `get_similar_users(body)`
 
 Returns similar users for the query.
@@ -643,7 +645,7 @@ type|string|false|The type of the query. Similarities will be calculated based o
 types|string|false|The types of the query. Exactly one of type or types parameters must be provided.
 user_id|string|false|The user id of the query.
 user_ids|array|false|The user ids of the query. Exactly one of user id or user ids parameters must be provided.
-### Get Similar Items
+### Gets Similar Items
 > `get_similar_items(body)`
 
 Returns similar items for the query.
