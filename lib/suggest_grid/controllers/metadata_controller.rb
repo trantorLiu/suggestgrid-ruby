@@ -83,7 +83,7 @@ module SuggestGrid
     end
 
     # Gets A User
-    # @param [String] user_id Required parameter: The user id to delete its metadata.
+    # @param [String] user_id Required parameter: The user id to get its metadata.
     # @return Metadata response from the API call
     def get_user(user_id)
 
@@ -294,7 +294,7 @@ module SuggestGrid
     end
 
     # Gets An Item
-    # @param [String] item_id Required parameter: The item id to delete its metadata.
+    # @param [String] item_id Required parameter: The item id to get its metadata.
     # @return Metadata response from the API call
     def get_item(item_id)
 

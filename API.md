@@ -337,7 +337,7 @@ Returns a user metadata if it exists.
 
 Name | Type |Required| Description
 --- | --- | --- | ---
-user_id|string|true|The user id to delete its metadata.
+user_id|string|true|The user id to get its metadata.
 ### Gets Users
 > `get_users`
 
@@ -445,7 +445,7 @@ Returns an item metadata if it exists.
 
 Name | Type |Required| Description
 --- | --- | --- | ---
-item_id|string|true|The item id to delete its metadata.
+item_id|string|true|The item id to get its metadata.
 ### Gets Items
 > `get_items`
 
