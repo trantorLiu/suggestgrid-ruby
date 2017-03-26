@@ -1,7 +1,7 @@
 
 
 ## Type Methods
-Type methods are used for creating, inspecting, and deleting SuggestGrid types.
+Type methods are used for creating, inspecting, and deleting types.
 [Types documentation](http://www.suggestgrid.com/docs/types) is available for an overview.
 
 ### Creates a Type
@@ -496,7 +496,7 @@ SuggestGridClient.metadata.delete_all_items
 
 
 ## Recommnedation Methods
-Recommnedation methods are for getting recommended items, or recommended users from SuggestGrid.
+Recommnedation methods are for getting recommended items for users, or recommended users for items.
 [Recommendations documentation](http://www.suggestgrid.com/docs/recommendations) is available for an overview.
 
 ### Gets Recommended Users
@@ -602,7 +602,7 @@ user_ids|array|false|The user ids of the query. Exactly one of user id or user i
 
 
 ## Similarity Methods
-Similarity methods are for getting similar items, or similar users from SuggestGrid.
+Similarity methods are for getting similar items, or similar users.
 [Similarities documentation](http://www.suggestgrid.com/docs/similarities) is available for an overview.
 
 ### Gets Similar Users
