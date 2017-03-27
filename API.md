@@ -1,8 +1,8 @@
 
 
 ## Type Methods
-Type methods are used for creating, inspecting, and deleting types.
-[Types documentation](http://www.suggestgrid.com/docs/types) is available for an overview.
+Type methods are used for creating, getting, and deleting types.
+Refer to [types](http://www.suggestgrid.com/docs/types) for an overview.
 
 ### Creates a Type
 > `create_type(type, body)`
@@ -94,8 +94,8 @@ SuggestGridClient.type.delete_all_types
 
 
 ## Action Methods
-Action methods are for creating, inspecting, and deleting actions.
-[Actions documentation](http://www.suggestgrid.com/docs/actions) is available for an overview.
+Action methods are for creating, getting, and deleting actions.
+Refer to [actions](http://www.suggestgrid.com/docs/actions) for an overview.
 
 ### Posts an Action
 > `post_action(SuggestGrid::Action.new(type, user_id, item_id, rating = nil))`
@@ -274,8 +274,8 @@ user_id|string||Delete actions of a user id.
 
 
 ## Metadata Methods
-Metadata methods are for creating, inspecting, and deleting metadata.
-[Metadata documentation ](http://www.suggestgrid.com/docs/metadata) is available for an overview.
+Metadata methods are for creating, getting, and deleting user, and item metadata.
+Refer to [metadata](http://www.suggestgrid.com/docs/metadata) for an overview.
 
 ### Posts a User
 > `post_user(metadata)`
@@ -497,7 +497,7 @@ SuggestGridClient.metadata.delete_all_items
 
 ## Recommnedation Methods
 Recommnedation methods are for getting recommended items for users, or recommended users for items.
-[Recommendations documentation](http://www.suggestgrid.com/docs/recommendations) is available for an overview.
+Refer to [recommendations](http://www.suggestgrid.com/docs/recommendations) for an overview.
 
 ### Gets Recommended Users
 > `get_recommended_users(body)`
@@ -603,7 +603,7 @@ user_ids|array|false|The user ids of the query. Exactly one of user id or user i
 
 ## Similarity Methods
 Similarity methods are for getting similar items, or similar users.
-[Similarities documentation](http://www.suggestgrid.com/docs/similarities) is available for an overview.
+Refer to [similarities](http://www.suggestgrid.com/docs/similarities) for an overview.
 
 ### Gets Similar Users
 > `get_similar_users(body)`
