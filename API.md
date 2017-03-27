@@ -206,11 +206,11 @@ response.count
 Name | Type |Required| Description
 --- | --- | --- | ---
 from|integer||The number of users to be skipped from the response. Defaults to 0. Must be bigger than or equal to 0. This parameter must be string represetation of an integer like "1". 
-item_id|string||The item id of the actions.
-older_than|string||Maxium timestamp of the actions. Valid times are in form of 1s, 1m, 1h, 1d, 1M, 1y, where 1 can be any integer, or a UNIX timestamp like 1443798195. 
+item_id|string||Get actions of an item id.
+older_than|string||Get actions older than the given duration, or the given time number. Could be a ISO 8601 duration, or a Unix time number. Specifications are available at https://en.wikipedia.org/wiki/ISO_8601#Durations, or https://en.wikipedia.org/wiki/Unix_time. 
 size|integer||The number of the users response. Defaults to 10. Must be between 1 and 10,000 inclusive. This parameter must be string represetation of an integer like "1". 
-type|string||The type of the actions.
-user_id|string||The user id of the actions.
+type|string||Get actions of a type.
+user_id|string||Get actions of a user id.
 ### Delete Actions
 > `delete_actions(type = nil, user_id = nil, item_id = nil, older_than = nil)`
 
@@ -267,10 +267,10 @@ SuggestGridClient.action.delete_actions('views', '1', '30', '891628467')
 
 Name | Type |Required| Description
 --- | --- | --- | ---
-item_id|string||The item id of the actions.
-older_than|string||Delete all actions of a type older than the given timestamp or time. Valid times are in form of 1s, 1m, 1h, 1d, 1M, 1y, where 1 can be any integer, or a UNIX timestamp like 1443798195. 
-type|string||The type of the actions.
-user_id|string||The user id of the actions.
+item_id|string||Delete actions of an item id.
+older_than|string||Delete actions older than the given duration, or the given time number. Could be a ISO 8601 duration, or a Unix time number. Specifications are available at https://en.wikipedia.org/wiki/ISO_8601#Durations, or https://en.wikipedia.org/wiki/Unix_time. 
+type|string|true|Delete actions of a type. This parameter and at least one other parameter is required.
+user_id|string||Delete actions of a user id.
 
 
 ## Metadata Methods
