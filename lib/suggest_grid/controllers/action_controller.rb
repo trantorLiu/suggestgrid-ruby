@@ -8,7 +8,7 @@ module SuggestGrid
       @@instance
     end
 
-    # Post an Action
+    # Posts an Action
     # @param [Action] action Required parameter: The action to be posted.
     # @return MessageResponse response from the API call
     def post_action(action)
@@ -46,7 +46,7 @@ module SuggestGrid
       return MessageResponse.from_hash(decoded)
     end
 
-    # Post Bulk Actions
+    # Posts Actions
     # @param [Collection] actions Required parameter: List of actions to be posted.
     # @return BulkPostResponse response from the API call
     def post_bulk_actions(actions)
@@ -90,11 +90,11 @@ module SuggestGrid
       return BulkPostResponse.from_hash(decoded)
     end
 
-    # Get Actions
-    # @param [String] type Optional parameter: The type of the actions.
-    # @param [String] user_id Optional parameter: The user id of the actions.
-    # @param [String] item_id Optional parameter: The item id of the actions.
-    # @param [String] older_than Optional parameter: Maxium timestamp of the actions. Valid times are in form of 1s, 1m, 1h, 1d, 1M, 1y, where 1 can be any integer, or a UNIX timestamp like 1443798195.
+    # Gets Actions
+    # @param [String] type Optional parameter: Get actions of a type.
+    # @param [String] user_id Optional parameter: Get actions of a user id.
+    # @param [String] item_id Optional parameter: Get actions of an item id.
+    # @param [String] older_than Optional parameter: Get actions older than the given duration, or the given time number. Could be a ISO 8601 duration, or a Unix time number. Specifications are available at https://en.wikipedia.org/wiki/ISO_8601#Durations, or https://en.wikipedia.org/wiki/Unix_time.
     # @param [Long] size Optional parameter: The number of the users response. Defaults to 10. Must be between 1 and 10,000 inclusive. This parameter must be string represetation of an integer like "1".
     # @param [Long] from Optional parameter: The number of users to be skipped from the response. Defaults to 0. Must be bigger than or equal to 0. This parameter must be string represetation of an integer like "1".
     # @return ActionsResponse response from the API call
@@ -140,12 +140,12 @@ module SuggestGrid
     end
 
     # Delete Actions
-    # @param [String] type Optional parameter: The type of the actions.
-    # @param [String] user_id Optional parameter: The user id of the actions.
-    # @param [String] item_id Optional parameter: The item id of the actions.
-    # @param [String] older_than Optional parameter: Delete all actions of a type older than the given timestamp or time. Valid times are in form of 1s, 1m, 1h, 1d, 1M, 1y, where 1 can be any integer, or a UNIX timestamp like 1443798195.
+    # @param [String] type Required parameter: Delete actions of a type. This parameter and at least one other parameter is required.
+    # @param [String] user_id Optional parameter: Delete actions of a user id.
+    # @param [String] item_id Optional parameter: Delete actions of an item id.
+    # @param [String] older_than Optional parameter: Delete actions older than the given duration, or the given time number. Could be a ISO 8601 duration, or a Unix time number. Specifications are available at https://en.wikipedia.org/wiki/ISO_8601#Durations, or https://en.wikipedia.org/wiki/Unix_time.
     # @return DeleteSuccessResponse response from the API call
-    def delete_actions(type = nil,
+    def delete_actions(type,
                        user_id = nil,
                        item_id = nil,
                        older_than = nil)

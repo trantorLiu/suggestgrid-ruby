@@ -14,7 +14,7 @@ module SuggestGrid
     # @return [String]
     attr_accessor :error_uri
 
-    # Specific details of the response.
+    # Details of the response.
     # @return [String]
     attr_accessor :error_details
 

@@ -1,24 +1,25 @@
 
 
 ## Type Methods
-Type methods are used for creating, inspecting, and deleting SuggestGrid types.
-[Types documentation](http://www.suggestgrid.com/docs/types) is available for an overview.
+Type methods are used for creating, getting, and deleting types.
+Refer to [types](http://www.suggestgrid.com/docs/types) for an overview.
 
-### Create a New Type
-> `create_type(type, body)`
+### Creates a Type
+> `SuggestGridClient.type.create_type(type, body)`
 
 Creates a new type.
 
 ```ruby
+# Defaults to implicit type creation
 SuggestGridClient.type.create_type('views')
 ```
 
 ```ruby
-SuggestGridClient.type.create_type('views', {rating : "implicit"})
+SuggestGridClient.type.create_type('views', {'rating': 'implicit'})
 ```
 
 ```ruby
-SuggestGridClient.type.create_type('views', {rating : "explicit"})
+SuggestGridClient.type.create_type('ratings', {'rating': 'explicit'})
 ```
 
 #### Parameters
@@ -34,17 +35,13 @@ Name | Type |Required| Description
 --- | --- | --- | ---
 rating|string|false|The rating type of the type. Could be "explicit" or "implicit", where "implicit" is the default.
 type|string|true|The name of the type.
-### Get Properties of a Type
-> `get_type(type)`
+### Gets Properties of a Type
+> `SuggestGridClient.type.get_type(type)`
 
 Returns the options of a type. The response rating parameter.
 
-
 ```ruby
-  response = SuggestGridClient.type.get_type('views')
-
-  # get rating of type
-  response.rating
+response = SuggestGridClient.type.get_type('views')
 ```
 
 #### Parameters
@@ -53,8 +50,8 @@ Returns the options of a type. The response rating parameter.
 Name | Type |Required| Description
 --- | --- | --- | ---
 type|string|true|The name of the type to get properties.
-### Delete a Type
-> `delete_type(type)`
+### Deletes a Type
+> `SuggestGridClient.type.delete_type(type)`
 
 Warning: Deletes the type with all of its actions and its recommendation model.
 
@@ -69,36 +66,35 @@ SuggestGridClient.type.delete_type('views')
 Name | Type |Required| Description
 --- | --- | --- | ---
 type|string|true|The name of the type to be deleted.
-### Get All Types
-> `get_all_types()`
+### Gets All Types
+> `SuggestGridClient.type.get_all_types()`
 
 Returns all type names in an array named types.
 
-
 ```ruby
-  response = SuggestGridClient.type.get_all_types
+response = SuggestGridClient.type.get_all_types()
 
-  # get array of type names
-  response.types
+# The array of type names
+response.types
 ```
 
-### Delete All Types
-> `delete_all_types`
+### Deletes All Types
+> `SuggestGridClient.type.delete_all_types()`
 
 Deletes ALL the types and ALL the actions.
 
 ```ruby
-SuggestGridClient.type.delete_all_types
+SuggestGridClient.type.delete_all_types()
 ```
 
 
 
 ## Action Methods
-Action methods are for creating, inspecting, and deleting actions.
-[Actions documentation](http://www.suggestgrid.com/docs/actions) is available for an overview.
+Action methods are for creating, getting, and deleting actions.
+Refer to [actions](http://www.suggestgrid.com/docs/actions) for an overview.
 
-### Post an Action
-> `post_action(SuggestGrid::Action.new(type, user_id, item_id, rating = nil))`
+### Posts an Action
+> `SuggestGridClient.action.post_action(action)`
 
 Posts an action to the given type in the body.
 The body must have user id, item id and type.
@@ -106,11 +102,13 @@ Rating is required for actions sent to an explicit type.
 
 
 ```ruby
-SuggestGridClient.action.post_action(SuggestGrid::Action.new('views','10', '20'))
+action = SuggestGrid::Action.new('views','10', '20')
+SuggestGridClient.action.post_action(action)
 ```
 
 ```ruby
-SuggestGridClient.action.post_action(SuggestGrid::Action.new('views','10', '20', 10))
+action = SuggestGrid::Action.new('ratings','10', '20', 5)
+SuggestGridClient.action.post_action(action)
 ```
 
 #### Parameters
@@ -125,80 +123,75 @@ rating|number|false|The optional rating given by the user, if the type is explic
 timestamp|integer|false|The optional UNIX epoch timestamp of the action. Defaults to the current timestamp.
 type|string|true|The type that the action belongs to.
 user_id|string|true|The user id of the performer of the action.
-### Post Bulk Actions
-> `post_bulk_actions(actions)`
+### Posts Actions
+> `SuggestGridClient.action.post_bulk_actions(actions)`
 
 Posts bulk actions to SuggestGrid.
 The recommended method for posting multiple actions at once.
 
 
-
-
-There's a limit of lines, hence number of actions you can send in one requests. That's default to 10000.
+There's a limit of lines, hence number of objects you can send in one requests. That's default to 10000.
 
 An example for bulk action request is the following:
 
 ```ruby
-
 actions = []
-
-actions << SuggestGrid::Action.new('views','10', '18')
-actions << SuggestGrid::Action.new('views','12', '1')
-actions << SuggestGrid::Action.new('views','13', '40')
-actions << SuggestGrid::Action.new('views','14', '302')
-actions << SuggestGrid::Action.new('views','10', '22')
+actions << SuggestGrid::Action.new('views', '10', '18')
+actions << SuggestGrid::Action.new('views', '12', '1')
+actions << SuggestGrid::Action.new('views', '13', '40')
+actions << SuggestGrid::Action.new('views', '14', '302')
+actions << SuggestGrid::Action.new('views', '10', '22')
 
 SuggestGridClient.action.post_bulk_actions(actions)
 ```
 
-Explicit actions can be post as;
+Explicit actions can be post as:
 
 ```ruby
-
 actions = []
-
-actions << SuggestGrid::Action.new('views','11', '22', 1)
-actions << SuggestGrid::Action.new('views','32', '33', 10)
-actions << SuggestGrid::Action.new('views','10', '20', 3)
-actions << SuggestGrid::Action.new('views','12', '20', 4)
+actions << SuggestGrid::Action.new('ratings', '11', '22', 1)
+actions << SuggestGrid::Action.new('ratings', '10', '33', 5)
+actions << SuggestGrid::Action.new('ratings', '10', '20', 3)
+actions << SuggestGrid::Action.new('ratings', '12', '20', 4)
 
 SuggestGridClient.action.post_bulk_actions(actions)
-
 ```
 
 #### Parameters
-### Get Actions
-> `get_actions(type = nil, user_id = nil, item_id = nil, older_than = nil)`
+### Gets Actions
+> `SuggestGridClient.action.get_actions(type, user_id, item_id, older_than, size, from)`
 
 Get actions. Defaut responses will be paged by 10 actios each.
 Type, user id, item id, or older than parameters could be provided.
 The intersection of the provided parameters will be returned.
 
 
+Get actions count:
 
-#### Get Actions Count
+If no query parameters is provided, all the actions will be returned:
 
 ```ruby
 response = SuggestGridClient.action.get_actions('views')
 
-# get count
-response.count
+# Get the total count of actions
+response.total_count
 ```
 
-#### Get Actions Count by Query
+Get actions count by query:
 
-You can include any of type, user_id, item_id, and older_than path parameters and SuggestGrid return the count of such actions.
-
-If no type is provided, the total number of actions will be returned.
+You can include any of `type`, `user_id`, `item_id`, and `older_than` query parameters and SuggestGrid would return the actions satisfying all the query parameters:
+`older_than` value could be a [ISO 8601 duration](https://en.wikipedia.org/wiki/ISO_8601#Durations), or a [Unix time number](https://en.wikipedia.org/wiki/Unix_time).
 
 This method can be particularly useful before deleting actions by query.
 
 ```ruby
-response = SuggestGridClient.action.get_actions(nil,'u5321', 'i1635', 891628467)
+response = SuggestGridClient.action.get_actions(nil, 'u5321', 'i1635', 891628467)
 
-# get count
-response.count
+# Get the action count
+response.total_count
 ```
+
+You can also include `from` and `size` parameters to nativage throught the reponse actions. From defaults to 0 and size defaults to 10. Returned actions are sorted from the most recent one to the least recent ones.
 
 #### Parameters
 ##### URI/Query Parameters
@@ -206,13 +199,13 @@ response.count
 Name | Type |Required| Description
 --- | --- | --- | ---
 from|integer||The number of users to be skipped from the response. Defaults to 0. Must be bigger than or equal to 0. This parameter must be string represetation of an integer like "1". 
-item_id|string||The item id of the actions.
-older_than|string||Maxium timestamp of the actions. Valid times are in form of 1s, 1m, 1h, 1d, 1M, 1y, where 1 can be any integer, or a UNIX timestamp like 1443798195. 
+item_id|string||Get actions of an item id.
+older_than|string||Get actions older than the given duration, or the given time number. Could be a ISO 8601 duration, or a Unix time number. Specifications are available at https://en.wikipedia.org/wiki/ISO_8601#Durations, or https://en.wikipedia.org/wiki/Unix_time. 
 size|integer||The number of the users response. Defaults to 10. Must be between 1 and 10,000 inclusive. This parameter must be string represetation of an integer like "1". 
-type|string||The type of the actions.
-user_id|string||The user id of the actions.
+type|string||Get actions of a type.
+user_id|string||Get actions of a user id.
 ### Delete Actions
-> `delete_actions(type = nil, user_id = nil, item_id = nil, older_than = nil)`
+> `SuggestGridClient.action.delete_actions(type, user_id, item_id, older_than)`
 
 Warning: Please use get actions with the exact parameters first to inspect the actions to be deleted.
 
@@ -224,66 +217,63 @@ Warning: Please use get actions with the exact parameters first to inspect the a
 * In addition to a type, at least one of these parameters must be provided. In order to delete all the actions of a type, delete the type.
 
 
+Type and at least one more parameter must be provided for all delete actions queries.
 
-#### Delete a User's Actions
+Delete a user's actions:
 
 ```ruby
 SuggestGridClient.action.delete_actions('views', '12')
 ```
 
-#### Delete an Item's Actions
-
+Delete an item's actions:
 ```ruby
 SuggestGridClient.action.delete_actions('views', nil, '12')
 ```
 
-#### Delete Old Actions
+Delete actions older than a year:
 
-In addition to unix timestamps, the method could accept:
-
-  * Seconds. (s) For example: 100s
-  * Minutes. (m) For example: 30m
-  * Hours. (h) For example: 12h
-  * Days. (d) For example: 7d
-  * Months. (M) For example: 6M
-  * Years. (y) For example: 10y
+`older_than` value could be a [ISO 8601 duration](https://en.wikipedia.org/wiki/ISO_8601#Durations), or a [Unix time number](https://en.wikipedia.org/wiki/Unix_time).
 
 ```ruby
-SuggestGridClient.action.delete_actions('views', nil, nil, '1d')
+SuggestGridClient.action.delete_actions('views', nil, nil, 'P1Y')
 ```
 
-#### Delete Actions by Query
+Delete actions by query:
 
-You can include any of user_id, item_id, and older_than parameters to the delete query and SuggestGrid would delete the intersection of the given queries accordingly.
+You can include any of `user_id`, `item_id`, and `older_than` parameters to the delete query and SuggestGrid would delete the intersection of the given queries accordingly.
 
-For example, if all of user_id, item_id, and older_than are provided, SuggestGrid would delete the actions of the given user on the given item before the given time.
+For example, if all of `user_id`, `item_id`, and `older_than` are provided, SuggestGrid would delete the actions of the given user on the given item older than the given time or duration.
 
 ```ruby
 SuggestGridClient.action.delete_actions('views', '1', '30', '891628467')
 ```
+
+It's highly recommended to first get the actions with the same parameters before deleting actions.
 
 #### Parameters
 ##### URI/Query Parameters
 
 Name | Type |Required| Description
 --- | --- | --- | ---
-item_id|string||The item id of the actions.
-older_than|string||Delete all actions of a type older than the given timestamp or time. Valid times are in form of 1s, 1m, 1h, 1d, 1M, 1y, where 1 can be any integer, or a UNIX timestamp like 1443798195. 
-type|string||The type of the actions.
-user_id|string||The user id of the actions.
+item_id|string||Delete actions of an item id.
+older_than|string||Delete actions older than the given duration, or the given time number. Could be a ISO 8601 duration, or a Unix time number. Specifications are available at https://en.wikipedia.org/wiki/ISO_8601#Durations, or https://en.wikipedia.org/wiki/Unix_time. 
+type|string|true|Delete actions of a type. This parameter and at least one other parameter is required.
+user_id|string||Delete actions of a user id.
 
 
 ## Metadata Methods
-Metadata methods are for creating, inspecting, and deleting metadata.
-[Metadata documentation ](http://www.suggestgrid.com/docs/metadata) is available for an overview.
+Metadata methods are for creating, getting, and deleting user, and item metadata.
+Refer to [metadata](http://www.suggestgrid.com/docs/metadata) for an overview.
 
-### Post a User
-> `post_user(metadata)`
+### Posts a User
+> `SuggestGridClient.metadata.post_user(user)`
 
 Posts a user metadata.
+Note that this operation completely overrides previous metadata for the id, if it exists.
+
 
 ```ruby
-SuggestGridClient.metadata.post_user({id: "9394182", age: 28, name: "Avis Horton"})
+SuggestGridClient.metadata.post_user({'id': '9394182', 'age': 28, 'name': 'Avis Horton'})
 ```
 
 #### Parameters
@@ -294,40 +284,35 @@ SuggestGridClient.metadata.post_user({id: "9394182", age: 28, name: "Avis Horton
 Name | Type |Required| Description
 --- | --- | --- | ---
 id|string|true|The id of the metadata of a user or an item. 
-### Post Bulk Users
-> `post_bulk_users(metadata)`
+### Posts Users
+> `SuggestGridClient.metadata.post_bulk_users(user)`
 
-Post user metadata in bulk.
-This metadata can be used to filter or to be included in recommendations and similars methods.
-
+Posts user metadata in bulk.
+Note that this operation completely overrides metadata with the same ids, if they exist.
 
 
 There's a limit of lines, hence number of actions you can send in one requests. That's default to 10000.
 
 An example for bulk user request is the following:
-
 ```ruby
-
 users = []
-
-users << {id: "9394182", age: 28, name: "Avis Horton"}
-users << {id: "6006895", age: 29, name: "Jami Bishop"}
-users << {id: "6540497", age: 21, name: "Bauer Case"}
-users << {id: "1967970", age: 30, name: "Rosetta Cole"}
-users << {id: "6084106", age: 35, name: "Shaw Simon"}
+users << {'id': '9394182', 'age': 28, 'name': 'Avis Horton'}
+users << {'id': '6006895', 'age': 29, 'name': 'Jami Bishop'}
+users << {'id': '6540497', 'age': 21, 'name': 'Bauer Case'}
+users << {'id': '1967970', 'age': 30, 'name': 'Rosetta Cole'}
+users << {'id': '6084106', 'age': 35, 'name': 'Shaw Simon'}
 
 SuggestGridClient.metadata.post_bulk_users(users)
 ```
 
 #### Parameters
-### Get A User
-> `get_user(user_id)`
+### Gets A User
+> `SuggestGridClient.metadata.get_user(user_id)`
 
 Returns a user metadata if it exists.
 
-
 ```ruby
-  user42 = SuggestGridClient.metadata.get_user("42")
+user42 = SuggestGridClient.metadata.get_user('42')
 ```
 
 #### Parameters
@@ -335,20 +320,19 @@ Returns a user metadata if it exists.
 
 Name | Type |Required| Description
 --- | --- | --- | ---
-user_id|string|true|The user id to delete its metadata.
-### Get Users
-> `get_users`
+user_id|string|true|The user id to get its metadata.
+### Gets Users
+> `SuggestGridClient.metadata.get_users(size, from)`
 
 Get items and total count of items.
 Page and per-page parameters could be set.
 
 
-
 ```ruby
-  response = SuggestGridClient.metadata.get_users
+response = SuggestGridClient.metadata.get_users()
 
-  # get count of users
-  response.count
+# Get the total count of users
+response.total_count
 ```
 
 #### Parameters
@@ -358,13 +342,13 @@ Name | Type |Required| Description
 --- | --- | --- | ---
 from|integer||The number of users to be skipped from the response. Defaults to 0. Must be bigger than or equal to 0. This parameter must be string represetation of an integer like "1". 
 size|integer||The number of the users response. Defaults to 10. Must be between 1 and 10,000 inclusive. This parameter must be string represetation of an integer like "1". 
-### Delete a User
-> `delete_user(user_id)`
+### Deletes a User
+> `SuggestGridClient.metadata.delete_user(user_id)`
 
 Deletes a user metadata with the given user id.
 
 ```ruby
-SuggestGridClient.metadata.delete_user("10")
+SuggestGridClient.metadata.delete_user('10')
 ```
 
 #### Parameters
@@ -373,25 +357,25 @@ SuggestGridClient.metadata.delete_user("10")
 Name | Type |Required| Description
 --- | --- | --- | ---
 user_id|string|true|The user id to delete its metadata.
-### Delete All Users
-> `delete_all_users`
+### Deletes All Users
+> `SuggestGridClient.metadata.delete_all_users()`
 
 Warning: Deletes all user metadata from SuggestGrid.
 
 
 ```ruby
-SuggestGridClient.metadata.delete_all_users
+SuggestGridClient.metadata.delete_all_users()
 ```
 
-### Post an Item
-> `post_item(metadata)`
+### Posts An Item
+> `SuggestGridClient.metadata.post_item(item)`
 
 Posts an item metadata.
-This metadata can be used to filter or to be included in recommendations and similars methods.
+Note that this operation completely overrides previous metadata for the id, if it exists.
 
 
 ```ruby
-SuggestGridClient.metadata.post_item({id: "25922342", manufacturer: "Vicon", price: 348})
+SuggestGridClient.metadata.post_item({'id': '25922342', 'manufacturer': 'Apple', 'price': 348})
 ```
 
 #### Parameters
@@ -402,12 +386,11 @@ SuggestGridClient.metadata.post_item({id: "25922342", manufacturer: "Vicon", pri
 Name | Type |Required| Description
 --- | --- | --- | ---
 id|string|true|The id of the metadata of a user or an item. 
-### Post Bulk Items
-> `post_bulk_items(metadata)`
+### Posts Items
+> `SuggestGridClient.metadata.post_bulk_items(item)`
 
-Post item metadata in bulk.
-This method is recommended for sharing stored data with SuggestGrid.
-
+Posts item metadata in bulk.
+Note that this operation completely overrides metadata with the same ids, if they exist.
 
 
 There's a limit of lines, hence number of actions you can send in one requests. That's default to 10000.
@@ -415,27 +398,24 @@ There's a limit of lines, hence number of actions you can send in one requests. 
 An example for bulk item request is the following:
 
 ```ruby
-
 items = []
-
-items << {id: "25922342", manufacturer: "Vicon", price: 348}
-items << {id: "80885987", manufacturer: "Aquamate", price: 771}
-items << {id: "71746854", manufacturer: "Exoplode", price: 310}
-items << {id: "53538832", manufacturer: "Teraprene", price: 832}
-items << {id: "72006635", manufacturer: "Ohmnet", price: 340}
+items << {id: '25922342', manufacturer: 'Vicon', price: 348}
+items << {id: '80885987', manufacturer: 'Aquamate', price: 771}
+items << {id: '71746854', manufacturer: 'Exoplode', price: 310}
+items << {id: '53538832', manufacturer: 'Teraprene', price: 832}
+items << {id: '72006635', manufacturer: 'Ohmnet', price: 340}
 
 SuggestGridClient.metadata.post_bulk_items(items)
 ```
 
 #### Parameters
-### Get An Item
-> `get_item(item_id)`
+### Gets An Item
+> `SuggestGridClient.metadata.get_item(item_id)`
 
 Returns an item metadata if it exists.
 
-
 ```ruby
-  item42 = SuggestGridClient.metadata.get_item(42)
+item42 = SuggestGridClient.metadata.get_item('42')
 ```
 
 #### Parameters
@@ -443,20 +423,19 @@ Returns an item metadata if it exists.
 
 Name | Type |Required| Description
 --- | --- | --- | ---
-item_id|string|true|The item id to delete its metadata.
-### Get Items
-> `get_items`
+item_id|string|true|The item id to get its metadata.
+### Gets Items
+> `SuggestGridClient.metadata.get_items(size, from)`
 
-Get items and total count of items.
+Gets items and total count of items.
 Page and per-page parameters could be set.
 
 
-
 ```ruby
-  response = SuggestGridClient.metadata.get_items
+response = SuggestGridClient.metadata.get_items()
 
-  # get count of items
-  response.count
+# Get the total count of items
+response.total_count
 ```
 
 #### Parameters
@@ -467,12 +446,12 @@ Name | Type |Required| Description
 from|integer||The number of users to be skipped from the response. Defaults to 0. Must be bigger than or equal to 0. This parameter must be string represetation of an integer like "1". 
 size|integer||The number of the users response. Defaults to 10. Must be between 1 and 10,000 inclusive. This parameter must be string represetation of an integer like "1". 
 ### Delete An Item
-> `delete_item(item_id)`
+> `SuggestGridClient.metadata.delete_item(item_id)`
 
 Deletes an item metadata with the given item id.
 
 ```ruby
-SuggestGridClient.metadata.delete_user("10")
+SuggestGridClient.metadata.delete_user('10')
 ```
 
 #### Parameters
@@ -481,51 +460,49 @@ SuggestGridClient.metadata.delete_user("10")
 Name | Type |Required| Description
 --- | --- | --- | ---
 item_id|string|true|The item id to delete its metadata.
-### Delete All Items
-> `delete_all_items`
+### Deletes All Items
+> `SuggestGridClient.metadata.delete_all_items()`
 
 Warning: Deletes all item metadata from SuggestGrid.
 
 
 ```ruby
-SuggestGridClient.metadata.delete_all_items
+SuggestGridClient.metadata.delete_all_items()
 ```
 
 
 
 ## Recommnedation Methods
-Recommnedation methods are for getting recommended items, or recommended users from SuggestGrid.
-[Recommendations documentation](http://www.suggestgrid.com/docs/recommendations) is available for an overview.
+Recommnedation methods are for getting recommended items for users, or recommended users for items.
+Refer to [recommendations](http://www.suggestgrid.com/docs/recommendations) for an overview.
 
-### Get Recommended Users
-> `get_recommended_users(body)`
+### Gets Recommended Users
+> `SuggestGridClient.recommendation.get_recommended_users(query)`
 
 Returns recommended users for the query.
 
-examples:
-
 ```ruby
-response = SuggestGridClient.recommendation.get_recommended_users({type: 'view', item_id: "42"})
-users = response.users # [{id:"451"},{id:"456"}]
+response = SuggestGridClient.recommendation.get_recommended_users({'type': 'view', 'item_id': '42'})
+users = response.users # [{'id':'451'},{'id':'456'}]
 ```
 
 ```ruby
-response = SuggestGridClient.recommendation.get_recommended_users({type: 'view', item_ids: ["42", "532", "841"]})
-users = response.users # [{id:"121"},{id:"33"},{id:"12"},{id:"32"},{id:"49"},{id:"11"},{id:"23"},{id:"54"},{id:"62"},{id:"29"}]
+response = SuggestGridClient.recommendation.get_recommended_users({'type': 'view', 'item_ids': ['42', '532', '841']})
+users = response.users # [{'id':'121'},{'id':'33'},{'id':'12'},{'id':'32'},{'id':'49'},{'id':'11'},{'id':'23'},{'id':'54'},{'id':'62'},{'id':'29'}]
 ```
 
 ```ruby
-response = SuggestGridClient.recommendation.get_recommended_users({type: 'view', item_ids: ["42", "532", "841"], similar_user_id: "100", except: ["100"], size: 5})
-users = response.users # [{id:"1"},{id:"84"},{id:"9"},{id:"32"},{id:"45"}]
+response = SuggestGridClient.recommendation.get_recommended_users({'type': 'view', 'item_ids': ['42', '532', '841'], 'similar_user_id': '100', except: ['100'], 'size': 5})
+users = response.users # [{'id':'1'},{'id':'84'},{'id':'9'},{'id':'32'},{'id':'45'}]
 ```
 
 
 ```ruby
-response = SuggestGridClient.recommendation.get_recommended_users({type: 'view', item_id: "42", size: 5, fields: ["name"], filter: { less_equal: {age: 60}}})
-users = response.users # [{id:"11",name:"Robert"},{id:"848",name:"Mike"},{id:"2",name:"Jennifer"}]
+response = SuggestGridClient.recommendation.get_recommended_users({'type': 'view', 'item_id': '42', 'size': 5, 'fields': ['name'], 'filter': {'less_equal': {'age': 60}}})
+users = response.users # [{'id':'11','name':'Robert'},{'id':'848','name':'Mike'},{'id':'2','name':'Jennifer'}]
 ```
 
-You can read [filters](/docs/concepts#filters-parameter) and [fields](/docs/concepts#fields-parameter) documentations for further reference.
+You can read [filters](https://suggestgrid.com/docs/advanced-features#filters-parameter) and [fields](https://suggestgrid.com/docs/advanced-features#fields-parameter) documentations for further reference.
 
 #### Parameters
 ##### Body Parameters
@@ -545,39 +522,37 @@ similar_user_ids|array|false|Similar users that the response should be similar t
 size|integer|false|The number of users requested. Defaults to 10. Must be between 1 and 10,000 inclusive.
 type|string|false|The type of the query. Recommendations will be calculated based on actions of this type.
 types|string|false|The types of the query. Exactly one of type or types parameters must be provided.
-### Get Recommended Items
-> `get_recommended_items(body)`
+### Gets Recommended Items
+> `SuggestGridClient.recommendation.get_recommended_items(query)`
 
 Returns recommended items for the query.
 
-examples:
-
 ```ruby
-response = SuggestGridClient.recommendation.get_recommended_items({type: 'view', user_id: "42"})
-items = response.items # [{id:"451"},{id:"456"}]
+response = SuggestGridClient.recommendation.get_recommended_items({'type': 'view', 'user_id': '42'})
+recommended_items = response.items # [{'id':'451'},{'id':'456'}]
 ```
 
 ```ruby
-response = SuggestGridClient.recommendation.get_recommended_items({type: 'view', user_ids: ["42", "532", "841"]})
-items = response.items # [{id:"121"},{id:"33"},{id:"12"},{id:"32"},{id:"49"},{id:"11"},{id:"23"},{id:"54"},{id:"62"},{id:"29"}]
+response = SuggestGridClient.recommendation.get_recommended_items({'type': 'view', user_ids: ['42', '532', '841']})
+recommended_items = response.items # [{'id':'121'},{'id':'33'},{'id':'12'},{'id':'32'},{'id':'49'},{'id':'11'},{'id':'23'},{'id':'54'},{'id':'62'},{'id':'29'}]
 ```
 
 ```ruby
-response = SuggestGridClient.recommendation.get_recommended_items({type: 'view', user_ids: ["42", "532", "841"], similar_item_id: "321", size: 3})
-items = response.items # [{id:"13"},{id:"65"},{id:"102"}]
+response = SuggestGridClient.recommendation.get_recommended_items({'type': 'view', 'user_ids': ['42', '532', '841'], 'similar_item_id': '321', 'size': 3})
+recommended_items = response.items # [{'id':'13'},{'id':'65'},{'id':'102'}]
 ```
 
 ```ruby
-response = SuggestGridClient.recommendation.get_recommended_items({type: 'view', user_id: "42", size: 5, filter: {less_equal: {price: 100}}})
-items = response.items # [{id:"930"},{id:"848"},{id:"102"},{id:"303"},{id:"593"}]
+response = SuggestGridClient.recommendation.get_recommended_items({'type': 'view', 'user_id': '42', 'size': 5, 'filter': {'less_equal': {'price': 100}}})
+recommended_items = response.items # [{'id':'930'},{'id':'848'},{'id':'102'},{'id':'303'},{'id':'593'}]
 ```
 
 ```ruby
-response = SuggestGridClient.recommendation.get_recommended_items({type: 'view', user_id: "42", size: 5, fields : ["category"], filter: { exact: {manufacturer: "Apple"}}})
-items = response.items # [{id:"930",category:"notebook"},{id:"848",category:"keyboard"},{id:"102",category:"watch"}]
+response = SuggestGridClient.recommendation.get_recommended_items({'type': 'view', 'user_id': '42', 'size': 5, 'fields' : ['category'], 'filter': { 'exact': {'manufacturer': 'Apple'}}})
+recommended_items = response.items # [{'id':'930','category':'notebook'},{'id':'848','category':'keyboard'},{'id':'102','category':'watch'}]
 ```
 
-You can read [filters](/docs/concepts#filters-parameter) and [fields](/docs/concepts#fields-parameter) documentations for further reference.
+You can read [filters](https://suggestgrid.com/docs/advanced-features#filters-parameter) and [fields](https://suggestgrid.com/docs/advanced-features#fields-parameter) documentations for further reference.
 
 #### Parameters
 ##### Body Parameters
@@ -600,32 +575,30 @@ user_ids|array|false|The user ids of the query. Exactly one of user id or user i
 
 
 ## Similarity Methods
-Similarity methods are for getting similar items, or similar users from SuggestGrid.
-[Similarities documentation](http://www.suggestgrid.com/docs/similarities) is available for an overview.
+Similarity methods are for getting similar items, or similar users.
+Refer to [similarities](http://www.suggestgrid.com/docs/similarities) for an overview.
 
-### Get Similar Users
-> `get_similar_users(body)`
+### Gets Similar Users
+> `SuggestGridClient.recommendation.get_similar_users(query)`
 
 Returns similar users for the query.
 
-examples:
-
 ```ruby
-response = SuggestGridClient.similarity.get_similar_users({type: "views", user_id: "1"})
-users = response.users # [{id:"1"},{id:"451"},{id:"456"}]
+response = SuggestGridClient.similarity.get_similar_users({'type': 'views', 'user_id': '1'})
+similar_users = response.users # [{'id':'491'},{'id':'51'},{'id':'813'}]
 ```
 
 ```ruby
-response = SuggestGridClient.similarity.get_similar_users({type: "views", user_id: "1", except: ["1"]})
-users = response.users # [{id:"451"},{id:"456"}]
+response = SuggestGridClient.similarity.get_similar_users({'type': 'views', 'user_id': '1', except: ['491']})
+similar_users = response.users # [{'id':'51'},{'id':'813'}]
 ```
 
 ```ruby
-response = SuggestGridClient.similarity.get_similar_users({type: "views", user_ids: ["42", "532", "841"], size: 3, fields: ["name"], filter: { less_equal: { age: 20}})
-users = response.users # [{id:"400", name:"Jason"},{id:"132", name:"Scarlett"},{id:"503", name:"Amy"}]
+response = SuggestGridClient.similarity.get_similar_users({'type': 'views', 'user_ids': ['42', '532', '841'], 'size': 3, 'fields': ['name'], 'filter': {'less_equal': {'age': 20}})
+similar_users = response.users # [{'id':'400', 'name':'Jason'},{'id':'132', 'name':'Scarlett'},{'id':'503', 'name':'Amy'}]
 ```
 
-You can read [filters](/docs/concepts#filters-parameter) and [fields](/docs/concepts#fields-parameter) documentations for further reference.
+You can read [filters](https://suggestgrid.com/docs/advanced-features#filters-parameter) and [fields](https://suggestgrid.com/docs/advanced-features#fields-parameter) documentations for further reference.
 
 #### Parameters
 ##### Body Parameters
@@ -643,29 +616,27 @@ type|string|false|The type of the query. Similarities will be calculated based o
 types|string|false|The types of the query. Exactly one of type or types parameters must be provided.
 user_id|string|false|The user id of the query.
 user_ids|array|false|The user ids of the query. Exactly one of user id or user ids parameters must be provided.
-### Get Similar Items
-> `get_similar_items(body)`
+### Gets Similar Items
+> `SuggestGridClient.recommendation.get_similar_items(query)`
 
 Returns similar items for the query.
 
-examples:
-
 ```ruby
-response = SuggestGridClient.similarity.get_similar_items({type: "views", item_id: "1"})
-items = response.items # [{id:"1"},{id:"451"},{id:"456"}]
+response = SuggestGridClient.similarity.get_similar_items({'type': 'views', 'item_id': '1'})
+similar_items = response.items # [{'id':'17'},{'id':'451'},{'id':'456'}]
 ```
 
 ```ruby
-response = SuggestGridClient.similarity.get_similar_items({type: "views", item_id: "1", except: ["1"]})
-items = response.items # [{id:"451"},{id:"456"}]
+response = SuggestGridClient.similarity.get_similar_items({'type': 'views', 'item_id': '1', 'except': ['17']})
+similar_items = response.items # [{'id':'451'},{'id':'456'}]
 ```
 
 ```ruby
-response = SuggestGridClient.similarity.get_similar_items({type: "views", item_ids:  ["3","5","8"], size: 3, fields: ["category"], filter: { greater: { capacity: 60}})
-items = response.items # [{id:"451",category:"television"},{id:"656",category:"blu-ray-dvd-players"}]
+response = SuggestGridClient.similarity.get_similar_items({'type': 'views', 'item_ids':  ['3','5','8'], 'size': 3, 'fields': ['category'], 'filter': {'greater': {'capacity': 60}})
+similar_items = response.items # [{'id':'451','category':'television'},{'id':'656','category':'blu-ray-dvd-players'}]
 ```
 
-You can read [filters](/docs/concepts#filters-parameter) and [fields](/docs/concepts#fields-parameter) documentations for further reference.
+You can read [filters](https://suggestgrid.com/docs/advanced-features#filters-parameter) and [fields](https://suggestgrid.com/docs/advanced-features#fields-parameter) documentations for further reference.
 
 #### Parameters
 ##### Body Parameters

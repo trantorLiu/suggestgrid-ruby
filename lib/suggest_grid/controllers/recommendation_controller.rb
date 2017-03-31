@@ -8,7 +8,7 @@ module SuggestGrid
       @@instance
     end
 
-    # Get Recommended Users
+    # Gets Recommended Users
     # @param [GetRecommendedUsersBody] query Required parameter: Query for recommended users.
     # @return UsersResponse response from the API call
     def get_recommended_users(query)
@@ -32,6 +32,8 @@ module SuggestGrid
       # validate response against endpoint and global error codes
       if _context.response.status_code == 400
         raise ErrorResponseException.new 'Request body is invalid.', _context
+      elsif _context.response.status_code == 404
+        raise ErrorResponseException.new 'At least one type in the request does not exist.', _context
       elsif _context.response.status_code == 422
         raise ErrorResponseException.new 'Required parameters are missing.', _context
       elsif !_context.response.status_code.between?(200, 208)
@@ -44,7 +46,7 @@ module SuggestGrid
       return UsersResponse.from_hash(decoded)
     end
 
-    # Get Recommended Items
+    # Gets Recommended Items
     # @param [GetRecommendedItemsBody] query Required parameter: Query for recommended items.
     # @return ItemsResponse response from the API call
     def get_recommended_items(query)
@@ -68,6 +70,8 @@ module SuggestGrid
       # validate response against endpoint and global error codes
       if _context.response.status_code == 400
         raise ErrorResponseException.new 'Request body is invalid.', _context
+      elsif _context.response.status_code == 404
+        raise ErrorResponseException.new 'At least one type in the request does not exist.', _context
       elsif _context.response.status_code == 422
         raise ErrorResponseException.new 'Required parameters are missing.', _context
       elsif !_context.response.status_code.between?(200, 208)
