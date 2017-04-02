@@ -8,8 +8,6 @@ We will walk through how to get started with SuggestGrid Ruby Client in three st
     
 3. [Get recommendations](#3-get-recommendations)
 
-If you did not [sign up for SuggestGrid](https://dashboard.suggestgrid.com/users/sign_up), this is the right time.
-
 ## Getting Started
 
 In this guide we will demonstrate how to display personalized recommendations on an existing Ruby project.
@@ -28,23 +26,16 @@ gem 'suggestgrid'
 
 
 
-Applications make their API requests to their dedicated sub-domain of `suggestgrid.space`.
-
-Most endpoints require a username and password for authentication.
-
-An initial user name and password is given on sign up.
-
-It is very convenient to configure SuggestGrid by setting an authenticated `SUGGESTGRID_URL` environment variable in the format below:
+Once you [sign up for SuggestGrid](https://dashboard.suggestgrid.com/users/sign_up), you'll see your SUGGESTGRID_URL parameter on the dashboard in the format below:
 
 `http://{user}:{pass}@{region}.suggestgrid.space/{app-uuid}`
 
 You can authenticate your application using `SUGGESTGRID_URL` environment variable like the example below:
 
 ```ruby
-sg_uri = ENV['SUGGESTGRID_URL']
+require 'suggest_grid'
 
-# Initialize the SuggestGrid client.
-::SuggestGridClient = SuggestGrid::SuggestGridClient.new sg_uri
+SuggestGridClient = SuggestGrid::SuggestGridClient.new ENV['SUGGESTGRID_URL']
 ```
 
 
@@ -54,11 +45,11 @@ This could be done either from the dashboard or with a snippet like this:
 
 ```ruby
   begin
-    SuggestGridClient.type.get_type('views')
-    puts "SuggestGrid type named 'views' already exists, skipping creation."
+      SuggestGridClient.type.get_type('views')
+      puts "SuggestGrid type named 'views' already exists, skipping creation."
   rescue SuggestGrid::APIException => e
-    SuggestGridClient.type.create_type('views')
-    puts "SuggestGrid type named 'views' is created."
+      SuggestGridClient.type.create_type('views', {'rating': 'implicit'})
+      puts "Views SuggestGrid type is created."
   end
 ```
 
@@ -67,16 +58,16 @@ This could be done either from the dashboard or with a snippet like this:
 ### 2. Post actions
 
 Once the type exists, let's start posting actions.
-We should invoke SuggestGrid client's action.post_action when an user views an item in our application.
+We should invoke SuggestGrid client's SuggestGridClient.action.post_action when an user views an item in our application.
 
 We can do this by putting the snippet below on the relevant point:
 
 ```ruby
 # Send action to SuggestGrid.
 begin
-  SuggestGridClient.action.post_action(SuggestGrid::Action.new('views',user.id, self.id))
+    SuggestGridClient.action.post_action(SuggestGrid::Action.new('views',user.id, self.id))
 rescue Exception => e
-  puts "Exception while sending action #{e}"
+    puts "Exception while sending action #{e}"
 end
 ```
 
@@ -96,9 +87,9 @@ Once the first model generated for 'views' type, recommendations could be get us
 
 ```ruby
 begin
-  items_response = SuggestGridClient.recommendation.get_recommended_items({type: 'view', user_id: user.id, size: size})
-  items_response.items
+    items_response = SuggestGridClient.recommendation.get_recommended_items({'type': 'view', 'user_id': user.id, 'size': size})
+    items_response.items
 rescue Exception => e
-  puts "Exception while getting recommendations #{e}"
+    puts "Exception while getting recommendations #{e}"
 end
 ```

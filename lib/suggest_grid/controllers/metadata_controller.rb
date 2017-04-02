@@ -8,7 +8,7 @@ module SuggestGrid
       @@instance
     end
 
-    # Post a User
+    # Posts a User
     # @param [Metadata] user Required parameter: The metadata to be saved. Metadata format has its restrictions.
     # @return MessageResponse response from the API call
     def post_user(user)
@@ -42,7 +42,7 @@ module SuggestGrid
       return MessageResponse.from_hash(decoded)
     end
 
-    # Post Bulk Users
+    # Posts Users
     # @param [Collection] users Required parameter: List of user metadata, whose size is limited to 10 thousand.
     # @return BulkPostResponse response from the API call
     def post_bulk_users(users)
@@ -82,8 +82,8 @@ module SuggestGrid
       return BulkPostResponse.from_hash(decoded)
     end
 
-    # Get A User
-    # @param [String] user_id Required parameter: The user id to delete its metadata.
+    # Gets A User
+    # @param [String] user_id Required parameter: The user id to get its metadata.
     # @return Metadata response from the API call
     def get_user(user_id)
 
@@ -118,7 +118,7 @@ module SuggestGrid
       return Metadata.from_hash(decoded)
     end
 
-    # Get Users
+    # Gets Users
     # @param [Long] size Optional parameter: The number of the users response. Defaults to 10. Must be between 1 and 10,000 inclusive. This parameter must be string represetation of an integer like "1".
     # @param [Long] from Optional parameter: The number of users to be skipped from the response. Defaults to 0. Must be bigger than or equal to 0. This parameter must be string represetation of an integer like "1".
     # @return UsersResponse response from the API call
@@ -155,7 +155,7 @@ module SuggestGrid
       return UsersResponse.from_hash(decoded)
     end
 
-    # Delete a User
+    # Deletes a User
     # @param [String] user_id Required parameter: The user id to delete its metadata.
     # @return MessageResponse response from the API call
     def delete_user(user_id)
@@ -189,7 +189,7 @@ module SuggestGrid
       return MessageResponse.from_hash(decoded)
     end
 
-    # Delete All Users
+    # Deletes All Users
     # @return MessageResponse response from the API call
     def delete_all_users
 
@@ -219,7 +219,7 @@ module SuggestGrid
       return MessageResponse.from_hash(decoded)
     end
 
-    # Post an Item
+    # Posts An Item
     # @param [Metadata] item Required parameter: The metadata to be saved. Metadata format has its restrictions.
     # @return MessageResponse response from the API call
     def post_item(item)
@@ -253,7 +253,7 @@ module SuggestGrid
       return MessageResponse.from_hash(decoded)
     end
 
-    # Post Bulk Items
+    # Posts Items
     # @param [Collection] items Required parameter: List of item metadata, whose size is limited to 10 thousand.
     # @return BulkPostResponse response from the API call
     def post_bulk_items(items)
@@ -293,8 +293,8 @@ module SuggestGrid
       return BulkPostResponse.from_hash(decoded)
     end
 
-    # Get An Item
-    # @param [String] item_id Required parameter: The item id to delete its metadata.
+    # Gets An Item
+    # @param [String] item_id Required parameter: The item id to get its metadata.
     # @return Metadata response from the API call
     def get_item(item_id)
 
@@ -329,7 +329,7 @@ module SuggestGrid
       return Metadata.from_hash(decoded)
     end
 
-    # Get Items
+    # Gets Items
     # @param [Long] size Optional parameter: The number of the users response. Defaults to 10. Must be between 1 and 10,000 inclusive. This parameter must be string represetation of an integer like "1".
     # @param [Long] from Optional parameter: The number of users to be skipped from the response. Defaults to 0. Must be bigger than or equal to 0. This parameter must be string represetation of an integer like "1".
     # @return ItemsResponse response from the API call
@@ -400,7 +400,7 @@ module SuggestGrid
       return MessageResponse.from_hash(decoded)
     end
 
-    # Delete All Items
+    # Deletes All Items
     # @return MessageResponse response from the API call
     def delete_all_items
 
