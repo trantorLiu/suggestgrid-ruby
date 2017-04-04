@@ -21,6 +21,7 @@ info:
     projectName: SuggestGrid
     enableAdditionalModelProperties: false
     preserveParameterOrder: true
+    enablePHPComposerVersionString: true
 
 schemes:
   - https
