@@ -2,7 +2,7 @@ swagger: '2.0'
 # 
 info:
   title: SuggestGrid
-  version: 0.1.31
+  version: 0.1.32-rc.2
   description: Personalization made Simple
   x-codegen-settings:
     appendContentHeaders: true
@@ -21,6 +21,7 @@ info:
     projectName: SuggestGrid
     enableAdditionalModelProperties: false
     preserveParameterOrder: true
+    enablePHPComposerVersionString: true
 
 schemes:
   - https
