@@ -43,9 +43,9 @@ module SuggestGrid
         nil
       else
         # Extract variables from the hash
-        message = hash["message"]
-        value = hash["value"]
-        error = hash["error"]
+        message = hash['message']
+        value = hash['value']
+        error = hash['error']
 
         # Clean out expected properties from Hash
         names.values.each {|k| hash.delete(k)}

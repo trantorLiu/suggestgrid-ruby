@@ -43,13 +43,13 @@ module SuggestGrid
         nil
       else
         # Extract variables from the hash
-        count = hash["count"]
-        total_count = hash["total_count"]
+        count = hash['count']
+        total_count = hash['total_count']
         # Parameter is an array, so we need to iterate through it
         users = nil
-        if hash["users"] != nil
+        if hash['users'] != nil
           users = Array.new
-          hash["users"].each{|structure| users << (Metadata.from_hash(structure) if structure)}
+          hash['users'].each{|structure| users << (Metadata.from_hash(structure) if structure)}
         end
 
         # Clean out expected properties from Hash

@@ -31,13 +31,13 @@ module SuggestGrid
 
       # validate response against endpoint and global error codes
       if _context.response.status_code == 400
-        raise ErrorResponseException.new 'Required user id or item id parameters are missing from the request.', _context
+        raise ErrorResponseErrorException.new 'Required user id or item id parameters are missing from the request.', _context
       elsif _context.response.status_code == 402
-        raise ErrorResponseException.new 'Action limit exceeded.', _context
+        raise ErrorResponseErrorException.new 'Action limit exceeded.', _context
       elsif _context.response.status_code == 404
-        raise ErrorResponseException.new 'Action type does not exists.', _context
+        raise ErrorResponseErrorException.new 'Action type does not exists.', _context
       elsif !_context.response.status_code.between?(200, 208)
-        raise ErrorResponseException.new 'Unexpected internal error.', _context
+        raise ErrorResponseErrorException.new 'Unexpected internal error.', _context
       end
       validate_response(_context)
 
@@ -73,15 +73,15 @@ module SuggestGrid
 
       # validate response against endpoint and global error codes
       if _context.response.status_code == 400
-        raise ErrorResponseException.new 'Body is missing.', _context
+        raise ErrorResponseErrorException.new 'Body is missing.', _context
       elsif _context.response.status_code == 402
-        raise ErrorResponseException.new 'Action limit exceeded.', _context
+        raise ErrorResponseErrorException.new 'Action limit exceeded.', _context
       elsif _context.response.status_code == 404
-        raise ErrorResponseException.new 'Action type does not exists.', _context
+        raise ErrorResponseErrorException.new 'Action type does not exists.', _context
       elsif _context.response.status_code == 413
-        raise ErrorResponseException.new 'Bulk request maximum line count exceeded.', _context
+        raise ErrorResponseErrorException.new 'Bulk request maximum line count exceeded.', _context
       elsif !_context.response.status_code.between?(200, 208)
-        raise ErrorResponseException.new 'Unexpected internal error.', _context
+        raise ErrorResponseErrorException.new 'Unexpected internal error.', _context
       end
       validate_response(_context)
 
@@ -130,7 +130,7 @@ module SuggestGrid
 
       # validate response against endpoint and global error codes
       if _context.response.status_code == 0
-        raise ErrorResponseException.new 'Unexpected internal error.', _context
+        raise ErrorResponseErrorException.new 'Unexpected internal error.', _context
       end
       validate_response(_context)
 
@@ -173,15 +173,15 @@ module SuggestGrid
 
       # validate response against endpoint and global error codes
       if _context.response.status_code == 400
-        raise ErrorResponseException.new 'Required user id or item id parameters are missing.', _context
+        raise ErrorResponseErrorException.new 'Required user id or item id parameters are missing.', _context
       elsif _context.response.status_code == 404
-        raise DeleteErrorResponseException.new 'Delete actions not found.', _context
+        raise DeleteErrorResponseErrorException.new 'Delete actions not found.', _context
       elsif _context.response.status_code == 422
-        raise ErrorResponseException.new 'No query parameter (user id, item id, or older than) is given. qIn order to delete all actionsdelete the type.', _context
+        raise ErrorResponseErrorException.new 'No query parameter (user id, item id, or older than) is given. qIn order to delete all actionsdelete the type.', _context
       elsif _context.response.status_code == 505
-        raise ErrorResponseException.new 'Request timed out.', _context
+        raise ErrorResponseErrorException.new 'Request timed out.', _context
       elsif !_context.response.status_code.between?(200, 208)
-        raise ErrorResponseException.new 'Unexpected internal error.', _context
+        raise ErrorResponseErrorException.new 'Unexpected internal error.', _context
       end
       validate_response(_context)
 

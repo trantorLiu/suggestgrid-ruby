@@ -5,19 +5,19 @@ module SuggestGrid
     # Execute an HttpRequest when the response is expected to be a string.
     # @param [HttpRequest] The HttpRequest to be executed.
     def execute_as_string(http_request)
-      raise NotImplementedError, "This method needs to be implemented in a child class."
+      raise NotImplementedError, 'This method needs to be implemented in a child class.'
     end
     
     # Execute an HttpRequest when the response is expected to be binary.
     # @param [HttpRequest] The HttpRequest to be executed.
     def execute_as_binary(http_request)
-      raise NotImplementedError, "This method needs to be implemented in a child class."
+      raise NotImplementedError, 'This method needs to be implemented in a child class.'
     end
     
     # Converts the HTTP Response from the client to an HttpResponse object.
     # @param [Dynamic] The response object received from the client.
     def convert_response(response)
-      raise NotImplementedError, "This method needs to be implemented in a child class."
+      raise NotImplementedError, 'This method needs to be implemented in a child class.'
     end
 
     # Get a GET HttpRequest object.

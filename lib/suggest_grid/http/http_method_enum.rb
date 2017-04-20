@@ -2,6 +2,6 @@
 
 module SuggestGrid
   class HttpMethodEnum
-    HTTPMETHODENUM = [GET = "GET", POST = "POST", PUT = "PUT", PATCH = "PATCH", DELETE = "DELETE"]
+    HTTPMETHODENUM = [GET = 'GET', POST = 'POST', PUT = 'PUT', PATCH = 'PATCH', DELETE = 'DELETE']
   end
 end

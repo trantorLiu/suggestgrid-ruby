@@ -50,10 +50,10 @@ module SuggestGrid
         nil
       else
         # Extract variables from the hash
-        message = hash["message"]
-        found = hash["found"]
-        deleted = hash["deleted"]
-        failed = hash["failed"]
+        message = hash['message']
+        found = hash['found']
+        deleted = hash['deleted']
+        failed = hash['failed']
 
         # Clean out expected properties from Hash
         names.values.each {|k| hash.delete(k)}

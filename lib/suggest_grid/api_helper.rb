@@ -10,27 +10,25 @@ module SuggestGrid
       raise ArgumentError, 'Given value for parameter \"query_builder\" is invalid.' unless query_builder.instance_of? String
 
       # return if there are no parameters to replace
-      if parameters.nil?
-        query_builder
-      else
-        # iterate and append parameters
-        parameters.each do |key, value|
+      return query_builder if parameters.nil?
+
+      # iterate and append parameters
+      parameters.each do |key, value|
+        replace_value = ''
+
+        if value.nil?
           replace_value = ''
-
-          if value.nil?
-            replace_value = ''
-          elsif value.instance_of? Array
-            value.map!{|element| CGI.escape(element.to_s)}
-            replace_value = value.join('/')
-          else
-            replace_value = CGI.escape(value.to_s)
-          end
-
-          # find the template parameter and replace it with its value
-          query_builder = query_builder.gsub('{' + key.to_s + '}', replace_value)
+        elsif value.instance_of? Array
+          value.map! { |element| CGI.escape(element.to_s) }
+          replace_value = value.join('/')
+        else
+          replace_value = CGI.escape(value.to_s)
         end
+
+        # find the template parameter and replace it with its value
+        query_builder = query_builder.gsub('{' + key.to_s + '}', replace_value)
       end
-      return query_builder
+      query_builder
     end
 
     # Appends the given set of parameters to the given query string
@@ -41,19 +39,17 @@ module SuggestGrid
       raise ArgumentError, 'Given value for parameter \"query_builder\" is invalid.' unless query_builder.instance_of? String
 
       # return if there are no parameters to replace
-      if parameters.nil?
-        return query_builder
-      else
-        # remove any nil values
-        parameters = parameters.reject { |_key, value| value.nil? }
+      return query_builder if parameters.nil?
 
-        # does the query string already has parameters
-        has_params = query_builder.include? '?'
-        separator = has_params ? '&' : '?'
+      # remove any nil values
+      parameters = parameters.reject { |_key, value| value.nil? }
 
-        # append query with separator and parameters and return
-        return query_builder << separator << URI.encode_www_form(parameters)
-      end
+      # does the query string already has parameters
+      has_params = query_builder.include? '?'
+      separator = has_params ? '&' : '?'
+
+      # append query with separator and parameters and return
+      query_builder << separator << URI.encode_www_form(parameters)
     end
 
     # Validates and processes the given Url
@@ -69,46 +65,44 @@ module SuggestGrid
 
       # get the http protocol match
       protocol = matches[1]
-      
+
       # check if parameters exist
       index = url.index('?')
 
       # remove redundant forward slashes
-      query = url[protocol.length...(index != nil ? index : url.length)]
+      query = url[protocol.length...(!index.nil? ? index : url.length)]
       query.gsub!(%r{\/\/+}, '/')
 
       # get the parameters
-      parameters = index != nil ? url[url.index('?')...url.length] : ""
+      parameters = !index.nil? ? url[url.index('?')...url.length] : ''
 
       # return processed url
-      return protocol + query  + parameters
-    end	
+      protocol + query + parameters
+    end
 
     # Parses JSON string.
     # @param [String] A JSON string.
     def self.json_deserialize(json)
-      begin
-        return JSON.parse(json)
-      rescue
-        raise TypeError, "Server responded with invalid JSON."
-      end
+      return JSON.parse(json)
+    rescue
+      raise TypeError, 'Server responded with invalid JSON.'
     end
 
     # Removes elements with empty values from a hash.
     # @param [Hash] The hash to clean.
     def self.clean_hash(hash)
-      hash.delete_if { |key, value| value.to_s.strip.empty? }
+      hash.delete_if { |_key, value| value.to_s.strip.empty? }
     end
 
     # Form encodes a hash of parameters.
     # @param [Hash] The hash of parameters to encode.
     # @return [Hash] A hash with the same parameters form encoded.
     def self.form_encode_parameters(form_parameters)
-      encoded = Hash.new
+      encoded = {}
       form_parameters.each do |key, value|
-        encoded.merge!(APIHelper.form_encode value, key)
-      end 
-      return encoded
+        encoded.merge!(APIHelper.form_encode(value, key))
+      end
+      encoded
     end
 
     # Form encodes an object.
@@ -116,28 +110,26 @@ module SuggestGrid
     # @param [String] The name of the object.
     # @return [Hash] A form encoded representation of the object in the form of a hash.
     def self.form_encode(obj, instance_name)
-      retval = Hash.new
+      retval = {}
 
       # If this is a structure, resolve it's field names.
-      if obj.kind_of? BaseModel
-        obj = obj.to_hash
-      end
-      
+      obj = obj.to_hash if obj.is_a? BaseModel
+
       # Create a form encoded hash for this object.
-      if obj == nil
-        nil         
+      if obj.nil?
+        nil
       elsif obj.instance_of? Array
         obj.each_with_index do |value, index|
-          retval.merge!(APIHelper.form_encode(value, instance_name + "[" + index.to_s + "]"))
+          retval.merge!(APIHelper.form_encode(value, instance_name + '[' + index.to_s + ']'))
         end
       elsif obj.instance_of? Hash
         obj.each do |key, value|
-          retval.merge!(APIHelper.form_encode(value, instance_name + "[" + key + "]"))
+          retval.merge!(APIHelper.form_encode(value, instance_name + '[' + key + ']'))
         end
       else
         retval[instance_name] = obj
       end
-      return retval
+      retval
     end
   end
 end

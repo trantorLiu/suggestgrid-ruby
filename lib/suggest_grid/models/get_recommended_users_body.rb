@@ -101,17 +101,17 @@ module SuggestGrid
         nil
       else
         # Extract variables from the hash
-        type = hash["type"]
-        types = hash["types"]
-        item_id = hash["item_id"]
-        item_ids = hash["item_ids"]
-        from = hash["from"]
-        size = hash["size"]
-        similar_user_id = hash["similar_user_id"]
-        similar_user_ids = hash["similar_user_ids"]
-        fields = hash["fields"]
-        filter = hash["filter"]
-        except = hash["except"]
+        type = hash['type']
+        types = hash['types']
+        item_id = hash['item_id']
+        item_ids = hash['item_ids']
+        from = hash['from']
+        size = hash['size']
+        similar_user_id = hash['similar_user_id']
+        similar_user_ids = hash['similar_user_ids']
+        fields = hash['fields']
+        filter = hash['filter']
+        except = hash['except']
 
         # Clean out expected properties from Hash
         names.values.each {|k| hash.delete(k)}

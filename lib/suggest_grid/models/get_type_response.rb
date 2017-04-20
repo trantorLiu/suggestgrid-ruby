@@ -29,7 +29,7 @@ module SuggestGrid
         nil
       else
         # Extract variables from the hash
-        rating = hash["rating"]
+        rating = hash['rating']
 
         # Clean out expected properties from Hash
         names.values.each {|k| hash.delete(k)}

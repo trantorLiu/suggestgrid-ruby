@@ -7,7 +7,7 @@ module SuggestGrid
     @@http_client = FaradayClient.new
 
     @@global_headers = {
-      'user-agent' => 'SUGGESTGRID'      
+      'user-agent' => 'SUGGESTGRID'
     }
 
     def initialize(http_client: nil, http_call_back: nil)
@@ -16,8 +16,8 @@ module SuggestGrid
     end
 
     def validate_parameters(args)
-      args.each do |name, value|
-        if value == nil
+      args.each do |_name, value|
+        if value.nil?
           raise ArgumentError.new 'Required parameter #{name} cannot be nil.'
         end
       end
@@ -28,7 +28,7 @@ module SuggestGrid
 
       APIHelper.clean_hash(request.headers)
       request.headers = @@global_headers.clone.merge(request.headers)
-      
+
       response = binary ? @http_client.execute_as_binary(request) : @http_client.execute_as_string(request)
       context = HttpContext.new(request, response)
 

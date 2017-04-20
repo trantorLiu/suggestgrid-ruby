@@ -39,10 +39,10 @@ require_relative 'suggest_grid/models/items_response.rb'
 
 # Exceptions
 require_relative 'suggest_grid/exceptions/api_exception.rb'
-require_relative 'suggest_grid/exceptions/error_response_exception.rb'
-require_relative 'suggest_grid/exceptions/detailed_error_response_exception.rb'
-require_relative 'suggest_grid/exceptions/limit_exceeded_error_response_exception.rb'
-require_relative 'suggest_grid/exceptions/delete_error_response_exception.rb'
+require_relative 'suggest_grid/exceptions/error_response_error_exception.rb'
+require_relative 'suggest_grid/exceptions/limit_exceeded_error_response_error_exception.rb'
+require_relative 'suggest_grid/exceptions/delete_error_response_error_exception.rb'
+require_relative 'suggest_grid/exceptions/detailed_error_response_error_exception.rb'
 
 require_relative 'suggest_grid/configuration.rb'
 

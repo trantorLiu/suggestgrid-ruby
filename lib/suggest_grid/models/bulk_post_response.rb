@@ -36,12 +36,12 @@ module SuggestGrid
         nil
       else
         # Extract variables from the hash
-        message = hash["message"]
+        message = hash['message']
         # Parameter is an array, so we need to iterate through it
         errors = nil
-        if hash["errors"] != nil
+        if hash['errors'] != nil
           errors = Array.new
-          hash["errors"].each{|structure| errors << (BulkPostError.from_hash(structure) if structure)}
+          hash['errors'].each{|structure| errors << (BulkPostError.from_hash(structure) if structure)}
         end
 
         # Clean out expected properties from Hash

@@ -31,9 +31,9 @@ module SuggestGrid
 
       # validate response against endpoint and global error codes
       if _context.response.status_code == 400
-        raise DetailedErrorResponseException.new 'Metadata is invalid.', _context
+        raise DetailedErrorResponseErrorException.new 'Metadata is invalid.', _context
       elsif !_context.response.status_code.between?(200, 208)
-        raise ErrorResponseException.new 'Unexpected internal error.', _context
+        raise ErrorResponseErrorException.new 'Unexpected internal error.', _context
       end
       validate_response(_context)
 
@@ -69,11 +69,11 @@ module SuggestGrid
 
       # validate response against endpoint and global error codes
       if _context.response.status_code == 400
-        raise ErrorResponseException.new 'Body is missing.', _context
+        raise ErrorResponseErrorException.new 'Body is missing.', _context
       elsif _context.response.status_code == 413
-        raise ErrorResponseException.new 'Bulk request maximum line count exceeded.', _context
+        raise ErrorResponseErrorException.new 'Bulk request maximum line count exceeded.', _context
       elsif !_context.response.status_code.between?(200, 208)
-        raise ErrorResponseException.new 'Unexpected internal error.', _context
+        raise ErrorResponseErrorException.new 'Unexpected internal error.', _context
       end
       validate_response(_context)
 
@@ -107,9 +107,9 @@ module SuggestGrid
 
       # validate response against endpoint and global error codes
       if _context.response.status_code == 404
-        raise ErrorResponseException.new 'User does not exists.', _context
+        raise ErrorResponseErrorException.new 'User does not exists.', _context
       elsif !_context.response.status_code.between?(200, 208)
-        raise ErrorResponseException.new 'Unexpected internal error.', _context
+        raise ErrorResponseErrorException.new 'Unexpected internal error.', _context
       end
       validate_response(_context)
 
@@ -146,7 +146,7 @@ module SuggestGrid
 
       # validate response against endpoint and global error codes
       if _context.response.status_code == 0
-        raise ErrorResponseException.new 'Unexpected internal error.', _context
+        raise ErrorResponseErrorException.new 'Unexpected internal error.', _context
       end
       validate_response(_context)
 
@@ -180,7 +180,7 @@ module SuggestGrid
 
       # validate response against endpoint and global error codes
       if _context.response.status_code == 0
-        raise ErrorResponseException.new 'Unexpected internal error.', _context
+        raise ErrorResponseErrorException.new 'Unexpected internal error.', _context
       end
       validate_response(_context)
 
@@ -210,7 +210,7 @@ module SuggestGrid
 
       # validate response against endpoint and global error codes
       if _context.response.status_code == 0
-        raise ErrorResponseException.new 'Unexpected internal error.', _context
+        raise ErrorResponseErrorException.new 'Unexpected internal error.', _context
       end
       validate_response(_context)
 
@@ -242,9 +242,9 @@ module SuggestGrid
 
       # validate response against endpoint and global error codes
       if _context.response.status_code == 400
-        raise DetailedErrorResponseException.new 'Metadata is invalid.', _context
+        raise DetailedErrorResponseErrorException.new 'Metadata is invalid.', _context
       elsif !_context.response.status_code.between?(200, 208)
-        raise ErrorResponseException.new 'Unexpected internal error.', _context
+        raise ErrorResponseErrorException.new 'Unexpected internal error.', _context
       end
       validate_response(_context)
 
@@ -280,11 +280,11 @@ module SuggestGrid
 
       # validate response against endpoint and global error codes
       if _context.response.status_code == 400
-        raise ErrorResponseException.new 'Body is missing.', _context
+        raise ErrorResponseErrorException.new 'Body is missing.', _context
       elsif _context.response.status_code == 413
-        raise ErrorResponseException.new 'Bulk request maximum line count exceeded.', _context
+        raise ErrorResponseErrorException.new 'Bulk request maximum line count exceeded.', _context
       elsif !_context.response.status_code.between?(200, 208)
-        raise ErrorResponseException.new 'Unexpected internal error.', _context
+        raise ErrorResponseErrorException.new 'Unexpected internal error.', _context
       end
       validate_response(_context)
 
@@ -318,9 +318,9 @@ module SuggestGrid
 
       # validate response against endpoint and global error codes
       if _context.response.status_code == 404
-        raise ErrorResponseException.new 'Item does not exists.', _context
+        raise ErrorResponseErrorException.new 'Item does not exists.', _context
       elsif !_context.response.status_code.between?(200, 208)
-        raise ErrorResponseException.new 'Unexpected internal error.', _context
+        raise ErrorResponseErrorException.new 'Unexpected internal error.', _context
       end
       validate_response(_context)
 
@@ -357,7 +357,7 @@ module SuggestGrid
 
       # validate response against endpoint and global error codes
       if _context.response.status_code == 0
-        raise ErrorResponseException.new 'Unexpected internal error.', _context
+        raise ErrorResponseErrorException.new 'Unexpected internal error.', _context
       end
       validate_response(_context)
 
@@ -391,7 +391,7 @@ module SuggestGrid
 
       # validate response against endpoint and global error codes
       if _context.response.status_code == 0
-        raise ErrorResponseException.new 'Unexpected internal error.', _context
+        raise ErrorResponseErrorException.new 'Unexpected internal error.', _context
       end
       validate_response(_context)
 
@@ -421,7 +421,7 @@ module SuggestGrid
 
       # validate response against endpoint and global error codes
       if _context.response.status_code == 0
-        raise ErrorResponseException.new 'Unexpected internal error.', _context
+        raise ErrorResponseErrorException.new 'Unexpected internal error.', _context
       end
       validate_response(_context)
 
