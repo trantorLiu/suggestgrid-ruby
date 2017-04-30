@@ -33,7 +33,7 @@ Once you [sign up for SuggestGrid](https://dashboard.suggestgrid.com/users/sign_
 You can authenticate your application using `SUGGESTGRID_URL` environment variable like the example below:
 
 ```ruby
-require 'suggest_grid'
+require 'suggestgrid'
 
 SuggestGridClient = SuggestGrid::SuggestGridClient.new ENV['SUGGESTGRID_URL']
 ```

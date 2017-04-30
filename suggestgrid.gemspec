@@ -1,11 +1,11 @@
 Gem::Specification.new do |s|
   s.name = 'suggestgrid'
   s.version = '0.1.32.pre'
-  s.summary = 'suggest_grid'
+  s.summary = 'SuggestGrid Ruby SDK'
   s.description = 'Personalization made Simple'
   s.authors = ['SuggestGrid']
   s.email = 'support@suggestgrid.com'
-  s.homepage = 'http://www.suggestgrid.com'
+  s.homepage = 'https://suggestgrid.com'
   s.license = 'MIT'
   s.add_dependency('logging', '~> 2.0')
   s.add_dependency('faraday', '~> 0.10.0')
