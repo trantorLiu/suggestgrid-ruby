@@ -13,4 +13,3 @@ expect "Password:   "
 send "$password\r"
 
 interact
-interact
