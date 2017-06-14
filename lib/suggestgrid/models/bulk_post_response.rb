@@ -12,46 +12,36 @@ module SuggestGrid
 
     # A mapping from model property names to API property names
     def self.names
-      if @hash.nil?
-        @hash = {}
-        @hash["message"] = "message"
-        @hash["errors"] = "errors"
+      if @_hash.nil?
+        @_hash = {}
+        @_hash["message"] = "message"
+        @_hash["errors"] = "errors"
       end
-      @hash
+      @_hash
     end
 
     def initialize(message = nil,
-                   errors = nil,
-                   additional_properties = {})
+                   errors = nil)
       @message = message
       @errors = errors
-
-      # Add additional model properties to the instance
-      additional_properties.each {|name, value| instance_variable_set("@#{name}", value)}
     end
 
     # Creates an instance of the object from a hash
     def self.from_hash(hash)
-      if hash == nil
-        nil
-      else
-        # Extract variables from the hash
-        message = hash['message']
-        # Parameter is an array, so we need to iterate through it
-        errors = nil
-        if hash['errors'] != nil
-          errors = Array.new
-          hash['errors'].each{|structure| errors << (BulkPostError.from_hash(structure) if structure)}
-        end
+      return nil unless hash
 
-        # Clean out expected properties from Hash
-        names.values.each {|k| hash.delete(k)}
-
-        # Create object from extracted values
-        BulkPostResponse.new(message,
-                             errors,
-                             hash)
+      # Extract variables from the hash
+      message = hash['message']
+      # Parameter is an array, so we need to iterate through it
+      errors = nil
+      if hash['errors'] != nil
+        errors = Array.new
+        hash['errors'].each{|structure| errors << (BulkPostError.from_hash(structure) if structure)}
       end
+
+      # Create object from extracted values
+      BulkPostResponse.new(message,
+                           errors)
     end
   end
 end

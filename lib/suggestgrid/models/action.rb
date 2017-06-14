@@ -24,56 +24,46 @@ module SuggestGrid
 
     # A mapping from model property names to API property names
     def self.names
-      if @hash.nil?
-        @hash = {}
-        @hash["type"] = "type"
-        @hash["user_id"] = "user_id"
-        @hash["item_id"] = "item_id"
-        @hash["rating"] = "rating"
-        @hash["timestamp"] = "timestamp"
+      if @_hash.nil?
+        @_hash = {}
+        @_hash["type"] = "type"
+        @_hash["user_id"] = "user_id"
+        @_hash["item_id"] = "item_id"
+        @_hash["rating"] = "rating"
+        @_hash["timestamp"] = "timestamp"
       end
-      @hash
+      @_hash
     end
 
     def initialize(type = nil,
                    user_id = nil,
                    item_id = nil,
                    rating = nil,
-                   timestamp = nil,
-                   additional_properties = {})
+                   timestamp = nil)
       @type = type
       @user_id = user_id
       @item_id = item_id
       @rating = rating
       @timestamp = timestamp
-
-      # Add additional model properties to the instance
-      additional_properties.each {|name, value| instance_variable_set("@#{name}", value)}
     end
 
     # Creates an instance of the object from a hash
     def self.from_hash(hash)
-      if hash == nil
-        nil
-      else
-        # Extract variables from the hash
-        type = hash['type']
-        user_id = hash['user_id']
-        item_id = hash['item_id']
-        rating = hash['rating']
-        timestamp = hash['timestamp']
+      return nil unless hash
 
-        # Clean out expected properties from Hash
-        names.values.each {|k| hash.delete(k)}
+      # Extract variables from the hash
+      type = hash['type']
+      user_id = hash['user_id']
+      item_id = hash['item_id']
+      rating = hash['rating']
+      timestamp = hash['timestamp']
 
-        # Create object from extracted values
-        Action.new(type,
-                   user_id,
-                   item_id,
-                   rating,
-                   timestamp,
-                   hash)
-      end
+      # Create object from extracted values
+      Action.new(type,
+                 user_id,
+                 item_id,
+                 rating,
+                 timestamp)
     end
   end
 end

@@ -131,7 +131,7 @@ module SuggestGrid
       _query_builder = APIHelper.append_url_with_query_parameters _query_builder, {
         'size' => size,
         'from' => from
-      }
+      }, array_serialization: Configuration.array_serialization
       _query_url = APIHelper.clean_url _query_builder
 
       # prepare headers
@@ -342,7 +342,7 @@ module SuggestGrid
       _query_builder = APIHelper.append_url_with_query_parameters _query_builder, {
         'size' => size,
         'from' => from
-      }
+      }, array_serialization: Configuration.array_serialization
       _query_url = APIHelper.clean_url _query_builder
 
       # prepare headers

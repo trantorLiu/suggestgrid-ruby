@@ -41,19 +41,19 @@ module SuggestGrid
 
     # A mapping from model property names to API property names
     def self.names
-      if @hash.nil?
-        @hash = {}
-        @hash["type"] = "type"
-        @hash["types"] = "types"
-        @hash["item_id"] = "item_id"
-        @hash["item_ids"] = "item_ids"
-        @hash["from"] = "from"
-        @hash["size"] = "size"
-        @hash["fields"] = "fields"
-        @hash["filter"] = "filter"
-        @hash["except"] = "except"
+      if @_hash.nil?
+        @_hash = {}
+        @_hash["type"] = "type"
+        @_hash["types"] = "types"
+        @_hash["item_id"] = "item_id"
+        @_hash["item_ids"] = "item_ids"
+        @_hash["from"] = "from"
+        @_hash["size"] = "size"
+        @_hash["fields"] = "fields"
+        @_hash["filter"] = "filter"
+        @_hash["except"] = "except"
       end
-      @hash
+      @_hash
     end
 
     def initialize(type = nil,
@@ -64,8 +64,7 @@ module SuggestGrid
                    size = nil,
                    fields = nil,
                    filter = nil,
-                   except = nil,
-                   additional_properties = {})
+                   except = nil)
       @type = type
       @types = types
       @item_id = item_id
@@ -75,42 +74,33 @@ module SuggestGrid
       @fields = fields
       @filter = filter
       @except = except
-
-      # Add additional model properties to the instance
-      additional_properties.each {|name, value| instance_variable_set("@#{name}", value)}
     end
 
     # Creates an instance of the object from a hash
     def self.from_hash(hash)
-      if hash == nil
-        nil
-      else
-        # Extract variables from the hash
-        type = hash['type']
-        types = hash['types']
-        item_id = hash['item_id']
-        item_ids = hash['item_ids']
-        from = hash['from']
-        size = hash['size']
-        fields = hash['fields']
-        filter = hash['filter']
-        except = hash['except']
+      return nil unless hash
 
-        # Clean out expected properties from Hash
-        names.values.each {|k| hash.delete(k)}
+      # Extract variables from the hash
+      type = hash['type']
+      types = hash['types']
+      item_id = hash['item_id']
+      item_ids = hash['item_ids']
+      from = hash['from']
+      size = hash['size']
+      fields = hash['fields']
+      filter = hash['filter']
+      except = hash['except']
 
-        # Create object from extracted values
-        GetSimilarItemsBody.new(type,
-                                types,
-                                item_id,
-                                item_ids,
-                                from,
-                                size,
-                                fields,
-                                filter,
-                                except,
-                                hash)
-      end
+      # Create object from extracted values
+      GetSimilarItemsBody.new(type,
+                              types,
+                              item_id,
+                              item_ids,
+                              from,
+                              size,
+                              fields,
+                              filter,
+                              except)
     end
   end
 end

@@ -8,36 +8,26 @@ module SuggestGrid
 
     # A mapping from model property names to API property names
     def self.names
-      if @hash.nil?
-        @hash = {}
-        @hash["message"] = "message"
+      if @_hash.nil?
+        @_hash = {}
+        @_hash["message"] = "message"
       end
-      @hash
+      @_hash
     end
 
-    def initialize(message = nil,
-                   additional_properties = {})
+    def initialize(message = nil)
       @message = message
-
-      # Add additional model properties to the instance
-      additional_properties.each {|name, value| instance_variable_set("@#{name}", value)}
     end
 
     # Creates an instance of the object from a hash
     def self.from_hash(hash)
-      if hash == nil
-        nil
-      else
-        # Extract variables from the hash
-        message = hash['message']
+      return nil unless hash
 
-        # Clean out expected properties from Hash
-        names.values.each {|k| hash.delete(k)}
+      # Extract variables from the hash
+      message = hash['message']
 
-        # Create object from extracted values
-        MessageResponse.new(message,
-                            hash)
-      end
+      # Create object from extracted values
+      MessageResponse.new(message)
     end
   end
 end

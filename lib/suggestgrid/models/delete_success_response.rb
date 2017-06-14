@@ -20,51 +20,41 @@ module SuggestGrid
 
     # A mapping from model property names to API property names
     def self.names
-      if @hash.nil?
-        @hash = {}
-        @hash["message"] = "message"
-        @hash["found"] = "found"
-        @hash["deleted"] = "deleted"
-        @hash["failed"] = "failed"
+      if @_hash.nil?
+        @_hash = {}
+        @_hash["message"] = "message"
+        @_hash["found"] = "found"
+        @_hash["deleted"] = "deleted"
+        @_hash["failed"] = "failed"
       end
-      @hash
+      @_hash
     end
 
     def initialize(message = nil,
                    found = nil,
                    deleted = nil,
-                   failed = nil,
-                   additional_properties = {})
+                   failed = nil)
       @message = message
       @found = found
       @deleted = deleted
       @failed = failed
-
-      # Add additional model properties to the instance
-      additional_properties.each {|name, value| instance_variable_set("@#{name}", value)}
     end
 
     # Creates an instance of the object from a hash
     def self.from_hash(hash)
-      if hash == nil
-        nil
-      else
-        # Extract variables from the hash
-        message = hash['message']
-        found = hash['found']
-        deleted = hash['deleted']
-        failed = hash['failed']
+      return nil unless hash
 
-        # Clean out expected properties from Hash
-        names.values.each {|k| hash.delete(k)}
+      # Extract variables from the hash
+      message = hash['message']
+      found = hash['found']
+      deleted = hash['deleted']
+      failed = hash['failed']
 
-        # Create object from extracted values
-        DeleteSuccessResponse.new(message,
-                                  found,
-                                  deleted,
-                                  failed,
-                                  hash)
-      end
+      # Create object from extracted values
+      DeleteSuccessResponse.new(message,
+                                found,
+                                deleted,
+                                failed)
     end
   end
 end

@@ -2,6 +2,25 @@
 
 module SuggestGrid
   class APIHelper
+    # Serializes an array parameter (creates key value pairs)
+    # @param [String] The name of the parameter
+    # @param [Array] The value of the parameter
+    # @param [String] The format of the serialization
+    def self.serialize_array(key, array, formatting: 'indexed')
+      tuples = []
+
+      if formatting == 'unindexed'
+        tuples += array.map { |element| ["#{key}[]", element] }
+      elsif formatting == 'indexed'
+        tuples += array.map.with_index { |element, index| ["#{key}[#{index}]", element] }
+      elsif formatting == 'plain'
+        tuples += array.map { |element| [key, element] }
+      else
+        raise ArgumentError, 'Invalid format provided.'
+      end
+      tuples
+    end
+
     # Replaces template parameters in the given url
     # @param [String] The query string builder to replace the template parameters
     # @param [Hash] The parameters to replace in the url
@@ -32,24 +51,37 @@ module SuggestGrid
     end
 
     # Appends the given set of parameters to the given query string
-    # @param [String] The query string builder to replace the template parameters
+    # @param [String] The query string builder to add the query parameters to
     # @param [Hash] The parameters to append
-    def self.append_url_with_query_parameters(query_builder, parameters)
+    # @param [String] The format of array parameter serialization
+    def self.append_url_with_query_parameters(query_builder, parameters, array_serialization: 'indexed')
       # perform parameter validation
       raise ArgumentError, 'Given value for parameter \"query_builder\" is invalid.' unless query_builder.instance_of? String
 
       # return if there are no parameters to replace
       return query_builder if parameters.nil?
 
-      # remove any nil values
-      parameters = parameters.reject { |_key, value| value.nil? }
-
-      # does the query string already has parameters
-      has_params = query_builder.include? '?'
-      separator = has_params ? '&' : '?'
-
-      # append query with separator and parameters and return
-      query_builder << separator << URI.encode_www_form(parameters)
+      parameters.each do |key, value|
+        seperator = (query_builder.include? '?') ? '&' : '?'
+        if not value.nil?
+          if value.instance_of? Array
+            value.compact!
+            if array_serialization == 'csv'
+              query_builder += "#{seperator}#{key}=#{value.map { |element| CGI.escape(element.to_s) }.join(',')}"
+            elsif array_serialization == 'psv'
+              query_builder += "#{seperator}#{key}=#{value.map { |element| CGI.escape(element.to_s) }.join('|')}"
+            elsif array_serialization == 'tsv'
+              query_builder += "#{seperator}#{key}=#{value.map { |element| CGI.escape(element.to_s) }.join('\t')}"
+            else
+              query_builder += "#{seperator}#{APIHelper.serialize_array(key, value, formatting: array_serialization).
+                map { |k, v| "#{k}=#{CGI.escape(v.to_s)}" }.join('&')}"
+            end
+          else
+            query_builder += "#{seperator}#{key}=#{CGI.escape(value.to_s)}"
+          end
+        end
+      end
+      query_builder
     end
 
     # Validates and processes the given Url

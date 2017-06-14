@@ -115,7 +115,7 @@ module SuggestGrid
         'older_than' => older_than,
         'size' => size,
         'from' => from
-      }
+      }, array_serialization: Configuration.array_serialization
       _query_url = APIHelper.clean_url _query_builder
 
       # prepare headers
@@ -158,7 +158,7 @@ module SuggestGrid
         'user_id' => user_id,
         'item_id' => item_id,
         'older_than' => older_than
-      }
+      }, array_serialization: Configuration.array_serialization
       _query_url = APIHelper.clean_url _query_builder
 
       # prepare headers

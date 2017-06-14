@@ -16,51 +16,41 @@ module SuggestGrid
 
     # A mapping from model property names to API property names
     def self.names
-      if @hash.nil?
-        @hash = {}
-        @hash["count"] = "count"
-        @hash["total_count"] = "total_count"
-        @hash["users"] = "users"
+      if @_hash.nil?
+        @_hash = {}
+        @_hash["count"] = "count"
+        @_hash["total_count"] = "total_count"
+        @_hash["users"] = "users"
       end
-      @hash
+      @_hash
     end
 
     def initialize(count = nil,
                    total_count = nil,
-                   users = nil,
-                   additional_properties = {})
+                   users = nil)
       @count = count
       @total_count = total_count
       @users = users
-
-      # Add additional model properties to the instance
-      additional_properties.each {|name, value| instance_variable_set("@#{name}", value)}
     end
 
     # Creates an instance of the object from a hash
     def self.from_hash(hash)
-      if hash == nil
-        nil
-      else
-        # Extract variables from the hash
-        count = hash['count']
-        total_count = hash['total_count']
-        # Parameter is an array, so we need to iterate through it
-        users = nil
-        if hash['users'] != nil
-          users = Array.new
-          hash['users'].each{|structure| users << (Metadata.from_hash(structure) if structure)}
-        end
+      return nil unless hash
 
-        # Clean out expected properties from Hash
-        names.values.each {|k| hash.delete(k)}
-
-        # Create object from extracted values
-        UsersResponse.new(count,
-                          total_count,
-                          users,
-                          hash)
+      # Extract variables from the hash
+      count = hash['count']
+      total_count = hash['total_count']
+      # Parameter is an array, so we need to iterate through it
+      users = nil
+      if hash['users'] != nil
+        users = Array.new
+        hash['users'].each{|structure| users << (Metadata.from_hash(structure) if structure)}
       end
+
+      # Create object from extracted values
+      UsersResponse.new(count,
+                        total_count,
+                        users)
     end
   end
 end
