@@ -226,6 +226,7 @@ SuggestGridClient.action.delete_actions('views', '12')
 ```
 
 Delete an item's actions:
+
 ```ruby
 SuggestGridClient.action.delete_actions('views', nil, '12')
 ```
@@ -294,6 +295,7 @@ Note that this operation completely overrides metadata with the same ids, if the
 There's a limit of lines, hence number of actions you can send in one requests. That's default to 10000.
 
 An example for bulk user request is the following:
+
 ```ruby
 users = []
 users << {'id': '9394182', 'age': 28, 'name': 'Avis Horton'}
