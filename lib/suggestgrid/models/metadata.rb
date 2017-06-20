@@ -15,19 +15,35 @@ module SuggestGrid
       @_hash
     end
 
-    def initialize(id = nil)
-      @id = id
+    def initialize(hash)
+      if !hash['id']
+        hash['id'] = nil
+      end
+      hash.each { |name, value|
+        instance_variable_set("@#{name}", value)
+      }
     end
 
     # Creates an instance of the object from a hash
     def self.from_hash(hash)
-      return nil unless hash
+      Metadata.new(hash)
+    end
 
-      # Extract variables from the hash
-      id = hash['id']
+    # Use to allow additional model properties
+    def method_missing(method_sym, *arguments, &block)
+      method = method_sym.to_s
+      if method.end_with? '='
+        instance_variable_set("@%s" % [method.chomp('=')], arguments.first)
+      elsif instance_variable_defined?("@#{method}") && arguments.empty?
+        instance_variable_get("@#{method}")
+      else
+        super
+      end
+    end
 
-      # Create object from extracted values
-      Metadata.new(id)
+    # Override for additional model properties
+    def respond_to?(method_sym, include_private=false)
+      instance_variable_defined?("@#{method_sym}") ? true : super
     end
   end
 end
