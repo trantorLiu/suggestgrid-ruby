@@ -231,12 +231,23 @@ Delete an item's actions:
 SuggestGridClient.action.delete_actions('views', nil, '12')
 ```
 
-Delete actions older than a year:
+Delete old actions:
 
-`older_than` value could be a [ISO 8601 duration](https://en.wikipedia.org/wiki/ISO_8601#Durations), or a [Unix time number](https://en.wikipedia.org/wiki/Unix_time).
+`older_than` value could be a [ISO 8601 duration](https://en.wikipedia.org/wiki/ISO_8601#Durations) in the form of PnDTnHnM, or a [Unix time number](https://en.wikipedia.org/wiki/Unix_time).
+
+Example durations:
+
+ * `P365D`: Approximately a year.
+ * `P30D`: Approximately a month.
+ * `P1DT12H`: One and a half days.
+ * `P1D`: A day (where a day is 24 hours or 86400 seconds).
+ * `PT12H`: 10 hours (where an hour is 3600 seconds).
+ * `PT1M`: 1 minute.
+
+Delete actions older than a month:
 
 ```ruby
-SuggestGridClient.action.delete_actions('views', nil, nil, 'P1Y')
+SuggestGridClient.action.delete_actions('views', nil, nil, 'P30D')
 ```
 
 Delete actions by query:
