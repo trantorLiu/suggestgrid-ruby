@@ -34,6 +34,12 @@ module SuggestGrid
       SimilarityController.instance
     end
 
+    # Returns the configuration class for easy access
+    # @return [Configuration] Returns the actual configuration class
+    def config
+      Configuration
+    end
+
     # Initializer with authentication and configuration parameters
     def initialize(connection_url)
       uri = URI(connection_url)
