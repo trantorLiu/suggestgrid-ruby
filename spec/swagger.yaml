@@ -2,7 +2,7 @@ swagger: '2.0'
 
 info:
   title: SuggestGrid
-  version: 0.2.0-rc.6
+  version: 0.3.0-rc.6
   description: Personalization made Simple
   x-codegen-settings:
     appendContentHeaders: true
@@ -396,50 +396,6 @@ definitions:
         type: integer
         format: int64
         description: The limit quantity of the account.
-  DeleteErrorResponse:
-    type: object
-    description: Error response with found, deleted, and failed parameters.
-    properties:
-      error_text:
-        type: string
-        description: Message of the response.
-      error_description:
-        type: string
-        description: Description of the response.
-      error_uri:
-        type: string
-        description: The URI of the error for more details.
-      found:
-        type: integer
-        format: int64
-        description: The number of records found.
-      deleted:
-        type: integer
-        format: int64
-        description: The number of records deleted.
-      failed:
-        type: integer
-        format: int64
-        description: The number of records failed to be deleted.
-  DeleteSuccessResponse:
-    type: object
-    description: Successful delete response with found, deleted, and failed parameters.
-    properties:
-      message:
-        type: string
-        description: Message of the response.
-      found:
-        type: integer
-        format: int64
-        description: The number of records found.
-      deleted:
-        type: integer
-        format: int64
-        description: The number of records deleted.
-      failed:
-        type: integer
-        format: int64
-        description: The number of records failed to be deleted.
   GetTypesResponse:
     type: object
     description: Type names response.
@@ -787,23 +743,15 @@ paths:
           type: string
       responses:
         200:
-          description: Successfully deleted actions.
+          description: Delete actions query accepted.
           schema:
-            $ref: '#/definitions/DeleteSuccessResponse'
+            $ref: '#/definitions/MessageResponse'
         400:
           description: Required user id or item id parameters are missing.
           schema:
             $ref: '#/definitions/ErrorResponse'
-        404:
-          description: Delete actions not found.
-          schema:
-            $ref: '#/definitions/DeleteErrorResponse'
         422:
           description: No query parameter (user id, item id, or older than) is given. qIn order to delete all actionsdelete the type.
-          schema:
-            $ref: '#/definitions/ErrorResponse'
-        505:
-          description: Request timed out.
           schema:
             $ref: '#/definitions/ErrorResponse'
         default:

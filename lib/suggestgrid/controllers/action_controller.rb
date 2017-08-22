@@ -144,7 +144,7 @@ module SuggestGrid
     # @param [String] user_id Optional parameter: Delete actions of a user id.
     # @param [String] item_id Optional parameter: Delete actions of an item id.
     # @param [String] older_than Optional parameter: Delete actions older than the given duration, or the given time number. Could be a ISO 8601 duration, or a Unix time number. Specifications are available at https://en.wikipedia.org/wiki/ISO_8601#Durations, or https://en.wikipedia.org/wiki/Unix_time.
-    # @return DeleteSuccessResponse response from the API call
+    # @return MessageResponse response from the API call
     def delete_actions(type,
                        user_id = nil,
                        item_id = nil,
@@ -174,12 +174,8 @@ module SuggestGrid
       # validate response against endpoint and global error codes
       if _context.response.status_code == 400
         raise ErrorResponseErrorException.new 'Required user id or item id parameters are missing.', _context
-      elsif _context.response.status_code == 404
-        raise DeleteErrorResponseErrorException.new 'Delete actions not found.', _context
       elsif _context.response.status_code == 422
         raise ErrorResponseErrorException.new 'No query parameter (user id, item id, or older than) is given. qIn order to delete all actionsdelete the type.', _context
-      elsif _context.response.status_code == 505
-        raise ErrorResponseErrorException.new 'Request timed out.', _context
       elsif !_context.response.status_code.between?(200, 208)
         raise ErrorResponseErrorException.new 'Unexpected internal error.', _context
       end
@@ -187,7 +183,7 @@ module SuggestGrid
 
       # return appropriate response type
       decoded = APIHelper.json_deserialize(_context.response.raw_body)
-      return DeleteSuccessResponse.from_hash(decoded)
+      return MessageResponse.from_hash(decoded)
     end
   end
 end

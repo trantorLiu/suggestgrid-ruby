@@ -12,7 +12,7 @@ module SuggestGrid
     # @param [String] type Required parameter: The name of the type.
     # @param [TypeRequestBody] settings Optional parameter: Optional settings for the rating parameter.
     # @return MessageResponse response from the API call
-    def create_type(type, 
+    def create_type(type,
                     settings = nil)
 
       # prepare query url
