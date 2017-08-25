@@ -2,7 +2,7 @@ swagger: '2.0'
 
 info:
   title: SuggestGrid
-  version: 0.3.0-rc.9
+  version: 0.3.0-SNAPSOT
   description: Personalization made Simple
   x-codegen-settings:
     appendContentHeaders: true
@@ -164,8 +164,10 @@ definitions:
         type: string
         description: The type of the query. Recommendations will be calculated based on actions of this type.
       types:
-        type: string
+        type: array
         description: The types of the query. Exactly one of type or types parameters must be provided.
+        items:
+          type: string
       item_id:
         type: string
         description: The item id of the query.
@@ -210,8 +212,10 @@ definitions:
         type: string
         description: The type of the query. Recommendations will be calculated based on actions of this type.
       types:
-        type: string
+        type: array
         description: The types of the query. Exactly one of type or types parameters must be provided.
+        items:
+          type: string
       user_id:
         type: string
         description: The user id of the query.
@@ -256,8 +260,10 @@ definitions:
         type: string
         description: The type of the query. Similarities will be calculated based on actions of this type.
       types:
-        type: string
+        type: array
         description: The types of the query. Exactly one of type or types parameters must be provided.
+        items:
+          type: string
       user_id:
         type: string
         description: The user id of the query.
@@ -292,8 +298,10 @@ definitions:
         type: string
         description: The type of the query. Similarities will be calculated based on actions of this type.
       types:
-        type: string
+        type: array
         description: The types of the query. Exactly one of type or types parameters must be provided.
+        items:
+          type: string
       item_id:
         type: string
         description: The item id of the query.

@@ -7,7 +7,7 @@ module SuggestGrid
     attr_accessor :type
 
     # The types of the query. Exactly one of type or types parameters must be provided.
-    # @return [String]
+    # @return [List of String]
     attr_accessor :types
 
     # The user id of the query.

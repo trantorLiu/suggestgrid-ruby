@@ -534,7 +534,7 @@ similar_user_id|string|false|Similar user that the response should be similar to
 similar_user_ids|array|false|Similar users that the response should be similar to. At most one of similar user and similar users parameters can be provided. 
 size|integer|false|The number of users requested. Defaults to 10. Must be between 1 and 10,000 inclusive.
 type|string|false|The type of the query. Recommendations will be calculated based on actions of this type.
-types|string|false|The types of the query. Exactly one of type or types parameters must be provided.
+types|array|false|The types of the query. Exactly one of type or types parameters must be provided.
 ### Gets Recommended Items
 > `SuggestGridClient.recommendation.get_recommended_items(query)`
 
@@ -582,7 +582,7 @@ similar_item_id|string|false|Similar item that the response should be similar to
 similar_item_ids|array|false|Similar items that the response should be similar to. At most one of similar item and similar items parameters can be provided. 
 size|integer|false|The number of items requested. Defaults to 10. Must be between 1 and 10,000 inclusive.
 type|string|false|The type of the query. Recommendations will be calculated based on actions of this type.
-types|string|false|The types of the query. Exactly one of type or types parameters must be provided.
+types|array|false|The types of the query. Exactly one of type or types parameters must be provided.
 user_id|string|false|The user id of the query.
 user_ids|array|false|The user ids of the query. Exactly one of user id or user ids parameters must be provided.
 
@@ -626,7 +626,7 @@ filter||false|
 from|integer|false|The number of most similar users to be skipped from the response. Defaults to 0.
 size|integer|false|The number of users requested. Defaults to 10. Must be between 1 and 10,000 inclusive.
 type|string|false|The type of the query. Similarities will be calculated based on actions of this type.
-types|string|false|The types of the query. Exactly one of type or types parameters must be provided.
+types|array|false|The types of the query. Exactly one of type or types parameters must be provided.
 user_id|string|false|The user id of the query.
 user_ids|array|false|The user ids of the query. Exactly one of user id or user ids parameters must be provided.
 ### Gets Similar Items
@@ -666,4 +666,4 @@ item_id|string|false|The item id of the query. Get similar items to given item i
 item_ids|array|false|The item ids of the query. Exactly one of item id or item ids parameters must be provided. Get similar items to given item ids. Either item id or item ids must be provided.
 size|integer|false|The number of items requested. Defaults to 10. Must be between 1 and 10,000 inclusive.
 type|string|false|The type of the query. Similarities will be calculated based on actions of this type.
-types|string|false|The types of the query. Exactly one of type or types parameters must be provided.
+types|array|false|The types of the query. Exactly one of type or types parameters must be provided.
