@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name = 'suggestgrid'
-  s.version = '0.3.0.rc10'
+  s.version = '0.3.0-SNAPSOT'
   s.summary = 'SuggestGrid Ruby SDK'
   s.description = 'Personalization made Simple'
   s.authors = ['SuggestGrid']
