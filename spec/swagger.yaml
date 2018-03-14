@@ -2,7 +2,7 @@ swagger: '2.0'
 
 info:
   title: SuggestGrid
-  version: 0.3.20-SNAPSHOT
+  version: 0.4.0
   description: Personalization made Simple
   x-codegen-settings:
     appendContentHeaders: true
@@ -81,9 +81,9 @@ tags:
       - delete_item
       - delete_all_items
   - name: recommendation
-    description: Recommnedation Methods
+    description: Recommendation Methods
     x-docs-text: |
-      Recommnedation methods are for getting recommended items for users, or recommended users for items.
+      Recommendation methods are for getting recommended items for users, or recommended users for items.
       Refer to [recommendations](http://www.suggestgrid.com/docs/recommendations) for an overview.
     x-methods:
       - get_recommended_users

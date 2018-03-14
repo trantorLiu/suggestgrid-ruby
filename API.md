@@ -485,8 +485,8 @@ SuggestGridClient.metadata.delete_all_items()
 
 
 
-## Recommnedation Methods
-Recommnedation methods are for getting recommended items for users, or recommended users for items.
+## Recommendation Methods
+Recommendation methods are for getting recommended items for users, or recommended users for items.
 Refer to [recommendations](http://www.suggestgrid.com/docs/recommendations) for an overview.
 
 ### Gets Recommended Users
